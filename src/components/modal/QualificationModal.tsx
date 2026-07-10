@@ -26,7 +26,7 @@ export function QualificationModal() {
         onClick={close}
         className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-default"
       />
-      <div className="relative w-full sm:max-w-lg bg-surface border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-2xl animate-fade-in-up max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full sm:max-w-lg bg-surface border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_30px_80px_-20px_rgba(0,0,0,0.6)] animate-fade-in-up max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between px-6 sm:px-8 pt-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent">
             {flow.title}
@@ -61,7 +61,7 @@ export function QualificationModal() {
                 href={result.cta.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#04221a] font-semibold px-6 py-3.5 hover:bg-accent-dark transition-colors"
+                className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors"
               >
                 {result.cta.label}
               </a>
@@ -80,9 +80,24 @@ export function QualificationModal() {
                     key={option.label}
                     type="button"
                     onClick={() => choose(option.next)}
-                    className="w-full text-left rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium hover:border-accent hover:text-accent transition-colors cursor-pointer"
+                    className="group w-full flex items-center justify-between gap-3 text-left rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium transition-all duration-150 hover:border-accent/50 hover:text-accent hover:-translate-y-0.5 cursor-pointer"
                   >
                     {option.label}
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="shrink-0 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0"
+                    >
+                      <path
+                        d="M5 12h14M13 6l6 6-6 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </button>
                 ))}
               </div>

@@ -6,42 +6,57 @@ import { PillarCard } from "@/components/ui/PillarCard";
 import { Timeline } from "@/components/ui/Timeline";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
+import { Reveal } from "@/components/ui/Reveal";
 
 export default function Home() {
   return (
     <>
       {/* 5.1 Hero */}
-      <Section className="pt-14 sm:pt-20 pb-20">
+      <Section
+        className="pt-16 sm:pt-24 pb-20"
+        decor={
+          <>
+            <div className="absolute inset-0 bg-grid" />
+            <div className="glow h-[460px] w-[460px] -top-48 left-1/2 -translate-x-1/2 sm:left-1/3" />
+          </>
+        }
+      >
         <div className="max-w-3xl">
-          <Eyebrow>Desde 2023</Eyebrow>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
-            Desde 2023, revolucionando negócios com Inteligência Artificial.
-          </h1>
-          <p className="text-lg sm:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
-            Do conteúdo sobre IA generativa à implementação de agentes que
-            vendem por você. Hoje ajudamos negócios a transformarem
-            pré-vendas com IA — e ensinamos outras pessoas a construírem uma
-            agência de IA de resultado.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-10">
-            <CTAButton flow="agentes" size="lg">
-              Quero implementar IA no meu negócio
-            </CTAButton>
-            <CTAButton flow="formacao" variant="secondary" size="lg">
-              Quero construir uma agência de IA
-            </CTAButton>
-          </div>
+          <Reveal>
+            <Eyebrow>Desde 2023</Eyebrow>
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
+              Desde 2023, revolucionando negócios com Inteligência Artificial.
+            </h1>
+            <p className="text-lg sm:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
+              Do conteúdo sobre IA generativa à implementação de agentes que
+              vendem por você. Hoje ajudamos negócios a transformarem
+              pré-vendas com IA — e ensinamos outras pessoas a construírem uma
+              agência de IA de resultado.
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <CTAButton flow="agentes" size="lg">
+                Quero implementar IA no meu negócio
+              </CTAButton>
+              <CTAButton flow="formacao" variant="secondary" size="lg">
+                Quero construir uma agência de IA
+              </CTAButton>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
       {/* 5.2 Nossa trajetória */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Nossa trajetória</Eyebrow>
-        <SectionTitle className="mb-6 max-w-2xl">
-          De uma newsletter sobre IA generativa a uma operação real de
-          pré-vendas.
-        </SectionTitle>
-        <div className="max-w-3xl text-muted leading-relaxed space-y-4 mb-12 text-lg">
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Nossa trajetória</Eyebrow>
+          <SectionTitle className="mb-6 max-w-2xl">
+            De uma newsletter sobre IA generativa a uma operação real de
+            pré-vendas.
+          </SectionTitle>
+        </Reveal>
+        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 mb-16 text-lg">
           <p>
             Começamos em 2023 criando conteúdo sobre Inteligência Artificial
             generativa no Instagram e no TikTok — e lançamos a primeira
@@ -65,34 +80,36 @@ export default function Home() {
             reais, que validamos tudo o que hoje aplicamos com nossos
             clientes e ensinamos para quem quer trilhar um caminho parecido.
           </p>
-        </div>
-        <Timeline
-          items={[
-            {
-              period: "2023",
-              title: "Conteúdo sobre IA generativa",
-              description:
-                "Instagram, TikTok e a primeira newsletter de IA generativa do Brasil.",
-            },
-            {
-              period: "2024–2025",
-              title: "Especialização em agentes",
-              description:
-                "Consultorias, palestras e workshops até o foco se afunilar em agentes de IA para pré-vendas.",
-            },
-            {
-              period: "Hoje",
-              title: "Implementação + formação",
-              description:
-                "Agência de implementação de agentes de IA e formação para quem quer construir a própria agência.",
-            },
-          ]}
-        />
+        </Reveal>
+        <Reveal delay={160}>
+          <Timeline
+            items={[
+              {
+                period: "2023",
+                title: "Conteúdo sobre IA generativa",
+                description:
+                  "Instagram, TikTok e a primeira newsletter de IA generativa do Brasil.",
+              },
+              {
+                period: "2024–2025",
+                title: "Especialização em agentes",
+                description:
+                  "Consultorias, palestras e workshops até o foco se afunilar em agentes de IA para pré-vendas.",
+              },
+              {
+                period: "Hoje",
+                title: "Implementação + formação",
+                description:
+                  "Agência de implementação de agentes de IA e formação para quem quer construir a própria agência.",
+              },
+            ]}
+          />
+        </Reveal>
       </Section>
 
       {/* 5.3 O problema que resolvemos */}
-      <Section className="border-t border-white/10">
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal className="max-w-3xl">
           <Eyebrow>O problema</Eyebrow>
           <SectionTitle className="mb-6">
             O gargalo não é tráfego. É pré-vendas.
@@ -112,17 +129,19 @@ export default function Home() {
             </span>
             , transformando leads parados em reuniões agendadas.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* 5.4 O que fazemos hoje */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>O que fazemos hoje</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Duas frentes, um mesmo método validado na prática.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>O que fazemos hoje</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Duas frentes, um mesmo método validado na prática.
+          </SectionTitle>
+        </Reveal>
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-surface p-8 flex flex-col">
+          <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8 flex flex-col">
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Agência de implementação
             </p>
@@ -139,13 +158,28 @@ export default function Home() {
             </p>
             <Link
               href="/agentes-de-ia"
-              className="inline-flex items-center gap-2 font-semibold text-accent hover:gap-3 transition-all"
+              className="group inline-flex items-center gap-2 font-semibold text-accent"
             >
-              Conhecer a solução →
+              Conhecer a solução
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              >
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </Link>
-          </div>
+          </Reveal>
 
-          <div className="rounded-3xl border border-white/10 bg-surface p-8 flex flex-col">
+          <Reveal delay={160} className="card-surface card-hover rounded-3xl p-8 flex flex-col">
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Formação
             </p>
@@ -160,58 +194,83 @@ export default function Home() {
             </p>
             <Link
               href="/formacao"
-              className="inline-flex items-center gap-2 font-semibold text-accent hover:gap-3 transition-all"
+              className="group inline-flex items-center gap-2 font-semibold text-accent"
             >
-              Conhecer a formação →
+              Conhecer a formação
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              >
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </Link>
-          </div>
+          </Reveal>
         </div>
       </Section>
 
       {/* 5.5 Prova (números institucionais) */}
-      <Section className="border-t border-white/10">
-        <StatGrid
-          stats={[
-            { value: "2,5x", label: "de ROI nos 3 primeiros meses" },
-            {
-              value: "20–25%",
-              label: "de conversão de agendamentos de leads qualificados",
-            },
-            {
-              value: "20%",
-              label: "de taxa média de resposta em follow-ups",
-            },
-            {
-              value: "até 50%",
-              label:
-                "a mais de faturamento comparado à qualificação por landing page",
-            },
-          ]}
-        />
+      <Section divider>
+        <Reveal>
+          <StatGrid
+            stats={[
+              { value: "2,5x", label: "de ROI nos 3 primeiros meses" },
+              {
+                value: "20–25%",
+                label: "de conversão de agendamentos de leads qualificados",
+              },
+              {
+                value: "20%",
+                label: "de taxa média de resposta em follow-ups",
+              },
+              {
+                value: "até 50%",
+                label:
+                  "a mais de faturamento comparado à qualificação por landing page",
+              },
+            ]}
+          />
+        </Reveal>
       </Section>
 
       {/* 5.6 Os 3 pilares */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Como funciona</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Os 3 pilares por trás de cada resultado.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Como funciona</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Os 3 pilares por trás de cada resultado.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-3 gap-6 mb-8">
-          <PillarCard
-            number="01"
-            title="Agente de IA"
-            description="O coração da operação, conduzindo cada conversa com velocidade, consistência e humanização."
-          />
-          <PillarCard
-            number="02"
-            title="Infraestrutura"
-            description="Conectando o agente à sua operação real: CRM, agenda, dashboard, mensageria."
-          />
-          <PillarCard
-            number="03"
-            title="Inteligência Comercial"
-            description="O script, o funil e a lógica de qualificação por trás de cada resultado."
-          />
+          <Reveal delay={80}>
+            <PillarCard
+              number="01"
+              title="Agente de IA"
+              description="O coração da operação, conduzindo cada conversa com velocidade, consistência e humanização."
+            />
+          </Reveal>
+          <Reveal delay={140}>
+            <PillarCard
+              number="02"
+              title="Infraestrutura"
+              description="Conectando o agente à sua operação real: CRM, agenda, dashboard, mensageria."
+            />
+          </Reveal>
+          <Reveal delay={200}>
+            <PillarCard
+              number="03"
+              title="Inteligência Comercial"
+              description="O script, o funil e a lógica de qualificação por trás de cada resultado."
+            />
+          </Reveal>
         </div>
         <p className="text-lg text-muted leading-relaxed max-w-2xl">
           Não entregamos só tecnologia. Entregamos os três juntos — porque é
@@ -220,8 +279,8 @@ export default function Home() {
       </Section>
 
       {/* 5.7 Por que confiar */}
-      <Section className="border-t border-white/10">
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal className="max-w-3xl">
           <Eyebrow>Por que confiar no Revolução AI</Eyebrow>
           <p className="text-lg text-muted leading-relaxed">
             Não somos uma empresa nova testando um mercado quente. Construímos
@@ -237,24 +296,28 @@ export default function Home() {
             </span>
             , não apenas ativação de uma ferramenta.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* Client logos */}
-      <Section className="border-t border-white/10 py-14 sm:py-16">
-        <p className="text-center text-sm text-muted mb-8">
-          Empresas que já confiaram no Revolução AI
-        </p>
-        <ClientLogos />
+      <Section divider className="py-14 sm:py-16">
+        <Reveal>
+          <p className="text-center text-sm text-muted-2 uppercase tracking-widest mb-8">
+            Empresas que já confiaram no Revolução AI
+          </p>
+          <ClientLogos />
+        </Reveal>
       </Section>
 
       {/* 5.8 FAQ */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Perguntas frequentes</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Antes de conversar com a gente
-        </SectionTitle>
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Perguntas frequentes</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Antes de conversar com a gente
+          </SectionTitle>
+        </Reveal>
+        <Reveal delay={100} className="max-w-3xl">
           <FAQAccordion
             items={[
               {
@@ -275,17 +338,20 @@ export default function Home() {
               },
             ]}
           />
-        </div>
+        </Reveal>
       </Section>
 
       {/* 5.9 CTA final */}
-      <Section className="border-t border-white/10">
-        <div className="rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
+      <Section divider>
+        <Reveal
+          className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center"
+        >
+          <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
+          <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
             Quer implementar IA na sua operação ou aprender a construir a sua
             própria agência?
           </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="relative flex flex-col sm:flex-row gap-4 justify-center">
             <CTAButton flow="agentes" size="lg">
               Quero implementar IA no meu negócio
             </CTAButton>
@@ -293,7 +359,7 @@ export default function Home() {
               Quero construir uma agência de IA
             </CTAButton>
           </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

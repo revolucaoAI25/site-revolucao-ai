@@ -17,7 +17,9 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
         return (
           <div
             key={item.question}
-            className="rounded-2xl border border-white/10 bg-surface overflow-hidden"
+            className={`rounded-2xl border bg-surface overflow-hidden transition-colors duration-200 ${
+              isOpen ? "border-accent/30" : "border-white/10"
+            }`}
           >
             <button
               type="button"
@@ -29,11 +31,13 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
                 {item.question}
               </span>
               <span
-                className={`shrink-0 text-accent transition-transform duration-200 ${
-                  isOpen ? "rotate-45" : ""
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-200 ${
+                  isOpen
+                    ? "rotate-45 border-accent/40 bg-accent-soft text-accent"
+                    : "border-white/15 text-muted"
                 }`}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M12 5v14M5 12h14"
                     stroke="currentColor"

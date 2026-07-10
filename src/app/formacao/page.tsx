@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
+import { CTAButton } from "@/components/ui/CTAButton";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
+import { Reveal } from "@/components/ui/Reveal";
 import { CURSO_LINK, AGENDAR_CONVERSA_LINK } from "@/lib/links";
 
 export const metadata: Metadata = {
@@ -15,37 +16,39 @@ export default function Formacao() {
   return (
     <>
       {/* 7.1 Hero */}
-      <Section className="pt-14 sm:pt-20 pb-16">
+      <Section
+        className="pt-16 sm:pt-24 pb-16"
+        decor={
+          <>
+            <div className="absolute inset-0 bg-grid" />
+            <div className="glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-1/4" />
+          </>
+        }
+      >
         <div className="max-w-3xl">
-          <Eyebrow>Formação</Eyebrow>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
-            Aprenda a construir — ou escalar — uma agência de IA lucrativa e
-            previsível.
-          </h1>
-          <div className="flex flex-col sm:flex-row gap-4 mt-10">
-            <Link
-              href={CURSO_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-accent text-[#04221a] font-semibold px-8 py-4 text-base sm:text-lg hover:bg-accent-dark transition-colors"
-            >
-              Conhecer o curso Do 0 aos 10K
-            </Link>
-            <Link
-              href={AGENDAR_CONVERSA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-base sm:text-lg font-semibold hover:border-accent hover:text-accent transition-colors"
-            >
-              Agendar conversa com a gente
-            </Link>
-          </div>
+          <Reveal>
+            <Eyebrow>Formação</Eyebrow>
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
+              Aprenda a construir — ou escalar — uma agência de IA lucrativa e
+              previsível.
+            </h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <CTAButton href={CURSO_LINK} external size="lg">
+                Conhecer o curso Do 0 aos 10K
+              </CTAButton>
+              <CTAButton href={AGENDAR_CONVERSA_LINK} external variant="secondary" size="lg">
+                Agendar conversa com a gente
+              </CTAButton>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
       {/* 7.2 O problema */}
-      <Section className="border-t border-white/10">
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal className="max-w-3xl">
           <Eyebrow>O problema</Eyebrow>
           <SectionTitle className="mb-6">
             A maioria falha por processo, não por técnica.
@@ -81,16 +84,18 @@ export default function Formacao() {
               é a falta de um caminho estruturado, validado na prática.
             </span>
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* 7.3 Quem está por trás */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Quem está por trás disso</Eyebrow>
-        <SectionTitle className="mb-6 max-w-2xl">
-          João Vitor e Lucas, fundadores do Revolução AI.
-        </SectionTitle>
-        <div className="max-w-3xl text-muted leading-relaxed space-y-4 text-lg mb-10">
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Quem está por trás disso</Eyebrow>
+          <SectionTitle className="mb-6 max-w-2xl">
+            João Vitor e Lucas, fundadores do Revolução AI.
+          </SectionTitle>
+        </Reveal>
+        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-lg mb-12">
           <p>
             Somos João Vitor e Lucas, fundadores do Revolução AI — uma das
             primeiras agências de IA do Brasil. Começamos em 2023 criando
@@ -109,14 +114,16 @@ export default function Formacao() {
             Ensinamos o que fizemos — e continuamos fazendo — com clientes
             reais, todos os dias.
           </p>
-        </div>
+        </Reveal>
 
-        <p className="text-sm font-semibold uppercase tracking-widest text-muted mb-6">
-          Já trabalhamos com nomes como
-        </p>
-        <ClientLogos />
+        <Reveal delay={140}>
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted mb-6">
+            Já trabalhamos com nomes como
+          </p>
+          <ClientLogos />
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-4 mt-8 max-w-3xl text-muted leading-relaxed">
+        <div className="grid sm:grid-cols-2 gap-4 mt-10 max-w-3xl text-muted leading-relaxed">
           <p>
             <span className="text-text font-semibold">Bubble Box</span> —
             franqueadora com mais de 250 unidades no Brasil
@@ -150,7 +157,7 @@ export default function Formacao() {
           </p>
         </div>
 
-        <p className="text-lg text-muted leading-relaxed mt-8 max-w-3xl">
+        <p className="text-lg text-muted leading-relaxed mt-10 max-w-3xl">
           Contratos fechados com essa metodologia:{" "}
           <span className="text-accent font-semibold">
             R$10 mil, R$12 mil, R$15 mil, R$20 mil e R$25 mil
@@ -160,60 +167,54 @@ export default function Formacao() {
       </Section>
 
       {/* 7.4 Direcionamento por estágio */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Escolha seu caminho</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Nossa forma de ensinar muda dependendo de onde você está.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Escolha seu caminho</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Nossa forma de ensinar muda dependendo de onde você está.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-surface p-8 flex flex-col">
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+          <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8 flex flex-col">
+            <span className="mb-4 inline-flex w-fit items-center rounded-full border border-accent/30 bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
               Estou começando agora
-            </p>
+            </span>
             <p className="text-muted leading-relaxed mb-8 flex-1">
               Ainda não tenho uma agência ou operação no digital, quero
               aprender do zero — desde como estruturar uma oferta até como
               fechar meus primeiros contratos.
             </p>
-            <Link
-              href={CURSO_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-accent text-[#04221a] font-semibold px-6 py-3.5 hover:bg-accent-dark transition-colors"
-            >
+            <CTAButton href={CURSO_LINK} external>
               Conhecer o curso Do 0 aos 10K
-            </Link>
-          </div>
+            </CTAButton>
+          </Reveal>
 
-          <div className="rounded-3xl border border-white/10 bg-surface p-8 flex flex-col">
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+          <Reveal delay={160} className="card-surface card-hover rounded-3xl p-8 flex flex-col">
+            <span className="mb-4 inline-flex w-fit items-center rounded-full border border-accent/30 bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
               Já tenho operação
-            </p>
+            </span>
             <p className="text-muted leading-relaxed mb-8 flex-1">
               Já tenho agência de IA/automações ou operação no digital, já
               vendo, mas preciso de mais estrutura, processo ou ticket para
               escalar.
             </p>
-            <Link
-              href={AGENDAR_CONVERSA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3.5 font-semibold hover:border-accent hover:text-accent transition-colors"
-            >
+            <CTAButton href={AGENDAR_CONVERSA_LINK} external variant="secondary">
               Agendar conversa com a gente
-            </Link>
-          </div>
+            </CTAButton>
+          </Reveal>
         </div>
       </Section>
 
       {/* 7.5 O que você aprende */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>O que você aprende</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Conteúdo direto ao ponto, para cada estágio.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>O que você aprende</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Conteúdo direto ao ponto, para cada estágio.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-surface p-8">
+          <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8">
             <h3 className="text-xl font-bold mb-5">
               Se você está começando (curso Do 0 aos 10K)
             </h3>
@@ -231,9 +232,9 @@ export default function Formacao() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="rounded-3xl border border-white/10 bg-surface p-8">
+          <Reveal delay={160} className="card-surface card-hover rounded-3xl p-8">
             <h3 className="text-xl font-bold mb-5">
               Se você já tem operação (mentoria)
             </h3>
@@ -250,13 +251,13 @@ export default function Formacao() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </Section>
 
       {/* 7.6 Por que aprender com o Revolução AI */}
-      <Section className="border-t border-white/10">
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal className="max-w-3xl">
           <Eyebrow>Por que aprender com o Revolução AI</Eyebrow>
           <p className="text-lg text-muted leading-relaxed">
             Não somos os mais técnicos do mercado — e não é isso que faz a
@@ -268,16 +269,18 @@ export default function Formacao() {
             dele, que compartilhamos com quem está construindo a própria
             agência.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* 7.7 FAQ */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Perguntas frequentes</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Antes de escolher seu caminho
-        </SectionTitle>
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Perguntas frequentes</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Antes de escolher seu caminho
+          </SectionTitle>
+        </Reveal>
+        <Reveal delay={100} className="max-w-3xl">
           <FAQAccordion
             items={[
               {
@@ -298,34 +301,25 @@ export default function Formacao() {
               },
             ]}
           />
-        </div>
+        </Reveal>
       </Section>
 
       {/* 7.8 CTA final */}
-      <Section className="border-t border-white/10">
-        <div className="rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
+      <Section divider>
+        <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
+          <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
+          <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
             Escolha o caminho que faz sentido pra você agora
           </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={CURSO_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-accent text-[#04221a] font-semibold px-8 py-4 text-base sm:text-lg hover:bg-accent-dark transition-colors"
-            >
+          <div className="relative flex flex-col sm:flex-row gap-4 justify-center">
+            <CTAButton href={CURSO_LINK} external size="lg">
               Conhecer o curso Do 0 aos 10K
-            </Link>
-            <Link
-              href={AGENDAR_CONVERSA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-base sm:text-lg font-semibold hover:border-accent hover:text-accent transition-colors"
-            >
+            </CTAButton>
+            <CTAButton href={AGENDAR_CONVERSA_LINK} external variant="secondary" size="lg">
               Agendar conversa com a gente
-            </Link>
+            </CTAButton>
           </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

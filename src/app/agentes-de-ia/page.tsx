@@ -5,6 +5,7 @@ import { StatGrid } from "@/components/ui/StatGrid";
 import { PillarCard } from "@/components/ui/PillarCard";
 import { CaseCard } from "@/components/ui/CaseCard";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Agentes de IA para Pré-Vendas",
@@ -85,34 +86,63 @@ const steps = [
   },
 ];
 
+const differentiators = [
+  {
+    title: "Treinado com dados do seu negócio",
+    description: "Não com respostas genéricas de um bot padrão.",
+  },
+  {
+    title: "Otimizado continuamente pela nossa equipe",
+    description:
+      "Com base em resultado real, não configurado uma vez e esquecido.",
+  },
+  {
+    title: "Economia de até 80% em tempo operacional",
+    description:
+      "Liberando sua equipe para o que só humano resolve: fechamento, relacionamento e atendimento presencial.",
+  },
+];
+
 export default function AgentesDeIA() {
   return (
     <>
       {/* 6.1 Hero */}
-      <Section className="pt-14 sm:pt-20 pb-16">
+      <Section
+        className="pt-16 sm:pt-24 pb-16"
+        decor={
+          <>
+            <div className="absolute inset-0 bg-grid" />
+            <div className="glow h-[460px] w-[460px] -top-48 left-1/2 -translate-x-1/2 sm:left-1/3" />
+          </>
+        }
+      >
         <div className="max-w-3xl">
-          <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 text-accent text-xs font-semibold uppercase tracking-widest px-4 py-1.5 mb-6">
-            Vagas limitadas por mês
-          </span>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
-            Transforme a forma como sua empresa qualifica, atende e converte
-            leads — com agentes de IA que trabalham por você, todos os dias.
-          </h1>
-          <p className="text-lg sm:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
-            Agentes treinados para entender objeções, conduzir a conversa e
-            agendar reuniões no automático, sem depender de equipe extra.
-          </p>
-          <div className="mt-10">
-            <CTAButton flow="agentes" size="lg">
-              Quero um agente de IA trabalhando para mim
-            </CTAButton>
-          </div>
+          <Reveal>
+            <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent-soft text-accent text-xs font-semibold uppercase tracking-widest px-4 py-1.5 mb-6">
+              Vagas limitadas por mês
+            </span>
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
+              Transforme a forma como sua empresa qualifica, atende e converte
+              leads — com agentes de IA que trabalham por você, todos os dias.
+            </h1>
+            <p className="text-lg sm:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
+              Agentes treinados para entender objeções, conduzir a conversa e
+              agendar reuniões no automático, sem depender de equipe extra.
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="mt-10">
+              <CTAButton flow="agentes" size="lg">
+                Quero um agente de IA trabalhando para mim
+              </CTAButton>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
       {/* 6.2 O problema */}
-      <Section className="border-t border-white/10">
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal className="max-w-3xl">
           <Eyebrow>O problema</Eyebrow>
           <SectionTitle className="mb-6">
             Cada minuto de demora é conversão que esfria.
@@ -133,230 +163,257 @@ export default function AgentesDeIA() {
             </span>{" "}
             — e é exatamente esse gargalo que resolvemos.
           </p>
-        </div>
+        </Reveal>
       </Section>
 
       {/* 6.3 Barra de credibilidade */}
-      <Section className="border-t border-white/10">
-        <StatGrid
-          columns={3}
-          stats={[
-            { value: "+100", label: "empresas atendidas" },
-            { value: "15–21 dias", label: "de setup" },
-            { value: "4.500+", label: "leads atendidos por mês" },
-            {
-              value: "até 100",
-              label: "reuniões geradas por mês com o sistema rodando",
-            },
-            { value: "20%", label: "de conversão média" },
-          ]}
-        />
-        <p className="mt-8 text-center sm:text-left text-sm font-semibold text-muted">
-          Sem mensalidade surpresa.
-        </p>
+      <Section divider>
+        <Reveal>
+          <StatGrid
+            columns={3}
+            stats={[
+              { value: "+100", label: "empresas atendidas" },
+              { value: "15–21 dias", label: "de setup" },
+              { value: "4.500+", label: "leads atendidos por mês" },
+              {
+                value: "até 100",
+                label: "reuniões geradas por mês com o sistema rodando",
+              },
+              { value: "20%", label: "de conversão média" },
+            ]}
+          />
+          <p className="mt-8 text-center sm:text-left text-sm font-semibold text-muted">
+            Sem mensalidade surpresa.
+          </p>
+        </Reveal>
       </Section>
 
       {/* 6.4 Pra quem é */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Pra quem é</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Feito para negócios que já têm leads chegando.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Pra quem é</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Feito para negócios que já têm leads chegando.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-surface p-8">
+          <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8">
             <p className="text-lg leading-relaxed">
               Você que já tem estrutura e volume de leads chegando todos os
               dias, mas sente que está desperdiçando parte deles.
             </p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-surface p-8">
+          </Reveal>
+          <Reveal delay={140} className="card-surface card-hover rounded-3xl p-8">
             <p className="text-lg leading-relaxed">
               Você que tem boa inteligência comercial e um bom script, mas
               precisa de mais consistência e performance na conversão.
             </p>
-          </div>
+          </Reveal>
         </div>
       </Section>
 
       {/* 6.5 Prova social */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Prova social</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Resultado real, com números reais.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Prova social</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Resultado real, com números reais.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <CaseCard
-            tag="Franqueadora de lavanderia"
-            name="Bubble Box"
-            highlight="6x mais reuniões em 30 dias"
-            description="Fazia 30 reuniões/mês com processo comercial tradicional, script estruturado mas aplicação inconsistente. Em 30 dias com o sistema plugado, substituiu 2 SDRs da operação e passou a gerar 205 reuniões/mês — mantendo o mesmo número de leads e o mesmo investimento em tráfego, apenas aplicando o script validado de forma consistente, 24h por dia."
-          />
-          <CaseCard
-            tag="Escritório de advocacia"
-            name="Escritório de Advocacia"
-            highlight="20% de conversão"
-            description="Recebia 423 leads/mês. Com o sistema, agendou 83 reuniões no automático, fechou 13 novos contratos e alcançou 20% de conversão."
-          />
-          <CaseCard
-            tag="Direito do Consumidor"
-            name="Pita Advocacia"
-            highlight="4x o faturamento"
-            description="Multiplicou por 4x o faturamento (de R$15 mil para R$60 mil/mês) apenas adicionando IA ao pré-vendas, sem aumentar investimento em tráfego nem volume de leads — foi de 10 para 50 reuniões/mês."
-          />
-          <CaseCard
-            tag="Direito Bancário"
-            name="Guedes & Cruz Advogados"
-            highlight="De 8% para 18% de conversão"
-            description="Conversão saltou de 8% para 18%, com 1 funcionário + IA fazendo o trabalho que antes exigia 3. Em um teste de 2 dias: 70 leads recebidos, 30 reuniões agendadas — 45% de conversão."
-          />
-          <CaseCard
-            tag="Clínica odontológica"
-            name="Dr. Paulo Bernardo"
-            highlight="Quase 4x o faturamento"
-            description="De 5 para 30 consultas agendadas por mês, com o mesmo investimento em tráfego — retorno mensal saltou de R$12 mil para R$40 mil."
-          />
+          {[
+            {
+              tag: "Franqueadora de lavanderia",
+              name: "Bubble Box",
+              highlight: "6x mais reuniões em 30 dias",
+              description:
+                "Fazia 30 reuniões/mês com processo comercial tradicional, script estruturado mas aplicação inconsistente. Em 30 dias com o sistema plugado, substituiu 2 SDRs da operação e passou a gerar 205 reuniões/mês — mantendo o mesmo número de leads e o mesmo investimento em tráfego, apenas aplicando o script validado de forma consistente, 24h por dia.",
+            },
+            {
+              tag: "Escritório de advocacia",
+              name: "Escritório de Advocacia",
+              highlight: "20% de conversão",
+              description:
+                "Recebia 423 leads/mês. Com o sistema, agendou 83 reuniões no automático, fechou 13 novos contratos e alcançou 20% de conversão.",
+            },
+            {
+              tag: "Direito do Consumidor",
+              name: "Pita Advocacia",
+              highlight: "4x o faturamento",
+              description:
+                "Multiplicou por 4x o faturamento (de R$15 mil para R$60 mil/mês) apenas adicionando IA ao pré-vendas, sem aumentar investimento em tráfego nem volume de leads — foi de 10 para 50 reuniões/mês.",
+            },
+            {
+              tag: "Direito Bancário",
+              name: "Guedes & Cruz Advogados",
+              highlight: "De 8% para 18% de conversão",
+              description:
+                "Conversão saltou de 8% para 18%, com 1 funcionário + IA fazendo o trabalho que antes exigia 3. Em um teste de 2 dias: 70 leads recebidos, 30 reuniões agendadas — 45% de conversão.",
+            },
+            {
+              tag: "Clínica odontológica",
+              name: "Dr. Paulo Bernardo",
+              highlight: "Quase 4x o faturamento",
+              description:
+                "De 5 para 30 consultas agendadas por mês, com o mesmo investimento em tráfego — retorno mensal saltou de R$12 mil para R$40 mil.",
+            },
+          ].map((item, index) => (
+            <Reveal key={item.name} delay={index * 60}>
+              <CaseCard
+                tag={item.tag}
+                name={item.name}
+                highlight={item.highlight}
+                description={item.description}
+              />
+            </Reveal>
+          ))}
         </div>
       </Section>
 
       {/* 6.6 Como funciona a implementação */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Como funciona</Eyebrow>
-        <SectionTitle className="mb-4 max-w-2xl">
-          Em até 15 a 21 dias, sua operação sai do zero para uma solução
-          completa rodando.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Como funciona</Eyebrow>
+          <SectionTitle className="mb-4 max-w-2xl">
+            Em até 15 a 21 dias, sua operação sai do zero para uma solução
+            completa rodando.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
           {steps.map((step, index) => (
-            <div key={step.title} className="rounded-3xl border border-white/10 bg-surface p-7">
-              <p className="text-sm font-black text-accent mb-4">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="text-lg font-bold mb-2">{step.title}</h3>
-              <p className="text-muted leading-relaxed text-[15px]">
-                {step.description}
-              </p>
-            </div>
+            <Reveal key={step.title} delay={index * 60}>
+              <PillarCard
+                number={String(index + 1).padStart(2, "0")}
+                title={step.title}
+                description={step.description}
+              />
+            </Reveal>
           ))}
         </div>
       </Section>
 
       {/* 6.7 Os 3 pilares */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Os 3 pilares</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          O agente não conversa apenas — ele vende.
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Os 3 pilares</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            O agente não conversa apenas — ele vende.
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-3 gap-6">
-          <PillarCard
-            number="01"
-            title="Agente de IA"
-            description="Recebe, qualifica, conduz a conversa, entende objeções, entende áudio e imagem, faz follow-up e agenda — 24 horas por dia, todos os dias, inclusive fins de semana e feriados."
-          />
-          <PillarCard
-            number="02"
-            title="Infraestrutura"
-            description="Integrado ao seu CRM, agenda, WhatsApp, Instagram e outras ferramentas que você já usa, sem código e sem equipe técnica."
-          />
-          <PillarCard
-            number="03"
-            title="Inteligência Comercial"
-            description="Script validado, lógica de qualificação e funil estruturado por trás de cada conversa, para que o agente não converse apenas — ele venda."
-          />
+          <Reveal delay={80}>
+            <PillarCard
+              number="01"
+              title="Agente de IA"
+              description="Recebe, qualifica, conduz a conversa, entende objeções, entende áudio e imagem, faz follow-up e agenda — 24 horas por dia, todos os dias, inclusive fins de semana e feriados."
+            />
+          </Reveal>
+          <Reveal delay={140}>
+            <PillarCard
+              number="02"
+              title="Infraestrutura"
+              description="Integrado ao seu CRM, agenda, WhatsApp, Instagram e outras ferramentas que você já usa, sem código e sem equipe técnica."
+            />
+          </Reveal>
+          <Reveal delay={200}>
+            <PillarCard
+              number="03"
+              title="Inteligência Comercial"
+              description="Script validado, lógica de qualificação e funil estruturado por trás de cada conversa, para que o agente não converse apenas — ele venda."
+            />
+          </Reveal>
         </div>
       </Section>
 
       {/* 6.8 Diferenciação */}
-      <Section className="border-t border-white/10">
-        <div className="max-w-3xl mb-10">
+      <Section divider>
+        <Reveal className="max-w-3xl mb-10">
           <Eyebrow>Diferenciação</Eyebrow>
           <SectionTitle>
             Enquanto o mercado vende chatbot, entregamos uma implementação
             comercial completa.
           </SectionTitle>
-        </div>
+        </Reveal>
         <div className="grid sm:grid-cols-3 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-surface p-7">
-            <p className="font-bold text-lg mb-2">
-              Treinado com dados do seu negócio
-            </p>
-            <p className="text-muted leading-relaxed text-[15px]">
-              Não com respostas genéricas de um bot padrão.
-            </p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-surface p-7">
-            <p className="font-bold text-lg mb-2">
-              Otimizado continuamente pela nossa equipe
-            </p>
-            <p className="text-muted leading-relaxed text-[15px]">
-              Com base em resultado real, não configurado uma vez e
-              esquecido.
-            </p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-surface p-7">
-            <p className="font-bold text-lg mb-2">
-              Economia de até 80% em tempo operacional
-            </p>
-            <p className="text-muted leading-relaxed text-[15px]">
-              Liberando sua equipe para o que só humano resolve: fechamento,
-              relacionamento e atendimento presencial.
-            </p>
-          </div>
+          {differentiators.map((item, index) => (
+            <Reveal
+              key={item.title}
+              delay={index * 80}
+              className="card-surface card-hover rounded-3xl p-7"
+            >
+              <p className="font-bold text-lg mb-2">{item.title}</p>
+              <p className="text-muted leading-relaxed text-[15px]">
+                {item.description}
+              </p>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
       {/* 6.9 O que você ganha na prática */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Na prática</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          O que você ganha na prática
-        </SectionTitle>
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Na prática</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            O que você ganha na prática
+          </SectionTitle>
+        </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {gains.map((gain) => (
-            <div key={gain.title} className="rounded-3xl border border-white/10 bg-surface p-7">
+          {gains.map((gain, index) => (
+            <Reveal
+              key={gain.title}
+              delay={index * 50}
+              className="card-surface card-hover rounded-3xl p-7"
+            >
               <h3 className="font-bold text-lg mb-2">{gain.title}</h3>
               <p className="text-muted leading-relaxed text-[15px]">
                 {gain.description}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
 
       {/* 6.10 O que está incluso */}
-      <Section className="border-t border-white/10">
-        <div className="rounded-3xl border border-white/10 bg-surface p-8 sm:p-12">
-          <Eyebrow>O que está incluso</Eyebrow>
-          <SectionTitle className="mb-8 max-w-2xl">
-            Tudo pronto para sua operação rodar
-          </SectionTitle>
-          <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
-            {included.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <span className="mt-1 text-accent shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M5 13l4 4L19 7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span className="text-muted leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <Section divider>
+        <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface p-8 sm:p-12">
+          <div className="glow h-[280px] w-[280px] -top-20 -right-20" />
+          <div className="relative">
+            <Eyebrow>O que está incluso</Eyebrow>
+            <SectionTitle className="mb-8 max-w-2xl">
+              Tudo pronto para sua operação rodar
+            </SectionTitle>
+            <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
+              {included.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-1 text-accent shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M5 13l4 4L19 7"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span className="text-muted leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </Section>
 
       {/* 6.11 FAQ */}
-      <Section className="border-t border-white/10">
-        <Eyebrow>Perguntas frequentes</Eyebrow>
-        <SectionTitle className="mb-10 max-w-2xl">
-          Antes de agendar sua conversa
-        </SectionTitle>
-        <div className="max-w-3xl">
+      <Section divider>
+        <Reveal>
+          <Eyebrow>Perguntas frequentes</Eyebrow>
+          <SectionTitle className="mb-10 max-w-2xl">
+            Antes de agendar sua conversa
+          </SectionTitle>
+        </Reveal>
+        <Reveal delay={100} className="max-w-3xl">
           <FAQAccordion
             items={[
               {
@@ -381,25 +438,28 @@ export default function AgentesDeIA() {
               },
             ]}
           />
-        </div>
+        </Reveal>
       </Section>
 
       {/* 6.12 Fechamento */}
-      <Section className="border-t border-white/10">
-        <div className="rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-6">
+      <Section divider>
+        <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
+          <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
+          <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-6">
             Em 15 a 21 dias você recebe uma operação completa, personalizada
             para o seu negócio e integrada às suas ferramentas.
           </h2>
-          <p className="text-muted max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="relative text-muted max-w-xl mx-auto mb-8 leading-relaxed">
             Sem precisar se envolver em nada técnico. As vagas de
             implementação são limitadas por mês para garantir qualidade de
             entrega e acompanhamento próximo em cada projeto.
           </p>
-          <CTAButton flow="agentes" size="lg">
-            Quero meu agente de IA agora
-          </CTAButton>
-        </div>
+          <div className="relative">
+            <CTAButton flow="agentes" size="lg">
+              Quero meu agente de IA agora
+            </CTAButton>
+          </div>
+        </Reveal>
       </Section>
     </>
   );

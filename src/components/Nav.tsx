@@ -17,7 +17,8 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-bg/85 backdrop-blur">
+    <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-md">
+      <div className="divider absolute bottom-0 left-0 right-0" />
       <Container className="flex items-center justify-between h-16 sm:h-20">
         <Link href="/" onClick={() => setOpen(false)}>
           <Logo />
@@ -30,11 +31,14 @@ export function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
-                  active ? "text-accent" : "text-text/80 hover:text-text"
+                className={`relative py-1 text-sm font-medium transition-colors ${
+                  active ? "text-text" : "text-text/70 hover:text-text"
                 }`}
               >
                 {link.label}
+                {active && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-px bg-accent shadow-[0_0_8px_rgba(0,200,83,0.8)]" />
+                )}
               </Link>
             );
           })}
@@ -42,7 +46,7 @@ export function Nav() {
 
         <Link
           href="/agentes-de-ia"
-          className="hidden md:inline-flex items-center rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold hover:border-accent hover:text-accent transition-colors"
+          className="hidden md:inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:border-accent/60 hover:text-accent hover:-translate-y-0.5"
         >
           Falar com a gente
         </Link>
@@ -92,7 +96,7 @@ export function Nav() {
             <Link
               href="/agentes-de-ia"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-accent text-[#04221a] px-5 py-3 text-sm font-semibold"
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-accent text-[#07090a] px-5 py-3 text-sm font-semibold"
             >
               Falar com a gente
             </Link>
