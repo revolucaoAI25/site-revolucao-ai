@@ -15,13 +15,25 @@ export const CALENDLY_AGENTE_LINK =
   "https://calendly.com/d/cxjt-7t2-nxc/apresentacao-agente-de-ia";
 
 /**
+ * PLACEHOLDER — o cliente disse que vai enviar uma agenda própria pra
+ * reunião de vendas da Formação. Até lá, reutiliza a mesma do agente de IA
+ * (ele mesmo confirmou que pode ser assim por enquanto).
+ */
+export const CALENDLY_FORMACAO_LINK = CALENDLY_AGENTE_LINK;
+
+/**
  * PLACEHOLDER — ainda não recebemos os links definitivos. Apontam para o
  * WhatsApp oficial como fallback; trocar assim que o cliente enviar:
- * - link do curso Do 0 aos 10K / agenda de conversa da Formação;
- * - página da ferramenta de extração de leads;
- * - página/LP do "outro produto" (oferta de ticket mais baixo).
+ * - link do curso Do 0 aos 10K (só usado como texto informativo hoje, não
+ *   como CTA — ver src/lib/qualification-flows.ts);
+ * - página da ferramenta de extração de leads (Agentes de IA);
+ * - página/LP do "outro produto", de ticket mais baixo (Agentes de IA);
+ * - página do produto gratuito (Formação, quem não tem orçamento agora);
+ * - página do produto de baixo ticket (Formação, orçamento até R$3.000).
  */
 export const CURSO_LINK = WHATSAPP_LINK;
 export const AGENDAR_CONVERSA_LINK = WHATSAPP_LINK;
 export const FERRAMENTA_EXTRACAO_LINK = WHATSAPP_LINK;
 export const OUTRO_PRODUTO_LINK = WHATSAPP_LINK;
+export const PRODUTO_GRATUITO_LINK = WHATSAPP_LINK;
+export const PRODUTO_LOW_TICKET_LINK = WHATSAPP_LINK;

@@ -2,6 +2,7 @@
 
 import { useQualificationModal } from "./ModalProvider";
 import { flows } from "@/lib/qualification-flows";
+import { CalendlyEmbed } from "./CalendlyEmbed";
 
 export function QualificationModal() {
   const { state, choose, close, goBack } = useQualificationModal();
@@ -26,7 +27,11 @@ export function QualificationModal() {
         onClick={close}
         className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-default"
       />
-      <div className="relative w-full sm:max-w-lg bg-surface border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_30px_80px_-20px_rgba(0,0,0,0.6)] animate-fade-in-up max-h-[90vh] overflow-y-auto">
+      <div
+        className={`relative w-full ${
+          result?.embed ? "sm:max-w-2xl" : "sm:max-w-lg"
+        } bg-surface border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_30px_80px_-20px_rgba(0,0,0,0.6)] animate-fade-in-up max-h-[90vh] overflow-y-auto`}
+      >
         <div className="flex items-center justify-between px-6 sm:px-8 pt-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent">
             {flow.title}
@@ -57,14 +62,18 @@ export function QualificationModal() {
               <p className="text-muted leading-relaxed mb-6">
                 {result.description}
               </p>
-              <a
-                href={result.cta.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors"
-              >
-                {result.cta.label}
-              </a>
+              {result.embed ? (
+                <CalendlyEmbed url={result.embed.url} />
+              ) : result.cta ? (
+                <a
+                  href={result.cta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors"
+                >
+                  {result.cta.label}
+                </a>
+              ) : null}
             </div>
           ) : step ? (
             <div>

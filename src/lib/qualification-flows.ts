@@ -1,17 +1,17 @@
 /**
  * Fluxo de qualificação do pop-up.
  *
- * `agentesFlow` reflete a lógica real de qualificação combinada com o
- * cliente. `formacaoFlow` ainda é um placeholder funcional — mexer nele é a
- * próxima etapa.
+ * `agentesFlow` e `formacaoFlow` refletem a lógica real de qualificação
+ * combinada com o cliente.
  */
 
 import {
   CALENDLY_AGENTE_LINK,
-  CURSO_LINK,
-  AGENDAR_CONVERSA_LINK,
+  CALENDLY_FORMACAO_LINK,
   FERRAMENTA_EXTRACAO_LINK,
   OUTRO_PRODUTO_LINK,
+  PRODUTO_GRATUITO_LINK,
+  PRODUTO_LOW_TICKET_LINK,
 } from "./links";
 
 export type FlowId = "agentes" | "formacao";
@@ -20,9 +20,15 @@ export type FlowResult = {
   kind: "result";
   title: string;
   description: string;
-  cta: {
+  /** Link de saída (abre em outra aba). Use quando não houver `embed`. */
+  cta?: {
     label: string;
     href: string;
+  };
+  /** Agenda embutida direto no pop-up, sem sair do site. */
+  embed?: {
+    provider: "calendly";
+    url: string;
   };
 };
 
@@ -67,7 +73,7 @@ export const agentesFlow: QualificationFlow = {
           label: "Não recebo leads e preciso de uma base pra prospectar",
           next: "extracao-ou-agente",
         },
-        { label: "Recebo de 0 a 100 leads por mês", next: "orcamento" },
+        { label: "Recebo de 10 a 100 leads por mês", next: "orcamento" },
         { label: "Recebo de 100 a 500 leads por mês", next: "result:agendar" },
         { label: "Recebo mais de 500 leads por mês", next: "result:agendar" },
       ],
@@ -104,8 +110,8 @@ export const agentesFlow: QualificationFlow = {
       kind: "result",
       title: "Vamos agendar a apresentação do agente de IA.",
       description:
-        "Seu cenário tem espaço real pra ganho com IA. Escolha o melhor horário e te mostramos como funciona na prática, aplicado ao seu negócio.",
-      cta: { label: "Agendar apresentação", href: CALENDLY_AGENTE_LINK },
+        "Seu cenário tem espaço real pra ganho com IA. Escolha o melhor horário abaixo e te mostramos como funciona na prática, aplicado ao seu negócio.",
+      embed: { provider: "calendly", url: CALENDLY_AGENTE_LINK },
     },
     "outro-produto": {
       kind: "result",
@@ -127,46 +133,60 @@ export const agentesFlow: QualificationFlow = {
 export const formacaoFlow: QualificationFlow = {
   id: "formacao",
   title: "Quero construir uma agência de IA",
-  startStepId: "estagio",
+  startStepId: "momento",
   steps: {
-    estagio: {
-      id: "estagio",
-      question: "Onde você está hoje?",
+    momento: {
+      id: "momento",
+      question: "Qual o seu momento na operação hoje?",
       options: [
-        {
-          label: "Estou começando agora, não tenho agência",
-          next: "result:comecando",
-        },
-        {
-          label: "Já tenho uma agência ou operação rodando",
-          next: "gargalo",
-        },
+        { label: "Estou começando do zero, ainda não tenho agência", next: "faturamento" },
+        { label: "Estou vindo de outra área ou operação", next: "faturamento" },
+        { label: "Já tenho uma agência de IA rodando", next: "faturamento" },
       ],
     },
-    gargalo: {
-      id: "gargalo",
-      question: "Qual o seu maior gargalo hoje?",
+    faturamento: {
+      id: "faturamento",
+      question: "Qual o seu faturamento atual?",
       options: [
-        { label: "Geração de leads", next: "result:mentoria" },
-        { label: "Vendas e fechamento", next: "result:mentoria" },
-        { label: "Entrega e operação", next: "result:mentoria" },
+        { label: "Ainda não faturo", next: "investimento" },
+        { label: "Até R$5.000/mês", next: "investimento" },
+        { label: "De R$5.000 a R$15.000/mês", next: "investimento" },
+        { label: "De R$15.000 a R$50.000/mês", next: "investimento" },
+        { label: "Acima de R$50.000/mês", next: "investimento" },
+      ],
+    },
+    investimento: {
+      id: "investimento",
+      question: "Quanto você tem disponível pra investir agora?",
+      options: [
+        { label: "Nada, não consigo investir agora", next: "result:gratuito" },
+        { label: "Até R$500", next: "result:low-ticket" },
+        { label: "De R$500 a R$3.000", next: "result:low-ticket" },
+        { label: "Acima de R$3.000", next: "result:reuniao-vendas" },
       ],
     },
   },
   results: {
-    comecando: {
+    gratuito: {
       kind: "result",
-      title: "O curso Do 0 aos 10K é o seu caminho.",
+      title: "Comece por aqui, sem custo.",
       description:
-        "Estruturado para quem ainda não tem agência: da oferta ao primeiro contrato fechado, com o mesmo método usado na prática pelo Revolução AI.",
-      cta: { label: "Conhecer o curso Do 0 aos 10K", href: CURSO_LINK },
+        "Preparamos um material gratuito pra você dar o primeiro passo na construção da sua agência de IA, sem precisar investir agora.",
+      cta: { label: "Acessar material gratuito", href: PRODUTO_GRATUITO_LINK },
     },
-    mentoria: {
+    "low-ticket": {
       kind: "result",
-      title: "A mentoria é o caminho pra escalar com estrutura.",
+      title: "Temos uma oferta de entrada ideal pro seu momento.",
       description:
-        "Pra quem já vende, mas precisa de mais processo, ticket e previsibilidade. Vamos agendar uma conversa pra entender seu gargalo de perto.",
-      cta: { label: "Agendar conversa com a gente", href: AGENDAR_CONVERSA_LINK },
+        "Pra esse investimento, o melhor caminho é começar por uma oferta mais enxuta, que já entrega resultado prático antes de qualquer coisa maior.",
+      cta: { label: "Conhecer a oferta", href: PRODUTO_LOW_TICKET_LINK },
+    },
+    "reuniao-vendas": {
+      kind: "result",
+      title: "Vamos agendar uma reunião de vendas.",
+      description:
+        "Seu momento e investimento fazem sentido pra construir a agência com a gente. Escolha o melhor horário abaixo pra conversarmos.",
+      embed: { provider: "calendly", url: CALENDLY_FORMACAO_LINK },
     },
   },
 };
