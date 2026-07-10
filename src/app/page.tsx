@@ -6,6 +6,7 @@ import { PillarCard } from "@/components/ui/PillarCard";
 import { Timeline } from "@/components/ui/Timeline";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
+import { TechLogos } from "@/components/ui/TechLogos";
 import { Reveal } from "@/components/ui/Reveal";
 
 export default function Home() {
@@ -45,6 +46,16 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      {/* Tecnologia por trás */}
+      <Section divider className="py-14 sm:py-16">
+        <Reveal>
+          <p className="text-center text-sm text-muted-2 uppercase tracking-widest mb-8">
+            Construído com as principais tecnologias de IA e mensageria do mercado
+          </p>
+          <TechLogos />
+        </Reveal>
       </Section>
 
       {/* 5.2 Nossa trajetória */}

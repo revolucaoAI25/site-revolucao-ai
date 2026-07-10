@@ -39,15 +39,15 @@ const clients: ClientItem[] = [
 // Duplicada para o loop do CSS ficar contínuo (anda -50% e reinicia sem corte).
 const track = [...clients, ...clients];
 
-const LOGO_HEIGHT = 56;
+const LOGO_HEIGHT = 100;
 const SCREENSHOT_HEIGHT = 132;
 
 function LogoChip({ item }: { item: LogoItem }) {
   const width = Math.round((item.width / item.height) * LOGO_HEIGHT);
   return (
     <div
-      className="flex shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-surface px-5"
-      style={{ height: LOGO_HEIGHT + 24 }}
+      className="flex shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-surface px-7"
+      style={{ height: LOGO_HEIGHT + 32 }}
       title={item.name}
     >
       <Image

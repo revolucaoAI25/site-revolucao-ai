@@ -7,6 +7,7 @@ import { CaseCard } from "@/components/ui/CaseCard";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { ClientLogos } from "@/components/ui/ClientLogos";
+import { TechLogos } from "@/components/ui/TechLogos";
 
 export const metadata: Metadata = {
   title: "Agentes de IA para Pré-Vendas",
@@ -137,6 +138,16 @@ export default function AgentesDeIA() {
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      {/* Tecnologia por trás */}
+      <Section divider className="py-14 sm:py-16">
+        <Reveal>
+          <p className="text-center text-sm text-muted-2 uppercase tracking-widest mb-8">
+            Construído com as principais tecnologias de IA e mensageria do mercado
+          </p>
+          <TechLogos />
+        </Reveal>
       </Section>
 
       {/* 6.2 O problema */}
