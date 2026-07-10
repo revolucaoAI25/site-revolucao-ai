@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #04221a;
+  --color-surface: #0a2e23;
+  --color-surface-2: #0e372a;
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-accent: #00c853;
+  --color-accent-dark: #00a844;
+  --color-text: #f5f7f6;
+  --color-muted: #9fb3ac;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #04221a;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}

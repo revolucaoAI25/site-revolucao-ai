@@ -1,0 +1,105 @@
+"use client";
+
+import { useQualificationModal } from "./ModalProvider";
+import { flows } from "@/lib/qualification-flows";
+
+export function QualificationModal() {
+  const { state, choose, close, goBack } = useQualificationModal();
+  const { flowId, stepId, result, history } = state;
+
+  if (!flowId) return null;
+
+  const flow = flows[flowId];
+  const step = stepId ? flow.steps[stepId] : null;
+  const canGoBack = history.length > 0 || Boolean(result);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={flow.title}
+    >
+      <button
+        type="button"
+        aria-label="Fechar"
+        onClick={close}
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-default"
+      />
+      <div className="relative w-full sm:max-w-lg bg-surface border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-2xl animate-fade-in-up max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between px-6 sm:px-8 pt-6">
+          <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+            {flow.title}
+          </p>
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Fechar pop-up"
+            className="text-muted hover:text-text transition-colors p-1 cursor-pointer"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div className="px-6 sm:px-8 pb-8 pt-4">
+          {result ? (
+            <div>
+              <h3 className="text-2xl font-black tracking-tight mb-3">
+                {result.title}
+              </h3>
+              <p className="text-muted leading-relaxed mb-6">
+                {result.description}
+              </p>
+              <a
+                href={result.cta.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#04221a] font-semibold px-6 py-3.5 hover:bg-accent-dark transition-colors"
+              >
+                {result.cta.label}
+              </a>
+            </div>
+          ) : step ? (
+            <div>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-2">
+                {step.question}
+              </h3>
+              {step.helper && (
+                <p className="text-muted text-sm mb-4">{step.helper}</p>
+              )}
+              <div className="flex flex-col gap-3 mt-5">
+                {step.options.map((option) => (
+                  <button
+                    key={option.label}
+                    type="button"
+                    onClick={() => choose(option.next)}
+                    className="w-full text-left rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium hover:border-accent hover:text-accent transition-colors cursor-pointer"
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {canGoBack && (
+            <button
+              type="button"
+              onClick={goBack}
+              className="mt-6 text-sm text-muted hover:text-text transition-colors cursor-pointer"
+            >
+              ← Voltar
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
