@@ -23,8 +23,8 @@ Abra [http://localhost:3000](http://localhost:3000).
 - `src/lib/qualification-flows.ts` — conteúdo do pop-up (perguntas, opções e
   para onde cada resposta leva). **Está com conteúdo placeholder** — ver seção
   abaixo.
-- `src/lib/links.ts` — links de destino (WhatsApp, curso, agendamento).
-  **Também placeholder.**
+- `src/lib/links.ts` — WhatsApp, e-mail, Instagram e endereço reais (já
+  usados no rodapé). Link do curso/agendamento ainda **placeholder**.
 
 ## Pendências antes de publicar
 
@@ -33,9 +33,10 @@ Abra [http://localhost:3000](http://localhost:3000).
    placeholder só para o site funcionar de ponta a ponta. Assim que vocês
    definirem o fluxo real e para onde cada resposta deve levar, é só
    substituir o conteúdo desse arquivo.
-2. **Links de destino**: `src/lib/links.ts` aponta tudo para um número de
-   WhatsApp de exemplo. Trocar pelo WhatsApp oficial, link do curso/checkout
-   e link de agendamento reais.
+2. **Links de curso/agendamento**: `CURSO_LINK` e `AGENDAR_CONVERSA_LINK`
+   em `src/lib/links.ts` ainda apontam para o WhatsApp oficial como
+   fallback. Trocar pelas páginas/links definitivos de cada um quando
+   estiverem prontos.
 
 A logo oficial já está integrada (`public/logo.png`, usada em
 `src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel

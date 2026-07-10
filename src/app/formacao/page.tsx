@@ -233,7 +233,7 @@ export default function Formacao() {
         <div className="grid sm:grid-cols-2 gap-6">
           <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8">
             <h3 className="text-lg font-bold mb-5">
-              Se você está começando (curso Do 0 aos 10K)
+              Se você está começando
             </h3>
             <ul className="space-y-3">
               {[
@@ -253,7 +253,7 @@ export default function Formacao() {
 
           <Reveal delay={160} className="card-surface card-hover rounded-3xl p-8">
             <h3 className="text-lg font-bold mb-5">
-              Se você já tem operação (mentoria)
+              Se você já tem operação
             </h3>
             <ul className="space-y-3">
               {[
