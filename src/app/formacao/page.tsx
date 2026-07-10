@@ -4,7 +4,6 @@ import { CTAButton } from "@/components/ui/CTAButton";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { Reveal } from "@/components/ui/Reveal";
-import { CURSO_LINK, AGENDAR_CONVERSA_LINK } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Formação para Agências de IA",
@@ -35,11 +34,11 @@ export default function Formacao() {
           </Reveal>
           <Reveal delay={120}>
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
-              <CTAButton href={CURSO_LINK} external size="lg">
-                Conhecer o curso Do 0 aos 10K
+              <CTAButton flow="formacao" size="lg">
+                Quero construir uma agência de IA
               </CTAButton>
-              <CTAButton href={AGENDAR_CONVERSA_LINK} external variant="secondary" size="lg">
-                Agendar conversa com a gente
+              <CTAButton flow="formacao" variant="secondary" size="lg">
+                Quero escalar minha agência
               </CTAButton>
             </div>
           </Reveal>
@@ -88,7 +87,7 @@ export default function Formacao() {
       </Section>
 
       {/* 7.3 Quem está por trás */}
-      <Section divider>
+      <Section divider className="bg-tint">
         <Reveal>
           <Eyebrow>Quem está por trás disso</Eyebrow>
           <SectionTitle className="mb-6 max-w-2xl">
@@ -184,8 +183,8 @@ export default function Formacao() {
               aprender do zero — desde como estruturar uma oferta até como
               fechar meus primeiros contratos.
             </p>
-            <CTAButton href={CURSO_LINK} external>
-              Conhecer o curso Do 0 aos 10K
+            <CTAButton flow="formacao">
+              Quero começar minha agência
             </CTAButton>
           </Reveal>
 
@@ -198,8 +197,8 @@ export default function Formacao() {
               vendo, mas preciso de mais estrutura, processo ou ticket para
               escalar.
             </p>
-            <CTAButton href={AGENDAR_CONVERSA_LINK} external variant="secondary">
-              Agendar conversa com a gente
+            <CTAButton flow="formacao" variant="secondary">
+              Quero escalar minha agência
             </CTAButton>
           </Reveal>
         </div>
@@ -256,7 +255,7 @@ export default function Formacao() {
       </Section>
 
       {/* 7.6 Por que aprender com o Revolução AI */}
-      <Section divider>
+      <Section divider className="bg-tint">
         <Reveal className="max-w-3xl">
           <Eyebrow>Por que aprender com o Revolução AI</Eyebrow>
           <p className="text-lg text-muted leading-relaxed">
@@ -312,11 +311,11 @@ export default function Formacao() {
             Escolha o caminho que faz sentido pra você agora
           </h2>
           <div className="relative flex flex-col sm:flex-row gap-4 justify-center">
-            <CTAButton href={CURSO_LINK} external size="lg">
-              Conhecer o curso Do 0 aos 10K
+            <CTAButton flow="formacao" size="lg">
+              Quero construir uma agência de IA
             </CTAButton>
-            <CTAButton href={AGENDAR_CONVERSA_LINK} external variant="secondary" size="lg">
-              Agendar conversa com a gente
+            <CTAButton flow="formacao" variant="secondary" size="lg">
+              Quero escalar minha agência
             </CTAButton>
           </div>
         </Reveal>

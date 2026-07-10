@@ -1,6 +1,7 @@
 /**
- * Placeholder de logos de clientes — trocar cada chip por <Image> com a
- * logo real assim que forem enviadas.
+ * Carrossel automático e infinito dos clientes — placeholder em texto.
+ * Quando as logos chegarem, é só trocar o `<span>` de cada item por um
+ * <Image src="..." /> mantendo a mesma lista/estrutura do array `clients`.
  */
 const clients = [
   "Bubble Box",
@@ -11,17 +12,30 @@ const clients = [
   "Guilherme Vazan",
 ];
 
+// Duplicada para o loop do CSS ficar contínuo (anda -50% e reinicia sem corte).
+const track = [...clients, ...clients];
+
 export function ClientLogos() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-      {clients.map((client) => (
-        <span
-          key={client}
-          className="rounded-full border border-white/10 bg-surface px-5 py-2.5 text-sm font-medium text-muted transition-colors duration-200 hover:border-accent/30 hover:text-text"
-        >
-          {client}
-        </span>
-      ))}
+    <div
+      className="relative overflow-hidden"
+      style={{
+        maskImage:
+          "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+      }}
+    >
+      <div className="flex w-max items-center gap-4 animate-marquee">
+        {track.map((client, index) => (
+          <span
+            key={`${client}-${index}`}
+            className="shrink-0 rounded-full border border-white/10 bg-surface px-6 py-3 text-sm font-medium text-muted/80 opacity-80 blur-[0.2px] transition-opacity duration-200 hover:opacity-100"
+          >
+            {client}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

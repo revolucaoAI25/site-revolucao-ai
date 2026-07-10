@@ -9,7 +9,11 @@
  * não precisa mudar, só o conteúdo.
  */
 
-import { WHATSAPP_LINK as PLACEHOLDER_WHATSAPP } from "./links";
+import {
+  WHATSAPP_LINK as PLACEHOLDER_WHATSAPP,
+  CURSO_LINK,
+  AGENDAR_CONVERSA_LINK,
+} from "./links";
 
 export type FlowId = "agentes" | "formacao";
 
@@ -127,14 +131,14 @@ export const formacaoFlow: QualificationFlow = {
       title: "O curso Do 0 aos 10K é o seu caminho.",
       description:
         "Estruturado para quem ainda não tem agência: da oferta ao primeiro contrato fechado, com o mesmo método usado na prática pelo Revolução AI.",
-      cta: { label: "Conhecer o curso Do 0 aos 10K", href: PLACEHOLDER_WHATSAPP },
+      cta: { label: "Conhecer o curso Do 0 aos 10K", href: CURSO_LINK },
     },
     mentoria: {
       kind: "result",
       title: "A mentoria é o caminho pra escalar com estrutura.",
       description:
         "Pra quem já vende, mas precisa de mais processo, ticket e previsibilidade. Vamos agendar uma conversa pra entender seu gargalo de perto.",
-      cta: { label: "Agendar conversa com a gente", href: PLACEHOLDER_WHATSAPP },
+      cta: { label: "Agendar conversa com a gente", href: AGENDAR_CONVERSA_LINK },
     },
   },
 };

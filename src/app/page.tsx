@@ -133,7 +133,7 @@ export default function Home() {
       </Section>
 
       {/* 5.4 O que fazemos hoje */}
-      <Section divider>
+      <Section divider className="bg-tint">
         <Reveal>
           <Eyebrow>O que fazemos hoje</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
@@ -279,7 +279,7 @@ export default function Home() {
       </Section>
 
       {/* 5.7 Por que confiar */}
-      <Section divider>
+      <Section divider className="bg-tint">
         <Reveal className="max-w-3xl">
           <Eyebrow>Por que confiar no Revolução AI</Eyebrow>
           <p className="text-lg text-muted leading-relaxed">

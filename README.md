@@ -32,10 +32,12 @@ Abra [http://localhost:3000](http://localhost:3000).
    texto (`src/components/Logo.tsx`). Assim que vocês tiverem a logo oficial
    em SVG/PNG, é só substituir esse componente.
 2. **Logos de clientes e favicon**: a seção "Empresas que já confiaram" (Home
-   e Formação) está com os nomes em chips de texto
-   (`src/components/ui/ClientLogos.tsx`), e o favicon (`src/app/favicon.ico`)
-   ainda é o padrão do Next.js. Envie os arquivos para trocarmos pelos
-   originais.
+   e Formação) já é um carrossel automático e infinito
+   (`src/components/ui/ClientLogos.tsx`), hoje com os nomes em chips de
+   texto no lugar das logos. Quando enviarem os arquivos, é só trocar cada
+   item do array `clients` por uma `<Image>` mantendo a mesma lista — o
+   carrossel e o fade nas bordas continuam funcionando do mesmo jeito. O
+   favicon (`src/app/favicon.ico`) também ainda é o padrão do Next.js.
 3. **Fluxo real do pop-up**: as perguntas e ramificações do pop-up de
    qualificação (`src/lib/qualification-flows.ts`) estão com um fluxo
    placeholder só para o site funcionar de ponta a ponta. Assim que vocês

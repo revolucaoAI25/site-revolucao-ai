@@ -118,9 +118,7 @@ export default function AgentesDeIA() {
       >
         <div className="max-w-3xl">
           <Reveal>
-            <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent-soft text-accent text-xs font-semibold uppercase tracking-widest px-4 py-1.5 mb-6">
-              Vagas limitadas por mês
-            </span>
+            <Eyebrow>Agentes de IA para pré-vendas</Eyebrow>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
               Transforme a forma como sua empresa qualifica, atende e converte
               leads — com agentes de IA que trabalham por você, todos os dias.
@@ -213,7 +211,7 @@ export default function AgentesDeIA() {
       </Section>
 
       {/* 6.5 Prova social */}
-      <Section divider>
+      <Section divider className="bg-tint">
         <Reveal>
           <Eyebrow>Prova social</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
@@ -268,6 +266,17 @@ export default function AgentesDeIA() {
             </Reveal>
           ))}
         </div>
+        <Reveal
+          delay={200}
+          className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 rounded-2xl border border-white/10 bg-surface px-6 py-6 sm:px-8"
+        >
+          <p className="text-lg font-semibold text-balance">
+            Quer um resultado parecido rodando no seu negócio?
+          </p>
+          <CTAButton flow="agentes">
+            Quero um agente de IA trabalhando para mim
+          </CTAButton>
+        </Reveal>
       </Section>
 
       {/* 6.6 Como funciona a implementação */}
@@ -293,7 +302,7 @@ export default function AgentesDeIA() {
       </Section>
 
       {/* 6.7 Os 3 pilares */}
-      <Section divider>
+      <Section divider className="bg-tint">
         <Reveal>
           <Eyebrow>Os 3 pilares</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
@@ -372,6 +381,11 @@ export default function AgentesDeIA() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={220} className="mt-8 flex justify-center">
+          <CTAButton flow="agentes" variant="secondary" size="lg">
+            Quero esses ganhos no meu negócio
+          </CTAButton>
+        </Reveal>
       </Section>
 
       {/* 6.10 O que está incluso */}
@@ -401,6 +415,11 @@ export default function AgentesDeIA() {
                 </li>
               ))}
             </ul>
+            <div className="mt-10">
+              <CTAButton flow="agentes">
+                Quero meu agente de IA
+              </CTAButton>
+            </div>
           </div>
         </Reveal>
       </Section>
@@ -450,9 +469,8 @@ export default function AgentesDeIA() {
             para o seu negócio e integrada às suas ferramentas.
           </h2>
           <p className="relative text-muted max-w-xl mx-auto mb-8 leading-relaxed">
-            Sem precisar se envolver em nada técnico. As vagas de
-            implementação são limitadas por mês para garantir qualidade de
-            entrega e acompanhamento próximo em cada projeto.
+            Sem precisar se envolver em nada técnico — só diagnóstico,
+            implementação e acompanhamento de perto em cada projeto.
           </p>
           <div className="relative">
             <CTAButton flow="agentes" size="lg">
