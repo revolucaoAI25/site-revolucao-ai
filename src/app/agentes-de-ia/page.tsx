@@ -8,6 +8,7 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { TechLogos } from "@/components/ui/TechLogos";
+import { HeroChatMock } from "@/components/ui/HeroChatMock";
 
 export const metadata: Metadata = {
   title: "Agentes de IA para Pré-Vendas",
@@ -115,6 +116,20 @@ export default function AgentesDeIA() {
           <>
             <div className="absolute inset-0 bg-grid" />
             <div className="glow h-[460px] w-[460px] -top-48 left-1/2 -translate-x-1/2 sm:left-1/3" />
+            <HeroChatMock
+              messages={[
+                { from: "lead", text: "Quero saber mais sobre o serviço de vocês" },
+                {
+                  from: "agent",
+                  text: "Show! Me conta rapidinho: hoje você já recebe leads todo dia?",
+                },
+                { from: "lead", text: "Recebo, mas a resposta demora demais." },
+                {
+                  from: "agent",
+                  text: "Consigo resolver isso. Tenho horário quinta às 15h ou sexta às 10h — qual prefere?",
+                },
+              ]}
+            />
           </>
         }
       >

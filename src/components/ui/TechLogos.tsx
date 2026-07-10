@@ -9,9 +9,9 @@ type TechItem = {
 
 const techs: TechItem[] = [
   { name: "Google Gemini", src: "/partners/gemini.png", width: 500, height: 185 },
-  { name: "Claude (Anthropic)", src: "/partners/claude.png", width: 256, height: 256 },
+  { name: "Claude (Anthropic)", src: "/partners/claude.png", width: 248, height: 58 },
   { name: "OpenAI", src: "/partners/openai.png", width: 2000, height: 544 },
-  { name: "Meta", src: "/partners/meta.png", width: 447, height: 447 },
+  { name: "Meta", src: "/partners/meta.png", width: 1567, height: 1041 },
   { name: "WhatsApp", src: "/partners/whatsapp.png", width: 960, height: 962 },
 ];
 

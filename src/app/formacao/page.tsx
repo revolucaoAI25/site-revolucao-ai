@@ -3,6 +3,7 @@ import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
+import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
@@ -21,6 +22,23 @@ export default function Formacao() {
           <>
             <div className="absolute inset-0 bg-grid" />
             <div className="glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-1/4" />
+            <HeroChatMock
+              badge="RA"
+              title="Mentoria Revolução AI"
+              subtitle="ativa agora"
+              messages={[
+                { from: "lead", text: "Acabei de fechar meu primeiro contrato: R$12 mil 🚀" },
+                {
+                  from: "agent",
+                  text: "Mandou bem! Essa é exatamente a régua que ensinamos aqui 👏",
+                },
+                { from: "lead", text: "Como estruturo a entrega agora?" },
+                {
+                  from: "agent",
+                  text: "Vou te passar o checklist certinho. Bora escalar isso.",
+                },
+              ]}
+            />
           </>
         }
       >

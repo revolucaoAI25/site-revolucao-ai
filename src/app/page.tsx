@@ -7,6 +7,7 @@ import { Timeline } from "@/components/ui/Timeline";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { TechLogos } from "@/components/ui/TechLogos";
+import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { Reveal } from "@/components/ui/Reveal";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
           <>
             <div className="absolute inset-0 bg-grid" />
             <div className="glow h-[460px] w-[460px] -top-48 left-1/2 -translate-x-1/2 sm:left-1/3" />
+            <HeroChatMock />
           </>
         }
       >
