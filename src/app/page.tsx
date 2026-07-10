@@ -8,7 +8,9 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { TechLogos } from "@/components/ui/TechLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
+import { InstagramShowcase } from "@/components/ui/InstagramShowcase";
 import { Reveal } from "@/components/ui/Reveal";
+import { INSTAGRAM_LINK, INSTAGRAM_HANDLE } from "@/lib/links";
 
 export default function Home() {
   return (
@@ -62,34 +64,44 @@ export default function Home() {
 
       {/* 5.2 Nossa trajetória */}
       <Section divider>
-        <Reveal>
-          <Eyebrow>Nossa trajetória</Eyebrow>
-          <SectionTitle className="mb-6 max-w-2xl">
-            De uma newsletter sobre IA generativa a uma operação real de
-            pré-vendas.
-          </SectionTitle>
-        </Reveal>
-        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 mb-16 text-base">
-          <p>
-            Começamos em 2023 criando conteúdo sobre Inteligência Artificial
-            generativa no Instagram e no TikTok — e lançamos a primeira
-            newsletter de IA generativa do Brasil. Nessa fase, ajudamos o
-            mercado brasileiro a entender um tema que ainda estava começando
-            a se popularizar por aqui.
-          </p>
-          <p>
-            De lá pra cá, passamos por consultorias, palestras e workshops,
-            entrando cada vez mais em projetos de automação e entregas
-            operacionais reais. Entre 2024 e 2025, esse caminho foi se
-            afunilando até nos especializarmos em algo muito mais concreto:
-            agentes de IA para pré-vendas.
-          </p>
-          <p>
-            Foi ali, na prática, vendendo e entregando para clientes reais,
-            que validamos tudo o que hoje aplicamos com nossos clientes e
-            ensinamos para quem quer trilhar um caminho parecido.
-          </p>
-        </Reveal>
+        <div className="grid lg:grid-cols-[1fr_300px] gap-x-12 gap-y-12 items-start mb-16">
+          <div>
+            <Reveal>
+              <Eyebrow>Nossa trajetória</Eyebrow>
+              <SectionTitle className="mb-6 max-w-2xl">
+                De uma newsletter sobre IA generativa a uma operação real de
+                pré-vendas.
+              </SectionTitle>
+            </Reveal>
+            <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-base">
+              <p>
+                Começamos em 2023 criando conteúdo sobre Inteligência Artificial
+                generativa no Instagram e no TikTok — e lançamos a primeira
+                newsletter de IA generativa do Brasil. Nessa fase, ajudamos o
+                mercado brasileiro a entender um tema que ainda estava começando
+                a se popularizar por aqui.
+              </p>
+              <p>
+                De lá pra cá, passamos por consultorias, palestras e workshops,
+                entrando cada vez mais em projetos de automação e entregas
+                operacionais reais. Entre 2024 e 2025, esse caminho foi se
+                afunilando até nos especializarmos em algo muito mais concreto:
+                agentes de IA para pré-vendas.
+              </p>
+              <p>
+                Foi ali, na prática, vendendo e entregando para clientes reais,
+                que validamos tudo o que hoje aplicamos com nossos clientes e
+                ensinamos para quem quer trilhar um caminho parecido.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={120} className="flex flex-col items-center gap-5">
+            <InstagramShowcase />
+            <CTAButton href={INSTAGRAM_LINK} external variant="secondary" icon={false}>
+              Seguir {INSTAGRAM_HANDLE}
+            </CTAButton>
+          </Reveal>
+        </div>
         <Reveal delay={160}>
           <Timeline
             items={[

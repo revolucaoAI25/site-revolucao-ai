@@ -7,12 +7,12 @@ const defaultMessages: Message[] = [
   { from: "lead", text: "Oi! Vi o anúncio de vocês, como funciona?" },
   {
     from: "agent",
-    text: "Oi! Passo tudo certinho pra você 👋 Me conta, você já atende clientes hoje ou está começando?",
+    text: "Oi! Te explico rapidinho 👋 Hoje vocês já recebem leads todo dia ou o volume ainda é baixo?",
   },
-  { from: "lead", text: "Já atendo, mas perco muito lead no meio do caminho." },
+  { from: "lead", text: "Recebemos bastante, mas perdemos muito no meio do caminho." },
   {
     from: "agent",
-    text: "Consigo te ajudar com isso. Vamos marcar 15 min essa semana?",
+    text: "Entendi. E hoje quem responde esses leads — tem alguém dedicado a isso ou fica mais solto mesmo?",
   },
 ];
 

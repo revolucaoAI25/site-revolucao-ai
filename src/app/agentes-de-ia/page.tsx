@@ -126,7 +126,7 @@ export default function AgentesDeIA() {
                 { from: "lead", text: "Recebo, mas a resposta demora demais." },
                 {
                   from: "agent",
-                  text: "Consigo resolver isso. Tenho horário quinta às 15h ou sexta às 10h — qual prefere?",
+                  text: "Entendi. E hoje é alguém do time que responde manualmente ou já tem algum tipo de automação rodando?",
                 },
               ]}
             />
