@@ -21,21 +21,25 @@ Abra [http://localhost:3000](http://localhost:3000).
 - `src/components/modal/` — pop-up de qualificação (perguntas ramificadas) que
   abre nos CTAs principais
 - `src/lib/qualification-flows.ts` — conteúdo do pop-up (perguntas, opções e
-  para onde cada resposta leva). **Está com conteúdo placeholder** — ver seção
-  abaixo.
-- `src/lib/links.ts` — WhatsApp, e-mail, Instagram e endereço reais (já
-  usados no rodapé). Link do curso/agendamento ainda **placeholder**.
+  para onde cada resposta leva). O fluxo de **Agentes de IA** (`agentesFlow`)
+  já é o real, combinado com o cliente. O fluxo de **Formação**
+  (`formacaoFlow`) ainda é placeholder — próxima etapa.
+- `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço e Calendly da
+  apresentação do agente de IA já são os reais. Link do curso, agenda da
+  mentoria, ferramenta de extração de leads e "outro produto" ainda
+  **placeholder**.
 
 ## Pendências antes de publicar
 
-1. **Fluxo real do pop-up**: as perguntas e ramificações do pop-up de
-   qualificação (`src/lib/qualification-flows.ts`) estão com um fluxo
-   placeholder só para o site funcionar de ponta a ponta. Assim que vocês
-   definirem o fluxo real e para onde cada resposta deve levar, é só
-   substituir o conteúdo desse arquivo.
-2. **Links de curso/agendamento**: `CURSO_LINK` e `AGENDAR_CONVERSA_LINK`
-   em `src/lib/links.ts` ainda apontam para o WhatsApp oficial como
-   fallback. Trocar pelas páginas/links definitivos de cada um quando
+1. **Fluxo real do pop-up de Formação**: `formacaoFlow` em
+   `src/lib/qualification-flows.ts` ainda é um placeholder. Mexer nele é a
+   próxima etapa (mesmo padrão do `agentesFlow`, que já está com a lógica
+   real).
+2. **Links ainda placeholder** em `src/lib/links.ts`, todos apontando pro
+   WhatsApp oficial como fallback: `CURSO_LINK`, `AGENDAR_CONVERSA_LINK`,
+   `FERRAMENTA_EXTRACAO_LINK` (ferramenta de extração de leads) e
+   `OUTRO_PRODUTO_LINK` (oferta pra quem não fecha o ticket da implementação
+   completa). Trocar pelas páginas/links definitivos de cada um quando
    estiverem prontos.
 
 A logo oficial já está integrada (`public/logo.png`, usada em

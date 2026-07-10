@@ -8,9 +8,20 @@ export const MAPS_LINK =
   "https://www.google.com/maps/search/?api=1&query=Rua+Sergipe,+1440+-+Savassi,+Belo+Horizonte+-+MG";
 
 /**
- * PLACEHOLDER — link de checkout do curso e de agenda de reunião ainda não
- * confirmados. Por enquanto apontam para o WhatsApp oficial; trocar quando
- * o cliente enviar as páginas/links definitivos de cada um.
+ * Calendly da apresentação do agente de IA — resultado "qualificado" do
+ * pop-up de Agentes de IA.
+ */
+export const CALENDLY_AGENTE_LINK =
+  "https://calendly.com/d/cxjt-7t2-nxc/apresentacao-agente-de-ia";
+
+/**
+ * PLACEHOLDER — ainda não recebemos os links definitivos. Apontam para o
+ * WhatsApp oficial como fallback; trocar assim que o cliente enviar:
+ * - link do curso Do 0 aos 10K / agenda de conversa da Formação;
+ * - página da ferramenta de extração de leads;
+ * - página/LP do "outro produto" (oferta de ticket mais baixo).
  */
 export const CURSO_LINK = WHATSAPP_LINK;
 export const AGENDAR_CONVERSA_LINK = WHATSAPP_LINK;
+export const FERRAMENTA_EXTRACAO_LINK = WHATSAPP_LINK;
+export const OUTRO_PRODUTO_LINK = WHATSAPP_LINK;

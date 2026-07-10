@@ -1,18 +1,17 @@
 /**
- * PLACEHOLDER — fluxos de qualificação do pop-up.
+ * Fluxo de qualificação do pop-up.
  *
- * As perguntas, opções e caminhos abaixo são um placeholder funcional para o
- * site ir ao ar com o pop-up já operando. Assim que o Revolução AI enviar o
- * fluxo real (perguntas + para onde cada resposta deve levar — WhatsApp,
- * link de agendamento, checkout do curso, etc.), substituir os objetos
- * `agentesFlow` e `formacaoFlow` abaixo. A estrutura (steps/options/result)
- * não precisa mudar, só o conteúdo.
+ * `agentesFlow` reflete a lógica real de qualificação combinada com o
+ * cliente. `formacaoFlow` ainda é um placeholder funcional — mexer nele é a
+ * próxima etapa.
  */
 
 import {
-  WHATSAPP_LINK as PLACEHOLDER_WHATSAPP,
+  CALENDLY_AGENTE_LINK,
   CURSO_LINK,
   AGENDAR_CONVERSA_LINK,
+  FERRAMENTA_EXTRACAO_LINK,
+  OUTRO_PRODUTO_LINK,
 } from "./links";
 
 export type FlowId = "agentes" | "formacao";
@@ -50,48 +49,77 @@ export type QualificationFlow = {
 export const agentesFlow: QualificationFlow = {
   id: "agentes",
   title: "Quero implementar IA no meu negócio",
-  startStepId: "tipo-negocio",
+  startStepId: "volume-leads",
   steps: {
-    "tipo-negocio": {
-      id: "tipo-negocio",
-      question: "Qual desses descreve melhor o seu negócio hoje?",
-      options: [
-        { label: "Escritório de advocacia", next: "volume-leads" },
-        { label: "Clínica, estética ou odontologia", next: "volume-leads" },
-        { label: "Outro tipo de negócio", next: "volume-leads" },
-      ],
-    },
     "volume-leads": {
       id: "volume-leads",
-      question: "Quantos leads sua operação recebe, em média, por mês?",
+      question: "Você já recebe leads pelo WhatsApp atualmente?",
       options: [
-        { label: "Menos de 100", next: "result:volume-baixo" },
-        { label: "Entre 100 e 500", next: "result:volume-medio" },
-        { label: "Mais de 500", next: "result:volume-alto" },
+        {
+          label: "Não recebo leads, mas tenho tráfego pago rodando",
+          next: "orcamento",
+        },
+        {
+          label: "Não recebo leads, mas já tenho uma base de contatos pra disparar",
+          next: "orcamento",
+        },
+        {
+          label: "Não recebo leads e preciso de uma base pra prospectar",
+          next: "extracao-ou-agente",
+        },
+        { label: "Recebo de 0 a 100 leads por mês", next: "orcamento" },
+        { label: "Recebo de 100 a 500 leads por mês", next: "result:agendar" },
+        { label: "Recebo mais de 500 leads por mês", next: "result:agendar" },
+      ],
+    },
+    "extracao-ou-agente": {
+      id: "extracao-ou-agente",
+      question:
+        "Você precisa do agente de IA completo, ou só de uma base de leads pra prospectar?",
+      options: [
+        { label: "Preciso do agente de IA completo", next: "orcamento" },
+        {
+          label: "Só preciso de uma base de leads pra prospectar",
+          next: "result:ferramenta-extracao",
+        },
+      ],
+    },
+    orcamento: {
+      id: "orcamento",
+      question: "Quanto você está disposto a investir nessa solução?",
+      options: [
+        { label: "Até R$1.000", next: "result:outro-produto" },
+        { label: "De R$1.000 a R$2.000", next: "result:outro-produto" },
+        { label: "De R$2.000 a R$5.000", next: "result:agendar" },
+        { label: "De R$5.000 a R$10.000", next: "result:agendar" },
+        {
+          label: "O necessário pra resolver meu problema e ter resultado",
+          next: "result:agendar",
+        },
       ],
     },
   },
   results: {
-    "volume-baixo": {
+    agendar: {
       kind: "result",
-      title: "Ainda vale a pena falar com a gente.",
+      title: "Vamos agendar a apresentação do agente de IA.",
       description:
-        "Com menos de 100 leads/mês, o primeiro passo costuma ser diagnosticar o funil antes de qualquer implementação. Vamos entender seu cenário em uma conversa rápida.",
-      cta: { label: "Falar no WhatsApp", href: PLACEHOLDER_WHATSAPP },
+        "Seu cenário tem espaço real pra ganho com IA. Escolha o melhor horário e te mostramos como funciona na prática, aplicado ao seu negócio.",
+      cta: { label: "Agendar apresentação", href: CALENDLY_AGENTE_LINK },
     },
-    "volume-medio": {
+    "outro-produto": {
       kind: "result",
-      title: "Seu volume tem espaço real de ganho com IA.",
+      title: "Temos uma solução mais alinhada ao seu momento agora.",
       description:
-        "Com esse volume de leads, é comum recuperar entre 20% e 25% em agendamentos que hoje ficam pelo caminho. Vamos falar sobre o seu funil.",
-      cta: { label: "Falar no WhatsApp", href: PLACEHOLDER_WHATSAPP },
+        "Pra esse orçamento, faz mais sentido começar por uma oferta diferente da implementação completa. Vamos te mostrar qual.",
+      cta: { label: "Conhecer a opção ideal", href: OUTRO_PRODUTO_LINK },
     },
-    "volume-alto": {
+    "ferramenta-extracao": {
       kind: "result",
-      title: "Esse é exatamente o cenário onde o agente de IA mais entrega.",
+      title: "O que você precisa é da nossa ferramenta de extração de leads.",
       description:
-        "Com mais de 500 leads/mês, cada minuto de demora custa caro. Vamos entender sua operação e desenhar a implementação.",
-      cta: { label: "Falar no WhatsApp", href: PLACEHOLDER_WHATSAPP },
+        "Pra quem só precisa montar uma base de contatos pra prospectar, sem o agente de IA completo, temos uma ferramenta específica pra isso.",
+      cta: { label: "Conhecer a ferramenta", href: FERRAMENTA_EXTRACAO_LINK },
     },
   },
 };
