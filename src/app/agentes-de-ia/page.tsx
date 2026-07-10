@@ -6,6 +6,7 @@ import { PillarCard } from "@/components/ui/PillarCard";
 import { CaseCard } from "@/components/ui/CaseCard";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
+import { ClientLogos } from "@/components/ui/ClientLogos";
 
 export const metadata: Metadata = {
   title: "Agentes de IA para Pré-Vendas",
@@ -168,16 +169,14 @@ export default function AgentesDeIA() {
       <Section divider>
         <Reveal>
           <StatGrid
-            columns={3}
             stats={[
               { value: "+100", label: "empresas atendidas" },
               { value: "15–21 dias", label: "de setup" },
               { value: "4.500+", label: "leads atendidos por mês" },
               {
-                value: "até 100",
-                label: "reuniões geradas por mês com o sistema rodando",
+                value: "20–25%",
+                label: "de conversão, em média, dos nossos clientes",
               },
-              { value: "20%", label: "de conversão média" },
             ]}
           />
           <p className="mt-8 text-center sm:text-left text-sm font-semibold text-muted">
@@ -186,37 +185,20 @@ export default function AgentesDeIA() {
         </Reveal>
       </Section>
 
-      {/* 6.4 Pra quem é */}
-      <Section divider>
-        <Reveal>
-          <Eyebrow>Pra quem é</Eyebrow>
-          <SectionTitle className="mb-10 max-w-2xl">
-            Feito para negócios que já têm leads chegando.
-          </SectionTitle>
-        </Reveal>
-        <div className="grid sm:grid-cols-2 gap-6">
-          <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8">
-            <p className="text-base leading-relaxed">
-              Você que já tem estrutura e volume de leads chegando todos os
-              dias, mas sente que está desperdiçando parte deles.
-            </p>
-          </Reveal>
-          <Reveal delay={140} className="card-surface card-hover rounded-3xl p-8">
-            <p className="text-base leading-relaxed">
-              Você que tem boa inteligência comercial e um bom script, mas
-              precisa de mais consistência e performance na conversão.
-            </p>
-          </Reveal>
-        </div>
-      </Section>
-
       {/* 6.5 Prova social */}
       <Section divider className="bg-tint">
         <Reveal>
           <Eyebrow>Prova social</Eyebrow>
-          <SectionTitle className="mb-10 max-w-2xl">
+          <SectionTitle className="mb-6 max-w-2xl">
             Resultado real, com números reais.
           </SectionTitle>
+          <p className="text-base text-muted leading-relaxed mb-10 max-w-2xl">
+            A prova começa na nossa própria operação: levamos o Revolução AI a{" "}
+            <span className="text-accent font-semibold">
+              R$100 mil de faturamento mensal com uma equipe enxuta
+            </span>{" "}
+            usando o mesmo sistema que implementamos para nossos clientes.
+          </p>
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
@@ -266,9 +248,17 @@ export default function AgentesDeIA() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={180} className="mt-14">
+          <p className="text-center text-sm text-muted-2 uppercase tracking-widest mb-8">
+            Empresas e profissionais que já confiaram no Revolução AI
+          </p>
+          <ClientLogos />
+        </Reveal>
+
         <Reveal
-          delay={200}
-          className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 rounded-2xl border border-white/10 bg-surface px-6 py-6 sm:px-8"
+          delay={220}
+          className="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 rounded-2xl border border-white/10 bg-surface px-6 py-6 sm:px-8"
         >
           <p className="text-base font-semibold text-balance">
             Quer um resultado parecido rodando no seu negócio?

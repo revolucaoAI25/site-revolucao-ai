@@ -72,13 +72,9 @@ export default function Home() {
             agentes de IA para pré-vendas.
           </p>
           <p>
-            Levamos nossa própria agência a{" "}
-            <span className="text-accent font-semibold">
-              R$100 mil de faturamento mensal com uma equipe enxuta
-            </span>{" "}
-            — e foi ali, na prática, vendendo e entregando para clientes
-            reais, que validamos tudo o que hoje aplicamos com nossos
-            clientes e ensinamos para quem quer trilhar um caminho parecido.
+            Foi ali, na prática, vendendo e entregando para clientes reais,
+            que validamos tudo o que hoje aplicamos com nossos clientes e
+            ensinamos para quem quer trilhar um caminho parecido.
           </p>
         </Reveal>
         <Reveal delay={160}>
