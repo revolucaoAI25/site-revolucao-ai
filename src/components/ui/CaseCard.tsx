@@ -26,8 +26,8 @@ export function CaseCard({
       <p className="text-xs font-semibold uppercase tracking-widest text-muted-2 mb-2">
         {tag}
       </p>
-      <h3 className="text-xl font-bold mb-3">{name}</h3>
-      <p className="text-2xl font-black text-accent mb-4 leading-tight text-balance">
+      <h3 className="text-lg font-bold mb-3">{name}</h3>
+      <p className="text-xl font-black text-accent mb-4 leading-tight text-balance">
         {highlight}
       </p>
       <p className="text-muted leading-relaxed text-[15px]">{description}</p>

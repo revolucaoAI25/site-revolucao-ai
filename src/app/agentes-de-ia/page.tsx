@@ -119,11 +119,11 @@ export default function AgentesDeIA() {
         <div className="max-w-3xl">
           <Reveal>
             <Eyebrow>Agentes de IA para pré-vendas</Eyebrow>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance leading-[1.05]">
               Transforme a forma como sua empresa qualifica, atende e converte
               leads — com agentes de IA que trabalham por você, todos os dias.
             </h1>
-            <p className="text-lg sm:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-muted mt-6 max-w-2xl leading-relaxed">
               Agentes treinados para entender objeções, conduzir a conversa e
               agendar reuniões no automático, sem depender de equipe extra.
             </p>
@@ -145,7 +145,7 @@ export default function AgentesDeIA() {
           <SectionTitle className="mb-6">
             Cada minuto de demora é conversão que esfria.
           </SectionTitle>
-          <p className="text-lg text-muted leading-relaxed mb-4">
+          <p className="text-base text-muted leading-relaxed mb-4">
             Todo negócio que investe em tráfego já viveu essa cena: o lead
             chega quente, pergunta, demonstra interesse — e a resposta não
             vem na hora. Vem em uma hora, no dia seguinte, ou nunca. Cada
@@ -153,7 +153,7 @@ export default function AgentesDeIA() {
             inconsistente é um script que não é seguido como deveria. E cada
             lead sem follow-up é dinheiro de tráfego jogado fora.
           </p>
-          <p className="text-lg text-muted leading-relaxed">
+          <p className="text-base text-muted leading-relaxed">
             O problema quase nunca é falta de leads. É{" "}
             <span className="text-text font-semibold">
               falta de estrutura para atender todos eles, sempre, com o mesmo
@@ -196,13 +196,13 @@ export default function AgentesDeIA() {
         </Reveal>
         <div className="grid sm:grid-cols-2 gap-6">
           <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8">
-            <p className="text-lg leading-relaxed">
+            <p className="text-base leading-relaxed">
               Você que já tem estrutura e volume de leads chegando todos os
               dias, mas sente que está desperdiçando parte deles.
             </p>
           </Reveal>
           <Reveal delay={140} className="card-surface card-hover rounded-3xl p-8">
-            <p className="text-lg leading-relaxed">
+            <p className="text-base leading-relaxed">
               Você que tem boa inteligência comercial e um bom script, mas
               precisa de mais consistência e performance na conversão.
             </p>
@@ -221,36 +221,36 @@ export default function AgentesDeIA() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
-              tag: "Franqueadora de lavanderia",
-              name: "Bubble Box",
+              tag: "Franquia",
+              name: "Franqueadora de Lavanderias",
               highlight: "6x mais reuniões em 30 dias",
               description:
                 "Fazia 30 reuniões/mês com processo comercial tradicional, script estruturado mas aplicação inconsistente. Em 30 dias com o sistema plugado, substituiu 2 SDRs da operação e passou a gerar 205 reuniões/mês — mantendo o mesmo número de leads e o mesmo investimento em tráfego, apenas aplicando o script validado de forma consistente, 24h por dia.",
             },
             {
-              tag: "Escritório de advocacia",
+              tag: "Advocacia",
               name: "Escritório de Advocacia",
               highlight: "20% de conversão",
               description:
                 "Recebia 423 leads/mês. Com o sistema, agendou 83 reuniões no automático, fechou 13 novos contratos e alcançou 20% de conversão.",
             },
             {
-              tag: "Direito do Consumidor",
-              name: "Pita Advocacia",
+              tag: "Advocacia",
+              name: "Escritório de Direito do Consumidor",
               highlight: "4x o faturamento",
               description:
                 "Multiplicou por 4x o faturamento (de R$15 mil para R$60 mil/mês) apenas adicionando IA ao pré-vendas, sem aumentar investimento em tráfego nem volume de leads — foi de 10 para 50 reuniões/mês.",
             },
             {
-              tag: "Direito Bancário",
-              name: "Guedes & Cruz Advogados",
+              tag: "Advocacia",
+              name: "Escritório de Direito Bancário",
               highlight: "De 8% para 18% de conversão",
               description:
                 "Conversão saltou de 8% para 18%, com 1 funcionário + IA fazendo o trabalho que antes exigia 3. Em um teste de 2 dias: 70 leads recebidos, 30 reuniões agendadas — 45% de conversão.",
             },
             {
-              tag: "Clínica odontológica",
-              name: "Dr. Paulo Bernardo",
+              tag: "Saúde",
+              name: "Consultório de Odontologia",
               highlight: "Quase 4x o faturamento",
               description:
                 "De 5 para 30 consultas agendadas por mês, com o mesmo investimento em tráfego — retorno mensal saltou de R$12 mil para R$40 mil.",
@@ -270,7 +270,7 @@ export default function AgentesDeIA() {
           delay={200}
           className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 rounded-2xl border border-white/10 bg-surface px-6 py-6 sm:px-8"
         >
-          <p className="text-lg font-semibold text-balance">
+          <p className="text-base font-semibold text-balance">
             Quer um resultado parecido rodando no seu negócio?
           </p>
           <CTAButton flow="agentes">
@@ -350,7 +350,7 @@ export default function AgentesDeIA() {
               delay={index * 80}
               className="card-surface card-hover rounded-3xl p-7"
             >
-              <p className="font-bold text-lg mb-2">{item.title}</p>
+              <p className="font-bold text-base mb-2">{item.title}</p>
               <p className="text-muted leading-relaxed text-[15px]">
                 {item.description}
               </p>
@@ -374,7 +374,7 @@ export default function AgentesDeIA() {
               delay={index * 50}
               className="card-surface card-hover rounded-3xl p-7"
             >
-              <h3 className="font-bold text-lg mb-2">{gain.title}</h3>
+              <h3 className="font-bold text-base mb-2">{gain.title}</h3>
               <p className="text-muted leading-relaxed text-[15px]">
                 {gain.description}
               </p>
@@ -464,7 +464,7 @@ export default function AgentesDeIA() {
       <Section divider>
         <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
           <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
-          <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-6">
+          <h2 className="relative text-2xl sm:text-3xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-6">
             Em 15 a 21 dias você recebe uma operação completa, personalizada
             para o seu negócio e integrada às suas ferramentas.
           </h2>

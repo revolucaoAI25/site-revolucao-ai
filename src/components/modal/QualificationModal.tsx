@@ -51,7 +51,7 @@ export function QualificationModal() {
         <div className="px-6 sm:px-8 pb-8 pt-4">
           {result ? (
             <div>
-              <h3 className="text-2xl font-black tracking-tight mb-3">
+              <h3 className="text-xl font-black tracking-tight mb-3">
                 {result.title}
               </h3>
               <p className="text-muted leading-relaxed mb-6">
@@ -68,7 +68,7 @@ export function QualificationModal() {
             </div>
           ) : step ? (
             <div>
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-2">
+              <h3 className="text-lg sm:text-xl font-black tracking-tight mb-2">
                 {step.question}
               </h3>
               {step.helper && (

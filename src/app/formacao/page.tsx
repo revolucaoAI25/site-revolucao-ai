@@ -27,7 +27,7 @@ export default function Formacao() {
         <div className="max-w-3xl">
           <Reveal>
             <Eyebrow>Formação</Eyebrow>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance leading-[1.05]">
               Aprenda a construir — ou escalar — uma agência de IA lucrativa e
               previsível.
             </h1>
@@ -52,31 +52,31 @@ export default function Formacao() {
           <SectionTitle className="mb-6">
             A maioria falha por processo, não por técnica.
           </SectionTitle>
-          <p className="text-lg text-muted leading-relaxed mb-6">
+          <p className="text-base text-muted leading-relaxed mb-6">
             O mercado de IA e automações cresceu rápido — e a maioria de
             quem tenta empreender nele falha, não por falta de habilidade
             técnica, mas por erros que se repetem:
           </p>
           <ul className="space-y-4 mb-6">
-            <li className="flex gap-3 text-lg text-muted leading-relaxed">
+            <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
               Tentar fazer todo tipo de projeto, sem foco em uma oferta
               clara — cada cliente vira uma aventura nova, sem repetição e
               sem processo.
             </li>
-            <li className="flex gap-3 text-lg text-muted leading-relaxed">
+            <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
               Achar que o problema é falta de demanda, quando na verdade é
               falta de processo comercial — prospecção, proposta,
               precificação e fechamento.
             </li>
-            <li className="flex gap-3 text-lg text-muted leading-relaxed">
+            <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
               Aprender tecnologia antes de definir o que vender — o caminho
               mais longo e mais frustrante para começar.
             </li>
           </ul>
-          <p className="text-lg text-muted leading-relaxed">
+          <p className="text-base text-muted leading-relaxed">
             Se você já esbarrou em algum desses pontos, o problema não é
             você —{" "}
             <span className="text-text font-semibold">
@@ -94,7 +94,7 @@ export default function Formacao() {
             João Vitor e Lucas, fundadores do Revolução AI.
           </SectionTitle>
         </Reveal>
-        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-lg mb-12">
+        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-base mb-12">
           <p>
             Somos João Vitor e Lucas, fundadores do Revolução AI — uma das
             primeiras agências de IA do Brasil. Começamos em 2023 criando
@@ -156,7 +156,7 @@ export default function Formacao() {
           </p>
         </div>
 
-        <p className="text-lg text-muted leading-relaxed mt-10 max-w-3xl">
+        <p className="text-base text-muted leading-relaxed mt-10 max-w-3xl">
           Contratos fechados com essa metodologia:{" "}
           <span className="text-accent font-semibold">
             R$10 mil, R$12 mil, R$15 mil, R$20 mil e R$25 mil
@@ -214,7 +214,7 @@ export default function Formacao() {
         </Reveal>
         <div className="grid sm:grid-cols-2 gap-6">
           <Reveal delay={80} className="card-surface card-hover rounded-3xl p-8">
-            <h3 className="text-xl font-bold mb-5">
+            <h3 className="text-lg font-bold mb-5">
               Se você está começando (curso Do 0 aos 10K)
             </h3>
             <ul className="space-y-3">
@@ -234,7 +234,7 @@ export default function Formacao() {
           </Reveal>
 
           <Reveal delay={160} className="card-surface card-hover rounded-3xl p-8">
-            <h3 className="text-xl font-bold mb-5">
+            <h3 className="text-lg font-bold mb-5">
               Se você já tem operação (mentoria)
             </h3>
             <ul className="space-y-3">
@@ -258,7 +258,7 @@ export default function Formacao() {
       <Section divider className="bg-tint">
         <Reveal className="max-w-3xl">
           <Eyebrow>Por que aprender com o Revolução AI</Eyebrow>
-          <p className="text-lg text-muted leading-relaxed">
+          <p className="text-base text-muted leading-relaxed">
             Não somos os mais técnicos do mercado — e não é isso que faz a
             diferença. A diferença está em ter construído um{" "}
             <span className="text-text font-semibold">negócio de verdade</span>
@@ -307,7 +307,7 @@ export default function Formacao() {
       <Section divider>
         <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
           <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
-          <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
+          <h2 className="relative text-2xl sm:text-3xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
             Escolha o caminho que faz sentido pra você agora
           </h2>
           <div className="relative flex flex-col sm:flex-row gap-4 justify-center">

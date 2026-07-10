@@ -24,10 +24,10 @@ export default function Home() {
         <div className="max-w-3xl">
           <Reveal>
             <Eyebrow>Desde 2023</Eyebrow>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance leading-[1.05]">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance leading-[1.05]">
               Desde 2023, revolucionando negócios com Inteligência Artificial.
             </h1>
-            <p className="text-lg sm:text-xl text-muted mt-6 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-muted mt-6 max-w-2xl leading-relaxed">
               Do conteúdo sobre IA generativa à implementação de agentes que
               vendem por você. Hoje ajudamos negócios a transformarem
               pré-vendas com IA — e ensinamos outras pessoas a construírem uma
@@ -56,7 +56,7 @@ export default function Home() {
             pré-vendas.
           </SectionTitle>
         </Reveal>
-        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 mb-16 text-lg">
+        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 mb-16 text-base">
           <p>
             Começamos em 2023 criando conteúdo sobre Inteligência Artificial
             generativa no Instagram e no TikTok — e lançamos a primeira
@@ -114,14 +114,14 @@ export default function Home() {
           <SectionTitle className="mb-6">
             O gargalo não é tráfego. É pré-vendas.
           </SectionTitle>
-          <p className="text-lg text-muted leading-relaxed mb-4">
+          <p className="text-base text-muted leading-relaxed mb-4">
             A maioria dos negócios que investe em tráfego e geração de leads
             esbarra no mesmo gargalo: o lead chega, mas a resposta demora, é
             inconsistente ou depende de uma pessoa disponível no momento
             certo. Isso significa oportunidade perdida — não por falta de
             demanda, mas por falta de estrutura no pré-vendas.
           </p>
-          <p className="text-lg text-muted leading-relaxed">
+          <p className="text-base text-muted leading-relaxed">
             É exatamente nesse ponto que entramos: não vendemos mais tráfego,
             vendemos{" "}
             <span className="text-text font-semibold">
@@ -145,7 +145,7 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Agência de implementação
             </p>
-            <h3 className="text-2xl font-bold mb-4">
+            <h3 className="text-xl font-bold mb-4">
               Agentes de IA para Pré-Vendas
             </h3>
             <p className="text-muted leading-relaxed mb-8 flex-1">
@@ -183,7 +183,7 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Formação
             </p>
-            <h3 className="text-2xl font-bold mb-4">
+            <h3 className="text-xl font-bold mb-4">
               Formação para Agências de IA
             </h3>
             <p className="text-muted leading-relaxed mb-8 flex-1">
@@ -272,7 +272,7 @@ export default function Home() {
             />
           </Reveal>
         </div>
-        <p className="text-lg text-muted leading-relaxed max-w-2xl">
+        <p className="text-base text-muted leading-relaxed max-w-2xl">
           Não entregamos só tecnologia. Entregamos os três juntos — porque é
           a combinação deles que gera o resultado.
         </p>
@@ -282,7 +282,7 @@ export default function Home() {
       <Section divider className="bg-tint">
         <Reveal className="max-w-3xl">
           <Eyebrow>Por que confiar no Revolução AI</Eyebrow>
-          <p className="text-lg text-muted leading-relaxed">
+          <p className="text-base text-muted leading-relaxed">
             Não somos uma empresa nova testando um mercado quente. Construímos
             nossa própria operação com os mesmos princípios que aplicamos nos
             clientes, atravessamos a curva de aprendizado antes de vender a
@@ -347,7 +347,7 @@ export default function Home() {
           className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center"
         >
           <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
-          <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
+          <h2 className="relative text-2xl sm:text-3xl font-black tracking-tight text-balance max-w-2xl mx-auto mb-8">
             Quer implementar IA na sua operação ou aprender a construir a sua
             própria agência?
           </h2>

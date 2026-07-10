@@ -23,7 +23,7 @@ export function StatGrid({
           className="card-surface card-hover rounded-2xl p-5 sm:p-6"
         >
           <div className="h-0.5 w-8 rounded-full bg-accent mb-4" />
-          <p className="text-3xl sm:text-4xl font-black text-text tracking-tight">
+          <p className="text-2xl sm:text-3xl font-black text-text tracking-tight">
             {stat.value}
           </p>
           <p className="text-sm sm:text-[15px] text-muted mt-2 leading-snug">

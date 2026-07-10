@@ -27,7 +27,7 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
               aria-expanded={isOpen}
               onClick={() => setOpenIndex(isOpen ? null : index)}
             >
-              <span className="font-semibold text-base sm:text-lg">
+              <span className="font-semibold text-sm sm:text-base">
                 {item.question}
               </span>
               <span

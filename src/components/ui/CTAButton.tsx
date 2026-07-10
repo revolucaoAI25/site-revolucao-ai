@@ -20,8 +20,8 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  md: "px-6 py-3 text-sm sm:text-base",
-  lg: "px-8 py-4 text-base sm:text-lg",
+  md: "px-6 py-3 text-sm",
+  lg: "px-7 py-3.5 text-sm sm:text-base",
 };
 
 const Arrow = () => (
