@@ -28,23 +28,22 @@ Abra [http://localhost:3000](http://localhost:3000).
 
 ## Pendências antes de publicar
 
-1. **Logos de clientes**: a seção "Empresas que já confiaram" (Home e
-   Formação) já é um carrossel automático e infinito
-   (`src/components/ui/ClientLogos.tsx`), hoje com os nomes em chips de
-   texto no lugar das logos. Quando enviarem os arquivos, é só trocar cada
-   item do array `clients` por uma `<Image>` mantendo a mesma lista — o
-   carrossel e o fade nas bordas continuam funcionando do mesmo jeito.
-2. **Fluxo real do pop-up**: as perguntas e ramificações do pop-up de
+1. **Fluxo real do pop-up**: as perguntas e ramificações do pop-up de
    qualificação (`src/lib/qualification-flows.ts`) estão com um fluxo
    placeholder só para o site funcionar de ponta a ponta. Assim que vocês
    definirem o fluxo real e para onde cada resposta deve levar, é só
    substituir o conteúdo desse arquivo.
-3. **Links de destino**: `src/lib/links.ts` aponta tudo para um número de
+2. **Links de destino**: `src/lib/links.ts` aponta tudo para um número de
    WhatsApp de exemplo. Trocar pelo WhatsApp oficial, link do curso/checkout
    e link de agendamento reais.
 
 A logo oficial já está integrada (`public/logo.png`, usada em
-`src/components/Logo.tsx` e como favicon em `src/app/icon.png`).
+`src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel
+de clientes (`src/components/ui/ClientLogos.tsx`) já usa as logos e fotos
+reais enviadas, salvas em `public/clients/`. Para adicionar mais um cliente,
+é só colocar o arquivo em `public/clients/` e acrescentar uma entrada no
+array `clients` desse componente (`kind: "logo"` para marca ou `kind:
+"person"` para avatar + nome, no estilo Instagram).
 
 ## Deploy
 
