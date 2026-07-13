@@ -112,17 +112,17 @@ export default function Formacao() {
 
       {/* 7.3 Quem está por trás */}
       <Section divider className="bg-tint">
-        <div className="grid lg:grid-cols-[1fr_180px] gap-x-12 gap-y-10 items-start mb-12">
+        <div className="grid lg:grid-cols-[1fr_220px] gap-x-12 gap-y-10 items-start mb-12">
           <div>
             <Reveal>
               <Eyebrow>Quem está por trás disso</Eyebrow>
               <SectionTitle className="mb-6 max-w-2xl">
-                João Vitor e Lucas, fundadores do Revolução AI.
+                Lucas e João Vitor, fundadores do Revolução AI.
               </SectionTitle>
             </Reveal>
             <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-base">
               <p>
-                Somos João Vitor e Lucas, fundadores do Revolução AI — uma das
+                Somos Lucas e João Vitor, fundadores do Revolução AI — uma das
                 primeiras agências de IA do Brasil. Começamos em 2023 criando
                 conteúdo sobre Inteligência Artificial generativa, e desde
                 então estruturamos projetos reais em advocacia, saúde, estética,
@@ -141,28 +141,24 @@ export default function Formacao() {
               </p>
             </Reveal>
           </div>
-          <Reveal delay={120} className="flex sm:flex-col gap-4 max-w-[180px]">
-            <div className="flex-1">
+          <Reveal delay={120} className="relative mx-auto lg:mx-0 w-[200px] h-[240px]">
+            <div className="absolute top-0 left-0 z-10 rotate-[-4deg] rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)]">
               <Image
                 src="/team/lucas.jpg"
                 alt="Lucas, fundador do Revolução AI"
-                width={180}
-                height={180}
-                className="w-full aspect-square rounded-2xl object-cover"
+                width={150}
+                height={150}
+                className="rounded-2xl object-cover border-[3px] border-bg"
               />
-              <p className="mt-3 text-sm font-semibold text-center">Lucas</p>
             </div>
-            <div className="flex-1">
+            <div className="absolute bottom-0 right-0 z-0 rotate-[3deg] rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)]">
               <Image
                 src="/team/joao-vitor.jpg"
                 alt="João Vitor, fundador do Revolução AI"
-                width={180}
-                height={180}
-                className="w-full aspect-square rounded-2xl object-cover"
+                width={150}
+                height={150}
+                className="rounded-2xl object-cover border-[3px] border-bg"
               />
-              <p className="mt-3 text-sm font-semibold text-center">
-                João Vitor
-              </p>
             </div>
           </Reveal>
         </div>
