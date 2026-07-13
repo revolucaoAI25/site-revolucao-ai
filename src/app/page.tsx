@@ -69,7 +69,7 @@ export default function Home() {
             <Reveal>
               <Eyebrow>Nossa trajetória</Eyebrow>
               <SectionTitle className="mb-6 max-w-2xl">
-                De uma educação sobre IA generativa a uma operação completa de
+                De educação sobre IA generativa a uma operação completa de
                 pré-vendas.
               </SectionTitle>
             </Reveal>

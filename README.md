@@ -54,10 +54,11 @@ Abra [http://localhost:3000](http://localhost:3000).
    do Calendly de Agentes de IA como placeholder (autorizado pelo cliente).
    Trocar pelo link definitivo da reunião de vendas da Formação assim que o
    cliente enviar.
-3. **`LEAD_WEBHOOK_URL`** (variável de ambiente, ver seção de leads abaixo)
-   ainda não foi configurada — falta o cliente informar a URL do webhook
-   próprio (Zapier, Make, n8n ou CRM) que deve receber nome e WhatsApp dos
-   leads da Formação.
+3. **`LEAD_WEBHOOK_URL`** já tem o valor definitivo (Make.com) configurado em
+   `.env.local` para rodar localmente. Falta só adicionar essa mesma
+   variável em Project Settings → Environment Variables na Vercel antes do
+   deploy de produção (arquivos `.env*` não vão pro Git, então essa etapa é
+   manual).
 
 A logo oficial já está integrada (`public/logo.png`, usada em
 `src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel

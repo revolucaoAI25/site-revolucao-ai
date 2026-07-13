@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
@@ -84,19 +85,18 @@ export default function Formacao() {
           <ul className="space-y-4 mb-6">
             <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
-              Vendemos diferente do resto do mercado: implementação
-              high-ticket, não commodity de curso barato ou serviço batido
-              por preço.
+              Vendemos diferente do resto do mercado: oferta clara e de alto
+              valor agregado, com implementação high-ticket.
             </li>
             <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
-              Processo de entrega validado com dezenas de clientes reais, do
-              diagnóstico ao contrato fechado.
+              Processo de aquisição e geração de demanda estruturado, com
+              vendas previsíveis — não depende de sorte ou indicação.
             </li>
             <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
-              Pioneirismo: testamos e validamos esse modelo antes da maioria
-              do mercado, na prática.
+              Processo de entrega e suporte validado com dezenas de clientes
+              reais, do diagnóstico ao pós-venda.
             </li>
           </ul>
           <p className="text-base text-muted leading-relaxed">
@@ -112,32 +112,60 @@ export default function Formacao() {
 
       {/* 7.3 Quem está por trás */}
       <Section divider className="bg-tint">
-        <Reveal>
-          <Eyebrow>Quem está por trás disso</Eyebrow>
-          <SectionTitle className="mb-6 max-w-2xl">
-            João Vitor e Lucas, fundadores do Revolução AI.
-          </SectionTitle>
-        </Reveal>
-        <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-base mb-12">
-          <p>
-            Somos João Vitor e Lucas, fundadores do Revolução AI — uma das
-            primeiras agências de IA do Brasil. Começamos em 2023 criando
-            conteúdo sobre Inteligência Artificial generativa, e desde
-            então estruturamos projetos reais em advocacia, saúde, estética,
-            software, franquias, varejo e infoprodutos. Levamos nossa
-            própria agência a{" "}
-            <span className="text-accent font-semibold">
-              R$100 mil de faturamento mensal com uma equipe enxuta
-            </span>{" "}
-            — e foi essa operação real, vendendo e entregando para clientes
-            de verdade, que validou tudo o que ensinamos hoje.
-          </p>
-          <p>
-            Não ensinamos teoria de curso gravado sem aplicação prática.
-            Ensinamos o que fizemos — e continuamos fazendo — com clientes
-            reais, todos os dias.
-          </p>
-        </Reveal>
+        <div className="grid lg:grid-cols-[1fr_260px] gap-x-12 gap-y-10 items-start mb-12">
+          <div>
+            <Reveal>
+              <Eyebrow>Quem está por trás disso</Eyebrow>
+              <SectionTitle className="mb-6 max-w-2xl">
+                João Vitor e Lucas, fundadores do Revolução AI.
+              </SectionTitle>
+            </Reveal>
+            <Reveal delay={80} className="max-w-3xl text-muted leading-relaxed space-y-4 text-base">
+              <p>
+                Somos João Vitor e Lucas, fundadores do Revolução AI — uma das
+                primeiras agências de IA do Brasil. Começamos em 2023 criando
+                conteúdo sobre Inteligência Artificial generativa, e desde
+                então estruturamos projetos reais em advocacia, saúde, estética,
+                software, franquias, varejo e infoprodutos. Levamos nossa
+                própria agência a{" "}
+                <span className="text-accent font-semibold">
+                  R$100 mil de faturamento mensal com uma equipe enxuta
+                </span>{" "}
+                — e foi essa operação real, vendendo e entregando para clientes
+                de verdade, que validou tudo o que ensinamos hoje.
+              </p>
+              <p>
+                Não ensinamos teoria de curso gravado sem aplicação prática.
+                Ensinamos o que fizemos — e continuamos fazendo — com clientes
+                reais, todos os dias.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={120} className="flex sm:flex-col gap-4">
+            <div className="flex-1">
+              <Image
+                src="/team/joao-vitor.jpg"
+                alt="João Vitor, fundador do Revolução AI"
+                width={260}
+                height={260}
+                className="w-full aspect-square rounded-2xl object-cover"
+              />
+              <p className="mt-3 text-sm font-semibold text-center">
+                João Vitor
+              </p>
+            </div>
+            <div className="flex-1">
+              <Image
+                src="/team/lucas.jpg"
+                alt="Lucas, fundador do Revolução AI"
+                width={260}
+                height={260}
+                className="w-full aspect-square rounded-2xl object-cover"
+              />
+              <p className="mt-3 text-sm font-semibold text-center">Lucas</p>
+            </div>
+          </Reveal>
+        </div>
 
         <Reveal delay={140}>
           <p className="text-sm font-semibold uppercase tracking-widest text-muted mb-6">

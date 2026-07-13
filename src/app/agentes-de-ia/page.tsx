@@ -138,7 +138,9 @@ export default function AgentesDeIA() {
             <Eyebrow>Agentes de IA para pré-vendas</Eyebrow>
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance leading-[1.05]">
               Transforme a forma como sua empresa{" "}
-              <span className="text-accent">qualifica, atende e converte</span>{" "}
+              <span className="underline decoration-accent decoration-[5px] underline-offset-8">
+                qualifica, atende e converte
+              </span>{" "}
               leads — com agentes de IA que trabalham por você, todos os dias.
             </h1>
             <p className="text-base sm:text-lg text-muted mt-6 max-w-2xl leading-relaxed">
