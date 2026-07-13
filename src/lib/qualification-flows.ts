@@ -8,7 +8,7 @@
 import {
   CALENDLY_AGENTE_LINK,
   CALENDLY_FORMACAO_LINK,
-  FERRAMENTA_EXTRACAO_LINK,
+  LEAD_EXTRACTOR_LINK,
   OUTRO_PRODUTO_LINK,
   PRODUTO_GRATUITO_LINK,
   PRODUTO_LOW_TICKET_LINK,
@@ -130,7 +130,7 @@ export const agentesFlow: QualificationFlow = {
       title: "O que você precisa é da nossa ferramenta de extração de leads.",
       description:
         "Pra quem só precisa montar uma base de contatos pra prospectar, sem o agente de IA completo, temos uma ferramenta específica pra isso.",
-      cta: { label: "Conhecer a ferramenta", href: FERRAMENTA_EXTRACAO_LINK },
+      cta: { label: "Conhecer a ferramenta", href: LEAD_EXTRACTOR_LINK },
     },
   },
 };

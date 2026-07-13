@@ -72,14 +72,16 @@ export function CTAButton(props: FlowTrigger | LinkTrigger) {
     icon = true,
   } = props;
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
-  const { open } = useQualificationModal();
 
+  // `useQualificationModal` só é chamado dentro do subcomponente abaixo,
+  // renderizado apenas quando `flow` está presente — assim páginas sem
+  // `ModalProvider` (como o Lead Extractor) podem usar a variante de link
+  // deste botão sem precisar do provider.
   if ("flow" in props && props.flow) {
     return (
-      <button type="button" className={classes} onClick={() => open(props.flow!)}>
+      <FlowCTAButton flow={props.flow} classes={classes} icon={icon}>
         {children}
-        {icon && <Arrow />}
-      </button>
+      </FlowCTAButton>
     );
   }
 
@@ -104,5 +106,25 @@ export function CTAButton(props: FlowTrigger | LinkTrigger) {
       {children}
       {icon && <Arrow />}
     </Link>
+  );
+}
+
+function FlowCTAButton({
+  flow,
+  classes,
+  icon,
+  children,
+}: {
+  flow: FlowId;
+  classes: string;
+  icon: boolean;
+  children: ReactNode;
+}) {
+  const { open } = useQualificationModal();
+  return (
+    <button type="button" className={classes} onClick={() => open(flow)}>
+      {children}
+      {icon && <Arrow />}
+    </button>
   );
 }

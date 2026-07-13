@@ -36,10 +36,23 @@ export const PRODUTO_LOW_TICKET_LINK =
   "https://revolucao-ai.pages.net.br/zero-aos-10k-4";
 
 /**
- * PLACEHOLDER — ainda não recebemos os links definitivos. Apontam para o
- * WhatsApp oficial como fallback; trocar assim que o cliente enviar:
- * - página da ferramenta de extração de leads (Agentes de IA);
- * - página/LP do "outro produto", de ticket mais baixo (Agentes de IA).
+ * LP do Lead Extractor — resultado "só preciso de uma base de leads pra
+ * prospectar" do pop-up de Agentes de IA. Rota interna (abre em nova aba
+ * porque é fora do fluxo do site institucional, ver src/app/lead-extractor).
  */
-export const FERRAMENTA_EXTRACAO_LINK = WHATSAPP_LINK;
+export const LEAD_EXTRACTOR_LINK = "/lead-extractor";
+
+/**
+ * PLACEHOLDER — checkout do Lead Extractor ainda não está sincronizado com
+ * o Asaas. Até lá, os botões de assinatura abrem o WhatsApp; trocar pelos
+ * links de checkout de cada plano assim que estiverem prontos.
+ */
+export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = WHATSAPP_LINK;
+export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = WHATSAPP_LINK;
+
+/**
+ * PLACEHOLDER — ainda não recebemos o link definitivo. Aponta para o
+ * WhatsApp oficial como fallback; trocar assim que o cliente enviar a
+ * página/LP do "outro produto", de ticket mais baixo (Agentes de IA).
+ */
 export const OUTRO_PRODUTO_LINK = WHATSAPP_LINK;

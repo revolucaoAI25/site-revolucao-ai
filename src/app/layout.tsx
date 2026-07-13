@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
-import { ModalProvider } from "@/components/modal/ModalProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,13 +40,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://assets.calendly.com" />
         <link rel="preconnect" href="https://calendly.com" />
       </head>
-      <body className="min-h-full flex flex-col antialiased">
-        <ModalProvider>
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </ModalProvider>
-      </body>
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
   );
 }

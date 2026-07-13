@@ -2,6 +2,8 @@
 
 Site em Next.js (App Router) + Tailwind CSS v4, com 3 páginas: Home,
 Agentes de IA e Formação. Tema escuro com acento verde, conforme briefing.
+Inclui também a LP própria do **Lead Extractor** (`/lead-extractor`), um
+produto separado com header/footer próprios.
 
 ## Rodando localmente
 
@@ -14,9 +16,23 @@ Abra [http://localhost:3000](http://localhost:3000).
 
 ## Estrutura
 
-- `src/app/page.tsx` — Home
-- `src/app/agentes-de-ia/page.tsx` — página de vendas de Agentes de IA
-- `src/app/formacao/page.tsx` — página de vendas da Formação
+- `src/app/(site)/` — grupo de rotas do site institucional (Home, Agentes de
+  IA, Formação), com layout próprio (`(site)/layout.tsx`) que injeta o
+  `Nav`, o `Footer` e o `ModalProvider`. O layout raiz (`src/app/layout.tsx`)
+  só cuida de `<html>`/`<body>`, fontes e metadata — é o que permite o Lead
+  Extractor existir como página separada, sem o menu do site principal.
+  - `(site)/page.tsx` — Home
+  - `(site)/agentes-de-ia/page.tsx` — página de vendas de Agentes de IA
+  - `(site)/formacao/page.tsx` — página de vendas da Formação
+- `src/app/lead-extractor/page.tsx` — LP própria do Lead Extractor (produto
+  separado, header/footer próprios, sem o pop-up de qualificação). É o
+  destino do resultado "só preciso de uma base de leads pra prospectar" do
+  pop-up de Agentes de IA (`LEAD_EXTRACTOR_LINK` em `src/lib/links.ts`),
+  aberta em nova aba. Vídeo de demonstração via
+  `src/components/lead-extractor/PandaVideoEmbed.tsx` (Panda Video) e
+  screenshots reais em `public/lead-extractor/`. Os botões de assinatura
+  (`LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK` / `..._ANUAL_LINK`) ainda são
+  **placeholder** (WhatsApp) até o checkout do Asaas estar pronto.
 - `src/components/` — componentes compartilhados (Nav, Footer, cards, FAQ, etc.)
 - `src/components/modal/` — pop-up de qualificação (perguntas ramificadas) que
   abre nos CTAs principais
@@ -32,10 +48,10 @@ Abra [http://localhost:3000](http://localhost:3000).
   e WhatsApp (`src/components/modal/ContactForm.tsx`) — o de **Agentes de
   IA** não pede, fica anônimo.
 - `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço, Calendly da
-  apresentação do agente de IA, o ebook gratuito e o curso Zero aos 10K
-  (baixo ticket) da Formação já são os reais. Agenda da reunião de vendas
-  da Formação, ferramenta de extração de leads e "outro produto" ainda
-  **placeholder**.
+  apresentação do agente de IA, o ebook gratuito, o curso Zero aos 10K
+  (baixo ticket) da Formação e a LP do Lead Extractor já são os reais.
+  Agenda da reunião de vendas da Formação, "outro produto" e o checkout do
+  Lead Extractor ainda **placeholder**.
 - `src/app/api/lead/route.ts` — recebe o resultado final de cada pop-up
   (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp), salva no
   Supabase e encaminha pro webhook próprio do cliente, se configurado. Ver
@@ -45,9 +61,10 @@ Abra [http://localhost:3000](http://localhost:3000).
 
 1. **Links ainda placeholder** em `src/lib/links.ts`, todos apontando pro
    WhatsApp oficial como fallback:
-   - `FERRAMENTA_EXTRACAO_LINK` (ferramenta de extração de leads, Agentes de IA);
    - `OUTRO_PRODUTO_LINK` (oferta pra quem não fecha o ticket da implementação
-     completa, Agentes de IA).
+     completa, Agentes de IA);
+   - `LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK` e `..._ANUAL_LINK` (checkout do
+     Asaas dos planos do Lead Extractor, ainda não sincronizado).
 
    Trocar pelas páginas/links definitivos de cada um quando estiverem prontos.
 2. **`CALENDLY_FORMACAO_LINK`** em `src/lib/links.ts` reutiliza o mesmo link
