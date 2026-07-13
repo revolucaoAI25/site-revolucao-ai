@@ -22,28 +22,122 @@ export const metadata: Metadata = {
     "Encontre centenas de leads qualificados com Google Maps e CNPJ, e mantenha uma prospecção automática rodando sozinha, direto pro Google Sheets.",
 };
 
-const comparativoColunas = ["Lead Extractor", "Apollo.io", "Speedio", "Econodata"];
+type ComparativoValor = true | false | string;
 
-const comparativo = [
+const comparativoColunas = ["Lead Extractor", "Apollo.io", "Ramper", "Speedio", "Econodata"];
+
+const comparativo: { dimensao: string; valores: ComparativoValor[] }[] = [
   {
     dimensao: "Leads locais via Google Maps",
-    valores: ["Sim", "Não", "Não", "Não"],
+    valores: [true, false, false, false, false],
   },
   {
     dimensao: "Dados fiscais de CNPJ (Receita Federal)",
-    valores: ["Sim", "Não (base americana)", "Sim", "Sim"],
+    valores: [true, false, false, true, true],
   },
   {
-    dimensao: "Automação com busca agendada + Sheets",
-    valores: ["Sim, nativa", "Sequência de e-mail, não busca", "Não", "Não"],
+    dimensao: "Automação de busca agendada + Google Sheets",
+    valores: [true, "Sequência de e-mail", "Sequência de e-mail", false, false],
   },
   {
     dimensao: "Enriquecimento cruzado (CNPJ + Maps)",
-    valores: ["Sim", "Não", "Não", "Parcial (IA de análise)"],
+    valores: [true, false, false, false, "Parcial"],
   },
   {
     dimensao: "Preço de entrada",
-    valores: ["R$497,90/mês", "US$49/usuário/mês", "A partir de R$500/mês", "A partir de R$300/mês"],
+    valores: [
+      "R$337/mês",
+      "US$49/usuário/mês",
+      "A partir de R$500/mês",
+      "A partir de R$500/mês",
+      "A partir de R$300/mês",
+    ],
+  },
+];
+
+function ComparativoCell({ valor, destaque }: { valor: ComparativoValor; destaque: boolean }) {
+  if (valor === true) {
+    return (
+      <span
+        className={`inline-flex h-7 w-7 items-center justify-center rounded-full ${
+          destaque ? "bg-accent-soft text-accent" : "bg-white/[0.06] text-muted"
+        }`}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 13l4 4L19 7"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    );
+  }
+  if (valor === false) {
+    return (
+      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/[0.04] text-muted-2">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M6 6l12 12M18 6L6 18"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </span>
+    );
+  }
+  return <span className={destaque ? "text-text" : "text-muted"}>{valor}</span>;
+}
+
+const fluxoIcons = {
+  search: (
+    <>
+      <circle cx="11" cy="11" r="7" />
+      <path d="M21 21l-4.3-4.3" />
+    </>
+  ),
+  filter: <path d="M4 6h16M7 12h10M10 18h4" />,
+  schedule: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7.5V12l3 2" />
+    </>
+  ),
+  download: (
+    <>
+      <path d="M12 3v12m0 0l-4-4m4 4l4-4" />
+      <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+    </>
+  ),
+};
+
+const fluxo: { icon: keyof typeof fluxoIcons; title: string; description: string }[] = [
+  {
+    icon: "search",
+    title: "Escolha a fonte",
+    description:
+      "Google Maps pra leads locais, ou CNPJ da Receita Federal pra prospecção B2B estruturada.",
+  },
+  {
+    icon: "filter",
+    title: "Defina os filtros",
+    description:
+      "Nicho, localização, porte, CNAE — quanto mais específico, melhor a qualidade do resultado.",
+  },
+  {
+    icon: "schedule",
+    title: "Busque ou agende",
+    description:
+      "Rode a busca na hora, ou deixe uma automação rodando sozinha todos os dias.",
+  },
+  {
+    icon: "download",
+    title: "Receba os leads",
+    description:
+      "Direto no Google Sheets, ou baixe em Excel/CSV — prontos pra prospectar.",
   },
 ];
 
@@ -166,31 +260,54 @@ export default function LeadExtractor() {
         <Section divider>
           <Reveal>
             <Eyebrow>Do zero ao lead pronto</Eyebrow>
-            <SectionTitle className="mb-10 max-w-2xl">
+            <SectionTitle className="mb-14 max-w-2xl">
               Um resumo de como a ferramenta entrega valor, de ponta a ponta.
             </SectionTitle>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <PillarCard
-              number="01"
-              title="Escolha a fonte"
-              description="Google Maps pra leads locais, ou CNPJ da Receita Federal pra prospecção B2B estruturada."
-            />
-            <PillarCard
-              number="02"
-              title="Defina os filtros"
-              description="Nicho, localização, porte, CNAE — quanto mais específico, melhor a qualidade do resultado."
-            />
-            <PillarCard
-              number="03"
-              title="Busque ou agende"
-              description="Rode a busca na hora, ou deixe uma automação rodando sozinha todos os dias."
-            />
-            <PillarCard
-              number="04"
-              title="Receba os leads"
-              description="Direto no Google Sheets, ou baixe em Excel/CSV — prontos pra prospectar."
-            />
+          <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-accent/40 via-accent/20 to-accent/40" />
+            {fluxo.map((step, index) => (
+              <Reveal key={step.title} delay={index * 80} className="relative">
+                <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-bg text-accent shadow-[0_0_20px_rgba(0,200,83,0.25)] mb-5">
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {fluxoIcons[step.icon]}
+                  </svg>
+                  <span className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-accent text-[#07090a] text-xs font-black">
+                    {index + 1}
+                  </span>
+                </div>
+                <h3 className="text-base font-bold mb-2">{step.title}</h3>
+                <p className="text-muted leading-relaxed text-[15px]">
+                  {step.description}
+                </p>
+                {index < fluxo.length - 1 && (
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="hidden lg:block absolute top-6 -right-[27px] text-accent/50"
+                  >
+                    <path
+                      d="M5 12h14M13 6l6 6-6 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </Reveal>
+            ))}
           </div>
         </Section>
 
@@ -433,7 +550,7 @@ export default function LeadExtractor() {
             </SectionTitle>
           </Reveal>
           <Reveal delay={80} className="overflow-x-auto">
-            <table className="w-full min-w-[760px] border-collapse">
+            <table className="w-full min-w-[820px] border-collapse">
               <thead>
                 <tr className="border-b border-white/10">
                   <th className="text-left py-4 pr-4 text-sm font-semibold text-muted-2 uppercase tracking-widest">
@@ -456,11 +573,8 @@ export default function LeadExtractor() {
                   <tr key={row.dimensao} className="border-b border-white/5">
                     <td className="py-4 pr-4 font-medium">{row.dimensao}</td>
                     {row.valores.map((valor, i) => (
-                      <td
-                        key={i}
-                        className={`py-4 pr-4 ${i === 0 ? "text-text" : "text-muted"}`}
-                      >
-                        {valor}
+                      <td key={i} className="py-4 pr-4">
+                        <ComparativoCell valor={valor} destaque={i === 0} />
                       </td>
                     ))}
                   </tr>
@@ -517,16 +631,16 @@ export default function LeadExtractor() {
               className="relative card-surface rounded-3xl p-8 flex flex-col border-accent/30 shadow-[0_0_0_1px_rgba(0,200,83,0.3),0_20px_60px_-15px_rgba(0,200,83,0.25)]"
             >
               <span className="absolute -top-3 right-8 rounded-full bg-accent text-[#07090a] text-xs font-bold uppercase tracking-widest px-3 py-1">
-                Economize R$975/ano
+                Economize R$1.930/ano
               </span>
               <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
                 Anual
               </p>
               <p className="text-4xl font-black tracking-tight mb-1">
-                R$417<span className="text-lg font-semibold text-muted">/mês</span>
+                R$337<span className="text-lg font-semibold text-muted">/mês</span>
               </p>
               <p className="text-muted text-sm mb-8">
-                R$5.000/ano, faturado em 12x.
+                R$4.044/ano, faturado em 12x.
               </p>
               <ul className="space-y-3 mb-8 flex-1">
                 {[
