@@ -137,7 +137,8 @@ export default function AgentesDeIA() {
           <Reveal>
             <Eyebrow>Agentes de IA para pré-vendas</Eyebrow>
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance leading-[1.05]">
-              Transforme a forma como sua empresa qualifica, atende e converte
+              Transforme a forma como sua empresa{" "}
+              <span className="text-accent">qualifica, atende e converte</span>{" "}
               leads — com agentes de IA que trabalham por você, todos os dias.
             </h1>
             <p className="text-base sm:text-lg text-muted mt-6 max-w-2xl leading-relaxed">
@@ -198,7 +199,7 @@ export default function AgentesDeIA() {
             stats={[
               { value: "+100", label: "empresas atendidas" },
               { value: "15–21 dias", label: "de setup" },
-              { value: "4.500+", label: "leads atendidos por mês" },
+              { value: "7.500+", label: "leads atendidos por mês" },
               {
                 value: "20–25%",
                 label: "de conversão, em média, dos nossos clientes",
@@ -219,11 +220,13 @@ export default function AgentesDeIA() {
             Resultado real, com números reais.
           </SectionTitle>
           <p className="text-base text-muted leading-relaxed mb-10 max-w-2xl">
-            A prova começa na nossa própria operação: levamos o Revolução AI a{" "}
+            A prova está nos números dos nossos clientes — negócios reais, de
+            portes diferentes, que passaram a{" "}
             <span className="text-accent font-semibold">
-              R$100 mil de faturamento mensal com uma equipe enxuta
-            </span>{" "}
-            usando o mesmo sistema que implementamos para nossos clientes.
+              agendar e converter mais leads sem aumentar o investimento em
+              tráfego
+            </span>
+            .
           </p>
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -322,10 +325,10 @@ export default function AgentesDeIA() {
         <Reveal>
           <Eyebrow>Os 3 pilares</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
-            O agente não conversa apenas — ele vende.
+            Três pilares trabalhando juntos — não só o agente de IA.
           </SectionTitle>
         </Reveal>
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-3 gap-6 mb-8">
           <Reveal delay={80}>
             <PillarCard
               number="01"
@@ -348,6 +351,10 @@ export default function AgentesDeIA() {
             />
           </Reveal>
         </div>
+        <p className="text-base text-muted leading-relaxed max-w-2xl">
+          Não entregamos só o agente. Entregamos os três juntos — porque é a
+          combinação deles que gera o resultado.
+        </p>
       </Section>
 
       {/* 6.8 Diferenciação */}
@@ -454,7 +461,7 @@ export default function AgentesDeIA() {
               {
                 question: "Funciona para o meu nicho?",
                 answer:
-                  "Priorizamos escritórios de advocacia, mas já aplicamos essa solução com sucesso em clínicas, estética, odontologia, franquias e outros negócios que recebem leads via tráfego ou indicação.",
+                  "Já aplicamos essa solução com sucesso em escritórios de advocacia, clínicas, estética, odontologia, franquias e outros negócios que recebem leads via tráfego ou indicação.",
               },
               {
                 question: "Preciso ter equipe técnica para tocar isso?",

@@ -31,13 +31,14 @@ Abra [http://localhost:3000](http://localhost:3000).
   No fluxo de **Formação**, antes de mostrar o resultado o pop-up pede nome
   e WhatsApp (`src/components/modal/ContactForm.tsx`) — o de **Agentes de
   IA** não pede, fica anônimo.
-- `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço e Calendly da
-  apresentação do agente de IA já são os reais. Agenda da reunião de vendas
-  da Formação, ferramenta de extração de leads, "outro produto", produto
-  gratuito e produto de baixo ticket ainda **placeholder**.
+- `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço, Calendly da
+  apresentação do agente de IA e o ebook gratuito da Formação já são os
+  reais. Agenda da reunião de vendas da Formação, ferramenta de extração de
+  leads, "outro produto" e produto de baixo ticket ainda **placeholder**.
 - `src/app/api/lead/route.ts` — recebe o resultado final de cada pop-up
-  (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp) e salva no
-  Supabase. Ver seção **Leads do pop-up (Supabase)** abaixo.
+  (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp), salva no
+  Supabase e encaminha pro webhook próprio do cliente, se configurado. Ver
+  seção **Leads do pop-up (Supabase e webhook)** abaixo.
 
 ## Pendências antes de publicar
 
@@ -46,7 +47,6 @@ Abra [http://localhost:3000](http://localhost:3000).
    - `FERRAMENTA_EXTRACAO_LINK` (ferramenta de extração de leads, Agentes de IA);
    - `OUTRO_PRODUTO_LINK` (oferta pra quem não fecha o ticket da implementação
      completa, Agentes de IA);
-   - `PRODUTO_GRATUITO_LINK` (Formação, quem não tem orçamento agora);
    - `PRODUTO_LOW_TICKET_LINK` (Formação, orçamento até R$3.000).
 
    Trocar pelas páginas/links definitivos de cada um quando estiverem prontos.
@@ -54,6 +54,10 @@ Abra [http://localhost:3000](http://localhost:3000).
    do Calendly de Agentes de IA como placeholder (autorizado pelo cliente).
    Trocar pelo link definitivo da reunião de vendas da Formação assim que o
    cliente enviar.
+3. **`LEAD_WEBHOOK_URL`** (variável de ambiente, ver seção de leads abaixo)
+   ainda não foi configurada — falta o cliente informar a URL do webhook
+   próprio (Zapier, Make, n8n ou CRM) que deve receber nome e WhatsApp dos
+   leads da Formação.
 
 A logo oficial já está integrada (`public/logo.png`, usada em
 `src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel
@@ -63,14 +67,14 @@ reais enviadas, salvas em `public/clients/`. Para adicionar mais um cliente,
 array `clients` desse componente (`kind: "logo"` para marca ou `kind:
 "person"` para avatar + nome, no estilo Instagram).
 
-## Leads do pop-up (Supabase)
+## Leads do pop-up (Supabase e webhook)
 
 Toda vez que o pop-up de qualificação chega num resultado, o site salva no
 Supabase: o fluxo (`agentes` ou `formacao`), o resultado final, a trilha de
 perguntas/respostas e — só no fluxo de Formação — nome e WhatsApp da pessoa
 (Agentes de IA fica anônimo, sem pedir contato).
 
-Pra ativar:
+Pra ativar o Supabase:
 
 1. Criar um projeto no [Supabase](https://supabase.com).
 2. Rodar `supabase/schema.sql` no SQL editor do projeto (cria a tabela
@@ -84,6 +88,13 @@ Pra ativar:
 Sem essas variáveis configuradas, o site funciona normalmente — a rota
 `/api/lead` só loga um aviso e não salva nada, então dá pra publicar antes
 do Supabase estar pronto.
+
+Além do Supabase, sempre que o pop-up de Formação coleta nome e WhatsApp
+(antes de mostrar o resultado), o lead também é encaminhado pro webhook
+próprio do cliente — configurar a variável `LEAD_WEBHOOK_URL` com a URL do
+Zapier/Make/n8n/CRM que deve recebê-lo. Sem essa variável configurada, esse
+encaminhamento simplesmente não acontece (não afeta o Supabase nem o
+funcionamento do pop-up).
 
 ## Deploy
 

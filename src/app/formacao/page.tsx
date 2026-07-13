@@ -63,43 +63,49 @@ export default function Formacao() {
         </div>
       </Section>
 
-      {/* 7.2 O problema */}
+      {/* 7.2 A oportunidade */}
       <Section divider>
         <Reveal className="max-w-3xl">
-          <Eyebrow>O problema</Eyebrow>
+          <Eyebrow>A oportunidade</Eyebrow>
           <SectionTitle className="mb-6">
-            A maioria falha por processo, não por técnica.
+            Geramos resultado. E ensinamos você a vender e entregar com o
+            mesmo padrão.
           </SectionTitle>
           <p className="text-base text-muted leading-relaxed mb-6">
-            O mercado de IA e automações cresceu rápido — e a maioria de
-            quem tenta empreender nele falha, não por falta de habilidade
-            técnica, mas por erros que se repetem:
+            O mercado de IA e automações está em plena expansão, e a
+            oportunidade é grande — não só pra quem entende de tecnologia,
+            mas pra quem sabe vender e entregar com qualidade. Seja você
+            alguém migrando de outro mercado, como gestão de tráfego, pra
+            começar a vender IA, alguém que já tem agência e quer mais
+            resultado, ou alguém que já sabe construir agentes e automações
+            mas ainda não sabe vender: o caminho que ensinamos já foi
+            validado na prática, com clientes reais.
           </p>
           <ul className="space-y-4 mb-6">
             <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
-              Tentar fazer todo tipo de projeto, sem foco em uma oferta
-              clara — cada cliente vira uma aventura nova, sem repetição e
-              sem processo.
+              Vendemos diferente do resto do mercado: implementação
+              high-ticket, não commodity de curso barato ou serviço batido
+              por preço.
             </li>
             <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
-              Achar que o problema é falta de demanda, quando na verdade é
-              falta de processo comercial — prospecção, proposta,
-              precificação e fechamento.
+              Processo de entrega validado com dezenas de clientes reais, do
+              diagnóstico ao contrato fechado.
             </li>
             <li className="flex gap-3 text-base text-muted leading-relaxed">
               <span className="text-accent shrink-0">—</span>
-              Aprender tecnologia antes de definir o que vender — o caminho
-              mais longo e mais frustrante para começar.
+              Pioneirismo: testamos e validamos esse modelo antes da maioria
+              do mercado, na prática.
             </li>
           </ul>
           <p className="text-base text-muted leading-relaxed">
-            Se você já esbarrou em algum desses pontos, o problema não é
-            você —{" "}
+            É esse caminho — com{" "}
             <span className="text-text font-semibold">
-              é a falta de um caminho estruturado, validado na prática.
-            </span>
+              resultado real, não só teoria de processo
+            </span>{" "}
+            — que ensinamos pra quem está construindo ou escalando a própria
+            agência de IA, aproveitando uma oportunidade que só cresce.
           </p>
         </Reveal>
       </Section>
@@ -277,14 +283,13 @@ export default function Formacao() {
         <Reveal className="max-w-3xl">
           <Eyebrow>Por que aprender com o Revolução AI</Eyebrow>
           <p className="text-base text-muted leading-relaxed">
-            Não somos os mais técnicos do mercado — e não é isso que faz a
-            diferença. A diferença está em ter construído um{" "}
+            Construímos um{" "}
             <span className="text-text font-semibold">negócio de verdade</span>
             , com processo, previsibilidade e clientes reais, em vez de ficar
-            preso à lógica de freelancer que vive de projeto em projeto. É
-            esse caminho, com os acertos e os erros que cometemos no meio
-            dele, que compartilhamos com quem está construindo a própria
-            agência.
+            preso à lógica de freelancer que vive de projeto em projeto. Foi
+            nesse caminho, com os acertos e os erros que cometemos no meio
+            dele, que validamos o método que compartilhamos com quem está
+            construindo a própria agência de IA.
           </p>
         </Reveal>
       </Section>
@@ -307,14 +312,14 @@ export default function Formacao() {
                   "Não. Ensinamos o processo de estruturação, venda e entrega — incluindo o uso de ferramentas que não exigem código.",
               },
               {
-                question: "Qual a diferença entre o curso e a mentoria?",
+                question: "Como funciona o ensino de vocês?",
                 answer:
-                  "O curso é o caminho mais indicado para quem está começando do zero. A mentoria é mais avançada, personalizada e voltada para quem já tem operação e quer escalar com mais estrutura.",
+                  "Temos formatos para cada momento: desde um ebook gratuito, passando por curso e mentoria, até uma implementação comercial completa dentro da sua própria agência. Dependendo do cenário em que você estiver, a gente te ajuda a entender qual faz mais sentido.",
               },
               {
                 question: "Em quanto tempo consigo ver resultado?",
                 answer:
-                  "Depende do seu ponto de partida e da sua dedicação — mas o caminho ensinado é o mesmo que usamos para sair do zero a uma agência de seis dígitos.",
+                  "Depende do seu ponto de partida e da sua dedicação — costuma levar de algumas semanas a alguns meses para os primeiros resultados, seguindo o mesmo caminho que usamos para sair do zero a uma agência de seis dígitos.",
               },
             ]}
           />

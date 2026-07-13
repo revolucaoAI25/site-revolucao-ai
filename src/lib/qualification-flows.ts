@@ -120,10 +120,10 @@ export const agentesFlow: QualificationFlow = {
     },
     "outro-produto": {
       kind: "result",
-      title: "Temos uma solução mais alinhada ao seu momento agora.",
+      title: "Temos a solução perfeita pro seu momento agora.",
       description:
-        "Pra esse orçamento, faz mais sentido começar por uma oferta diferente da implementação completa. Vamos te mostrar qual.",
-      cta: { label: "Conhecer a opção ideal", href: OUTRO_PRODUTO_LINK },
+        "Você vai conhecer nossa ferramenta de construção de agentes de IA e como funciona nossa implementação completa — a gente te mostra qual desses caminhos faz mais sentido pra você.",
+      cta: { label: "Conhecer as opções", href: OUTRO_PRODUTO_LINK },
     },
     "ferramenta-extracao": {
       kind: "result",
@@ -185,7 +185,7 @@ export const formacaoFlow: QualificationFlow = {
     },
     "contato-low-ticket": {
       id: "contato-low-ticket",
-      question: "Antes de te mostrar a oferta, como podemos te chamar?",
+      question: "Antes de continuar, só precisamos de duas informações.",
       helper: "Seu nome e WhatsApp — só isso.",
       kind: "contact",
       options: [],
@@ -193,7 +193,7 @@ export const formacaoFlow: QualificationFlow = {
     },
     "contato-reuniao": {
       id: "contato-reuniao",
-      question: "Antes de agendar, como podemos te chamar?",
+      question: "Antes de continuar, só precisamos de duas informações.",
       helper: "Seu nome e WhatsApp — só isso.",
       kind: "contact",
       options: [],
@@ -210,16 +210,16 @@ export const formacaoFlow: QualificationFlow = {
     },
     "low-ticket": {
       kind: "result",
-      title: "Temos uma oferta de entrada ideal pro seu momento.",
+      title: "Temos algo perfeito pro seu momento agora.",
       description:
-        "Pra esse investimento, o melhor caminho é começar por uma oferta mais enxuta, que já entrega resultado prático antes de qualquer coisa maior.",
-      cta: { label: "Conhecer a oferta", href: PRODUTO_LOW_TICKET_LINK },
+        "Preparamos um conteúdo que já entrega resultado prático pro ponto em que você está hoje. Vamos te mostrar.",
+      cta: { label: "Acessar conteúdo", href: PRODUTO_LOW_TICKET_LINK },
     },
     "reuniao-vendas": {
       kind: "result",
-      title: "Vamos agendar uma reunião de vendas.",
+      title: "Vamos entender seu momento de perto.",
       description:
-        "Seu momento e investimento fazem sentido pra construir a agência com a gente. Escolha o melhor horário abaixo pra conversarmos.",
+        "Pelo que você trouxe até aqui, o ideal é uma conversa direta com o Lucas — pra entender sua operação, seus objetivos, e já sair com um plano de ação pro seu próximo passo. Escolha o melhor horário abaixo.",
       embed: { provider: "calendly", url: CALENDLY_FORMACAO_LINK },
     },
   },

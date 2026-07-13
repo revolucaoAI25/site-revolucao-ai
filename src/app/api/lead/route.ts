@@ -8,6 +8,26 @@ type LeadPayload = {
   contact?: { name: string; phone: string } | null;
 };
 
+/**
+ * Encaminha o lead pro webhook próprio do cliente (Zapier/Make/n8n/CRM),
+ * além do Supabase — só quando há nome/WhatsApp coletados (fluxo de
+ * Formação). Falha aqui não deve derrubar o resto do processamento.
+ */
+async function forwardToWebhook(payload: LeadPayload) {
+  const url = process.env.LEAD_WEBHOOK_URL;
+  if (!url || !payload.contact) return;
+
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch (error) {
+    console.error("[lead] Falha ao encaminhar pro webhook:", error);
+  }
+}
+
 export async function POST(req: NextRequest) {
   const body = (await req.json().catch(() => null)) as LeadPayload | null;
   const { flowId, resultKey, answers, contact } = body ?? {};
@@ -15,6 +35,8 @@ export async function POST(req: NextRequest) {
   if (!flowId || !resultKey) {
     return NextResponse.json({ error: "invalid payload" }, { status: 400 });
   }
+
+  await forwardToWebhook({ flowId, resultKey, answers, contact });
 
   const supabase = getSupabaseServerClient();
   if (!supabase) {

@@ -22,18 +22,18 @@ export const CALENDLY_AGENTE_LINK =
 export const CALENDLY_FORMACAO_LINK = CALENDLY_AGENTE_LINK;
 
 /**
+ * Ebook gratuito — resultado "sem orçamento agora" do pop-up de Formação.
+ */
+export const PRODUTO_GRATUITO_LINK =
+  "https://docs.google.com/document/d/11u8-q8Z2Qr_j5W7udWUTlWlp1MsjpXDVhcWOth5ncBc/edit?usp=sharing";
+
+/**
  * PLACEHOLDER — ainda não recebemos os links definitivos. Apontam para o
  * WhatsApp oficial como fallback; trocar assim que o cliente enviar:
- * - link do curso Do 0 aos 10K (só usado como texto informativo hoje, não
- *   como CTA — ver src/lib/qualification-flows.ts);
  * - página da ferramenta de extração de leads (Agentes de IA);
  * - página/LP do "outro produto", de ticket mais baixo (Agentes de IA);
- * - página do produto gratuito (Formação, quem não tem orçamento agora);
  * - página do produto de baixo ticket (Formação, orçamento até R$3.000).
  */
-export const CURSO_LINK = WHATSAPP_LINK;
-export const AGENDAR_CONVERSA_LINK = WHATSAPP_LINK;
 export const FERRAMENTA_EXTRACAO_LINK = WHATSAPP_LINK;
 export const OUTRO_PRODUTO_LINK = WHATSAPP_LINK;
-export const PRODUTO_GRATUITO_LINK = WHATSAPP_LINK;
 export const PRODUTO_LOW_TICKET_LINK = WHATSAPP_LINK;

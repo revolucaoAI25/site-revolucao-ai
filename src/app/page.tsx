@@ -69,7 +69,7 @@ export default function Home() {
             <Reveal>
               <Eyebrow>Nossa trajetória</Eyebrow>
               <SectionTitle className="mb-6 max-w-2xl">
-                De uma newsletter sobre IA generativa a uma operação real de
+                De uma educação sobre IA generativa a uma operação completa de
                 pré-vendas.
               </SectionTitle>
             </Reveal>
@@ -172,10 +172,10 @@ export default function Home() {
             <p className="text-muted leading-relaxed mb-8 flex-1">
               Implementamos agentes de IA no WhatsApp que recebem, qualificam
               e conduzem seus leads até o agendamento — com infraestrutura
-              conectada à sua operação e inteligência comercial por trás.
-              Preferência por escritórios de advocacia, mas atuamos em
-              qualquer negócio que recebe leads e precisa de mais velocidade e
-              consistência no pré-vendas.
+              conectada à sua operação e inteligência comercial por trás. De
+              escritórios de advocacia à clínicas, atuamos em qualquer negócio
+              que recebe leads e precisa de mais velocidade e consistência no
+              pré-vendas.
             </p>
             <Link
               href="/agentes-de-ia"
@@ -304,7 +304,7 @@ export default function Home() {
         <Reveal className="max-w-3xl">
           <Eyebrow>Por que confiar no Revolução AI</Eyebrow>
           <p className="text-base text-muted leading-relaxed">
-            Não somos uma empresa nova testando um mercado quente. Construímos
+            Não somos uma empresa nova testando um mercado da moda. Construímos
             nossa própria operação com os mesmos princípios que aplicamos nos
             clientes, atravessamos a curva de aprendizado antes de vender a
             solução, e hoje trabalhamos com negócios de portes muito
@@ -324,7 +324,7 @@ export default function Home() {
       <Section divider className="py-14 sm:py-16">
         <Reveal>
           <p className="text-center text-sm text-muted-2 uppercase tracking-widest mb-8">
-            Empresas que já confiaram no Revolução AI
+            Empresas e profissionais que já confiaram no Revolução AI
           </p>
           <ClientLogos />
         </Reveal>
@@ -349,7 +349,7 @@ export default function Home() {
               {
                 question: "Vocês atendem qualquer tipo de negócio?",
                 answer:
-                  "Atendemos negócios que recebem leads via tráfego ou indicação e precisam de mais velocidade e consistência no pré-vendas. Hoje priorizamos escritórios de advocacia, mas seguimos atendendo outros nichos aderentes.",
+                  "Atendemos negócios que recebem leads via tráfego ou indicação e precisam de mais velocidade e consistência no pré-vendas.",
               },
               {
                 question:
