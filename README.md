@@ -90,10 +90,12 @@ Sem essas variáveis configuradas, o site funciona normalmente — a rota
 `/api/lead` só loga um aviso e não salva nada, então dá pra publicar antes
 do Supabase estar pronto.
 
-Além do Supabase, sempre que o pop-up de Formação coleta nome e WhatsApp
-(antes de mostrar o resultado), o lead também é encaminhado pro webhook
-próprio do cliente — configurar a variável `LEAD_WEBHOOK_URL` com a URL do
-Zapier/Make/n8n/CRM que deve recebê-lo. Sem essa variável configurada, esse
+Além do Supabase, só quando o resultado é o **material gratuito** (quem
+não tem orçamento agora e vai receber o ebook) o lead também é encaminhado
+pro webhook próprio do cliente — configurar a variável `LEAD_WEBHOOK_URL`
+com a URL do Zapier/Make/n8n/CRM que deve recebê-lo. Os demais resultados
+da Formação (baixo ticket, reunião) só ficam salvos no Supabase, sem
+encaminhamento pro webhook. Sem essa variável configurada, esse
 encaminhamento simplesmente não acontece (não afeta o Supabase nem o
 funcionamento do pop-up).
 

@@ -10,12 +10,13 @@ type LeadPayload = {
 
 /**
  * Encaminha o lead pro webhook próprio do cliente (Zapier/Make/n8n/CRM),
- * além do Supabase — só quando há nome/WhatsApp coletados (fluxo de
- * Formação). Falha aqui não deve derrubar o resto do processamento.
+ * além do Supabase — só no resultado "gratuito" (quem vai receber o
+ * ebook). Os outros resultados só ficam salvos no Supabase, sem
+ * encaminhamento. Falha aqui não deve derrubar o resto do processamento.
  */
 async function forwardToWebhook(payload: LeadPayload) {
   const url = process.env.LEAD_WEBHOOK_URL;
-  if (!url || !payload.contact) return;
+  if (!url || !payload.contact || payload.resultKey !== "gratuito") return;
 
   try {
     await fetch(url, {
