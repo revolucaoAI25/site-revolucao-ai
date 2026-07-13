@@ -32,9 +32,10 @@ Abra [http://localhost:3000](http://localhost:3000).
   e WhatsApp (`src/components/modal/ContactForm.tsx`) — o de **Agentes de
   IA** não pede, fica anônimo.
 - `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço, Calendly da
-  apresentação do agente de IA e o ebook gratuito da Formação já são os
-  reais. Agenda da reunião de vendas da Formação, ferramenta de extração de
-  leads, "outro produto" e produto de baixo ticket ainda **placeholder**.
+  apresentação do agente de IA, o ebook gratuito e o curso Zero aos 10K
+  (baixo ticket) da Formação já são os reais. Agenda da reunião de vendas
+  da Formação, ferramenta de extração de leads e "outro produto" ainda
+  **placeholder**.
 - `src/app/api/lead/route.ts` — recebe o resultado final de cada pop-up
   (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp), salva no
   Supabase e encaminha pro webhook próprio do cliente, se configurado. Ver
@@ -46,8 +47,7 @@ Abra [http://localhost:3000](http://localhost:3000).
    WhatsApp oficial como fallback:
    - `FERRAMENTA_EXTRACAO_LINK` (ferramenta de extração de leads, Agentes de IA);
    - `OUTRO_PRODUTO_LINK` (oferta pra quem não fecha o ticket da implementação
-     completa, Agentes de IA);
-   - `PRODUTO_LOW_TICKET_LINK` (Formação, orçamento até R$3.000).
+     completa, Agentes de IA).
 
    Trocar pelas páginas/links definitivos de cada um quando estiverem prontos.
 2. **`CALENDLY_FORMACAO_LINK`** em `src/lib/links.ts` reutiliza o mesmo link

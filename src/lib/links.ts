@@ -28,12 +28,18 @@ export const PRODUTO_GRATUITO_LINK =
   "https://docs.google.com/document/d/11u8-q8Z2Qr_j5W7udWUTlWlp1MsjpXDVhcWOth5ncBc/edit?usp=sharing";
 
 /**
+ * Curso Zero aos 10K (R$37) — resultado "baixo ticket" do pop-up de
+ * Formação, pra quem consegue investir algo mas não chega aos R$3.000 da
+ * reunião.
+ */
+export const PRODUTO_LOW_TICKET_LINK =
+  "https://revolucao-ai.pages.net.br/zero-aos-10k-4";
+
+/**
  * PLACEHOLDER — ainda não recebemos os links definitivos. Apontam para o
  * WhatsApp oficial como fallback; trocar assim que o cliente enviar:
  * - página da ferramenta de extração de leads (Agentes de IA);
- * - página/LP do "outro produto", de ticket mais baixo (Agentes de IA);
- * - página do produto de baixo ticket (Formação, orçamento até R$3.000).
+ * - página/LP do "outro produto", de ticket mais baixo (Agentes de IA).
  */
 export const FERRAMENTA_EXTRACAO_LINK = WHATSAPP_LINK;
 export const OUTRO_PRODUTO_LINK = WHATSAPP_LINK;
-export const PRODUTO_LOW_TICKET_LINK = WHATSAPP_LINK;
