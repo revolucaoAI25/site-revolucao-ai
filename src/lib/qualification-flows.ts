@@ -41,7 +41,11 @@ export type FlowStep = {
   id: string;
   question: string;
   helper?: string;
+  /** "contact" pede nome e telefone em vez de mostrar opções. */
+  kind?: "options" | "contact";
   options: FlowOption[];
+  /** Usado só quando `kind` é "contact": pra onde ir depois do envio. */
+  next?: string;
 };
 
 export type QualificationFlow = {
@@ -159,11 +163,35 @@ export const formacaoFlow: QualificationFlow = {
       id: "investimento",
       question: "Quanto você tem disponível pra investir agora?",
       options: [
-        { label: "Nada, não consigo investir agora", next: "result:gratuito" },
-        { label: "Até R$500", next: "result:low-ticket" },
-        { label: "De R$500 a R$3.000", next: "result:low-ticket" },
-        { label: "Acima de R$3.000", next: "result:reuniao-vendas" },
+        { label: "Nada, não consigo investir agora", next: "contato-gratuito" },
+        { label: "Até R$500", next: "contato-low-ticket" },
+        { label: "De R$500 a R$3.000", next: "contato-low-ticket" },
+        { label: "Acima de R$3.000", next: "contato-reuniao" },
       ],
+    },
+    "contato-gratuito": {
+      id: "contato-gratuito",
+      question: "Pra te enviar o material, como podemos te chamar?",
+      helper: "Seu nome e WhatsApp — só isso.",
+      kind: "contact",
+      options: [],
+      next: "result:gratuito",
+    },
+    "contato-low-ticket": {
+      id: "contato-low-ticket",
+      question: "Antes de te mostrar a oferta, como podemos te chamar?",
+      helper: "Seu nome e WhatsApp — só isso.",
+      kind: "contact",
+      options: [],
+      next: "result:low-ticket",
+    },
+    "contato-reuniao": {
+      id: "contato-reuniao",
+      question: "Antes de agendar, como podemos te chamar?",
+      helper: "Seu nome e WhatsApp — só isso.",
+      kind: "contact",
+      options: [],
+      next: "result:reuniao-vendas",
     },
   },
   results: {

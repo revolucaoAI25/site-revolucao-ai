@@ -1,46 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
-const SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initInlineWidget: (options: {
-        url: string;
-        parentElement: HTMLElement;
-        prefill?: Record<string, unknown>;
-        utm?: Record<string, unknown>;
-      }) => void;
-    };
-  }
-}
-
-function loadCalendlyScript(): Promise<void> {
-  return new Promise((resolve) => {
-    if (window.Calendly) {
-      resolve();
-      return;
-    }
-    const existing = document.querySelector<HTMLScriptElement>(
-      `script[src="${SCRIPT_SRC}"]`
-    );
-    if (existing) {
-      existing.addEventListener("load", () => resolve());
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = SCRIPT_SRC;
-    script.async = true;
-    script.onload = () => resolve();
-    document.body.appendChild(script);
-  });
-}
+import { useEffect, useRef, useState } from "react";
+import { loadCalendlyScript } from "@/lib/calendly";
 
 /**
  * Agenda do Calendly embutida direto no pop-up (em vez de abrir uma nova
- * aba) — o visitante escolhe o horário sem sair do site.
+ * aba) — o visitante escolhe o horário sem sair do site. O script já
+ * começa a carregar assim que o pop-up abre (ver `ModalProvider`), então
+ * na maioria das vezes o widget já está pronto quando o usuário chega
+ * aqui; o spinner só cobre o tempo do próprio iframe do Calendly montar.
  */
 export function CalendlyEmbed({
   url,
@@ -50,9 +18,17 @@ export function CalendlyEmbed({
   height?: number;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
+  const [loadedUrl, setLoadedUrl] = useState(url);
+
+  if (url !== loadedUrl) {
+    setLoadedUrl(url);
+    setReady(false);
+  }
 
   useEffect(() => {
     let cancelled = false;
+
     loadCalendlyScript().then(() => {
       if (cancelled || !containerRef.current || !window.Calendly) return;
       containerRef.current.innerHTML = "";
@@ -60,17 +36,34 @@ export function CalendlyEmbed({
         url,
         parentElement: containerRef.current,
       });
+
+      const observer = new MutationObserver(() => {
+        if (containerRef.current?.querySelector("iframe")) {
+          setReady(true);
+          observer.disconnect();
+        }
+      });
+      observer.observe(containerRef.current, { childList: true, subtree: true });
     });
+
     return () => {
       cancelled = true;
     };
   }, [url]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{ minWidth: 280, height }}
-      className="overflow-hidden rounded-2xl"
-    />
+    <div className="relative" style={{ minWidth: 280, height }}>
+      {!ready && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-muted">
+          <span className="h-8 w-8 rounded-full border-2 border-white/15 border-t-accent animate-spin" />
+          <p className="text-sm">Carregando agenda...</p>
+        </div>
+      )}
+      <div
+        ref={containerRef}
+        style={{ minWidth: 280, height }}
+        className="overflow-hidden rounded-2xl"
+      />
+    </div>
   );
 }

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "./Logo";
 import { Container } from "./ui/Container";
+import { WHATSAPP_LINK } from "@/lib/links";
 
 const links = [
   { href: "/", label: "Home" },
@@ -44,12 +45,14 @@ export function Nav() {
           })}
         </nav>
 
-        <Link
-          href="/agentes-de-ia"
+        <a
+          href={WHATSAPP_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden md:inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:border-accent/60 hover:text-accent hover:-translate-y-0.5"
         >
           Falar com a gente
-        </Link>
+        </a>
 
         <button
           type="button"
@@ -93,13 +96,15 @@ export function Nav() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/agentes-de-ia"
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center rounded-full bg-accent text-[#07090a] px-5 py-3 text-sm font-semibold"
             >
               Falar com a gente
-            </Link>
+            </a>
           </Container>
         </div>
       )}

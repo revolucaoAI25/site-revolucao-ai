@@ -25,11 +25,19 @@ Abra [http://localhost:3000](http://localhost:3000).
   e de **Formação** (`formacaoFlow`) já são os reais, combinados com o
   cliente. O resultado "qualificado" de cada um abre uma agenda do Calendly
   **embutida no próprio pop-up** (`src/components/modal/CalendlyEmbed.tsx`),
-  sem sair do site.
+  sem sair do site. O script do Calendly já começa a carregar assim que o
+  pop-up abre (`ModalProvider`), antes mesmo do usuário responder as
+  perguntas, pra agenda aparecer sem demora quando ele chegar no resultado.
+  No fluxo de **Formação**, antes de mostrar o resultado o pop-up pede nome
+  e WhatsApp (`src/components/modal/ContactForm.tsx`) — o de **Agentes de
+  IA** não pede, fica anônimo.
 - `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço e Calendly da
   apresentação do agente de IA já são os reais. Agenda da reunião de vendas
   da Formação, ferramenta de extração de leads, "outro produto", produto
   gratuito e produto de baixo ticket ainda **placeholder**.
+- `src/app/api/lead/route.ts` — recebe o resultado final de cada pop-up
+  (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp) e salva no
+  Supabase. Ver seção **Leads do pop-up (Supabase)** abaixo.
 
 ## Pendências antes de publicar
 
@@ -55,9 +63,30 @@ reais enviadas, salvas em `public/clients/`. Para adicionar mais um cliente,
 array `clients` desse componente (`kind: "logo"` para marca ou `kind:
 "person"` para avatar + nome, no estilo Instagram).
 
+## Leads do pop-up (Supabase)
+
+Toda vez que o pop-up de qualificação chega num resultado, o site salva no
+Supabase: o fluxo (`agentes` ou `formacao`), o resultado final, a trilha de
+perguntas/respostas e — só no fluxo de Formação — nome e WhatsApp da pessoa
+(Agentes de IA fica anônimo, sem pedir contato).
+
+Pra ativar:
+
+1. Criar um projeto no [Supabase](https://supabase.com).
+2. Rodar `supabase/schema.sql` no SQL editor do projeto (cria a tabela
+   `leads`, com RLS ligado e sem policy pública — só a service role grava).
+3. Configurar as variáveis de ambiente (local em `.env.local`, e na Vercel
+   em Project Settings → Environment Variables):
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY` (a service role key, nunca a `anon` — essa
+     fica só no servidor, nunca é exposta ao navegador)
+
+Sem essas variáveis configuradas, o site funciona normalmente — a rota
+`/api/lead` só loga um aviso e não salva nada, então dá pra publicar antes
+do Supabase estar pronto.
+
 ## Deploy
 
 Projeto pronto para deploy direto na [Vercel](https://vercel.com/new) (stack
-padrão Next.js, sem configuração extra). Se surgir necessidade de banco de
-dados (ex. armazenar leads capturados no pop-up), a recomendação é
-[Supabase](https://supabase.com).
+padrão Next.js, sem configuração extra além das variáveis do Supabase acima,
+se quiser os leads salvos desde o primeiro deploy).

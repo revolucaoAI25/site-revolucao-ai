@@ -3,9 +3,10 @@
 import { useQualificationModal } from "./ModalProvider";
 import { flows } from "@/lib/qualification-flows";
 import { CalendlyEmbed } from "./CalendlyEmbed";
+import { ContactForm } from "./ContactForm";
 
 export function QualificationModal() {
-  const { state, choose, close, goBack } = useQualificationModal();
+  const { state, choose, submitContact, close, goBack } = useQualificationModal();
   const { flowId, stepId, result, history } = state;
 
   if (!flowId) return null;
@@ -83,33 +84,39 @@ export function QualificationModal() {
               {step.helper && (
                 <p className="text-muted text-sm mb-4">{step.helper}</p>
               )}
-              <div className="flex flex-col gap-3 mt-5">
-                {step.options.map((option) => (
-                  <button
-                    key={option.label}
-                    type="button"
-                    onClick={() => choose(option.next)}
-                    className="group w-full flex items-center justify-between gap-3 text-left rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium transition-all duration-150 hover:border-accent/50 hover:text-accent hover:-translate-y-0.5 cursor-pointer"
-                  >
-                    {option.label}
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="shrink-0 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0"
+              {step.kind === "contact" ? (
+                <ContactForm
+                  onSubmit={(name, phone) => submitContact(name, phone, step.next!)}
+                />
+              ) : (
+                <div className="flex flex-col gap-3 mt-5">
+                  {step.options.map((option) => (
+                    <button
+                      key={option.label}
+                      type="button"
+                      onClick={() => choose(option.next, step.question, option.label)}
+                      className="group w-full flex items-center justify-between gap-3 text-left rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium transition-all duration-150 hover:border-accent/50 hover:text-accent hover:-translate-y-0.5 cursor-pointer"
                     >
-                      <path
-                        d="M5 12h14M13 6l6 6-6 6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                ))}
-              </div>
+                      {option.label}
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="shrink-0 opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0"
+                      >
+                        <path
+                          d="M5 12h14M13 6l6 6-6 6"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ) : null}
 
