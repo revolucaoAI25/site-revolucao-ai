@@ -112,7 +112,7 @@ export default function Formacao() {
 
       {/* 7.3 Quem está por trás */}
       <Section divider className="bg-tint">
-        <div className="grid lg:grid-cols-[1fr_260px] gap-x-12 gap-y-10 items-start mb-12">
+        <div className="grid lg:grid-cols-[1fr_180px] gap-x-12 gap-y-10 items-start mb-12">
           <div>
             <Reveal>
               <Eyebrow>Quem está por trás disso</Eyebrow>
@@ -141,28 +141,28 @@ export default function Formacao() {
               </p>
             </Reveal>
           </div>
-          <Reveal delay={120} className="flex sm:flex-col gap-4">
+          <Reveal delay={120} className="flex sm:flex-col gap-4 max-w-[180px]">
+            <div className="flex-1">
+              <Image
+                src="/team/lucas.jpg"
+                alt="Lucas, fundador do Revolução AI"
+                width={180}
+                height={180}
+                className="w-full aspect-square rounded-2xl object-cover"
+              />
+              <p className="mt-3 text-sm font-semibold text-center">Lucas</p>
+            </div>
             <div className="flex-1">
               <Image
                 src="/team/joao-vitor.jpg"
                 alt="João Vitor, fundador do Revolução AI"
-                width={260}
-                height={260}
+                width={180}
+                height={180}
                 className="w-full aspect-square rounded-2xl object-cover"
               />
               <p className="mt-3 text-sm font-semibold text-center">
                 João Vitor
               </p>
-            </div>
-            <div className="flex-1">
-              <Image
-                src="/team/lucas.jpg"
-                alt="Lucas, fundador do Revolução AI"
-                width={260}
-                height={260}
-                className="w-full aspect-square rounded-2xl object-cover"
-              />
-              <p className="mt-3 text-sm font-semibold text-center">Lucas</p>
             </div>
           </Reveal>
         </div>
