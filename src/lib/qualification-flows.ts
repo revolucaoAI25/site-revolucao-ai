@@ -166,7 +166,12 @@ export const formacaoFlow: QualificationFlow = {
         { label: "Nada, não consigo investir agora", next: "contato-gratuito" },
         { label: "Até R$500", next: "contato-low-ticket" },
         { label: "De R$500 a R$3.000", next: "contato-low-ticket" },
-        { label: "Acima de R$3.000", next: "contato-reuniao" },
+        { label: "De R$3.000 a R$5.000", next: "contato-reuniao" },
+        { label: "De R$5.000 a R$10.000", next: "contato-reuniao" },
+        {
+          label: "O necessário pra resolver meu problema e ter resultado",
+          next: "contato-reuniao",
+        },
       ],
     },
     "contato-gratuito": {

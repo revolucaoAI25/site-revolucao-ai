@@ -32,11 +32,11 @@ export function CalendlyEmbed({
     loadCalendlyScript().then(() => {
       if (cancelled || !containerRef.current || !window.Calendly) return;
       containerRef.current.innerHTML = "";
-      window.Calendly.initInlineWidget({
-        url,
-        parentElement: containerRef.current,
-      });
 
+      // Precisa observar ANTES de chamar `initInlineWidget`: o Calendly
+      // insere o iframe de forma síncrona dentro dessa chamada, então
+      // observar depois faria o MutationObserver perder a inserção e o
+      // spinner nunca sumiria.
       const observer = new MutationObserver(() => {
         if (containerRef.current?.querySelector("iframe")) {
           setReady(true);
@@ -44,6 +44,16 @@ export function CalendlyEmbed({
         }
       });
       observer.observe(containerRef.current, { childList: true, subtree: true });
+
+      window.Calendly.initInlineWidget({
+        url,
+        parentElement: containerRef.current,
+      });
+
+      if (containerRef.current.querySelector("iframe")) {
+        setReady(true);
+        observer.disconnect();
+      }
     });
 
     return () => {
