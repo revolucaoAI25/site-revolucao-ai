@@ -2,20 +2,42 @@
 
 import { useState, type FormEvent } from "react";
 
+/** Formata os dígitos do número nacional (DDD + telefone) como (11) 91234-5678. */
+function formatLocalNumber(digits: string): string {
+  const ddd = digits.slice(0, 2);
+  const rest = digits.slice(2, 11);
+
+  let out = "";
+  if (ddd) out += `(${ddd}`;
+  if (ddd.length === 2) out += ") ";
+  if (rest) {
+    const splitAt = rest.length > 8 ? 5 : 4;
+    const part1 = rest.slice(0, splitAt);
+    const part2 = rest.slice(splitAt);
+    out += part2 ? `${part1}-${part2}` : part1;
+  }
+  return out;
+}
+
 export function ContactForm({
   onSubmit,
 }: {
   onSubmit: (name: string, phone: string) => void;
 }) {
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
 
-  const canSubmit = name.trim().length > 1 && phone.trim().length > 7;
+  const canSubmit = name.trim().length > 1 && phoneDigits.length >= 10;
+
+  function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const digits = e.target.value.replace(/\D/g, "").slice(0, 11);
+    setPhoneDigits(digits);
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    onSubmit(name.trim(), phone.trim());
+    onSubmit(name.trim(), `55${phoneDigits}`);
   }
 
   return (
@@ -28,14 +50,17 @@ export function ContactForm({
         autoComplete="name"
         className="w-full rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium placeholder:text-muted focus:outline-none focus:border-accent/50"
       />
-      <input
-        type="tel"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        placeholder="Seu WhatsApp"
-        autoComplete="tel"
-        className="w-full rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium placeholder:text-muted focus:outline-none focus:border-accent/50"
-      />
+      <div className="flex items-center rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 focus-within:border-accent/50">
+        <span className="font-medium text-muted shrink-0">+55</span>
+        <input
+          type="tel"
+          value={formatLocalNumber(phoneDigits)}
+          onChange={handlePhoneChange}
+          placeholder="(11) 91234-5678"
+          autoComplete="tel-national"
+          className="w-full min-w-0 bg-transparent pl-2 font-medium placeholder:text-muted focus:outline-none"
+        />
+      </div>
       <button
         type="submit"
         disabled={!canSubmit}
