@@ -102,6 +102,7 @@ export const agentesFlow: QualificationFlow = {
         { label: "De R$1.000 a R$2.000", next: "result:outro-produto" },
         { label: "De R$2.000 a R$5.000", next: "result:agendar" },
         { label: "De R$5.000 a R$10.000", next: "result:agendar" },
+        { label: "De R$10.000 a R$20.000", next: "result:agendar" },
         {
           label: "O necessário pra resolver meu problema e ter resultado",
           next: "result:agendar",
