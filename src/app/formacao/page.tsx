@@ -112,7 +112,7 @@ export default function Formacao() {
 
       {/* 7.3 Quem está por trás */}
       <Section divider className="bg-tint">
-        <div className="grid lg:grid-cols-[1fr_260px] gap-x-12 gap-y-10 items-start mb-12">
+        <div className="grid lg:grid-cols-[1fr_300px] gap-x-12 gap-y-10 items-start mb-12">
           <div>
             <Reveal>
               <Eyebrow>Quem está por trás disso</Eyebrow>
@@ -141,7 +141,7 @@ export default function Formacao() {
               </p>
             </Reveal>
           </div>
-          <Reveal delay={120} className="relative mx-auto lg:mx-0 w-[260px] h-[280px]">
+          <Reveal delay={120} className="relative mx-auto lg:mx-0 w-[300px] h-[320px]">
             <div className="absolute top-0 left-0 z-10 rotate-[-4deg] rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)]">
               <Image
                 src="/team/lucas.jpg"
