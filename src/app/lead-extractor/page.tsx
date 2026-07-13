@@ -22,31 +22,28 @@ export const metadata: Metadata = {
     "Encontre centenas de leads qualificados com Google Maps e CNPJ, e mantenha uma prospecção automática rodando sozinha, direto pro Google Sheets.",
 };
 
+const comparativoColunas = ["Lead Extractor", "Apollo.io", "Speedio", "Econodata"];
+
 const comparativo = [
   {
-    dimensao: "Google Maps + CNPJ no mesmo lugar",
-    leadExtractor: "Sim, os dois motores juntos",
-    mercado: "Geralmente só um dos dois",
+    dimensao: "Leads locais via Google Maps",
+    valores: ["Sim", "Não", "Não", "Não"],
   },
   {
-    dimensao: "Automação com dias/horários programados",
-    leadExtractor: "Nativa, com deduplicação automática",
-    mercado: "Raro — quando existe, é manual",
+    dimensao: "Dados fiscais de CNPJ (Receita Federal)",
+    valores: ["Sim", "Não (base americana)", "Sim", "Sim"],
   },
   {
-    dimensao: "Exportação direto pro Google Sheets",
-    leadExtractor: "Automática a cada busca",
-    mercado: "Exportação manual ou inexistente",
+    dimensao: "Automação com busca agendada + Sheets",
+    valores: ["Sim, nativa", "Sequência de e-mail, não busca", "Não", "Não"],
   },
   {
     dimensao: "Enriquecimento cruzado (CNPJ + Maps)",
-    leadExtractor: "Sim, completa o que falta sem sobrescrever",
-    mercado: "Não existe",
+    valores: ["Sim", "Não", "Não", "Parcial (IA de análise)"],
   },
   {
-    dimensao: "Preço",
-    leadExtractor: "A partir de R$416,67/mês",
-    mercado: "Ferramentas fragmentadas custam mais somadas",
+    dimensao: "Preço de entrada",
+    valores: ["R$497,90/mês", "US$49/usuário/mês", "A partir de R$500/mês", "A partir de R$300/mês"],
   },
 ];
 
@@ -57,9 +54,9 @@ const extras = [
       "Toda busca fica salva — retome campanhas de onde parou e evite prospectar o mesmo contato duas vezes.",
   },
   {
-    title: "Pool de múltiplas chaves de API",
+    title: "Capacidade sob demanda",
     description:
-      "Cadastre mais de uma chave do Google Maps: o sistema alterna automaticamente quando uma atinge o limite mensal.",
+      "A infraestrutura escala por trás das cenas conforme seu volume de busca cresce — você não fica travado num limite baixo.",
   },
   {
     title: "Busca em qualquer país",
@@ -163,6 +160,38 @@ export default function LeadExtractor() {
           <Reveal delay={80} className="max-w-4xl mx-auto">
             <PandaVideoEmbed />
           </Reveal>
+        </Section>
+
+        {/* Fluxo de uso */}
+        <Section divider>
+          <Reveal>
+            <Eyebrow>Do zero ao lead pronto</Eyebrow>
+            <SectionTitle className="mb-10 max-w-2xl">
+              Um resumo de como a ferramenta entrega valor, de ponta a ponta.
+            </SectionTitle>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <PillarCard
+              number="01"
+              title="Escolha a fonte"
+              description="Google Maps pra leads locais, ou CNPJ da Receita Federal pra prospecção B2B estruturada."
+            />
+            <PillarCard
+              number="02"
+              title="Defina os filtros"
+              description="Nicho, localização, porte, CNAE — quanto mais específico, melhor a qualidade do resultado."
+            />
+            <PillarCard
+              number="03"
+              title="Busque ou agende"
+              description="Rode a busca na hora, ou deixe uma automação rodando sozinha todos os dias."
+            />
+            <PillarCard
+              number="04"
+              title="Receba os leads"
+              description="Direto no Google Sheets, ou baixe em Excel/CSV — prontos pra prospectar."
+            />
+          </div>
         </Section>
 
         {/* Os 3 motores */}
@@ -276,12 +305,13 @@ export default function LeadExtractor() {
                 </li>
                 <li className="flex gap-3 text-base text-muted leading-relaxed">
                   <span className="text-accent shrink-0">—</span>
-                  Sem o teto técnico de ~60 resultados por busca que o Google
-                  Maps tem —{" "}
-                  <span className="text-text font-semibold">
-                    defina o volume que quiser
+                  <span>
+                    Buscas ilimitadas —{" "}
+                    <span className="text-text font-semibold">
+                      defina o volume que quiser
+                    </span>
+                    , de dezenas a milhares de empresas por consulta.
                   </span>
-                  , de dezenas a milhares de empresas por consulta.
                 </li>
                 <li className="flex gap-3 text-base text-muted leading-relaxed">
                   <span className="text-accent shrink-0">—</span>
@@ -399,35 +429,49 @@ export default function LeadExtractor() {
           <Reveal className="max-w-2xl mb-10">
             <Eyebrow>Comparativo</Eyebrow>
             <SectionTitle>
-              O que muda em relação a uma ferramenta de raspagem comum.
+              O que muda em relação a outras plataformas de prospecção.
             </SectionTitle>
           </Reveal>
           <Reveal delay={80} className="overflow-x-auto">
-            <table className="w-full min-w-[640px] border-collapse">
+            <table className="w-full min-w-[760px] border-collapse">
               <thead>
                 <tr className="border-b border-white/10">
                   <th className="text-left py-4 pr-4 text-sm font-semibold text-muted-2 uppercase tracking-widest">
                     &nbsp;
                   </th>
-                  <th className="text-left py-4 pr-4 text-sm font-semibold text-accent uppercase tracking-widest">
-                    Lead Extractor
-                  </th>
-                  <th className="text-left py-4 text-sm font-semibold text-muted-2 uppercase tracking-widest">
-                    Ferramentas genéricas
-                  </th>
+                  {comparativoColunas.map((col, i) => (
+                    <th
+                      key={col}
+                      className={`text-left py-4 pr-4 text-sm font-semibold uppercase tracking-widest ${
+                        i === 0 ? "text-accent" : "text-muted-2"
+                      }`}
+                    >
+                      {col}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
                 {comparativo.map((row) => (
                   <tr key={row.dimensao} className="border-b border-white/5">
                     <td className="py-4 pr-4 font-medium">{row.dimensao}</td>
-                    <td className="py-4 pr-4 text-text">{row.leadExtractor}</td>
-                    <td className="py-4 text-muted">{row.mercado}</td>
+                    {row.valores.map((valor, i) => (
+                      <td
+                        key={i}
+                        className={`py-4 pr-4 ${i === 0 ? "text-text" : "text-muted"}`}
+                      >
+                        {valor}
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
             </table>
           </Reveal>
+          <p className="text-sm text-muted-2 mt-6">
+            Comparativo com base em informações públicas de cada plataforma,
+            sujeitas a mudança.
+          </p>
         </Section>
 
         {/* Planos e preços */}
@@ -444,7 +488,7 @@ export default function LeadExtractor() {
                 Mensal
               </p>
               <p className="text-4xl font-black tracking-tight mb-1">
-                R$500<span className="text-lg font-semibold text-muted">/mês</span>
+                R$497<span className="text-lg font-semibold text-muted">,90/mês</span>
               </p>
               <p className="text-muted text-sm mb-8">Sem fidelidade.</p>
               <ul className="space-y-3 mb-8 flex-1">
@@ -473,13 +517,13 @@ export default function LeadExtractor() {
               className="relative card-surface rounded-3xl p-8 flex flex-col border-accent/30 shadow-[0_0_0_1px_rgba(0,200,83,0.3),0_20px_60px_-15px_rgba(0,200,83,0.25)]"
             >
               <span className="absolute -top-3 right-8 rounded-full bg-accent text-[#07090a] text-xs font-bold uppercase tracking-widest px-3 py-1">
-                Economize R$1.000/ano
+                Economize R$975/ano
               </span>
               <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
                 Anual
               </p>
               <p className="text-4xl font-black tracking-tight mb-1">
-                R$416,67<span className="text-lg font-semibold text-muted">/mês</span>
+                R$417<span className="text-lg font-semibold text-muted">/mês</span>
               </p>
               <p className="text-muted text-sm mb-8">
                 R$5.000/ano, faturado em 12x.
