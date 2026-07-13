@@ -189,3 +189,45 @@ body::before {
     animation-play-state: paused;
   }
 }
+
+/* Range slider (calculadora de ROI) */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg);
+  box-shadow:
+    0 0 0 1px rgba(0, 200, 83, 0.4),
+    0 4px 12px -2px rgba(0, 200, 83, 0.5);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg);
+  box-shadow:
+    0 0 0 1px rgba(0, 200, 83, 0.4),
+    0 4px 12px -2px rgba(0, 200, 83, 0.5);
+  cursor: pointer;
+}
+
+.slider::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: transparent;
+}

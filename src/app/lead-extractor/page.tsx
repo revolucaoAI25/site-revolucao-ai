@@ -8,6 +8,7 @@ import { PillarCard } from "@/components/ui/PillarCard";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { PandaVideoEmbed } from "@/components/lead-extractor/PandaVideoEmbed";
+import { ROICalculator } from "@/components/lead-extractor/ROICalculator";
 import {
   WHATSAPP_LINK,
   WHATSAPP_NUMBER_DISPLAY,
@@ -186,6 +187,9 @@ export default function LeadExtractor() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-text/70">
             <a href="#funcionalidades" className="hover:text-text transition-colors">
               Funcionalidades
+            </a>
+            <a href="#calculadora" className="hover:text-text transition-colors">
+              Calculadora
             </a>
             <a href="#planos" className="hover:text-text transition-colors">
               Planos
@@ -586,6 +590,23 @@ export default function LeadExtractor() {
             Comparativo com base em informações públicas de cada plataforma,
             sujeitas a mudança.
           </p>
+        </Section>
+
+        {/* Calculadora de ROI */}
+        <Section id="calculadora" divider className="bg-tint">
+          <Reveal className="max-w-2xl mb-12">
+            <Eyebrow>Calculadora de ROI</Eyebrow>
+            <SectionTitle>
+              Veja quanto o Lead Extractor pode gerar pro seu negócio.
+            </SectionTitle>
+            <p className="text-muted leading-relaxed mt-4">
+              Preencha com os números do seu negócio e simule o retorno — do
+              lead extraído até a venda fechada.
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <ROICalculator />
+          </Reveal>
         </Section>
 
         {/* Planos e preços */}

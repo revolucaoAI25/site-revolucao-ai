@@ -29,7 +29,10 @@ Abra [http://localhost:3000](http://localhost:3000).
   destino do resultado "só preciso de uma base de leads pra prospectar" do
   pop-up de Agentes de IA (`LEAD_EXTRACTOR_LINK` em `src/lib/links.ts`),
   aberta em nova aba. Vídeo de demonstração via
-  `src/components/lead-extractor/PandaVideoEmbed.tsx` (Panda Video) e
+  `src/components/lead-extractor/PandaVideoEmbed.tsx` (Panda Video),
+  calculadora de ROI interativa via
+  `src/components/lead-extractor/ROICalculator.tsx` (funil estimado +
+  faturamento/retorno, com base nos números que o visitante preenche) e
   screenshots reais em `public/lead-extractor/`. Os botões de assinatura
   (`LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK` / `..._ANUAL_LINK`) ainda são
   **placeholder** (WhatsApp) até o checkout do Asaas estar pronto.
