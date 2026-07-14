@@ -10,7 +10,7 @@ import {
 } from "react";
 import { flows, type FlowId, type FlowResult } from "@/lib/qualification-flows";
 import { loadCalendlyScript } from "@/lib/calendly";
-import { submitLead, type LeadAnswer } from "@/lib/leads";
+import { submitLead, markLeadScheduled, type LeadAnswer } from "@/lib/leads";
 import { QualificationModal } from "./QualificationModal";
 
 type Contact = { name: string; phone: string; email: string };
@@ -22,6 +22,9 @@ type ModalState = {
   answers: LeadAnswer[];
   contact: Contact | null;
   result: FlowResult | null;
+  /** Id do lead salvo no Supabase pro resultado atual — usado só pra
+   * marcar "agendou" quando o Calendly embutido confirma um agendamento. */
+  leadId: string | null;
 };
 
 type ModalContextValue = {
@@ -29,6 +32,7 @@ type ModalContextValue = {
   close: () => void;
   choose: (next: string, question?: string, label?: string) => void;
   submitContact: (name: string, phone: string, email: string, next: string) => void;
+  onScheduled: () => void;
   goBack: () => void;
   state: ModalState;
 };
@@ -42,6 +46,7 @@ const initialState: ModalState = {
   answers: [],
   contact: null,
   result: null,
+  leadId: null,
 };
 
 export function ModalProvider({ children }: { children: React.ReactNode }) {
@@ -60,6 +65,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
       answers: [],
       contact: null,
       result: null,
+      leadId: null,
     });
   }, []);
 
@@ -68,7 +74,9 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   // `choose`/`submitContact` disparam `submitLead` (efeito colateral) fora
   // do updater do `setState`: updaters devem ser puros, e o React invoca
   // essa função duas vezes em dev/Strict Mode — se o POST estivesse lá
-  // dentro, cada resultado seria salvo em duplicidade.
+  // dentro, cada resultado seria salvo em duplicidade. `submitLead` não é
+  // esperado (await) aqui — o resultado aparece na hora — só guardamos o
+  // id assim que a resposta chegar, pra poder marcar "agendou" depois.
   const choose = useCallback(
     (next: string, question?: string, label?: string) => {
       if (!state.flowId) return;
@@ -82,7 +90,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
           resultKey,
           answers: answer ? [...state.answers, answer] : state.answers,
           contact: state.contact,
-        });
+        }).then((leadId) => setState((prev) => ({ ...prev, leadId })));
         setState((prev) => ({ ...prev, result: flow.results[resultKey] ?? null }));
         return;
       }
@@ -110,7 +118,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
           resultKey,
           answers: state.answers,
           contact,
-        });
+        }).then((leadId) => setState((prev) => ({ ...prev, leadId })));
         setState((prev) => ({
           ...prev,
           contact,
@@ -128,6 +136,10 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
     },
     [state]
   );
+
+  const onScheduled = useCallback(() => {
+    if (state.leadId) markLeadScheduled(state.leadId);
+  }, [state.leadId]);
 
   const goBack = useCallback(() => {
     setState((prev) => {
@@ -161,8 +173,8 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   }, [state.flowId, close]);
 
   const value = useMemo(
-    () => ({ open, close, choose, submitContact, goBack, state }),
-    [open, close, choose, submitContact, goBack, state]
+    () => ({ open, close, choose, submitContact, onScheduled, goBack, state }),
+    [open, close, choose, submitContact, onScheduled, goBack, state]
   );
 
   return (

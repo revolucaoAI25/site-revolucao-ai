@@ -13,9 +13,12 @@ import { loadCalendlyScript } from "@/lib/calendly";
 export function CalendlyEmbed({
   url,
   height = 650,
+  onScheduled,
 }: {
   url: string;
   height?: number;
+  /** Chamado quando a pessoa conclui um agendamento de verdade no widget. */
+  onScheduled?: () => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
@@ -25,6 +28,19 @@ export function CalendlyEmbed({
     setLoadedUrl(url);
     setReady(false);
   }
+
+  // O Calendly avisa a página via postMessage quando o agendamento é
+  // concluído — é o único jeito de saber isso, já que o widget roda dentro
+  // de um iframe de outro domínio.
+  useEffect(() => {
+    function onMessage(event: MessageEvent) {
+      if (event.data?.event === "calendly.event_scheduled") {
+        onScheduled?.();
+      }
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [onScheduled]);
 
   useEffect(() => {
     let cancelled = false;

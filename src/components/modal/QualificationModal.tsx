@@ -6,7 +6,8 @@ import { CalendlyEmbed } from "./CalendlyEmbed";
 import { ContactForm } from "./ContactForm";
 
 export function QualificationModal() {
-  const { state, choose, submitContact, close, goBack } = useQualificationModal();
+  const { state, choose, submitContact, onScheduled, close, goBack } =
+    useQualificationModal();
   const { flowId, stepId, result, history } = state;
 
   if (!flowId) return null;
@@ -64,7 +65,7 @@ export function QualificationModal() {
                 {result.description}
               </p>
               {result.embed ? (
-                <CalendlyEmbed url={result.embed.url} />
+                <CalendlyEmbed url={result.embed.url} onScheduled={onScheduled} />
               ) : result.cta ? (
                 <a
                   href={result.cta.href}

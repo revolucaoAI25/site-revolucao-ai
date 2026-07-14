@@ -17,6 +17,11 @@ create table if not exists public.leads (
 -- coletado no pop-up): adiciona a coluna sem quebrar o que já existe.
 alter table public.leads add column if not exists email text;
 
+-- Preenchido quando a pessoa efetivamente marca um horário na agenda do
+-- Calendly embutida no resultado do pop-up (ver CalendlyEmbed.tsx e
+-- /api/lead/schedule) — só se aplica a resultados com agenda embutida.
+alter table public.leads add column if not exists scheduled_at timestamptz;
+
 create index if not exists leads_flow_id_idx on public.leads (flow_id);
 create index if not exists leads_created_at_idx on public.leads (created_at desc);
 
@@ -53,3 +58,10 @@ alter table public.asaas_checkouts enable row level security;
 -- Mesma regra do leads: sem policy pra anon/authenticated, só a service
 -- role (usada pelas rotas /api/asaas-subscription e /api/asaas-webhook)
 -- grava e atualiza.
+
+-- Painel /admin (dashboard, kanban e tabela): não precisa de nenhuma
+-- tabela nova, só lê leads/asaas_checkouts acima com a service role,
+-- depois que o Supabase Auth (login em /admin/login) já confirmou a
+-- sessão. Pra criar o primeiro usuário que vai logar no admin: no painel
+-- do Supabase, Authentication → Users → Add user (defina e-mail e senha
+-- ali mesmo, não precisa de fluxo de cadastro).

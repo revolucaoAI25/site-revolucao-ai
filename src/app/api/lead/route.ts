@@ -48,19 +48,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, stored: false });
   }
 
-  const { error } = await supabase.from("leads").insert({
-    flow_id: flowId,
-    result_key: resultKey,
-    answers: answers ?? [],
-    name: contact?.name ?? null,
-    phone: contact?.phone ?? null,
-    email: contact?.email ?? null,
-  });
+  const { data, error } = await supabase
+    .from("leads")
+    .insert({
+      flow_id: flowId,
+      result_key: resultKey,
+      answers: answers ?? [],
+      name: contact?.name ?? null,
+      phone: contact?.phone ?? null,
+      email: contact?.email ?? null,
+    })
+    .select("id")
+    .single();
 
   if (error) {
     console.error("[lead] Falha ao salvar no Supabase:", error);
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 
-  return NextResponse.json({ ok: true, stored: true });
+  return NextResponse.json({ ok: true, stored: true, id: data.id });
 }

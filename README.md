@@ -60,6 +60,10 @@ Abra [http://localhost:3000](http://localhost:3000).
   (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp), salva no
   Supabase e encaminha pro webhook próprio do cliente, se configurado. Ver
   seção **Leads do pop-up (Supabase e webhook)** abaixo.
+- `src/app/admin/` — painel interno (dashboard, kanban e tabela) com todo
+  mundo que passou pelo pop-up ou pelo checkout do Lead Extractor,
+  protegido por login (Supabase Auth). Ver seção **Painel admin**
+  abaixo.
 
 ## Pendências antes de publicar
 
@@ -95,7 +99,11 @@ array `clients` desse componente (`kind: "logo"` para marca ou `kind:
 Toda vez que o pop-up de qualificação chega num resultado, o site salva no
 Supabase: o fluxo (`agentes` ou `formacao`), o resultado final, a trilha de
 perguntas/respostas e o nome, e-mail e WhatsApp da pessoa (os dois fluxos
-pedem contato antes de mostrar o resultado).
+pedem contato antes de mostrar o resultado). Quando o resultado tem agenda
+do Calendly embutida, o widget avisa a página (via `postMessage`) assim
+que a pessoa conclui um agendamento de verdade — `CalendlyEmbed.tsx`
+escuta esse evento e `/api/lead/schedule` marca esse mesmo lead com
+`scheduled_at`, pra aparecer como "agendou" no painel admin (ver abaixo).
 
 Pra ativar o Supabase:
 
@@ -182,6 +190,56 @@ antes da chave estar pronta. Sem `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY`
 configuradas, o registro do lead simplesmente não acontece (não quebra o
 checkout). Falta configurar no painel do Asaas o webhook apontando pra
 `/api/asaas-webhook` (eventos de pagamento).
+
+## Painel admin (`/admin`)
+
+Visão completa de tudo que passa pelo site: quem preencheu o pop-up, quem
+agendou reunião, quem iniciou o checkout do Lead Extractor e quem
+confirmou a compra. Três telas, todas lendo os mesmos dados
+(`src/lib/admin-data.ts`, que junta `leads` + `asaas_checkouts` num
+formato só):
+
+- **`/admin`** — dashboard com números gerais (leads por fluxo, quantos
+  agendaram, checkouts iniciados/confirmados, taxa de confirmação) e um
+  detalhamento por resultado do pop-up.
+- **`/admin/kanban`** — cada registro (pop-up ou Lead Extractor) num card,
+  organizado em 4 colunas por estágio: preencheu → agendou → iniciou
+  checkout → confirmado. Não é arrastável — o estágio é calculado
+  automaticamente a partir do que já sabemos sobre cada um, não é uma
+  ação manual.
+- **`/admin/tabela`** — tabela detalhada, com busca por nome/e-mail/telefone
+  e filtro por fonte/estágio.
+
+### Login (Supabase Auth)
+
+O painel é protegido por login de verdade (e-mail/senha via Supabase
+Auth) — `src/proxy.ts` (o antigo "middleware", renomeado nessa versão do
+Next.js) barra qualquer acesso a `/admin/*` sem sessão válida, redirecionando
+pra `/admin/login`; o layout em `src/app/admin/(dashboard)/layout.tsx`
+repete a checagem do lado do servidor, como recomenda a documentação do
+Next.js (proxy sozinho não é suficiente por causa de client-side
+transitions).
+
+Pra criar o primeiro usuário que vai logar: no painel do Supabase,
+**Authentication → Users → Add user** (define e-mail e senha ali mesmo,
+sem precisar de fluxo de cadastro no site).
+
+Variáveis de ambiente necessárias, além das já usadas por
+`SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY`:
+
+- `NEXT_PUBLIC_SUPABASE_URL` — mesma URL do projeto Supabase (essa é
+  pública, vai pro navegador).
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — a chave **anônima/pública** do
+  projeto (Project Settings → API no painel do Supabase) — **não** é a
+  service role key. É só o que a tela de login usa pra autenticar; a
+  leitura dos dados de leads/checkouts continua sempre com a service role,
+  do lado do servidor, só depois que a sessão já foi confirmada.
+
+Sem essas duas variáveis, `/admin/*` (exceto `/admin/login`, que só
+depende delas no momento de logar) retorna erro — o painel não tem como
+funcionar sem login configurado, então aqui não existe modo "degradado";
+o resto do site continua funcionando normalmente, já que o proxy só roda
+nas rotas `/admin`.
 
 ## Deploy
 
