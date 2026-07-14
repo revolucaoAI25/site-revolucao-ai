@@ -41,7 +41,7 @@ const comparativo: { dimensao: string; valores: ComparativoValor[] }[] = [
     valores: [true, "Sequência de e-mail", "Sequência de e-mail", false, false],
   },
   {
-    dimensao: "Enriquecimento cruzado (CNPJ + Maps)",
+    dimensao: "Enriquecimento Avançado 360°",
     valores: [true, false, false, false, "Parcial"],
   },
   {
@@ -148,8 +148,41 @@ const planoFeatures = [
   "Filtros avançados por nicho, localização, porte e CNAE",
   "Automações agendadas com deduplicação automática",
   "Exportação automática pro Google Sheets + Excel/CSV",
-  "Enriquecimento cruzado entre CNPJ e Google Maps",
+  "Enriquecimento Avançado 360° (CNPJ + Google Maps)",
   "Histórico completo de buscas",
+];
+
+const enriquecimento = [
+  {
+    title: "Sócios e responsável legal",
+    description:
+      "Direto da Receita Federal — fale com quem decide, não só com “a empresa”.",
+  },
+  {
+    title: "Porte real do negócio",
+    description:
+      "Capital social declarado cruzado com o volume e a nota das avaliações no Google Maps.",
+  },
+  {
+    title: "Segmento exato",
+    description:
+      "CNAE, natureza jurídica e regime tributário, pra prospecção ultra-segmentada por nicho.",
+  },
+  {
+    title: "Mais de uma via de contato",
+    description:
+      "Site oficial e um segundo telefone, quando disponíveis — se um não responde, você tenta o outro.",
+  },
+  {
+    title: "Confirmação de atividade real",
+    description:
+      "Cruza com o Google Maps pra confirmar que a empresa realmente aparece pro público, não só um CNPJ aberto no papel.",
+  },
+  {
+    title: "Endereço físico real",
+    description:
+      "O endereço fiscal da Receita cruzado com a localização real no Google Maps — útil pra quem prospecta porta a porta.",
+  },
 ];
 
 const extras = [
@@ -583,6 +616,48 @@ export default function LeadExtractor() {
             Comparativo com base em informações públicas de cada plataforma,
             sujeitas a mudança.
           </p>
+        </Section>
+
+        {/* Enriquecimento Avançado 360 */}
+        <Section divider>
+          <Reveal className="max-w-2xl mb-10">
+            <Eyebrow>Diferencial</Eyebrow>
+            <SectionTitle>
+              Enriquecimento Avançado 360°: cada lead sai com mais do que um
+              nome numa lista.
+            </SectionTitle>
+            <p className="text-muted leading-relaxed mt-4">
+              Toda busca cruza automaticamente os dados oficiais da Receita
+              Federal com o perfil real da empresa no Google Maps — sem
+              nenhuma configuração extra. O resultado é um lead mais
+              completo, com mais de uma forma de chegar até ele.
+            </p>
+          </Reveal>
+          <div className="rounded-3xl border border-accent/30 bg-accent-soft p-8">
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-7">
+              {enriquecimento.map((item, index) => (
+                <Reveal key={item.title} delay={index * 60} className="flex gap-4">
+                  <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M5 13l4 4L19 7"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-bold text-base mb-1">{item.title}</h3>
+                    <p className="text-muted text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </Section>
 
         {/* Calculadora de ROI */}
