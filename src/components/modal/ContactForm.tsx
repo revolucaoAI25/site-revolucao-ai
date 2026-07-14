@@ -22,12 +22,14 @@ function formatLocalNumber(digits: string): string {
 export function ContactForm({
   onSubmit,
 }: {
-  onSubmit: (name: string, phone: string) => void;
+  onSubmit: (name: string, phone: string, email: string) => void;
 }) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneDigits, setPhoneDigits] = useState("");
 
-  const canSubmit = name.trim().length > 1 && phoneDigits.length >= 10;
+  const canSubmit =
+    name.trim().length > 1 && email.trim().includes("@") && phoneDigits.length >= 10;
 
   function handlePhoneChange(e: React.ChangeEvent<HTMLInputElement>) {
     const digits = e.target.value.replace(/\D/g, "").slice(0, 11);
@@ -37,7 +39,7 @@ export function ContactForm({
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    onSubmit(name.trim(), `55${phoneDigits}`);
+    onSubmit(name.trim(), `55${phoneDigits}`, email.trim());
   }
 
   return (
@@ -48,6 +50,14 @@ export function ContactForm({
         onChange={(e) => setName(e.target.value)}
         placeholder="Seu nome"
         autoComplete="name"
+        className="w-full rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium placeholder:text-muted focus:outline-none focus:border-accent/50"
+      />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Seu e-mail"
+        autoComplete="email"
         className="w-full rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium placeholder:text-muted focus:outline-none focus:border-accent/50"
       />
       <div className="flex items-center rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 focus-within:border-accent/50">

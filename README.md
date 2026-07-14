@@ -49,9 +49,8 @@ Abra [http://localhost:3000](http://localhost:3000).
   sem sair do site. O script do Calendly já começa a carregar assim que o
   pop-up abre (`ModalProvider`), antes mesmo do usuário responder as
   perguntas, pra agenda aparecer sem demora quando ele chegar no resultado.
-  No fluxo de **Formação**, antes de mostrar o resultado o pop-up pede nome
-  e WhatsApp (`src/components/modal/ContactForm.tsx`) — o de **Agentes de
-  IA** não pede, fica anônimo.
+  Antes de mostrar o resultado, os dois fluxos pedem nome, e-mail e WhatsApp
+  (`src/components/modal/ContactForm.tsx`).
 - `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço, Calendly da
   apresentação do agente de IA, o ebook gratuito, o curso Zero aos 10K
   (baixo ticket) da Formação e a LP do Lead Extractor já são os reais.
@@ -95,8 +94,8 @@ array `clients` desse componente (`kind: "logo"` para marca ou `kind:
 
 Toda vez que o pop-up de qualificação chega num resultado, o site salva no
 Supabase: o fluxo (`agentes` ou `formacao`), o resultado final, a trilha de
-perguntas/respostas e — só no fluxo de Formação — nome e WhatsApp da pessoa
-(Agentes de IA fica anônimo, sem pedir contato).
+perguntas/respostas e o nome, e-mail e WhatsApp da pessoa (os dois fluxos
+pedem contato antes de mostrar o resultado).
 
 Pra ativar o Supabase:
 

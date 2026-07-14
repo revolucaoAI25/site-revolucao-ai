@@ -1,7 +1,7 @@
 -- Rodar no SQL editor do projeto Supabase.
 -- Guarda cada resposta final do pop-up de qualificação (Agentes de IA e
--- Formação). Nome e telefone só são preenchidos pelo fluxo de Formação, que
--- pede contato antes de mostrar o resultado; Agentes de IA fica anônimo.
+-- Formação) — os dois fluxos pedem nome, WhatsApp e e-mail antes de
+-- mostrar o resultado.
 
 create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
@@ -12,6 +12,10 @@ create table if not exists public.leads (
   name text,
   phone text
 );
+
+-- Rodar em bancos já existentes (criados antes do e-mail passar a ser
+-- coletado no pop-up): adiciona a coluna sem quebrar o que já existe.
+alter table public.leads add column if not exists email text;
 
 create index if not exists leads_flow_id_idx on public.leads (flow_id);
 create index if not exists leads_created_at_idx on public.leads (created_at desc);

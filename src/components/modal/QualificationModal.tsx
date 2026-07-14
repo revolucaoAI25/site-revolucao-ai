@@ -30,7 +30,7 @@ export function QualificationModal() {
       />
       <div
         className={`relative w-full ${
-          result?.embed ? "sm:max-w-2xl" : "sm:max-w-lg"
+          result?.embed ? "sm:max-w-3xl" : "sm:max-w-xl"
         } bg-surface border border-white/10 rounded-t-3xl sm:rounded-3xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_30px_80px_-20px_rgba(0,0,0,0.6)] animate-fade-in-up max-h-[90vh] overflow-y-auto`}
       >
         <div className="flex items-center justify-between px-6 sm:px-8 pt-6">
@@ -86,7 +86,9 @@ export function QualificationModal() {
               )}
               {step.kind === "contact" ? (
                 <ContactForm
-                  onSubmit={(name, phone) => submitContact(name, phone, step.next!)}
+                  onSubmit={(name, phone, email) =>
+                    submitContact(name, phone, email, step.next!)
+                  }
                 />
               ) : (
                 <div className="flex flex-col gap-3 mt-5">

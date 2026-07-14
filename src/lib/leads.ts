@@ -10,7 +10,7 @@ export function submitLead(payload: {
   flowId: string;
   resultKey: string;
   answers: LeadAnswer[];
-  contact?: { name: string; phone: string } | null;
+  contact?: { name: string; phone: string; email: string } | null;
 }) {
   if (typeof window === "undefined") return;
   fetch("/api/lead", {

@@ -13,7 +13,7 @@ import { loadCalendlyScript } from "@/lib/calendly";
 import { submitLead, type LeadAnswer } from "@/lib/leads";
 import { QualificationModal } from "./QualificationModal";
 
-type Contact = { name: string; phone: string };
+type Contact = { name: string; phone: string; email: string };
 
 type ModalState = {
   flowId: FlowId | null;
@@ -28,7 +28,7 @@ type ModalContextValue = {
   open: (flowId: FlowId) => void;
   close: () => void;
   choose: (next: string, question?: string, label?: string) => void;
-  submitContact: (name: string, phone: string, next: string) => void;
+  submitContact: (name: string, phone: string, email: string, next: string) => void;
   goBack: () => void;
   state: ModalState;
 };
@@ -98,10 +98,10 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   );
 
   const submitContact = useCallback(
-    (name: string, phone: string, next: string) => {
+    (name: string, phone: string, email: string, next: string) => {
       if (!state.flowId) return;
       const flow = flows[state.flowId];
-      const contact = { name, phone };
+      const contact = { name, phone, email };
 
       if (next.startsWith("result:")) {
         const resultKey = next.replace("result:", "");

@@ -41,7 +41,7 @@ export type FlowStep = {
   id: string;
   question: string;
   helper?: string;
-  /** "contact" pede nome e telefone em vez de mostrar opções. */
+  /** "contact" pede nome, e-mail e telefone em vez de mostrar opções. */
   kind?: "options" | "contact";
   options: FlowOption[];
   /** Usado só quando `kind` é "contact": pra onde ir depois do envio. */
@@ -56,6 +56,8 @@ export type QualificationFlow = {
   results: Record<string, FlowResult>;
 };
 
+const CONTATO_HELPER = "Seu nome, e-mail e WhatsApp — só isso.";
+
 export const agentesFlow: QualificationFlow = {
   id: "agentes",
   title: "Quero implementar IA no meu negócio",
@@ -65,6 +67,9 @@ export const agentesFlow: QualificationFlow = {
       id: "volume-leads",
       question: "Você já recebe leads pelo WhatsApp atualmente?",
       options: [
+        { label: "Recebo de 10 a 100 leads por mês", next: "orcamento" },
+        { label: "Recebo de 100 a 500 leads por mês", next: "contato-agendar" },
+        { label: "Recebo mais de 500 leads por mês", next: "contato-agendar" },
         {
           label: "Não recebo leads, mas tenho tráfego pago rodando",
           next: "orcamento",
@@ -77,9 +82,6 @@ export const agentesFlow: QualificationFlow = {
           label: "Não recebo leads e preciso de uma base pra prospectar",
           next: "extracao-ou-agente",
         },
-        { label: "Recebo de 10 a 100 leads por mês", next: "orcamento" },
-        { label: "Recebo de 100 a 500 leads por mês", next: "result:agendar" },
-        { label: "Recebo mais de 500 leads por mês", next: "result:agendar" },
       ],
     },
     "extracao-ou-agente": {
@@ -90,24 +92,49 @@ export const agentesFlow: QualificationFlow = {
         { label: "Preciso do agente de IA completo", next: "orcamento" },
         {
           label: "Só preciso de uma base de leads pra prospectar",
-          next: "result:ferramenta-extracao",
+          next: "contato-extracao",
         },
       ],
     },
     orcamento: {
       id: "orcamento",
-      question: "Quanto você está disposto a investir nessa solução?",
+      question: "Quanto você está disposto a investir, no total, pra ter essa solução implementada?",
+      helper: "Valor total da implementação — não é uma mensalidade.",
       options: [
-        { label: "Até R$1.000", next: "result:outro-produto" },
-        { label: "De R$1.000 a R$2.000", next: "result:outro-produto" },
-        { label: "De R$2.000 a R$5.000", next: "result:agendar" },
-        { label: "De R$5.000 a R$10.000", next: "result:agendar" },
-        { label: "De R$10.000 a R$20.000", next: "result:agendar" },
+        { label: "Até R$1.000", next: "contato-outro-produto" },
+        { label: "De R$1.000 a R$2.000", next: "contato-outro-produto" },
+        { label: "De R$2.000 a R$5.000", next: "contato-agendar" },
+        { label: "De R$5.000 a R$10.000", next: "contato-agendar" },
+        { label: "De R$10.000 a R$20.000", next: "contato-agendar" },
         {
           label: "O necessário pra resolver meu problema e ter resultado",
-          next: "result:agendar",
+          next: "contato-agendar",
         },
       ],
+    },
+    "contato-agendar": {
+      id: "contato-agendar",
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: CONTATO_HELPER,
+      kind: "contact",
+      options: [],
+      next: "result:agendar",
+    },
+    "contato-outro-produto": {
+      id: "contato-outro-produto",
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: CONTATO_HELPER,
+      kind: "contact",
+      options: [],
+      next: "result:outro-produto",
+    },
+    "contato-extracao": {
+      id: "contato-extracao",
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: CONTATO_HELPER,
+      kind: "contact",
+      options: [],
+      next: "result:ferramenta-extracao",
     },
   },
   results: {
@@ -162,13 +189,14 @@ export const formacaoFlow: QualificationFlow = {
     },
     investimento: {
       id: "investimento",
-      question: "Quanto você tem disponível pra investir agora?",
+      question: "Quanto você tem disponível pra investir na sua formação agora?",
       options: [
         { label: "Nada, não consigo investir agora", next: "contato-gratuito" },
         { label: "Até R$500", next: "contato-low-ticket" },
         { label: "De R$500 a R$3.000", next: "contato-low-ticket" },
         { label: "De R$3.000 a R$5.000", next: "contato-reuniao" },
         { label: "De R$5.000 a R$10.000", next: "contato-reuniao" },
+        { label: "De R$10.000 a R$20.000", next: "contato-reuniao" },
         {
           label: "O necessário pra resolver meu problema e ter resultado",
           next: "contato-reuniao",
@@ -178,23 +206,23 @@ export const formacaoFlow: QualificationFlow = {
     "contato-gratuito": {
       id: "contato-gratuito",
       question: "Pra te enviar o material, como podemos te chamar?",
-      helper: "Seu nome e WhatsApp — só isso.",
+      helper: CONTATO_HELPER,
       kind: "contact",
       options: [],
       next: "result:gratuito",
     },
     "contato-low-ticket": {
       id: "contato-low-ticket",
-      question: "Antes de continuar, só precisamos de duas informações.",
-      helper: "Seu nome e WhatsApp — só isso.",
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: CONTATO_HELPER,
       kind: "contact",
       options: [],
       next: "result:low-ticket",
     },
     "contato-reuniao": {
       id: "contato-reuniao",
-      question: "Antes de continuar, só precisamos de duas informações.",
-      helper: "Seu nome e WhatsApp — só isso.",
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: CONTATO_HELPER,
       kind: "contact",
       options: [],
       next: "result:reuniao-vendas",

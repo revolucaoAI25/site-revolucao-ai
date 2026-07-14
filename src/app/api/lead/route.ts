@@ -5,7 +5,7 @@ type LeadPayload = {
   flowId?: string;
   resultKey?: string;
   answers?: { question: string; label: string }[];
-  contact?: { name: string; phone: string } | null;
+  contact?: { name: string; phone: string; email: string } | null;
 };
 
 /**
@@ -54,6 +54,7 @@ export async function POST(req: NextRequest) {
     answers: answers ?? [],
     name: contact?.name ?? null,
     phone: contact?.phone ?? null,
+    email: contact?.email ?? null,
   });
 
   if (error) {
