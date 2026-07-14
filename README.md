@@ -127,11 +127,22 @@ funcionamento do pop-up).
 O botão "Quero assinar" de cada plano leva pro formulário próprio em
 `/lead-extractor/assinar?plano=mensal|anual` (nome, e-mail, CPF/CNPJ e
 WhatsApp). Ao enviar, `src/app/api/asaas-subscription/route.ts` cria (ou
-reaproveita, pelo CPF/CNPJ) o cliente no Asaas e a assinatura recorrente
-mensal — anual com `endDate` de 12 meses (fidelidade), mensal sem data de
-fim — e o navegador é redirecionado pra fatura hospedada no próprio Asaas,
-onde a pessoa escolhe cartão, boleto ou Pix. O site nunca recebe nem
-processa dado de cartão.
+reaproveita, pelo CPF/CNPJ) o cliente no Asaas e, dependendo do plano,
+cria uma cobrança diferente (`src/lib/asaas.ts`):
+
+- **Mensal**: assinatura recorrente de verdade (`/subscriptions`), sem
+  data de fim — cartão, boleto ou Pix, cancela quando quiser.
+- **Anual**: **não** é assinatura recorrente. É uma cobrança única
+  (`/payments`) do valor cheio (R$4.044) parcelada em 12x, travada em
+  `billingType: "CREDIT_CARD"` — o parcelamento no cartão é autorizado de
+  uma vez só pela operadora, então quem assina não consegue escapar do
+  compromisso trocando de cartão ou deixando de pagar uma parcela no meio
+  do caminho (o que aconteceria com boleto/Pix "parcelado", que são cobranças
+  independentes a cada mês).
+
+Em ambos os casos o navegador é redirecionado pra fatura hospedada no
+próprio Asaas pra concluir o pagamento — o site nunca recebe nem processa
+dado de cartão.
 
 Variáveis de ambiente necessárias (local em `.env.local`, e na Vercel em
 Project Settings → Environment Variables):

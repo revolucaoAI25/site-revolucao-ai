@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  ASAAS_PLANOS,
-  createSubscriptionCheckout,
+  PLANOS,
+  createCheckout,
   findOrCreateCustomer,
   type Plano,
 } from "@/lib/asaas";
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
   const cpfCnpj = onlyDigits(body?.cpfCnpj ?? "");
   const telefone = onlyDigits(body?.telefone ?? "");
 
-  if (!plano || !(plano in ASAAS_PLANOS)) {
+  if (!plano || !PLANOS.includes(plano)) {
     return NextResponse.json({ error: "Plano inválido" }, { status: 400 });
   }
   if (
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       cpfCnpj,
       phone: telefone,
     });
-    const checkoutUrl = await createSubscriptionCheckout(plano, customerId);
+    const checkoutUrl = await createCheckout(plano, customerId);
     return NextResponse.json({ checkoutUrl });
   } catch (error) {
     console.error("[asaas-subscription] Falha ao criar assinatura:", error);
