@@ -193,8 +193,8 @@ export const formacaoFlow: QualificationFlow = {
       options: [
         { label: "Nada, não consigo investir agora", next: "contato-gratuito" },
         { label: "Até R$500", next: "contato-low-ticket" },
-        { label: "De R$500 a R$3.000", next: "contato-low-ticket" },
-        { label: "De R$3.000 a R$5.000", next: "contato-reuniao" },
+        { label: "De R$500 a R$2.000", next: "contato-low-ticket" },
+        { label: "De R$2.000 a R$5.000", next: "contato-reuniao" },
         { label: "De R$5.000 a R$10.000", next: "contato-reuniao" },
         { label: "De R$10.000 a R$20.000", next: "contato-reuniao" },
         {
@@ -205,8 +205,8 @@ export const formacaoFlow: QualificationFlow = {
     },
     "contato-gratuito": {
       id: "contato-gratuito",
-      question: "Pra te enviar o material, como podemos te chamar?",
-      helper: CONTATO_HELPER,
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: "Preparamos um material gratuito pra te enviar — só seu nome, e-mail e WhatsApp.",
       kind: "contact",
       options: [],
       next: "result:gratuito",
