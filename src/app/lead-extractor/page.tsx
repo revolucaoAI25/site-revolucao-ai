@@ -10,8 +10,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { PandaVideoEmbed } from "@/components/lead-extractor/PandaVideoEmbed";
 import { ROICalculator } from "@/components/lead-extractor/ROICalculator";
 import {
-  WHATSAPP_LINK,
-  WHATSAPP_NUMBER_DISPLAY,
+  LEAD_EXTRACTOR_WHATSAPP_LINK,
+  LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY,
   EMAIL,
   LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK,
   LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK,
@@ -200,6 +200,11 @@ const extras = [
     title: "Busca em qualquer país",
     description:
       "O Google Maps busca negócios fora do Brasil também — a busca por CNPJ é exclusiva para empresas brasileiras.",
+  },
+  {
+    title: "Guia completo + suporte por e-mail",
+    description:
+      "Todo assinante recebe um guia passo a passo de como usar a ferramenta, e pode contar com suporte por e-mail sempre que precisar.",
   },
 ];
 
@@ -462,9 +467,10 @@ export default function LeadExtractor() {
                 </li>
                 <li className="flex gap-3 text-base text-muted leading-relaxed">
                   <span className="text-accent shrink-0">—</span>
-                  Enriquecimento automático: cruza cada empresa com o Google
-                  Maps pra completar telefone, site e avaliações que não
-                  vieram da Receita, sem sobrescrever nada.
+                  Ative o enriquecimento com um toggle: cruza cada empresa
+                  com o Google Maps pra completar telefone, site e
+                  avaliações que não vieram da Receita, sem sobrescrever
+                  nada.
                 </li>
               </ul>
             </Reveal>
@@ -555,7 +561,7 @@ export default function LeadExtractor() {
               Os detalhes que fazem diferença no dia a dia.
             </SectionTitle>
           </Reveal>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {extras.map((extra, index) => (
               <Reveal
                 key={extra.title}
@@ -627,10 +633,10 @@ export default function LeadExtractor() {
               nome numa lista.
             </SectionTitle>
             <p className="text-muted leading-relaxed mt-4">
-              Toda busca cruza automaticamente os dados oficiais da Receita
-              Federal com o perfil real da empresa no Google Maps — sem
-              nenhuma configuração extra. O resultado é um lead mais
-              completo, com mais de uma forma de chegar até ele.
+              Toda busca por CNPJ pode ser enriquecida com o perfil real da
+              empresa no Google Maps — é só ativar o toggle. O resultado é
+              um lead mais completo, com mais de uma forma de chegar até
+              ele.
             </p>
           </Reveal>
           <div className="rounded-3xl border border-accent/30 bg-accent-soft p-8">
@@ -800,7 +806,7 @@ export default function LeadExtractor() {
               e confirma se o Lead Extractor é o caminho certo pra você.
             </p>
             <div className="relative">
-              <CTAButton href={WHATSAPP_LINK} external size="lg">
+              <CTAButton href={LEAD_EXTRACTOR_WHATSAPP_LINK} external size="lg">
                 Falar com a gente
               </CTAButton>
             </div>
@@ -822,6 +828,11 @@ export default function LeadExtractor() {
                   question: "Preciso saber programar ou configurar algo técnico?",
                   answer:
                     "Não. Depois de assinar, você só usa: escolhe o nicho, a região e os filtros — a ferramenta faz o resto.",
+                },
+                {
+                  question: "Preciso ter minha própria chave de API do Google Maps?",
+                  answer:
+                    "Não. A ferramenta já usa um pool de chaves de API próprio — você não precisa criar, configurar nem pagar por nenhuma chave separada.",
                 },
                 {
                   question: "Os planos têm fidelidade?",
@@ -868,8 +879,8 @@ export default function LeadExtractor() {
         <Container className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
           <p>Lead Extractor by Revolução AI</p>
           <div className="flex items-center gap-6">
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">
-              {WHATSAPP_NUMBER_DISPLAY}
+            <a href={LEAD_EXTRACTOR_WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-text transition-colors">
+              {LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY}
             </a>
             <a href={`mailto:${EMAIL}`} className="hover:text-text transition-colors">
               {EMAIL}

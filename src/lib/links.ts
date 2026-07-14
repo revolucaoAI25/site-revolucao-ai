@@ -1,5 +1,12 @@
 export const WHATSAPP_NUMBER_DISPLAY = "+55 31 3157-6084";
 export const WHATSAPP_LINK = "https://wa.me/553131576084";
+
+/**
+ * WhatsApp próprio do Lead Extractor (diferente do WhatsApp geral da
+ * Revolução AI acima) — usado nos CTAs de contato e checkout dessa LP.
+ */
+export const LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY = "+55 31 3157-5625";
+export const LEAD_EXTRACTOR_WHATSAPP_LINK = "https://wa.me/553131575625";
 export const EMAIL = "contato@revolucao-ai.com";
 export const INSTAGRAM_HANDLE = "@revolucao.ai";
 export const INSTAGRAM_LINK = "https://instagram.com/revolucao.ai";
@@ -44,11 +51,12 @@ export const LEAD_EXTRACTOR_LINK = "/lead-extractor";
 
 /**
  * PLACEHOLDER — checkout do Lead Extractor ainda não está sincronizado com
- * o Asaas. Até lá, os botões de assinatura abrem o WhatsApp; trocar pelos
- * links de checkout de cada plano assim que estiverem prontos.
+ * o Asaas. Até lá, os botões de assinatura abrem o WhatsApp próprio do Lead
+ * Extractor; trocar pelos links de checkout de cada plano assim que
+ * estiverem prontos.
  */
-export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = WHATSAPP_LINK;
-export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = WHATSAPP_LINK;
+export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = LEAD_EXTRACTOR_WHATSAPP_LINK;
+export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = LEAD_EXTRACTOR_WHATSAPP_LINK;
 
 /**
  * PLACEHOLDER — ainda não recebemos o link definitivo. Aponta para o
