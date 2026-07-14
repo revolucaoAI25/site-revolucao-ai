@@ -22,6 +22,14 @@ alter table public.leads add column if not exists email text;
 -- /api/lead/schedule) — só se aplica a resultados com agenda embutida.
 alter table public.leads add column if not exists scheduled_at timestamptz;
 
+-- Estágio do lead no painel /admin (kanban) — começa em 'preencheu' ou
+-- 'agendou' automaticamente (evento real), mas pode ser movido à mão no
+-- kanban a qualquer momento (ver /api/admin/records).
+alter table public.leads add column if not exists stage text;
+update public.leads
+  set stage = case when scheduled_at is not null then 'agendou' else 'preencheu' end
+  where stage is null;
+
 create index if not exists leads_flow_id_idx on public.leads (flow_id);
 create index if not exists leads_created_at_idx on public.leads (created_at desc);
 
@@ -47,6 +55,12 @@ create table if not exists public.asaas_checkouts (
   status text not null default 'iniciado',
   confirmed_at timestamptz
 );
+
+-- Mesma ideia do leads.stage acima — estágio no kanban, editável à mão.
+alter table public.asaas_checkouts add column if not exists stage text;
+update public.asaas_checkouts
+  set stage = case when status = 'confirmado' then 'confirmado' else 'iniciou-checkout' end
+  where stage is null;
 
 create index if not exists asaas_checkouts_customer_id_idx
   on public.asaas_checkouts (asaas_customer_id);

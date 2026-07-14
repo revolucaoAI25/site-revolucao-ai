@@ -65,7 +65,11 @@ async function markCheckoutConfirmed(recordId: string) {
 
   const { error } = await supabase
     .from("asaas_checkouts")
-    .update({ status: "confirmado", confirmed_at: new Date().toISOString() })
+    .update({
+      status: "confirmado",
+      confirmed_at: new Date().toISOString(),
+      stage: "confirmado",
+    })
     .eq("id", recordId);
 
   if (error) {

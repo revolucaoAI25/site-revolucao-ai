@@ -33,6 +33,12 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (!user) {
+    // Rotas de API devolvem 401 puro (quem chama é fetch() da própria UI
+    // do admin, não navegação de página) — redirecionar mandaria o HTML
+    // da tela de login como se fosse a resposta da API.
+    if (request.nextUrl.pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+    }
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
@@ -40,5 +46,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/((?!login).*)"],
+  matcher: ["/admin", "/admin/((?!login).*)", "/api/admin/:path*"],
 };

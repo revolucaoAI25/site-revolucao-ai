@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
       name: contact?.name ?? null,
       phone: contact?.phone ?? null,
       email: contact?.email ?? null,
+      stage: "preencheu",
     })
     .select("id")
     .single();

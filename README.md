@@ -204,11 +204,19 @@ formato só):
   detalhamento por resultado do pop-up.
 - **`/admin/kanban`** — cada registro (pop-up ou Lead Extractor) num card,
   organizado em 4 colunas por estágio: preencheu → agendou → iniciou
-  checkout → confirmado. Não é arrastável — o estágio é calculado
-  automaticamente a partir do que já sabemos sobre cada um, não é uma
-  ação manual.
-- **`/admin/tabela`** — tabela detalhada, com busca por nome/e-mail/telefone
-  e filtro por fonte/estágio.
+  checkout → confirmado. O estágio já vem preenchido automaticamente (pelo
+  site, quando confirma um agendamento ou um pagamento), mas dá pra
+  **arrastar um card pra outra coluna** a qualquer momento pra corrigir ou
+  mover à mão — e editar (nome/e-mail/telefone/estágio) ou excluir cada
+  card direto ali.
+- **`/admin/tabela`** — tabela detalhada, com busca por nome/e-mail/telefone,
+  filtro por fonte/estágio, edição por linha, exclusão individual e exclusão
+  em massa (seleciona várias linhas com as caixinhas e clica em "Excluir
+  selecionados").
+
+Toda edição/exclusão passa por `/api/admin/records` (`src/app/api/admin/records/route.ts`),
+que exige sessão válida (verificada de novo ali, além do proxy — rota de
+API não passa pelo layout do admin) antes de tocar no Supabase.
 
 ### Login (Supabase Auth)
 

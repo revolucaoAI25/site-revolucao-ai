@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
   const { error } = await supabase
     .from("leads")
-    .update({ scheduled_at: new Date().toISOString() })
+    .update({ scheduled_at: new Date().toISOString(), stage: "agendou" })
     .eq("id", id);
 
   if (error) {

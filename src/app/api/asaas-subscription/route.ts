@@ -45,6 +45,7 @@ async function registerCheckoutStarted(lead: CheckoutLead): Promise<string | nul
       cpf_cnpj: lead.cpfCnpj,
       telefone: lead.telefone,
       status: "iniciado",
+      stage: "iniciou-checkout",
     })
     .select("id")
     .single();

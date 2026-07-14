@@ -1,44 +1,14 @@
 import "server-only";
 import { getSupabaseServerClient } from "@/lib/supabase-server";
+import {
+  STAGES,
+  type LeadRow,
+  type AsaasCheckoutRow,
+  type Stage,
+  type AdminRecord,
+} from "@/lib/admin-types";
 
-export type LeadRow = {
-  id: string;
-  created_at: string;
-  flow_id: string;
-  result_key: string;
-  answers: { question: string; label: string }[];
-  name: string | null;
-  phone: string | null;
-  email: string | null;
-  scheduled_at: string | null;
-};
-
-export type AsaasCheckoutRow = {
-  id: string;
-  created_at: string;
-  plano: string;
-  nome: string;
-  email: string;
-  cpf_cnpj: string;
-  telefone: string;
-  asaas_customer_id: string | null;
-  status: string;
-  confirmed_at: string | null;
-};
-
-export type Stage = "preencheu" | "agendou" | "iniciou-checkout" | "confirmado";
-
-export type AdminRecord = {
-  id: string;
-  source: "popup" | "lead-extractor";
-  createdAt: string;
-  name: string | null;
-  email: string | null;
-  phone: string | null;
-  detail: string;
-  stage: Stage;
-  raw: LeadRow | AsaasCheckoutRow;
-};
+export { STAGES, type LeadRow, type AsaasCheckoutRow, type Stage, type AdminRecord };
 
 const RESULT_LABELS: Record<string, string> = {
   agendar: "Agentes de IA — Agendar apresentação",
@@ -53,11 +23,21 @@ function leadDetail(row: LeadRow) {
   return RESULT_LABELS[row.result_key] ?? `${row.flow_id} — ${row.result_key}`;
 }
 
+const VALID_STAGES = new Set(STAGES.map((s) => s.stage));
+
+function isStage(value: string | null): value is Stage {
+  return !!value && VALID_STAGES.has(value as Stage);
+}
+
+/** Estágio salvo (editável no kanban) — só deriva do sinal automático em
+ * linhas antigas que ainda não passaram pela migration de backfill. */
 function leadStage(row: LeadRow): Stage {
+  if (isStage(row.stage)) return row.stage;
   return row.scheduled_at ? "agendou" : "preencheu";
 }
 
 function checkoutStage(row: AsaasCheckoutRow): Stage {
+  if (isStage(row.stage)) return row.stage;
   return row.status === "confirmado" ? "confirmado" : "iniciou-checkout";
 }
 
