@@ -50,13 +50,12 @@ export const PRODUTO_LOW_TICKET_LINK =
 export const LEAD_EXTRACTOR_LINK = "/lead-extractor";
 
 /**
- * PLACEHOLDER — checkout do Lead Extractor ainda não está sincronizado com
- * o Asaas. Até lá, os botões de assinatura abrem o WhatsApp próprio do Lead
- * Extractor; trocar pelos links de checkout de cada plano assim que
- * estiverem prontos.
+ * Checkout do Lead Extractor — formulário próprio (nome/e-mail/CPF-CNPJ)
+ * que cria a assinatura direto na API do Asaas e redireciona pra fatura
+ * (cartão, boleto ou Pix), ver src/app/lead-extractor/assinar.
  */
-export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = LEAD_EXTRACTOR_WHATSAPP_LINK;
-export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = LEAD_EXTRACTOR_WHATSAPP_LINK;
+export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = "/lead-extractor/assinar?plano=mensal";
+export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = "/lead-extractor/assinar?plano=anual";
 
 /**
  * PLACEHOLDER — ainda não recebemos o link definitivo. Aponta para o

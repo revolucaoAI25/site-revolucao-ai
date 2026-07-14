@@ -34,8 +34,10 @@ Abra [http://localhost:3000](http://localhost:3000).
   `src/components/lead-extractor/ROICalculator.tsx` (funil estimado +
   faturamento/retorno, com base nos números que o visitante preenche) e
   screenshots reais em `public/lead-extractor/`. Os botões de assinatura
-  (`LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK` / `..._ANUAL_LINK`) ainda são
-  **placeholder** (WhatsApp) até o checkout do Asaas estar pronto.
+  (`LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK` / `..._ANUAL_LINK`) levam pro
+  checkout próprio em `src/app/lead-extractor/assinar/`, que cria a
+  assinatura direto na API do Asaas — ver seção **Checkout do Lead
+  Extractor (Asaas)** abaixo.
 - `src/components/` — componentes compartilhados (Nav, Footer, cards, FAQ, etc.)
 - `src/components/modal/` — pop-up de qualificação (perguntas ramificadas) que
   abre nos CTAs principais
@@ -62,14 +64,12 @@ Abra [http://localhost:3000](http://localhost:3000).
 
 ## Pendências antes de publicar
 
-1. **Links ainda placeholder** em `src/lib/links.ts`, todos apontando pro
+1. **Links ainda placeholder** em `src/lib/links.ts`, apontando pro
    WhatsApp oficial como fallback:
    - `OUTRO_PRODUTO_LINK` (oferta pra quem não fecha o ticket da implementação
-     completa, Agentes de IA);
-   - `LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK` e `..._ANUAL_LINK` (checkout do
-     Asaas dos planos do Lead Extractor, ainda não sincronizado).
+     completa, Agentes de IA).
 
-   Trocar pelas páginas/links definitivos de cada um quando estiverem prontos.
+   Trocar pela página/link definitivo quando estiver pronto.
 2. **`CALENDLY_FORMACAO_LINK`** em `src/lib/links.ts` reutiliza o mesmo link
    do Calendly de Agentes de IA como placeholder (autorizado pelo cliente).
    Trocar pelo link definitivo da reunião de vendas da Formação assim que o
@@ -79,6 +79,9 @@ Abra [http://localhost:3000](http://localhost:3000).
    variável em Project Settings → Environment Variables na Vercel antes do
    deploy de produção (arquivos `.env*` não vão pro Git, então essa etapa é
    manual).
+4. **`ASAAS_API_KEY`** ainda não configurada — ver seção **Checkout do Lead
+   Extractor (Asaas)** abaixo. Sem ela, o formulário de assinatura mostra um
+   aviso pedindo pra falar pelo WhatsApp, sem quebrar o resto do site.
 
 A logo oficial já está integrada (`public/logo.png`, usada em
 `src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel
@@ -118,6 +121,38 @@ da Formação (baixo ticket, reunião) só ficam salvos no Supabase, sem
 encaminhamento pro webhook. Sem essa variável configurada, esse
 encaminhamento simplesmente não acontece (não afeta o Supabase nem o
 funcionamento do pop-up).
+
+## Checkout do Lead Extractor (Asaas)
+
+O botão "Quero assinar" de cada plano leva pro formulário próprio em
+`/lead-extractor/assinar?plano=mensal|anual` (nome, e-mail, CPF/CNPJ e
+WhatsApp). Ao enviar, `src/app/api/asaas-subscription/route.ts` cria (ou
+reaproveita, pelo CPF/CNPJ) o cliente no Asaas e a assinatura recorrente
+mensal — anual com `endDate` de 12 meses (fidelidade), mensal sem data de
+fim — e o navegador é redirecionado pra fatura hospedada no próprio Asaas,
+onde a pessoa escolhe cartão, boleto ou Pix. O site nunca recebe nem
+processa dado de cartão.
+
+Variáveis de ambiente necessárias (local em `.env.local`, e na Vercel em
+Project Settings → Environment Variables):
+
+- `ASAAS_API_KEY` — chave de API da conta Asaas (produção).
+- `ASAAS_ENV` — `production` (padrão, pode deixar de fora) ou `sandbox`
+  pra testar contra o ambiente de testes do Asaas antes de ir com a chave
+  de produção.
+- `ASAAS_WEBHOOK_TOKEN` — opcional; se configurado, `/api/asaas-webhook`
+  passa a exigir esse token no header `asaas-access-token` (configurável
+  no painel do Asaas ao cadastrar o webhook), rejeitando o resto.
+- `ASAAS_WEBHOOK_FORWARD_URL` — opcional; URL do Make.com/Zapier/etc que
+  recebe uma notificação (já com nome/e-mail/telefone do cliente) toda vez
+  que um pagamento é confirmado (`PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED`),
+  pra alguém liberar o acesso manualmente.
+
+Sem `ASAAS_API_KEY` configurada, o formulário mostra um aviso pedindo pra
+chamar no WhatsApp em vez de quebrar — dá pra publicar o resto do site
+antes da chave estar pronta. Falta configurar no painel do Asaas o webhook
+apontando pra `/api/asaas-webhook` (eventos de pagamento) quando o
+`ASAAS_WEBHOOK_FORWARD_URL` estiver em uso.
 
 ## Deploy
 

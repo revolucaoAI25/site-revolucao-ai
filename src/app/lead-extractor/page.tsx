@@ -710,7 +710,6 @@ export default function LeadExtractor() {
               </ul>
               <CTAButton
                 href={LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK}
-                external
                 variant="secondary"
               >
                 Quero assinar
@@ -751,7 +750,7 @@ export default function LeadExtractor() {
                   prospecção além do Maps e do CNPJ.
                 </p>
               </div>
-              <CTAButton href={LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK} external>
+              <CTAButton href={LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK}>
                 Quero assinar
               </CTAButton>
             </Reveal>
