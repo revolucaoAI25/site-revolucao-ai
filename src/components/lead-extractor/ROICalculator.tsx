@@ -23,6 +23,24 @@ function formatBRL(value: number, digits = 0) {
   }).format(value);
 }
 
+function InfoTooltip({ text }: { text: string }) {
+  return (
+    <span className="group/tip relative inline-flex">
+      <button
+        type="button"
+        tabIndex={0}
+        className="flex h-4 w-4 items-center justify-center rounded-full border border-white/20 text-[10px] font-bold leading-none text-muted-2 transition-colors hover:border-white/40 hover:text-text focus:border-white/40 focus:text-text focus:outline-none cursor-help"
+        aria-label={text}
+      >
+        ?
+      </button>
+      <span className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 -translate-x-1/2 rounded-xl border border-white/10 bg-surface-2 p-3 text-xs font-normal normal-case leading-relaxed text-muted opacity-0 shadow-xl transition-opacity duration-150 group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+        {text}
+      </span>
+    </span>
+  );
+}
+
 function Slider({
   label,
   value,
@@ -31,6 +49,7 @@ function Slider({
   max,
   step,
   format,
+  info,
 }: {
   label: string;
   value: number;
@@ -39,12 +58,16 @@ function Slider({
   max: number;
   step: number;
   format: (value: number) => string;
+  info?: string;
 }) {
   const percent = ((value - min) / (max - min)) * 100;
   return (
     <div>
       <div className="flex items-center justify-between mb-2.5">
-        <label className="text-sm font-medium text-muted">{label}</label>
+        <span className="flex items-center gap-1.5">
+          <label className="text-sm font-medium text-muted">{label}</label>
+          {info && <InfoTooltip text={info} />}
+        </span>
         <span className="text-sm font-bold text-accent">{format(value)}</span>
       </div>
       <input
@@ -219,6 +242,7 @@ export function ROICalculator() {
             max={50}
             step={1}
             format={(v) => `${v}%`}
+            info="De cada 100 contatos que responderem, quantos fecham a compra ali mesmo, na própria ligação ou conversa — sem passar por uma reunião separada."
           />
         ) : (
           <>
@@ -230,6 +254,7 @@ export function ROICalculator() {
               max={50}
               step={1}
               format={(v) => `${v}%`}
+              info="De cada 100 contatos que responderem, quantos aceitam marcar uma reunião com você."
             />
             <Slider
               label="Taxa de fechamento"
@@ -239,6 +264,7 @@ export function ROICalculator() {
               max={50}
               step={1}
               format={(v) => `${v}%`}
+              info="De cada 100 reuniões marcadas, quantas realmente viram venda."
             />
           </>
         )}
