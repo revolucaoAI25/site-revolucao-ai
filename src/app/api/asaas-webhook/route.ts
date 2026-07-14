@@ -28,16 +28,45 @@ async function fetchCustomer(customerId: string) {
   }
 }
 
+type CheckoutRecord = {
+  id: string;
+  plano: string;
+  nome: string;
+  email: string;
+  cpf_cnpj: string;
+  telefone: string;
+  status: string;
+};
+
+/** Busca o registro salvo em /api/asaas-subscription no momento do checkout. */
+async function findCheckoutRecord(customerId: string): Promise<CheckoutRecord | null> {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("asaas_checkouts")
+    .select("id, plano, nome, email, cpf_cnpj, telefone, status")
+    .eq("asaas_customer_id", customerId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[asaas-webhook] Falha ao buscar registro no Supabase:", error);
+    return null;
+  }
+  return data;
+}
+
 /** Marca o cliente como confirmado/ativo no Supabase (asaas_checkouts). */
-async function markCheckoutConfirmed(customerId: string) {
+async function markCheckoutConfirmed(recordId: string) {
   const supabase = getSupabaseServerClient();
   if (!supabase) return;
 
   const { error } = await supabase
     .from("asaas_checkouts")
     .update({ status: "confirmado", confirmed_at: new Date().toISOString() })
-    .eq("asaas_customer_id", customerId)
-    .neq("status", "confirmado");
+    .eq("id", recordId);
 
   if (error) {
     console.error("[asaas-webhook] Falha ao atualizar status no Supabase:", error);
@@ -46,16 +75,22 @@ async function markCheckoutConfirmed(customerId: string) {
 
 /**
  * Encaminha a confirmação de pagamento pro webhook do time (Make.com/etc),
- * já enriquecida com nome/e-mail/telefone do cliente, pra quem receber
- * conseguir liberar o acesso sem precisar abrir o painel do Asaas.
+ * com todos os dados do lead que a gente já tem — incluindo o plano
+ * escolhido — pra quem receber conseguir liberar o acesso sem precisar
+ * abrir o painel do Asaas.
  */
-async function forwardPaymentConfirmed(event: string, payment: Record<string, unknown>) {
+async function forwardPaymentConfirmed(
+  event: string,
+  payment: Record<string, unknown>,
+  record: CheckoutRecord | null
+) {
   const forwardUrl = process.env.ASAAS_WEBHOOK_FORWARD_URL;
   if (!forwardUrl) return;
 
-  const customer = payment.customer
-    ? await fetchCustomer(payment.customer as string)
-    : null;
+  // Sem registro no Supabase (ou Supabase não configurado), cai pra buscar
+  // nome/e-mail/telefone direto no Asaas — só não dá pra saber o plano
+  // nesse caso, já que isso não fica salvo lá.
+  const customer = record ?? (await fetchCustomer(payment.customer as string));
 
   try {
     await fetch(forwardUrl, {
@@ -69,14 +104,23 @@ async function forwardPaymentConfirmed(event: string, payment: Record<string, un
           billingType: payment.billingType,
           subscription: payment.subscription,
         },
-        customer: customer
+        lead: record
           ? {
-              name: customer.name,
-              email: customer.email,
-              phone: customer.mobilePhone,
-              cpfCnpj: customer.cpfCnpj,
+              plano: record.plano,
+              nome: record.nome,
+              email: record.email,
+              cpfCnpj: record.cpf_cnpj,
+              telefone: record.telefone,
             }
-          : { id: payment.customer },
+          : customer
+            ? {
+                plano: null,
+                nome: customer.name,
+                email: customer.email,
+                cpfCnpj: customer.cpfCnpj,
+                telefone: customer.mobilePhone,
+              }
+            : { plano: null, asaasCustomerId: payment.customer },
       }),
     });
   } catch (error) {
@@ -97,11 +141,15 @@ export async function POST(req: NextRequest) {
   const event = body?.event as string | undefined;
   const payment = body?.payment as Record<string, unknown> | undefined;
 
-  if (event && RELEVANT_EVENTS.has(event) && payment) {
-    if (payment.customer) {
-      await markCheckoutConfirmed(payment.customer as string);
+  if (event && RELEVANT_EVENTS.has(event) && payment?.customer) {
+    const record = await findCheckoutRecord(payment.customer as string);
+
+    // Idempotência: se já processamos essa confirmação antes (o Asaas pode
+    // reenviar o mesmo evento), não atualiza nem encaminha de novo.
+    if (!record || record.status !== "confirmado") {
+      if (record) await markCheckoutConfirmed(record.id);
+      await forwardPaymentConfirmed(event, payment, record);
     }
-    await forwardPaymentConfirmed(event, payment);
   }
 
   return NextResponse.json({ ok: true });
