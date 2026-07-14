@@ -142,6 +142,16 @@ const fluxo: { icon: keyof typeof fluxoIcons; title: string; description: string
   },
 ];
 
+const planoFeatures = [
+  "Busca ilimitada no Google Maps (telefone, site, avaliações)",
+  "Busca ilimitada por CNPJ na base da Receita Federal",
+  "Filtros avançados por nicho, localização, porte e CNAE",
+  "Automações agendadas com deduplicação automática",
+  "Exportação automática pro Google Sheets + Excel/CSV",
+  "Enriquecimento cruzado entre CNPJ e Google Maps",
+  "Histórico completo de buscas",
+];
+
 const extras = [
   {
     title: "Histórico completo de buscas",
@@ -271,7 +281,7 @@ export default function LeadExtractor() {
           <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
             <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-accent/40 via-accent/20 to-accent/40" />
             {fluxo.map((step, index) => (
-              <Reveal key={step.title} delay={index * 80} className="relative">
+              <Reveal key={step.title} delay={index * 80} className="relative flex flex-col items-center text-center">
                 <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-bg text-accent shadow-[0_0_20px_rgba(0,200,83,0.25)] mb-5">
                   <svg
                     width="26"
@@ -293,23 +303,6 @@ export default function LeadExtractor() {
                 <p className="text-muted leading-relaxed text-[15px]">
                   {step.description}
                 </p>
-                {index < fluxo.length - 1 && (
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="hidden lg:block absolute top-6 -right-[27px] text-accent/50"
-                  >
-                    <path
-                      d="M5 12h14M13 6l6 6-6 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
               </Reveal>
             ))}
           </div>
@@ -627,14 +620,10 @@ export default function LeadExtractor() {
               </p>
               <p className="text-muted text-sm mb-8">Sem fidelidade.</p>
               <ul className="space-y-3 mb-8 flex-1">
-                {[
-                  "Google Maps + Busca por CNPJ",
-                  "Automações e exportação pro Sheets",
-                  "Histórico e enriquecimento cruzado",
-                ].map((item) => (
+                {planoFeatures.map((item) => (
                   <li key={item} className="flex gap-3 text-muted text-sm leading-relaxed">
                     <span className="text-accent shrink-0">—</span>
-                    {item}
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -664,14 +653,10 @@ export default function LeadExtractor() {
                 R$4.044/ano, faturado em 12x.
               </p>
               <ul className="space-y-3 mb-8 flex-1">
-                {[
-                  "Google Maps + Busca por CNPJ",
-                  "Automações e exportação pro Sheets",
-                  "Histórico e enriquecimento cruzado",
-                ].map((item) => (
+                {planoFeatures.map((item) => (
                   <li key={item} className="flex gap-3 text-muted text-sm leading-relaxed">
                     <span className="text-accent shrink-0">—</span>
-                    {item}
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
