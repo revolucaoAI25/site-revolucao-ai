@@ -733,7 +733,7 @@ export default function LeadExtractor() {
               <p className="text-muted text-sm mb-8">
                 R$4.044/ano, faturado em 12x.
               </p>
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-3 mb-5 flex-1">
                 {planoFeatures.map((item) => (
                   <li key={item} className="flex gap-3 text-muted text-sm leading-relaxed">
                     <span className="text-accent shrink-0">—</span>
@@ -741,6 +741,16 @@ export default function LeadExtractor() {
                   </li>
                 ))}
               </ul>
+              <div className="rounded-2xl border border-accent/20 bg-accent/5 px-4 py-3 mb-8">
+                <p className="text-xs font-bold uppercase tracking-widest text-accent mb-1">
+                  Bônus do plano anual
+                </p>
+                <p className="text-sm text-muted leading-relaxed">
+                  Extração de leads também via Instagram — seguidores ou
+                  comentaristas de perfis públicos, mais uma fonte de
+                  prospecção além do Maps e do CNPJ.
+                </p>
+              </div>
               <CTAButton href={LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK} external>
                 Quero assinar
               </CTAButton>
@@ -832,7 +842,7 @@ export default function LeadExtractor() {
                 {
                   question: "Preciso ter minha própria chave de API do Google Maps?",
                   answer:
-                    "Não. A ferramenta já usa um pool de chaves de API próprio — você não precisa criar, configurar nem pagar por nenhuma chave separada.",
+                    "Sim, a busca por Google Maps usa a API do Google e depende de uma chave sua (gratuita de criar). A ferramenta já vem com um sistema automático que rotaciona o uso entre suas chaves, mantendo tudo dentro do limite gratuito da API e evitando gastos extras.",
                 },
                 {
                   question: "Os planos têm fidelidade?",
