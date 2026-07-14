@@ -762,46 +762,6 @@ export default function LeadExtractor() {
           </p>
         </Section>
 
-        {/* Some com IA */}
-        <Section divider className="bg-tint">
-          <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-            <div>
-              <Eyebrow>Quer ir além da prospecção?</Eyebrow>
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-3 max-w-xl">
-                O agente de IA já dispara a primeira mensagem pra esses leads
-                por você.
-              </h3>
-              <p className="text-muted leading-relaxed max-w-xl">
-                Se você contratar a implementação completa de agentes de IA,
-                a planilha alimentada pelo Lead Extractor pode ser monitorada
-                pra disparar mensagens automáticas assim que novos leads
-                chegam.
-              </p>
-            </div>
-            <Link
-              href="/agentes-de-ia"
-              className="group inline-flex items-center gap-2 font-semibold text-accent shrink-0"
-            >
-              Conhecer o agente de IA
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="transition-transform duration-200 group-hover:translate-x-1"
-              >
-                <path
-                  d="M5 12h14M13 6l6 6-6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          </Reveal>
-        </Section>
-
         {/* Fale com a gente antes de comprar */}
         <Section divider>
           <Reveal
@@ -866,6 +826,46 @@ export default function LeadExtractor() {
                 },
               ]}
             />
+          </Reveal>
+        </Section>
+
+        {/* Some com IA */}
+        <Section divider className="bg-tint">
+          <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+            <div>
+              <Eyebrow>Quer ir além da prospecção?</Eyebrow>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-3 max-w-xl">
+                O agente de IA já dispara a primeira mensagem pra esses leads
+                por você.
+              </h3>
+              <p className="text-muted leading-relaxed max-w-xl">
+                Se você contratar a implementação completa de agentes de IA,
+                a planilha alimentada pelo Lead Extractor pode ser monitorada
+                pra disparar mensagens automáticas assim que novos leads
+                chegam.
+              </p>
+            </div>
+            <Link
+              href="/agentes-de-ia"
+              className="group inline-flex items-center gap-2 font-semibold text-accent shrink-0"
+            >
+              Conhecer o agente de IA
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              >
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
           </Reveal>
         </Section>
 
