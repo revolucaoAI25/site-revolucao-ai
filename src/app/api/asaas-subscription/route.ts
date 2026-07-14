@@ -5,6 +5,7 @@ import {
   findOrCreateCustomer,
   type Plano,
 } from "@/lib/asaas";
+import { getSupabaseServerClient } from "@/lib/supabase-server";
 
 type Payload = {
   plano?: string;
@@ -14,8 +15,60 @@ type Payload = {
   telefone?: string;
 };
 
+type CheckoutLead = {
+  plano: Plano;
+  nome: string;
+  email: string;
+  cpfCnpj: string;
+  telefone: string;
+};
+
 function onlyDigits(value: string) {
   return value.replace(/\D/g, "");
+}
+
+/**
+ * Registra a tentativa de assinatura assim que a pessoa envia o
+ * formulário — antes mesmo de saber se ela vai concluir o pagamento —
+ * pra não perder o lead caso ela abandone o checkout do Asaas.
+ */
+async function registerCheckoutStarted(lead: CheckoutLead): Promise<string | null> {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("asaas_checkouts")
+    .insert({
+      plano: lead.plano,
+      nome: lead.nome,
+      email: lead.email,
+      cpf_cnpj: lead.cpfCnpj,
+      telefone: lead.telefone,
+      status: "iniciado",
+    })
+    .select("id")
+    .single();
+
+  if (error) {
+    console.error("[asaas-subscription] Falha ao salvar no Supabase:", error);
+    return null;
+  }
+  return data.id as string;
+}
+
+/** Dispara e esquece — falha aqui não deve travar o checkout. */
+async function forwardCheckoutStarted(lead: CheckoutLead) {
+  const url = process.env.ASAAS_CHECKOUT_STARTED_WEBHOOK_URL;
+  if (!url) return;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: "CHECKOUT_STARTED", ...lead }),
+    });
+  } catch (error) {
+    console.error("[asaas-subscription] Falha ao encaminhar webhook:", error);
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -51,6 +104,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const lead: CheckoutLead = { plano, nome, email, cpfCnpj, telefone };
+  const checkoutRecordId = await registerCheckoutStarted(lead);
+  await forwardCheckoutStarted(lead);
+
   try {
     const customerId = await findOrCreateCustomer({
       name: nome,
@@ -58,7 +115,16 @@ export async function POST(req: NextRequest) {
       cpfCnpj,
       phone: telefone,
     });
-    const checkoutUrl = await createCheckout(plano, customerId);
+    const checkoutUrl = await createCheckout(plano, customerId, req.nextUrl.origin);
+
+    const supabase = getSupabaseServerClient();
+    if (supabase && checkoutRecordId) {
+      await supabase
+        .from("asaas_checkouts")
+        .update({ asaas_customer_id: customerId })
+        .eq("id", checkoutRecordId);
+    }
+
     return NextResponse.json({ checkoutUrl });
   } catch (error) {
     console.error("[asaas-subscription] Falha ao criar assinatura:", error);

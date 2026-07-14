@@ -81,7 +81,10 @@ export function AssinarForm() {
           nome: nome.trim(),
           email: email.trim(),
           cpfCnpj: docDigits,
-          telefone: `55${phoneDigits}`,
+          // Asaas espera o telefone no formato nacional (DDD + número),
+          // sem o código do país — diferente do link do WhatsApp, que
+          // precisa do 55 na frente.
+          telefone: phoneDigits,
         }),
       });
       const data = await res.json();

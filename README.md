@@ -126,23 +126,38 @@ funcionamento do pop-up).
 
 O botão "Quero assinar" de cada plano leva pro formulário próprio em
 `/lead-extractor/assinar?plano=mensal|anual` (nome, e-mail, CPF/CNPJ e
-WhatsApp). Ao enviar, `src/app/api/asaas-subscription/route.ts` cria (ou
-reaproveita, pelo CPF/CNPJ) o cliente no Asaas e, dependendo do plano,
-cria uma cobrança diferente (`src/lib/asaas.ts`):
+WhatsApp — o telefone vai pro Asaas **sem** o 55 do país, só DDD + número;
+foi um bug já corrigido, o Asaas rejeita o número com o código do país
+junto). Ao enviar, `src/app/api/asaas-subscription/route.ts` cria (ou
+reaproveita, pelo CPF/CNPJ) o cliente no Asaas e cria o checkout
+(`/v3/checkouts`, `src/lib/asaas.ts`) — dependendo do plano:
 
-- **Mensal**: assinatura recorrente de verdade (`/subscriptions`), sem
-  data de fim — cartão, boleto ou Pix, cancela quando quiser.
-- **Anual**: **não** é assinatura recorrente. É uma cobrança única
-  (`/payments`) do valor cheio (R$4.044) parcelada em 12x, travada em
-  `billingType: "CREDIT_CARD"` — o parcelamento no cartão é autorizado de
+- **Mensal**: `chargeTypes: ["RECURRENT"]` — assinatura recorrente de
+  verdade, sem data de fim — cartão, boleto ou Pix, cancela quando quiser.
+- **Anual**: `chargeTypes: ["INSTALLMENT"]` — cobrança única do valor
+  cheio (R$4.044) parcelada em até 12x, travada em
+  `billingTypes: ["CREDIT_CARD"]`. O parcelamento no cartão é autorizado de
   uma vez só pela operadora, então quem assina não consegue escapar do
   compromisso trocando de cartão ou deixando de pagar uma parcela no meio
   do caminho (o que aconteceria com boleto/Pix "parcelado", que são cobranças
   independentes a cada mês).
 
-Em ambos os casos o navegador é redirecionado pra fatura hospedada no
+Em ambos os casos o navegador é redirecionado pro checkout hospedado no
 próprio Asaas pra concluir o pagamento — o site nunca recebe nem processa
-dado de cartão.
+dado de cartão. Assim que a pessoa termina o checkout, o próprio Asaas
+(via `callback.successUrl`) redireciona de volta pra
+`/lead-extractor/assinar/obrigado`, avisando que o time entra em contato
+nas próximas horas com os acessos.
+
+### Registro do lead e ativação (Supabase)
+
+Assim que o formulário é enviado — antes mesmo de saber se a pessoa vai
+concluir o pagamento — os dados já são salvos na tabela
+`public.asaas_checkouts` (`supabase/schema.sql`), com `status: 'iniciado'`,
+pra não perder o lead se ela abandonar o checkout. Quando o webhook do
+Asaas confirma o pagamento (`PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED`), o
+`/api/asaas-webhook` atualiza esse mesmo registro pra `status: 'confirmado'`
+— é o "cliente ativo".
 
 Variáveis de ambiente necessárias (local em `.env.local`, e na Vercel em
 Project Settings → Environment Variables):
@@ -151,19 +166,23 @@ Project Settings → Environment Variables):
 - `ASAAS_ENV` — `production` (padrão, pode deixar de fora) ou `sandbox`
   pra testar contra o ambiente de testes do Asaas antes de ir com a chave
   de produção.
+- `ASAAS_CHECKOUT_STARTED_WEBHOOK_URL` — opcional; URL do Make.com/Zapier/etc
+  que recebe uma notificação assim que a pessoa envia o formulário
+  (nome/e-mail/CPF-CNPJ/telefone/plano), antes mesmo de ir pro pagamento.
 - `ASAAS_WEBHOOK_TOKEN` — opcional; se configurado, `/api/asaas-webhook`
   passa a exigir esse token no header `asaas-access-token` (configurável
   no painel do Asaas ao cadastrar o webhook), rejeitando o resto.
 - `ASAAS_WEBHOOK_FORWARD_URL` — opcional; URL do Make.com/Zapier/etc que
   recebe uma notificação (já com nome/e-mail/telefone do cliente) toda vez
-  que um pagamento é confirmado (`PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED`),
-  pra alguém liberar o acesso manualmente.
+  que um pagamento é confirmado, pra alguém liberar o acesso manualmente
+  (além da atualização automática no Supabase acima).
 
 Sem `ASAAS_API_KEY` configurada, o formulário mostra um aviso pedindo pra
 chamar no WhatsApp em vez de quebrar — dá pra publicar o resto do site
-antes da chave estar pronta. Falta configurar no painel do Asaas o webhook
-apontando pra `/api/asaas-webhook` (eventos de pagamento) quando o
-`ASAAS_WEBHOOK_FORWARD_URL` estiver em uso.
+antes da chave estar pronta. Sem `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY`
+configuradas, o registro do lead simplesmente não acontece (não quebra o
+checkout). Falta configurar no painel do Asaas o webhook apontando pra
+`/api/asaas-webhook` (eventos de pagamento).
 
 ## Deploy
 

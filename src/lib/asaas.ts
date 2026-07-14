@@ -10,17 +10,24 @@ const MENSAL_VALUE = 497.9;
 const ANUAL_VALUE_MES = 337;
 const ANUAL_PARCELAS = 12;
 
-function baseUrl() {
-  return process.env.ASAAS_ENV === "sandbox"
-    ? "https://api-sandbox.asaas.com/v3"
-    : "https://api.asaas.com/v3";
+function isSandbox() {
+  return process.env.ASAAS_ENV === "sandbox";
+}
+
+function apiBaseUrl() {
+  return isSandbox() ? "https://api-sandbox.asaas.com/v3" : "https://api.asaas.com/v3";
+}
+
+/** Domínio (não-API) onde a fatura/checkout hospedado do Asaas é exibido. */
+function checkoutBaseUrl() {
+  return isSandbox() ? "https://sandbox.asaas.com" : "https://asaas.com";
 }
 
 async function asaasFetch(path: string, init: RequestInit = {}) {
   const apiKey = process.env.ASAAS_API_KEY;
   if (!apiKey) throw new Error("ASAAS_API_KEY não configurada");
 
-  const res = await fetch(`${baseUrl()}${path}`, {
+  const res = await fetch(`${apiBaseUrl()}${path}`, {
     ...init,
     headers: {
       "Content-Type": "application/json",
@@ -72,70 +79,77 @@ export async function findOrCreateCustomer(input: {
 }
 
 /**
- * Plano mensal: assinatura recorrente de verdade, sem fidelidade — cada
- * mês é uma cobrança independente (cartão, boleto ou Pix, à escolha de
- * quem assina) e cancela quando quiser.
+ * Cria o checkout hospedado no Asaas (`/v3/checkouts`) e devolve a URL final
+ * pra onde o navegador é redirecionado. Esse é o produto do Asaas que
+ * suporta `callback.successUrl` — assim que a pessoa termina de fato a
+ * cobrança, o próprio Asaas manda ela de volta pra uma página nossa, sem
+ * a gente precisar ficar só no webhook assíncrono pra dar esse retorno.
+ *
+ * - **Mensal**: `chargeTypes: ["RECURRENT"]` — assinatura recorrente de
+ *   verdade (cartão, boleto ou Pix), sem data de fim, cancela quando
+ *   quiser.
+ * - **Anual**: `chargeTypes: ["INSTALLMENT"]` — cobrança única do valor
+ *   cheio parcelada em até 12x, travada em `billingTypes: ["CREDIT_CARD"]`.
+ *   O parcelamento no cartão é autorizado de uma vez só pela operadora, então
+ *   quem assina não consegue escapar do compromisso trocando de cartão ou
+ *   deixando de pagar uma parcela no meio do caminho (risco real de boleto/Pix
+ *   "parcelado", que são cobranças independentes a cada mês).
  */
-async function createMensalCheckout(customerId: string): Promise<string> {
-  const subscription = await asaasFetch("/subscriptions", {
+export async function createCheckout(
+  plano: Plano,
+  customerId: string,
+  origin: string
+): Promise<string> {
+  const callback = {
+    successUrl: `${origin}/lead-extractor/assinar/obrigado?plano=${plano}`,
+    cancelUrl: `${origin}/lead-extractor/assinar?plano=${plano}`,
+    expiredUrl: `${origin}/lead-extractor/assinar?plano=${plano}`,
+  };
+
+  const body =
+    plano === "anual"
+      ? {
+          customer: customerId,
+          billingTypes: ["CREDIT_CARD"],
+          chargeTypes: ["INSTALLMENT"],
+          minutesToExpire: 1440,
+          installment: { maxInstallmentCount: ANUAL_PARCELAS },
+          callback,
+          items: [
+            {
+              name: "Lead Extractor — Plano Anual",
+              description: `Parcelado em até ${ANUAL_PARCELAS}x de ${ANUAL_VALUE_MES.toFixed(2)}`,
+              quantity: 1,
+              value: ANUAL_VALUE_MES * ANUAL_PARCELAS,
+            },
+          ],
+        }
+      : {
+          customer: customerId,
+          billingTypes: ["CREDIT_CARD", "BOLETO", "PIX"],
+          chargeTypes: ["RECURRENT"],
+          minutesToExpire: 1440,
+          callback,
+          items: [
+            {
+              name: "Lead Extractor — Plano Mensal",
+              quantity: 1,
+              value: MENSAL_VALUE,
+            },
+          ],
+          subscription: {
+            cycle: "MONTHLY",
+            nextDueDate: isoDatePlusDays(1),
+          },
+        };
+
+  const checkout = await asaasFetch("/checkouts", {
     method: "POST",
-    body: JSON.stringify({
-      customer: customerId,
-      billingType: "UNDEFINED",
-      value: MENSAL_VALUE,
-      cycle: "MONTHLY",
-      nextDueDate: isoDatePlusDays(1),
-      description: "Lead Extractor — Plano Mensal",
-    }),
+    body: JSON.stringify(body),
   });
 
-  const payments = await asaasFetch(`/payments?subscription=${subscription.id}`);
-  const invoiceUrl = payments?.data?.[0]?.invoiceUrl;
-  if (!invoiceUrl) {
-    throw new Error("Não foi possível gerar o link de pagamento da assinatura");
+  if (!checkout?.id) {
+    throw new Error("Não foi possível gerar o link de pagamento");
   }
-  return invoiceUrl as string;
-}
-
-/**
- * Plano anual: NÃO é assinatura recorrente — é uma cobrança única do valor
- * cheio (R$4.044), parcelada em 12x no cartão de crédito. O parcelamento no
- * cartão é autorizado de uma vez só pela operadora (é a própria operadora
- * que divide as parcelas na fatura de quem assinou); diferente de uma
- * assinatura mês a mês, a pessoa não consegue simplesmente trocar de
- * cartão ou deixar de pagar uma parcela no meio do caminho pra escapar do
- * compromisso. Por isso o billingType é travado em CREDIT_CARD (sem
- * boleto/Pix parcelado, que aí sim teria esse risco).
- */
-async function createAnualCheckout(customerId: string): Promise<string> {
-  const totalValue = ANUAL_VALUE_MES * ANUAL_PARCELAS;
-
-  const payment = await asaasFetch("/payments", {
-    method: "POST",
-    body: JSON.stringify({
-      customer: customerId,
-      billingType: "CREDIT_CARD",
-      totalValue,
-      installmentCount: ANUAL_PARCELAS,
-      dueDate: isoDatePlusDays(1),
-      description: `Lead Extractor — Plano Anual (${ANUAL_PARCELAS}x de ${ANUAL_VALUE_MES.toFixed(2)})`,
-    }),
-  });
-
-  const invoiceUrl = payment?.invoiceUrl;
-  if (!invoiceUrl) {
-    throw new Error("Não foi possível gerar o link de pagamento parcelado");
-  }
-  return invoiceUrl as string;
-}
-
-/**
- * Cria a cobrança no Asaas e retorna a URL da fatura (invoiceUrl) — é pra
- * lá que o navegador é redirecionado, pra concluir o pagamento direto no
- * Asaas, sem a gente tocar em dado de cartão.
- */
-export async function createCheckout(plano: Plano, customerId: string): Promise<string> {
-  return plano === "anual"
-    ? createAnualCheckout(customerId)
-    : createMensalCheckout(customerId);
+  return `${checkoutBaseUrl()}/checkoutSession/show?id=${checkout.id}`;
 }

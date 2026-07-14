@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getSupabaseServerClient } from "@/lib/supabase-server";
 
 /**
  * Eventos que indicam que o pagamento entrou de fato — é o gatilho pra
@@ -24,6 +25,22 @@ async function fetchCustomer(customerId: string) {
     return await res.json();
   } catch {
     return null;
+  }
+}
+
+/** Marca o cliente como confirmado/ativo no Supabase (asaas_checkouts). */
+async function markCheckoutConfirmed(customerId: string) {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return;
+
+  const { error } = await supabase
+    .from("asaas_checkouts")
+    .update({ status: "confirmado", confirmed_at: new Date().toISOString() })
+    .eq("asaas_customer_id", customerId)
+    .neq("status", "confirmado");
+
+  if (error) {
+    console.error("[asaas-webhook] Falha ao atualizar status no Supabase:", error);
   }
 }
 
@@ -81,6 +98,9 @@ export async function POST(req: NextRequest) {
   const payment = body?.payment as Record<string, unknown> | undefined;
 
   if (event && RELEVANT_EVENTS.has(event) && payment) {
+    if (payment.customer) {
+      await markCheckoutConfirmed(payment.customer as string);
+    }
     await forwardPaymentConfirmed(event, payment);
   }
 
