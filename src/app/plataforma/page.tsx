@@ -5,8 +5,12 @@ import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { CaseCard } from "@/components/ui/CaseCard";
+import { ClientLogos } from "@/components/ui/ClientLogos";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
+import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/FeatureIcon";
+import { ScreenshotPlaceholder } from "@/components/plataforma/ScreenshotPlaceholder";
+import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
 import { WHATSAPP_LINK, WHATSAPP_NUMBER_DISPLAY, EMAIL } from "@/lib/links";
 import { PLANO_INFO, TAXA_AGENTE_PRONTO, type Plano } from "@/lib/asaas-plataforma";
 
@@ -16,76 +20,138 @@ export const metadata: Metadata = {
     "Acesso completo à Chatflux, a plataforma por trás dos resultados do Revolução AI, com minicurso de 1h pra você construir seu próprio agente de IA para WhatsApp.",
 };
 
-const features: { title: string; description: string }[] = [
+const flowSteps: { icon: FeatureIconName; title: string; description: string }[] = [
   {
-    title: "Conversa natural e assertiva",
-    description:
-      "Seu agente segue o script de vendas com precisão — sempre, com todos os leads, sem as variações que acontecem em uma equipe humana. Entende texto, áudio e imagem, e conduz a conversa com naturalidade.",
+    icon: "chat",
+    title: "Lead chega",
+    description: "Pelo WhatsApp ou Instagram, a qualquer hora do dia.",
   },
   {
-    title: "Base de conhecimento (Perguntas e Respostas)",
-    description:
-      "Alimente seu agente com uma base específica do seu negócio — da mais simples à mais refinada, incluindo como quebrar objeções comuns. Quanto mais completa, mais preciso e natural o atendimento.",
+    icon: "sparkles",
+    title: "Agente qualifica",
+    description: "Com o script e a base de conhecimento que você configurou.",
   },
   {
-    title: "Follow-up automático e inteligente",
-    description:
-      "Configure sequências de mensagens pra recuperar leads que pararam de responder — 30 minutos, 1 hora, 1 dia depois, no formato que fizer sentido pro seu funil. Para sozinho quando o objetivo já foi cumprido.",
+    icon: "calendar",
+    title: "Agenda ou insiste",
+    description: "Marca reunião sozinho, ou faz follow-up no momento certo.",
   },
   {
-    title: "Lembretes automáticos",
-    description:
-      "Configure lembretes que reforçam compromissos já agendados, reduzindo faltas e aumentando o comparecimento.",
+    icon: "kanban",
+    title: "Você acompanha",
+    description: "No Kanban e no dashboard, assumindo a conversa quando quiser.",
+  },
+];
+
+type FeatureItem = { icon: FeatureIconName; title: string; description: string };
+
+const featureBlocks: {
+  eyebrow: string;
+  title: string;
+  bullets: FeatureItem[];
+  placeholder: string;
+}[] = [
+  {
+    eyebrow: "Conversa que qualifica sozinha",
+    title: "Seu agente conduz a conversa como o melhor vendedor da equipe.",
+    bullets: [
+      {
+        icon: "chat",
+        title: "Conversa natural e assertiva",
+        description:
+          "Segue o script de vendas com precisão — sempre, com todos os leads, sem as variações que acontecem numa equipe humana. Entende texto, áudio e imagem.",
+      },
+      {
+        icon: "book",
+        title: "Base de conhecimento (Perguntas e Respostas)",
+        description:
+          "Alimente com perguntas e respostas específicas do seu negócio, incluindo como quebrar as objeções mais comuns dos seus leads.",
+      },
+      {
+        icon: "sliders",
+        title: "Instruções customizadas e alta precisão",
+        description:
+          "Configure exatamente como ele deve se comportar, com instruções detalhadas — não é um bot genérico com respostas padronizadas.",
+      },
+    ],
+    placeholder: "Chat do agente no WhatsApp",
   },
   {
-    title: "Agendamento integrado",
-    description:
-      "Conecte seu agente à sua agenda (Google Agenda) e deixe que ele mesmo agende reuniões e consultas direto na conversa, sem intervenção manual.",
+    eyebrow: "Follow-up, lembretes e agendamento",
+    title: "Ele não deixa o lead esfriar, e agenda sozinho.",
+    bullets: [
+      {
+        icon: "repeat",
+        title: "Follow-up automático e inteligente",
+        description:
+          "Sequências de mensagens pra recuperar quem parou de responder — 30 minutos, 1 hora, 1 dia depois. Para sozinho quando o objetivo já foi cumprido.",
+      },
+      {
+        icon: "bell",
+        title: "Lembretes automáticos",
+        description: "Reforça compromissos já agendados, reduzindo faltas e aumentando o comparecimento.",
+      },
+      {
+        icon: "calendar",
+        title: "Agendamento integrado",
+        description:
+          "Conectado à sua agenda (Google Agenda), agenda reuniões e consultas direto na conversa, sem intervenção manual.",
+      },
+      {
+        icon: "clock",
+        title: "Horário de funcionamento configurável",
+        description: "Define exatamente quando ele deve atuar — dias e horários de atendimento.",
+      },
+    ],
+    placeholder: "Configuração de follow-up e agenda",
   },
   {
-    title: "Horário de funcionamento configurável",
-    description:
-      "Defina exatamente quando seu agente deve atuar — dias e horários de atendimento — e ele respeita esse limite automaticamente.",
+    eyebrow: "Acompanhamento e controle total",
+    title: "Você enxerga tudo, e assume a conversa quando quiser.",
+    bullets: [
+      {
+        icon: "kanban",
+        title: "Kanban integrado com automações",
+        description:
+          "Automações nos dois sentidos: ações na conversa movimentam o lead entre etapas, e movimentações no Kanban disparam ações na própria IA.",
+      },
+      {
+        icon: "dashboard",
+        title: "Dashboard de métricas",
+        description:
+          "Conversas iniciadas, agendamentos realizados, taxa de resposta — tudo em tempo real, com filtros por período.",
+      },
+      {
+        icon: "pause",
+        title: "Pausa automática e controle da conversa",
+        description:
+          "Pausa sozinho quando um humano entra na conversa. Você sempre pode assumir, pausar ou reativar a qualquer momento.",
+      },
+    ],
+    placeholder: "Kanban e dashboard de métricas",
   },
+];
+
+const compactFeatures: FeatureItem[] = [
   {
-    title: "Pausa automática e controle da conversa",
-    description:
-      "O agente pausa sozinho quando um humano entra na conversa ou identifica frases que pedem atendimento manual. Você sempre pode assumir, pausar ou reativar a IA a qualquer momento.",
-  },
-  {
-    title: "Kanban integrado com automações",
-    description:
-      "Acompanhe seus leads num painel estilo CRM, com automações nos dois sentidos: ações na conversa movimentam o lead entre etapas, e movimentações no Kanban disparam ações na própria IA.",
-  },
-  {
+    icon: "users",
     title: "Multiagentes",
-    description:
-      "Crie mais de um agente na mesma conta — pra diferentes produtos, funis ou frentes do seu negócio, cada um com seu próprio comportamento e base de conhecimento.",
+    description: "Crie mais de um agente na mesma conta, cada um com seu comportamento e base de conhecimento.",
   },
   {
+    icon: "attachment",
     title: "Envio de anexos e mídias",
-    description:
-      "Seu agente pode enviar imagens, PDFs, vídeos e outros materiais direto na conversa, no momento certo do funil — sem depender de alguém enviando manualmente.",
+    description: "Imagens, PDFs e vídeos direto na conversa, no momento certo do funil.",
   },
   {
-    title: "Dashboard de métricas",
-    description:
-      "Acompanhe conversas iniciadas, agendamentos realizados, taxa de resposta e o andamento de cada conversa em tempo real, com filtros por período.",
+    icon: "link",
+    title: "WhatsApp e Instagram",
+    description: "Atenda seus leads onde eles já estão, com integração nativa aos dois canais.",
   },
   {
-    title: "Integração com WhatsApp e Instagram",
-    description:
-      "Atenda seus leads onde eles já estão — com integração nativa aos canais mais usados no relacionamento comercial no Brasil.",
-  },
-  {
-    title: "Instruções customizadas e alta precisão",
-    description:
-      "Configure exatamente como seu agente deve se comportar, com instruções detalhadas e específicas do seu negócio — não é um bot genérico com respostas padronizadas.",
-  },
-  {
-    title: "IA de apoio para configuração e ajustes",
-    description:
-      "A plataforma conta com uma IA própria, com contexto completo sobre como ela funciona, que te ajuda a fazer ajustes no seu agente sempre que precisar — você não fica sozinho depois do curso.",
+    icon: "sparkles",
+    title: "IA de apoio pra ajustes",
+    description: "Uma IA própria da plataforma te ajuda a configurar e ajustar o agente sempre que precisar.",
   },
 ];
 
@@ -148,6 +214,14 @@ function checkoutHref(plano: Plano, agentePronto: boolean) {
   return `/plataforma/assinar?plano=${plano}${agentePronto ? "&agentePronto=1" : ""}`;
 }
 
+function FeatureIconBadge({ icon }: { icon: FeatureIconName }) {
+  return (
+    <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-accent/30 bg-accent-soft text-accent">
+      <FeatureIcon name={icon} />
+    </span>
+  );
+}
+
 export default function PlataformaPage() {
   return (
     <>
@@ -172,12 +246,15 @@ export default function PlataformaPage() {
               </span>
             </span>
           </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-text/70">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-text/70">
+            <a href="#resultados" className="hover:text-text transition-colors">
+              Resultados
+            </a>
             <a href="#funcionalidades" className="hover:text-text transition-colors">
               Funcionalidades
             </a>
-            <a href="#caminhos" className="hover:text-text transition-colors">
-              Como funciona
+            <a href="#calculadora" className="hover:text-text transition-colors">
+              Calculadora
             </a>
             <a href="#planos" className="hover:text-text transition-colors">
               Planos
@@ -220,12 +297,52 @@ export default function PlataformaPage() {
                 <CTAButton href="#planos" size="lg">
                   Quero acessar a plataforma
                 </CTAButton>
-                <CTAButton href="#caminhos" variant="secondary" size="lg">
+                <CTAButton href="#planos" variant="secondary" size="lg">
                   Quero o Agente Pronto
                 </CTAButton>
               </div>
             </Reveal>
           </div>
+        </Section>
+
+        {/* Resultados possíveis */}
+        <Section id="resultados" divider className="bg-tint">
+          <Reveal className="max-w-2xl mb-6">
+            <Eyebrow>Resultados possíveis</Eyebrow>
+            <SectionTitle>
+              O que negócios já alcançaram com essa mesma tecnologia.
+            </SectionTitle>
+          </Reveal>
+          <Reveal delay={60} className="max-w-3xl mb-12">
+            <p className="text-muted leading-relaxed text-base">
+              Negócios que implementaram agentes de IA com essa mesma
+              tecnologia já saíram de 30 para mais de 200 reuniões por mês,
+              aumentaram sua taxa de conversão de 8% para 18%, e
+              multiplicaram por até 4x o faturamento — mantendo o mesmo
+              volume de leads e o mesmo investimento em tráfego. O resultado
+              vem de uma boa configuração do agente: script certo,
+              qualificação bem definida e follow-up consistente — tudo isso
+              você pode construir com essa mesma ferramenta.
+            </p>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+            {cases.map((item, index) => (
+              <Reveal key={item.name} delay={index * 60}>
+                <CaseCard
+                  tag={item.tag}
+                  name={item.name}
+                  highlight={item.highlight}
+                  description={item.description}
+                />
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={120}>
+            <p className="text-center text-sm text-muted-2 uppercase tracking-widest mb-8">
+              Empresas e profissionais que já confiaram no Revolução AI
+            </p>
+            <ClientLogos />
+          </Reveal>
         </Section>
 
         {/* Para quem é */}
@@ -267,7 +384,7 @@ export default function PlataformaPage() {
 
         {/* Como funciona */}
         <Section divider className="bg-tint">
-          <Reveal className="max-w-2xl mx-auto text-center mb-10">
+          <Reveal className="max-w-2xl mx-auto text-center mb-14">
             <Eyebrow>Como funciona</Eyebrow>
             <SectionTitle>
               Acesso à ferramenta, minicurso de 1h, e você constrói no seu
@@ -277,31 +394,94 @@ export default function PlataformaPage() {
               Você recebe acesso à plataforma Chatflux — a mesma que o
               Revolução AI usa pra implementar agentes nos seus clientes —
               com um minicurso de aproximadamente 1 hora te ensinando a
-              construir seu agente do zero: configurar o comportamento
-              dele, estruturar a base de conhecimento, definir follow-ups e
-              colocá-lo pra atender de verdade. A partir daí, você constrói,
+              construir seu agente do zero. A partir daí, você constrói,
               testa e ajusta no seu próprio ritmo, com suporte via e-mail
-              sempre que precisar.
+              sempre que precisar. Na prática, o dia a dia do seu agente
+              funciona assim:
             </p>
           </Reveal>
+          <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 max-w-5xl mx-auto">
+            <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-accent/40 via-accent/20 to-accent/40" />
+            {flowSteps.map((step, index) => (
+              <Reveal
+                key={step.title}
+                delay={index * 80}
+                className="relative flex flex-col items-center text-center"
+              >
+                <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-bg text-accent shadow-[0_0_20px_rgba(0,200,83,0.25)] mb-5">
+                  <FeatureIcon name={step.icon} size={26} />
+                  <span className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-accent text-[#07090a] text-xs font-black">
+                    {index + 1}
+                  </span>
+                </div>
+                <h3 className="text-base font-bold mb-2">{step.title}</h3>
+                <p className="text-muted leading-relaxed text-[15px]">
+                  {step.description}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </Section>
 
         {/* Funcionalidades */}
         <Section id="funcionalidades" divider>
-          <Reveal className="max-w-2xl mb-12">
+          <Reveal className="max-w-2xl mb-14">
             <Eyebrow>Funcionalidades</Eyebrow>
             <SectionTitle>
               Tudo que você precisa pra montar um agente de verdade, não um
               bot genérico.
             </SectionTitle>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
+
+          <div className="flex flex-col gap-16">
+            {featureBlocks.map((block, blockIndex) => (
+              <div
+                key={block.eyebrow}
+                className="grid lg:grid-cols-2 gap-10 items-center"
+              >
+                <Reveal
+                  className={blockIndex % 2 === 1 ? "order-2 lg:order-1" : "order-2"}
+                >
+                  <ScreenshotPlaceholder label={block.placeholder} />
+                </Reveal>
+                <Reveal
+                  delay={80}
+                  className={blockIndex % 2 === 1 ? "order-1 lg:order-2" : "order-1"}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+                    {block.eyebrow}
+                  </p>
+                  <h3 className="text-xl font-black tracking-tight mb-6 text-balance">
+                    {block.title}
+                  </h3>
+                  <div className="flex flex-col gap-5">
+                    {block.bullets.map((bullet) => (
+                      <div key={bullet.title} className="flex gap-4">
+                        <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent-soft text-accent">
+                          <FeatureIcon name={bullet.icon} size={18} />
+                        </span>
+                        <div>
+                          <h4 className="font-bold text-sm mb-1">{bullet.title}</h4>
+                          <p className="text-muted text-sm leading-relaxed">
+                            {bullet.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Reveal>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            {compactFeatures.map((feature, index) => (
               <Reveal
                 key={feature.title}
-                delay={(index % 6) * 60}
+                delay={index * 60}
                 className="card-surface card-hover rounded-3xl p-7 flex flex-col h-full"
               >
+                <FeatureIconBadge icon={feature.icon} />
                 <h3 className="font-bold text-base mb-2">{feature.title}</h3>
                 <p className="text-muted leading-relaxed text-[15px]">
                   {feature.description}
@@ -311,42 +491,8 @@ export default function PlataformaPage() {
           </div>
         </Section>
 
-        {/* Resultados possíveis */}
-        <Section divider className="bg-tint">
-          <Reveal className="max-w-2xl mb-6">
-            <Eyebrow>Resultados possíveis</Eyebrow>
-            <SectionTitle>
-              O que negócios já alcançaram com essa mesma tecnologia.
-            </SectionTitle>
-          </Reveal>
-          <Reveal delay={60} className="max-w-3xl mb-12">
-            <p className="text-muted leading-relaxed text-base">
-              Negócios que implementaram agentes de IA com essa mesma
-              tecnologia já saíram de 30 para mais de 200 reuniões por mês,
-              aumentaram sua taxa de conversão de 8% para 18%, e
-              multiplicaram por até 4x o faturamento — mantendo o mesmo
-              volume de leads e o mesmo investimento em tráfego. O resultado
-              vem de uma boa configuração do agente: script certo,
-              qualificação bem definida e follow-up consistente — tudo isso
-              você pode construir com essa mesma ferramenta.
-            </p>
-          </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cases.map((item, index) => (
-              <Reveal key={item.name} delay={index * 60}>
-                <CaseCard
-                  tag={item.tag}
-                  name={item.name}
-                  highlight={item.highlight}
-                  description={item.description}
-                />
-              </Reveal>
-            ))}
-          </div>
-        </Section>
-
         {/* Os dois caminhos */}
-        <Section id="caminhos" divider>
+        <Section id="caminhos" divider className="bg-tint">
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>Os dois caminhos</Eyebrow>
             <SectionTitle>Escolha como você quer começar.</SectionTitle>
@@ -422,6 +568,24 @@ export default function PlataformaPage() {
             (CRM, agendas próprias fora do Google Agenda/Cal.com) — isso faz
             parte do escopo da implementação completa consultiva.
           </p>
+        </Section>
+
+        {/* Calculadora de ROI */}
+        <Section id="calculadora" divider>
+          <Reveal className="max-w-2xl mb-12">
+            <Eyebrow>Calculadora</Eyebrow>
+            <SectionTitle>
+              Quantas reuniões a mais o seu agente pode gerar por mês?
+            </SectionTitle>
+            <p className="text-muted leading-relaxed mt-4">
+              Informe quantas conversas você recebe por mês e sua taxa de
+              agendamento hoje — e veja o ganho estimado configurando bem o
+              seu agente.
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <PlataformaROICalculator />
+          </Reveal>
         </Section>
 
         {/* Planos e preços */}
@@ -523,8 +687,29 @@ export default function PlataformaPage() {
           </Reveal>
         </Section>
 
+        {/* Fale com a gente */}
+        <Section divider className="bg-tint">
+          <Reveal
+            className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-12 sm:px-16 sm:py-14 text-center"
+          >
+            <div className="glow h-[280px] w-[280px] -top-20 left-1/2 -translate-x-1/2" />
+            <h2 className="relative text-xl sm:text-2xl font-black tracking-tight text-balance max-w-xl mx-auto mb-4">
+              Ficou com alguma dúvida?
+            </h2>
+            <p className="relative text-muted max-w-xl mx-auto mb-8 leading-relaxed">
+              Fala com a gente antes de assinar — a gente entende seu
+              cenário e confirma se essa é a melhor opção pra você agora.
+            </p>
+            <div className="relative">
+              <CTAButton href={WHATSAPP_LINK} external size="lg">
+                Falar no WhatsApp
+              </CTAButton>
+            </div>
+          </Reveal>
+        </Section>
+
         {/* FAQ */}
-        <Section id="faq" divider className="bg-tint">
+        <Section id="faq" divider>
           <Reveal>
             <Eyebrow>Perguntas frequentes</Eyebrow>
             <SectionTitle className="mb-10 max-w-2xl">
