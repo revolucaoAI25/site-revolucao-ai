@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Container } from "./ui/Container";
+import { WhatsAppIcon } from "./ui/WhatsAppIcon";
 import {
   WHATSAPP_NUMBER_DISPLAY,
   WHATSAPP_LINK,
@@ -10,22 +11,6 @@ import {
   ADDRESS,
   MAPS_LINK,
 } from "@/lib/links";
-
-function WhatsAppIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M8.5 8.3c.2-.5.5-.5.8-.5h.6c.2 0 .5 0 .7.5.2.6.7 1.8.7 2 .1.2.1.4 0 .6-.2.3-.3.4-.5.6-.2.2-.4.4-.2.7.5.9 1.1 1.6 1.9 2.2.8.6 1.3.8 1.6.9.3.1.5 0 .6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.3.1 1-.2 1.5-.4.6-1.5 1.1-2.1 1.1-.6 0-1.2 0-3.9-1.6-3.2-1.9-5.2-4.9-5.4-5.2-.1-.2-1-1.4-1-2.6 0-1.2.7-1.8.9-2.1Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 function MailIcon() {
   return (

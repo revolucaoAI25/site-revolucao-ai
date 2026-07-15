@@ -9,6 +9,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { TechLogos } from "@/components/ui/TechLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
+import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 
 export const metadata: Metadata = {
   title: "Agentes de IA para Pré-Vendas",
@@ -504,6 +505,8 @@ export default function AgentesDeIA() {
           </div>
         </Reveal>
       </Section>
+
+      <WhatsAppFloatingButton />
     </>
   );
 }

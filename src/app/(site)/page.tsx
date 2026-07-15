@@ -10,6 +10,7 @@ import { TechLogos } from "@/components/ui/TechLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { InstagramShowcase } from "@/components/ui/InstagramShowcase";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 import { INSTAGRAM_LINK, INSTAGRAM_HANDLE } from "@/lib/links";
 
 export default function Home() {
@@ -382,6 +383,8 @@ export default function Home() {
           </div>
         </Reveal>
       </Section>
+
+      <WhatsAppFloatingButton />
     </>
   );
 }
