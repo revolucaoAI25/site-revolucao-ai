@@ -81,6 +81,19 @@ const paths: Record<string, ReactNode> = {
       <path d="M19 15l.6 1.8 1.9.7-1.9.7L19 20l-.6-1.8-1.9-.7 1.9-.7.6-1.8Z" />
     </>
   ),
+  inbox: (
+    <>
+      <path d="M3.5 12h4.5l1.7 2.5h4.6l1.7-2.5h4.5" />
+      <path d="M3.5 12 5 5.5A2 2 0 0 1 6.9 4h10.2a2 2 0 0 1 1.9 1.5L20.5 12" />
+      <path d="M3.5 12v5a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5" />
+    </>
+  ),
+  channels: (
+    <>
+      <path d="M3.5 5.5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2H9l-3 2.3v-2.3H5.5a2 2 0 0 1-2-2V5.5Z" />
+      <path d="M13 4.3h4.6a2 2 0 0 1 2 2v5.4a2 2 0 0 1-2 2H17v2.3l-2.7-2.3" />
+    </>
+  ),
 };
 
 export type FeatureIconName = keyof typeof paths;

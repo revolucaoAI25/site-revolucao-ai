@@ -17,7 +17,7 @@ import { PLANO_INFO, TAXA_AGENTE_PRONTO, type Plano } from "@/lib/asaas-platafor
 export const metadata: Metadata = {
   title: "Plataforma — Construa seu Agente de IA para Pré-Vendas",
   description:
-    "Acesso completo à Chatflux, a plataforma por trás dos resultados do Revolução AI, com minicurso de 1h pra você construir seu próprio agente de IA para WhatsApp.",
+    "Acesso completo à Chatflux, a plataforma por trás dos resultados do Revolução AI, com treinamento guiado pra você construir seu próprio agente de IA para WhatsApp.",
 };
 
 const flowSteps: { icon: FeatureIconName; title: string; description: string }[] = [
@@ -97,17 +97,43 @@ const featureBlocks: {
         description:
           "Conectado à sua agenda (Google Agenda), agenda reuniões e consultas direto na conversa, sem intervenção manual.",
       },
-      {
-        icon: "clock",
-        title: "Horário de funcionamento configurável",
-        description: "Define exatamente quando ele deve atuar — dias e horários de atendimento.",
-      },
     ],
     placeholder: "Configuração de follow-up e agenda",
   },
   {
-    eyebrow: "Acompanhamento e controle total",
-    title: "Você enxerga tudo, e assume a conversa quando quiser.",
+    eyebrow: "Central de atendimento",
+    title: "Acompanhe e participe de cada conversa, em tempo real.",
+    bullets: [
+      {
+        icon: "inbox",
+        title: "Chat centralizado",
+        description:
+          "Veja todas as conversas em andamento, em tempo real, com o histórico completo de cada lead.",
+      },
+      {
+        icon: "pause",
+        title: "Pause a IA e assuma quando quiser",
+        description:
+          "Pausa manualmente a qualquer momento e envie mensagens você mesmo, direto pela plataforma — sem precisar abrir o WhatsApp.",
+      },
+      {
+        icon: "channels",
+        title: "Múltiplos canais numa só tela",
+        description:
+          "Se você usa mais de um canal (WhatsApp e Instagram), acompanha tudo no mesmo lugar.",
+      },
+      {
+        icon: "users",
+        title: "Atribua conversas a vendedores específicos",
+        description:
+          "Direcione o atendimento manual pra pessoa certa da sua equipe continuar a conversa.",
+      },
+    ],
+    placeholder: "Central de atendimento (chat)",
+  },
+  {
+    eyebrow: "Acompanhamento e organização",
+    title: "Você enxerga tudo, organizado do seu jeito.",
     bullets: [
       {
         icon: "kanban",
@@ -122,10 +148,9 @@ const featureBlocks: {
           "Conversas iniciadas, agendamentos realizados, taxa de resposta — tudo em tempo real, com filtros por período.",
       },
       {
-        icon: "pause",
-        title: "Pausa automática e controle da conversa",
-        description:
-          "Pausa sozinho quando um humano entra na conversa. Você sempre pode assumir, pausar ou reativar a qualquer momento.",
+        icon: "clock",
+        title: "Horário de funcionamento configurável",
+        description: "Define exatamente quando ele deve atuar — dias e horários de atendimento.",
       },
     ],
     placeholder: "Kanban e dashboard de métricas",
@@ -183,7 +208,7 @@ type ComparativoValor = true | false | string;
 const comparativoColunas = ["Acesso à plataforma", "Agente Pronto"];
 const comparativo: { dimensao: string; valores: ComparativoValor[] }[] = [
   { dimensao: "Acesso à Chatflux", valores: [true, true] },
-  { dimensao: "Minicurso de 1h", valores: [true, true] },
+  { dimensao: "Treinamento guiado", valores: [true, true] },
   { dimensao: "Suporte via e-mail", valores: [true, true] },
   { dimensao: "Quem monta o agente", valores: ["Você", "Revolução AI monta a primeira versão"] },
   { dimensao: "Investimento", valores: ["Assinatura mensal", "Assinatura mensal + taxa única"] },
@@ -370,7 +395,7 @@ export default function PlataformaPage() {
               <p className="text-muted leading-relaxed text-[15px]">
                 Aqui você compra <span className="text-text font-semibold">ferramenta + capacitação</span> —
                 a mesma plataforma que usamos com nossos clientes, e um
-                minicurso pra você aprender a usar. Na{" "}
+                treinamento guiado pra você aprender a usar. Na{" "}
                 <Link href="/agentes-de-ia" className="text-accent hover:underline">
                   implementação completa
                 </Link>
@@ -387,14 +412,15 @@ export default function PlataformaPage() {
           <Reveal className="max-w-2xl mx-auto text-center mb-14">
             <Eyebrow>Como funciona</Eyebrow>
             <SectionTitle>
-              Acesso à ferramenta, minicurso de 1h, e você constrói no seu
-              ritmo.
+              Acesso à ferramenta, treinamento guiado, e você constrói no
+              seu ritmo.
             </SectionTitle>
             <p className="text-muted leading-relaxed mt-4">
               Você recebe acesso à plataforma Chatflux — a mesma que o
               Revolução AI usa pra implementar agentes nos seus clientes —
-              com um minicurso de aproximadamente 1 hora te ensinando a
-              construir seu agente do zero. A partir daí, você constrói,
+              com um treinamento guiado de aproximadamente 1 hora te
+              ensinando a construir seu agente do zero. A partir daí, você
+              constrói,
               testa e ajusta no seu próprio ritmo, com suporte via e-mail
               sempre que precisar. Na prática, o dia a dia do seu agente
               funciona assim:
@@ -504,8 +530,8 @@ export default function PlataformaPage() {
               </p>
               <h3 className="text-lg font-bold mb-3">Acesso à plataforma</h3>
               <p className="text-muted leading-relaxed text-[15px]">
-                Você recebe acesso completo à Chatflux e ao minicurso de 1h,
-                e constrói seu agente do zero, no seu ritmo. Ideal pra quem
+                Você recebe acesso completo à Chatflux e ao treinamento
+                guiado, e constrói seu agente do zero, no seu ritmo. Ideal pra quem
                 gosta de colocar a mão na massa e quer aprender a fundo como
                 funciona.
               </p>
@@ -522,8 +548,8 @@ export default function PlataformaPage() {
                 Você preenche um formulário com informações do seu negócio,
                 e o Revolução AI monta a primeira versão do seu agente —
                 prompt e fluxo de conversa configurados e prontos pra
-                rodar. Você recebe acesso à plataforma e ao mesmo minicurso
-                de 1h, pra fazer os ajustes que quiser depois. Ideal pra
+                rodar. Você recebe acesso à plataforma e ao mesmo
+                treinamento guiado, pra fazer os ajustes que quiser depois. Ideal pra
                 quem quer começar já com uma base pronta, sem abrir mão de
                 assumir os ajustes no dia a dia.
               </p>
@@ -575,12 +601,12 @@ export default function PlataformaPage() {
           <Reveal className="max-w-2xl mb-12">
             <Eyebrow>Calculadora</Eyebrow>
             <SectionTitle>
-              Quantas reuniões a mais o seu agente pode gerar por mês?
+              Quanto a mais o seu agente pode gerar de faturamento por mês?
             </SectionTitle>
             <p className="text-muted leading-relaxed mt-4">
-              Informe quantas conversas você recebe por mês e sua taxa de
-              agendamento hoje — e veja o ganho estimado configurando bem o
-              seu agente.
+              Informe seu ticket médio, quantas conversas você recebe por mês
+              e se sua venda acontece por agendamento ou direto na conversa
+              — e veja o ganho estimado configurando bem o seu agente.
             </p>
           </Reveal>
           <Reveal delay={80}>
@@ -621,7 +647,7 @@ export default function PlataformaPage() {
                     </li>
                     <li className="flex gap-2 text-muted leading-relaxed">
                       <span className="text-accent shrink-0">—</span>
-                      Minicurso de 1h + suporte por e-mail
+                      Treinamento guiado + suporte por e-mail
                     </li>
                     <li className="flex gap-2 text-muted leading-relaxed">
                       <span className="text-accent shrink-0">—</span>
@@ -669,20 +695,21 @@ export default function PlataformaPage() {
           </p>
         </Section>
 
-        {/* Minicurso */}
+        {/* Treinamento guiado */}
         <Section divider>
           <Reveal className="relative overflow-hidden rounded-3xl border border-accent/30 bg-accent-soft p-8 sm:p-12">
-            <Eyebrow>O minicurso de 1h</Eyebrow>
+            <Eyebrow>Treinamento guiado</Eyebrow>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-4 max-w-2xl">
-              Direto ao ponto — sem enrolação.
+              Aprenda a configurar seu agente numa sessão prática de 1h.
             </h2>
             <p className="text-muted leading-relaxed max-w-2xl">
-              Junto com o seu acesso, você recebe um minicurso direto ao
-              ponto — cerca de 1 hora de conteúdo — te ensinando a
+              Junto com o seu acesso, você recebe um treinamento guiado —
+              cerca de 1 hora de conteúdo direto ao ponto — te ensinando a
               configurar seu agente de IA do zero: como estruturar o
               comportamento dele, montar a base de conhecimento, configurar
-              follow-ups e colocar tudo pra rodar de verdade. Focado no que
-              você precisa pra sair do zero e ter seu agente funcionando.
+              follow-ups e colocar tudo pra rodar de verdade. O suficiente
+              pra você sair do zero e ter seu agente funcionando com
+              confiança.
             </p>
           </Reveal>
         </Section>
