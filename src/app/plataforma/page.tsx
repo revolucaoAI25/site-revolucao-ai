@@ -10,6 +10,7 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/FeatureIcon";
 import { ScreenshotPlaceholder } from "@/components/plataforma/ScreenshotPlaceholder";
+import { VideoPlaceholder } from "@/components/plataforma/VideoPlaceholder";
 import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
 import {
   LEAD_EXTRACTOR_WHATSAPP_LINK,
@@ -466,6 +467,17 @@ export default function PlataformaPage() {
           </div>
         </Section>
 
+        {/* Vídeo de demonstração */}
+        <Section divider>
+          <Reveal className="max-w-2xl mx-auto text-center mb-10">
+            <Eyebrow>Veja funcionando</Eyebrow>
+            <SectionTitle>A plataforma rodando, na prática.</SectionTitle>
+          </Reveal>
+          <Reveal delay={80} className="max-w-4xl mx-auto">
+            <VideoPlaceholder label="Demonstração da Chatflux" />
+          </Reveal>
+        </Section>
+
         {/* Funcionalidades */}
         <Section id="funcionalidades" divider>
           <Reveal className="max-w-2xl mb-14">
@@ -531,6 +543,18 @@ export default function PlataformaPage() {
                 </p>
               </Reveal>
             ))}
+            <Reveal
+              delay={compactFeatures.length * 60}
+              className="rounded-3xl border border-dashed border-white/15 p-7 flex flex-col items-center justify-center text-center h-full"
+            >
+              <p className="text-lg font-black tracking-tight text-accent mb-2">E mais</p>
+              <p className="text-muted text-sm leading-relaxed mb-4">
+                Confira a lista completa de tudo que vem com o seu acesso.
+              </p>
+              <a href="#resumo" className="text-sm font-semibold text-accent hover:underline">
+                Ver resumo completo →
+              </a>
+            </Reveal>
           </div>
         </Section>
 
@@ -700,10 +724,10 @@ export default function PlataformaPage() {
             </Reveal>
           </div>
           <p className="text-center text-sm text-muted-2 mt-8 max-w-xl mx-auto">
-            Conversa excedente ao limite do plano é cobrada à parte, em
-            valor por conversa acima do custo do tier atual — fale com a
-            gente se seu volume estiver sempre no limite, pra migrar de
-            plano em vez de pagar avulso.
+            Conversa excedente ao limite do plano é cobrada à parte, R$2 por
+            conversa acima do limite do tier atual — fale com a gente se seu
+            volume estiver sempre no limite, pra migrar de plano em vez de
+            pagar avulso.
           </p>
         </Section>
 
@@ -789,7 +813,7 @@ export default function PlataformaPage() {
         </Section>
 
         {/* Resumo das funcionalidades */}
-        <Section divider className="bg-tint">
+        <Section id="resumo" divider className="bg-tint">
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>Resumo</Eyebrow>
             <SectionTitle>Tudo que vem com o seu acesso.</SectionTitle>
