@@ -217,8 +217,9 @@ export function PlataformaAssinarForm() {
                 </button>
 
                 <p className="text-xs text-muted-2 leading-relaxed text-center">
-                  Você será redirecionado pro ambiente seguro do Asaas pra
-                  concluir o pagamento (cartão, boleto ou Pix).
+                  {agentePronto
+                    ? "Você será redirecionado pro ambiente seguro do Asaas pra concluir o pagamento da taxa (cartão, boleto ou Pix). A assinatura mensal, na sequência, é só no cartão de crédito (exige cartão salvo)."
+                    : "Você será redirecionado pro ambiente seguro do Asaas pra concluir o pagamento no cartão de crédito (assinatura recorrente exige cartão salvo)."}
                 </p>
               </form>
 

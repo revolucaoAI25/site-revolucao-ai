@@ -112,7 +112,12 @@ export async function createFeeCheckout(
   });
 }
 
-/** Checkout recorrente (`RECURRENT`) da assinatura mensal, por plano. */
+/**
+ * Checkout recorrente (`RECURRENT`) da assinatura mensal, por plano.
+ * Travado em `billingTypes: ["CREDIT_CARD"]` porque o Asaas só aceita
+ * cartão pra cobrança recorrente automática — boleto e Pix são cobranças
+ * avulsas, não haveria como recobrar sozinho no ciclo seguinte.
+ */
 export async function createSubscriptionCheckout(
   checkoutId: string,
   plano: Plano,
@@ -123,7 +128,7 @@ export async function createSubscriptionCheckout(
   const info = PLANO_INFO[plano];
   return createCheckoutSession({
     customer: customerId,
-    billingTypes: ["CREDIT_CARD", "BOLETO", "PIX"],
+    billingTypes: ["CREDIT_CARD"],
     chargeTypes: ["RECURRENT"],
     minutesToExpire: 1440,
     callback: {

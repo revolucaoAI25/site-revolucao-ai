@@ -202,7 +202,7 @@ export function AssinarForm() {
                 <p className="text-xs text-muted-2 leading-relaxed text-center">
                   {plano === "anual"
                     ? "Você será redirecionado pro ambiente seguro do Asaas pra concluir o pagamento parcelado em 12x no cartão de crédito."
-                    : "Você será redirecionado pro ambiente seguro do Asaas pra concluir o pagamento (cartão, boleto ou Pix)."}
+                    : "Você será redirecionado pro ambiente seguro do Asaas pra concluir o pagamento no cartão de crédito (assinatura recorrente exige cartão salvo)."}
                 </p>
               </form>
 

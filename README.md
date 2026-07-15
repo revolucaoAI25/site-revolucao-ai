@@ -142,7 +142,12 @@ reaproveita, pelo CPF/CNPJ) o cliente no Asaas e cria o checkout
 (`/v3/checkouts`, `src/lib/asaas.ts`) — dependendo do plano:
 
 - **Mensal**: `chargeTypes: ["RECURRENT"]` — assinatura recorrente de
-  verdade, sem data de fim — cartão, boleto ou Pix, cancela quando quiser.
+  verdade, sem data de fim, cancela quando quiser. Travada em
+  `billingTypes: ["CREDIT_CARD"]` — o Asaas só aceita cartão pra cobrança
+  recorrente automática (boleto/Pix são cobranças avulsas, não haveria
+  como recobrar sozinho no ciclo seguinte). Já foi produção com
+  `billingTypes` incluindo boleto/Pix nesse caso, e o Asaas rejeitava o
+  checkout com "O campo billingTypes é inválido" — bug corrigido.
 - **Anual**: `chargeTypes: ["INSTALLMENT"]` — cobrança única do valor
   cheio (R$4.044) parcelada em até 12x, travada em
   `billingTypes: ["CREDIT_CARD"]`. O parcelamento no cartão é autorizado de
