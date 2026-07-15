@@ -73,6 +73,42 @@ alter table public.asaas_checkouts enable row level security;
 -- role (usada pelas rotas /api/asaas-subscription e /api/asaas-webhook)
 -- grava e atualiza.
 
+-- Registra cada tentativa de assinatura do produto de entrada "Plataforma"
+-- (/plataforma — acesso self-service à Chatflux, com ou sem o add-on
+-- Agente Pronto). `agente_pronto` = true segue um checkout encadeado: taxa
+-- única de implementação primeiro (status vai pra 'taxa_confirmada'), só
+-- depois a assinatura mensal (status vira 'confirmado'). Sem o add-on, vai
+-- direto de 'iniciado' pra 'confirmado', igual ao asaas_checkouts acima.
+create table if not exists public.plataforma_checkouts (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  plano text not null,
+  agente_pronto boolean not null default false,
+  nome text not null,
+  email text not null,
+  cpf_cnpj text not null,
+  telefone text not null,
+  asaas_customer_id text,
+  status text not null default 'iniciado',
+  confirmed_at timestamptz,
+  -- Preenchido pelo cliente na página de obrigado, só quando agente_pronto
+  -- é true — informações do negócio pra gente montar a primeira versão do
+  -- agente (ver /api/plataforma-business-info).
+  business_info jsonb,
+  stage text
+);
+
+create index if not exists plataforma_checkouts_customer_id_idx
+  on public.plataforma_checkouts (asaas_customer_id);
+create index if not exists plataforma_checkouts_created_at_idx
+  on public.plataforma_checkouts (created_at desc);
+
+alter table public.plataforma_checkouts enable row level security;
+
+-- Mesma regra das tabelas acima: sem policy pra anon/authenticated, só a
+-- service role (usada pelas rotas /api/plataforma-subscription,
+-- /api/plataforma-business-info e /api/asaas-webhook) grava e atualiza.
+
 -- Painel /admin (dashboard, kanban e tabela): não precisa de nenhuma
 -- tabela nova, só lê leads/asaas_checkouts acima com a service role,
 -- depois que o Supabase Auth (login em /admin/login) já confirmou a

@@ -38,6 +38,14 @@ Abra [http://localhost:3000](http://localhost:3000).
   checkout próprio em `src/app/lead-extractor/assinar/`, que cria a
   assinatura direto na API do Asaas — ver seção **Checkout do Lead
   Extractor (Asaas)** abaixo.
+- `src/app/plataforma/page.tsx` — LP do produto de entrada "Plataforma"
+  (acesso self-service à Chatflux + add-on opcional Agente Pronto), mesmo
+  padrão de página separada do Lead Extractor. É o destino do resultado
+  "outro produto" do pop-up de Agentes de IA (`OUTRO_PRODUTO_LINK` em
+  `src/lib/links.ts`), pra quem quer resultado com IA mas não tem
+  orçamento pra implementação completa. Checkout próprio em
+  `src/app/plataforma/assinar/`, ver seção **Checkout da Plataforma**
+  abaixo.
 - `src/components/` — componentes compartilhados (Nav, Footer, cards, FAQ, etc.)
 - `src/components/modal/` — pop-up de qualificação (perguntas ramificadas) que
   abre nos CTAs principais
@@ -53,36 +61,30 @@ Abra [http://localhost:3000](http://localhost:3000).
   (`src/components/modal/ContactForm.tsx`).
 - `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço, Calendly da
   apresentação do agente de IA, o ebook gratuito, o curso Zero aos 10K
-  (baixo ticket) da Formação e a LP do Lead Extractor já são os reais.
-  Agenda da reunião de vendas da Formação, "outro produto" e o checkout do
-  Lead Extractor ainda **placeholder**.
+  (baixo ticket) da Formação, a LP do Lead Extractor e a LP da Plataforma
+  (`OUTRO_PRODUTO_LINK`) já são os reais. Agenda da reunião de vendas da
+  Formação ainda **placeholder** (reaproveitando a do agente de IA).
 - `src/app/api/lead/route.ts` — recebe o resultado final de cada pop-up
   (fluxo, respostas dadas e, no caso da Formação, nome/WhatsApp), salva no
   Supabase e encaminha pro webhook próprio do cliente, se configurado. Ver
   seção **Leads do pop-up (Supabase e webhook)** abaixo.
 - `src/app/admin/` — painel interno (dashboard, kanban e tabela) com todo
-  mundo que passou pelo pop-up ou pelo checkout do Lead Extractor,
-  protegido por login (Supabase Auth). Ver seção **Painel admin**
-  abaixo.
+  mundo que passou pelo pop-up ou pelos checkouts (Lead Extractor e
+  Plataforma), protegido por login (Supabase Auth). Ver seção **Painel
+  admin** abaixo.
 
 ## Pendências antes de publicar
 
-1. **Links ainda placeholder** em `src/lib/links.ts`, apontando pro
-   WhatsApp oficial como fallback:
-   - `OUTRO_PRODUTO_LINK` (oferta pra quem não fecha o ticket da implementação
-     completa, Agentes de IA).
-
-   Trocar pela página/link definitivo quando estiver pronto.
-2. **`CALENDLY_FORMACAO_LINK`** em `src/lib/links.ts` reutiliza o mesmo link
+1. **`CALENDLY_FORMACAO_LINK`** em `src/lib/links.ts` reutiliza o mesmo link
    do Calendly de Agentes de IA como placeholder (autorizado pelo cliente).
    Trocar pelo link definitivo da reunião de vendas da Formação assim que o
    cliente enviar.
-3. **`LEAD_WEBHOOK_URL`** já tem o valor definitivo (Make.com) configurado em
+2. **`LEAD_WEBHOOK_URL`** já tem o valor definitivo (Make.com) configurado em
    `.env.local` para rodar localmente. Falta só adicionar essa mesma
    variável em Project Settings → Environment Variables na Vercel antes do
    deploy de produção (arquivos `.env*` não vão pro Git, então essa etapa é
    manual).
-4. **`ASAAS_API_KEY`** ainda não configurada — ver seção **Checkout do Lead
+3. **`ASAAS_API_KEY`** ainda não configurada — ver seção **Checkout do Lead
    Extractor (Asaas)** abaixo. Sem ela, o formulário de assinatura mostra um
    aviso pedindo pra falar pelo WhatsApp, sem quebrar o resto do site.
 
@@ -191,24 +193,65 @@ configuradas, o registro do lead simplesmente não acontece (não quebra o
 checkout). Falta configurar no painel do Asaas o webhook apontando pra
 `/api/asaas-webhook` (eventos de pagamento).
 
+## Checkout da Plataforma (produto de entrada, `/plataforma`)
+
+Mesma ideia do Lead Extractor acima (checkout hospedado no Asaas, nunca
+processa cartão no site), mas com uma diferença: o add-on **Agente
+Pronto** soma uma taxa única de implementação (R$1.000) à assinatura
+mensal do plano escolhido (Start/Growth/Scale) — e o Asaas não deixa
+combinar uma cobrança única com uma recorrente no mesmo checkout. Por
+isso, quando o cliente escolhe o Agente Pronto, o fluxo é **encadeado em
+dois checkouts**:
+
+1. `/plataforma/assinar?plano=X&agentePronto=1` → `POST
+   /api/plataforma-subscription` cria o cliente no Asaas e o primeiro
+   checkout, de cobrança única (`chargeTypes: ["DETACHED"]`) da taxa de
+   R$1.000 (`createFeeCheckout`, `src/lib/asaas-plataforma.ts`).
+2. Ao pagar, o Asaas redireciona (`callback.successUrl`) pra `GET
+   /api/plataforma-subscription/continue`, que cria o **segundo**
+   checkout — agora sim a assinatura mensal recorrente
+   (`chargeTypes: ["RECURRENT"]`, `createSubscriptionCheckout`) — e
+   redireciona de novo pro Asaas.
+3. Só depois de pagar os dois é que o navegador chega em
+   `/plataforma/assinar/obrigado`.
+
+Sem o Agente Pronto, é só o passo 2 — igual ao Lead Extractor.
+
+Cada tentativa fica registrada em `public.plataforma_checkouts`
+(`supabase/schema.sql`), com `status` passando por `iniciado` →
+`taxa_confirmada` (só quando tem Agente Pronto, ao pagar a taxa) →
+`confirmado` (ao confirmar a assinatura). O `/api/asaas-webhook` já
+existente distingue as duas cobranças pelo campo `payment.subscription`
+do evento (presente só na cobrança recorrente).
+
+Na página de obrigado, se o cliente escolheu Agente Pronto, aparece um
+formulário pra contar sobre o negócio (o que vende, público-alvo,
+objeções, etc.) — salvo em `business_info` (jsonb) via `POST
+/api/plataforma-business-info`, pro time montar a primeira versão do
+agente. Usa as mesmas variáveis de ambiente do Asaas já documentadas
+acima (`ASAAS_API_KEY`, `ASAAS_ENV`, `ASAAS_CHECKOUT_STARTED_WEBHOOK_URL`,
+`ASAAS_WEBHOOK_TOKEN`, `ASAAS_WEBHOOK_FORWARD_URL`) — não precisa de
+nenhuma variável nova.
+
 ## Painel admin (`/admin`)
 
 Visão completa de tudo que passa pelo site: quem preencheu o pop-up, quem
-agendou reunião, quem iniciou o checkout do Lead Extractor e quem
-confirmou a compra. Três telas, todas lendo os mesmos dados
-(`src/lib/admin-data.ts`, que junta `leads` + `asaas_checkouts` num
-formato só):
+agendou reunião, quem iniciou o checkout do Lead Extractor ou da
+Plataforma, e quem confirmou a compra. Três telas, todas lendo os mesmos
+dados (`src/lib/admin-data.ts`, que junta `leads` + `asaas_checkouts` +
+`plataforma_checkouts` num formato só):
 
 - **`/admin`** — dashboard com números gerais (leads por fluxo, quantos
-  agendaram, checkouts iniciados/confirmados, taxa de confirmação) e um
-  detalhamento por resultado do pop-up.
-- **`/admin/kanban`** — cada registro (pop-up ou Lead Extractor) num card,
-  organizado em 4 colunas por estágio: preencheu → agendou → iniciou
-  checkout → confirmado. O estágio já vem preenchido automaticamente (pelo
-  site, quando confirma um agendamento ou um pagamento), mas dá pra
-  **arrastar um card pra outra coluna** a qualquer momento pra corrigir ou
-  mover à mão — e editar (nome/e-mail/telefone/estágio) ou excluir cada
-  card direto ali.
+  agendaram, checkouts iniciados/confirmados e taxa de confirmação — do
+  Lead Extractor e da Plataforma, separadamente) e um detalhamento por
+  resultado do pop-up.
+- **`/admin/kanban`** — cada registro (pop-up, Lead Extractor ou
+  Plataforma) num card, organizado em 4 colunas por estágio: preencheu →
+  agendou → iniciou checkout → confirmado. O estágio já vem preenchido
+  automaticamente (pelo site, quando confirma um agendamento ou um
+  pagamento), mas dá pra **arrastar um card pra outra coluna** a qualquer
+  momento pra corrigir ou mover à mão — e editar
+  (nome/e-mail/telefone/estágio) ou excluir cada card direto ali.
 - **`/admin/tabela`** — tabela detalhada, com busca por nome/e-mail/telefone,
   filtro por fonte/estágio, edição por linha, exclusão individual e exclusão
   em massa (seleciona várias linhas com as caixinhas e clica em "Excluir

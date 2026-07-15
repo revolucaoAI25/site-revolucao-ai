@@ -49,7 +49,7 @@ export default async function AdminDashboardPage() {
       <div>
         <h1 className="text-2xl font-black tracking-tight mb-1">Dashboard</h1>
         <p className="text-muted text-sm">
-          Visão geral do pop-up de qualificação e do checkout do Lead Extractor.
+          Visão geral do pop-up de qualificação e dos checkouts (Lead Extractor e Plataforma).
         </p>
       </div>
 
@@ -77,6 +77,18 @@ export default async function AdminDashboardPage() {
         <StatTile
           label="Compras confirmadas (Lead Extractor)"
           value={String(summary.totalCheckoutsConfirmados)}
+          accent
+        />
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4">
+        <StatTile
+          label="Checkouts iniciados (Plataforma)"
+          value={String(summary.totalPlataformaIniciados)}
+        />
+        <StatTile
+          label="Compras confirmadas (Plataforma)"
+          value={String(summary.totalPlataformaConfirmados)}
           accent
         />
       </div>

@@ -58,8 +58,9 @@ export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = "/lead-extractor/assinar?plan
 export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = "/lead-extractor/assinar?plano=anual";
 
 /**
- * PLACEHOLDER — ainda não recebemos o link definitivo. Aponta para o
- * WhatsApp oficial como fallback; trocar assim que o cliente enviar a
- * página/LP do "outro produto", de ticket mais baixo (Agentes de IA).
+ * LP da Plataforma (acesso self-service à Chatflux + add-on Agente
+ * Pronto) — resultado "outro produto" do pop-up de Agentes de IA, pra
+ * quem quer resultado com IA mas não tem orçamento pra implementação
+ * completa. Rota interna, ver src/app/plataforma.
  */
-export const OUTRO_PRODUTO_LINK = WHATSAPP_LINK;
+export const OUTRO_PRODUTO_LINK = "/plataforma";

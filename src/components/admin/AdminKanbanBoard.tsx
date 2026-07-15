@@ -4,6 +4,12 @@ import { useState } from "react";
 import { STAGES, type AdminRecord, type Stage } from "@/lib/admin-types";
 import { EditRecordModal, type RecordUpdates } from "./EditRecordModal";
 
+const SOURCE_LABELS: Record<AdminRecord["source"], string> = {
+  popup: "Pop-up",
+  "lead-extractor": "Lead Extractor",
+  plataforma: "Plataforma",
+};
+
 function recordKey(r: Pick<AdminRecord, "source" | "id">) {
   return `${r.source}-${r.id}`;
 }
@@ -138,12 +144,12 @@ export function AdminKanbanBoard({ records: initialRecords }: { records: AdminRe
                           </span>
                           <span
                             className={`shrink-0 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
-                              record.source === "lead-extractor"
+                              record.source !== "popup"
                                 ? "bg-accent/15 text-accent"
                                 : "bg-white/[0.06] text-muted"
                             }`}
                           >
-                            {record.source === "lead-extractor" ? "Lead Extractor" : "Pop-up"}
+                            {SOURCE_LABELS[record.source]}
                           </span>
                         </div>
                         <p className="text-xs text-muted truncate">{record.detail}</p>

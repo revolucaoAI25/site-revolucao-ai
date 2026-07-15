@@ -3,15 +3,16 @@ import { getSupabaseAuthServerClient } from "@/lib/supabase-auth-server";
 import { getSupabaseServerClient } from "@/lib/supabase-server";
 import { STAGES } from "@/lib/admin-types";
 
-type Source = "popup" | "lead-extractor";
+type Source = "popup" | "lead-extractor" | "plataforma";
 
 const VALID_STAGES = new Set(STAGES.map((s) => s.stage));
 const TABLE_BY_SOURCE: Record<Source, string> = {
   popup: "leads",
   "lead-extractor": "asaas_checkouts",
+  plataforma: "plataforma_checkouts",
 };
 
-/** Nomes de coluna variam entre as duas tabelas (leads x asaas_checkouts). */
+/** Nomes de coluna variam entre as tabelas (leads x asaas_checkouts/plataforma_checkouts). */
 function toColumns(source: Source, updates: Record<string, unknown>) {
   const out: Record<string, unknown> = {};
   if (typeof updates.stage === "string") {

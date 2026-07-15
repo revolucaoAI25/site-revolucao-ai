@@ -32,22 +32,38 @@ export type AsaasCheckoutRow = {
   stage: string | null;
 };
 
+export type PlataformaCheckoutRow = {
+  id: string;
+  created_at: string;
+  plano: string;
+  agente_pronto: boolean;
+  nome: string;
+  email: string;
+  cpf_cnpj: string;
+  telefone: string;
+  asaas_customer_id: string | null;
+  status: string;
+  confirmed_at: string | null;
+  business_info: Record<string, string> | null;
+  stage: string | null;
+};
+
 export type Stage = "preencheu" | "agendou" | "iniciou-checkout" | "confirmado";
 export const STAGES: { stage: Stage; label: string }[] = [
   { stage: "preencheu", label: "Preencheu o pop-up" },
   { stage: "agendou", label: "Agendou reunião" },
-  { stage: "iniciou-checkout", label: "Iniciou checkout (Lead Extractor)" },
+  { stage: "iniciou-checkout", label: "Iniciou checkout" },
   { stage: "confirmado", label: "Cliente confirmado" },
 ];
 
 export type AdminRecord = {
   id: string;
-  source: "popup" | "lead-extractor";
+  source: "popup" | "lead-extractor" | "plataforma";
   createdAt: string;
   name: string | null;
   email: string | null;
   phone: string | null;
   detail: string;
   stage: Stage;
-  raw: LeadRow | AsaasCheckoutRow;
+  raw: LeadRow | AsaasCheckoutRow | PlataformaCheckoutRow;
 };

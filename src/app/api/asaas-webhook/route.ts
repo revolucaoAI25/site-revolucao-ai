@@ -38,6 +38,17 @@ type CheckoutRecord = {
   status: string;
 };
 
+type PlataformaRecord = {
+  id: string;
+  plano: string;
+  agente_pronto: boolean;
+  nome: string;
+  email: string;
+  cpf_cnpj: string;
+  telefone: string;
+  status: string;
+};
+
 /** Busca o registro salvo em /api/asaas-subscription no momento do checkout. */
 async function findCheckoutRecord(customerId: string): Promise<CheckoutRecord | null> {
   const supabase = getSupabaseServerClient();
@@ -53,6 +64,26 @@ async function findCheckoutRecord(customerId: string): Promise<CheckoutRecord | 
 
   if (error) {
     console.error("[asaas-webhook] Falha ao buscar registro no Supabase:", error);
+    return null;
+  }
+  return data;
+}
+
+/** Mesma ideia acima, pro produto /plataforma (ver /api/plataforma-subscription). */
+async function findPlataformaRecord(customerId: string): Promise<PlataformaRecord | null> {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("plataforma_checkouts")
+    .select("id, plano, agente_pronto, nome, email, cpf_cnpj, telefone, status")
+    .eq("asaas_customer_id", customerId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[asaas-webhook] Falha ao buscar registro (plataforma) no Supabase:", error);
     return null;
   }
   return data;
@@ -74,6 +105,81 @@ async function markCheckoutConfirmed(recordId: string) {
 
   if (error) {
     console.error("[asaas-webhook] Falha ao atualizar status no Supabase:", error);
+  }
+}
+
+/** Marca só a taxa de implementação (Agente Pronto) como paga — ainda não
+ * é a assinatura confirmada, então o `stage` no kanban continua o mesmo. */
+async function markPlataformaFeeConfirmed(recordId: string) {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return;
+
+  const { error } = await supabase
+    .from("plataforma_checkouts")
+    .update({ status: "taxa_confirmada" })
+    .eq("id", recordId);
+
+  if (error) {
+    console.error("[asaas-webhook] Falha ao atualizar taxa (plataforma) no Supabase:", error);
+  }
+}
+
+/** Marca a assinatura da /plataforma como confirmada/ativa. */
+async function markPlataformaConfirmed(recordId: string) {
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return;
+
+  const { error } = await supabase
+    .from("plataforma_checkouts")
+    .update({
+      status: "confirmado",
+      confirmed_at: new Date().toISOString(),
+      stage: "confirmado",
+    })
+    .eq("id", recordId);
+
+  if (error) {
+    console.error("[asaas-webhook] Falha ao atualizar status (plataforma) no Supabase:", error);
+  }
+}
+
+/**
+ * Encaminha eventos da /plataforma pro webhook do time. `subscriptionPaid`
+ * distingue a cobrança recorrente (assinatura, sinal de liberar acesso) da
+ * cobrança única da taxa de implementação (só um aviso, não libera nada).
+ */
+async function forwardPlataformaPaymentConfirmed(
+  payment: Record<string, unknown>,
+  record: PlataformaRecord,
+  subscriptionPaid: boolean
+) {
+  const forwardUrl = process.env.ASAAS_WEBHOOK_FORWARD_URL;
+  if (!forwardUrl) return;
+
+  try {
+    await fetch(forwardUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event: subscriptionPaid ? "PLATAFORMA_ASSINATURA_CONFIRMADA" : "PLATAFORMA_TAXA_CONFIRMADA",
+        payment: {
+          id: payment.id,
+          value: payment.value,
+          billingType: payment.billingType,
+          subscription: payment.subscription,
+        },
+        lead: {
+          plano: record.plano,
+          agentePronto: record.agente_pronto,
+          nome: record.nome,
+          email: record.email,
+          cpfCnpj: record.cpf_cnpj,
+          telefone: record.telefone,
+        },
+      }),
+    });
+  } catch (error) {
+    console.error("[asaas-webhook] Falha ao encaminhar webhook (plataforma):", error);
   }
 }
 
@@ -146,13 +252,30 @@ export async function POST(req: NextRequest) {
   const payment = body?.payment as Record<string, unknown> | undefined;
 
   if (event && RELEVANT_EVENTS.has(event) && payment?.customer) {
-    const record = await findCheckoutRecord(payment.customer as string);
+    const plataformaRecord = await findPlataformaRecord(payment.customer as string);
 
-    // Idempotência: se já processamos essa confirmação antes (o Asaas pode
-    // reenviar o mesmo evento), não atualiza nem encaminha de novo.
-    if (!record || record.status !== "confirmado") {
-      if (record) await markCheckoutConfirmed(record.id);
-      await forwardPaymentConfirmed(event, payment, record);
+    if (plataformaRecord && plataformaRecord.status !== "confirmado") {
+      // Cobrança recorrente (assinatura) traz `subscription`; a taxa única
+      // de implementação (DETACHED) não — é assim que distinguimos qual
+      // das duas etapas do checkout encadeado esse evento confirma.
+      const subscriptionPaid = !!payment.subscription;
+
+      if (subscriptionPaid) {
+        await markPlataformaConfirmed(plataformaRecord.id);
+        await forwardPlataformaPaymentConfirmed(payment, plataformaRecord, true);
+      } else if (plataformaRecord.status === "iniciado") {
+        await markPlataformaFeeConfirmed(plataformaRecord.id);
+        await forwardPlataformaPaymentConfirmed(payment, plataformaRecord, false);
+      }
+    } else if (!plataformaRecord) {
+      const record = await findCheckoutRecord(payment.customer as string);
+
+      // Idempotência: se já processamos essa confirmação antes (o Asaas
+      // pode reenviar o mesmo evento), não atualiza nem encaminha de novo.
+      if (!record || record.status !== "confirmado") {
+        if (record) await markCheckoutConfirmed(record.id);
+        await forwardPaymentConfirmed(event, payment, record);
+      }
     }
   }
 

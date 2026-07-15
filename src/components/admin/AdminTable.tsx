@@ -8,6 +8,12 @@ const STAGE_LABELS: Record<Stage, string> = Object.fromEntries(
   STAGES.map((s) => [s.stage, s.label])
 ) as Record<Stage, string>;
 
+const SOURCE_LABELS: Record<AdminRecord["source"], string> = {
+  popup: "Pop-up",
+  "lead-extractor": "Lead Extractor",
+  plataforma: "Plataforma",
+};
+
 function recordKey(r: Pick<AdminRecord, "source" | "id">) {
   return `${r.source}-${r.id}`;
 }
@@ -136,6 +142,7 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
           <option value="todos">Todas as fontes</option>
           <option value="popup">Pop-up</option>
           <option value="lead-extractor">Lead Extractor</option>
+          <option value="plataforma">Plataforma</option>
         </select>
         <select
           value={stage}
@@ -212,12 +219,12 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
                 <td className="py-3 px-4">
                   <span
                     className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
-                      r.source === "lead-extractor"
+                      r.source !== "popup"
                         ? "bg-accent/15 text-accent"
                         : "bg-white/[0.06] text-muted"
                     }`}
                   >
-                    {r.source === "lead-extractor" ? "Lead Extractor" : "Pop-up"}
+                    {SOURCE_LABELS[r.source]}
                   </span>
                 </td>
                 <td className="py-3 px-4 text-muted">{r.detail}</td>
