@@ -11,7 +11,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/FeatureIcon";
 import { ScreenshotPlaceholder } from "@/components/plataforma/ScreenshotPlaceholder";
 import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
-import { WHATSAPP_LINK, WHATSAPP_NUMBER_DISPLAY, EMAIL } from "@/lib/links";
+import {
+  LEAD_EXTRACTOR_WHATSAPP_LINK,
+  LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY,
+  EMAIL,
+} from "@/lib/links";
 import { PLANO_INFO, TAXA_AGENTE_PRONTO, type Plano } from "@/lib/asaas-plataforma";
 
 export const metadata: Metadata = {
@@ -33,13 +37,15 @@ const flowSteps: { icon: FeatureIconName; title: string; description: string }[]
   },
   {
     icon: "calendar",
-    title: "Agenda ou insiste",
-    description: "Marca reunião sozinho, ou faz follow-up no momento certo.",
+    title: "Agenda, vende ou insiste",
+    description:
+      "Marca reunião, fecha a venda direto na conversa, ou faz follow-up no momento certo.",
   },
   {
     icon: "kanban",
     title: "Você acompanha",
-    description: "No Kanban e no dashboard, assumindo a conversa quando quiser.",
+    description:
+      "No chat, no Kanban e no dashboard, assumindo a conversa quando quiser.",
   },
 ];
 
@@ -178,6 +184,17 @@ const compactFeatures: FeatureItem[] = [
     title: "IA de apoio pra ajustes",
     description: "Uma IA própria da plataforma te ajuda a configurar e ajustar o agente sempre que precisar.",
   },
+  {
+    icon: "code",
+    title: "Código customizado",
+    description:
+      "Configure ações específicas pro seu agente executar durante a conversa — funções, integrações e chamadas a aplicações externas, disparadas no momento certo do funil.",
+  },
+];
+
+const allFeatureTitles = [
+  ...featureBlocks.flatMap((block) => block.bullets.map((bullet) => bullet.title)),
+  ...compactFeatures.map((feature) => feature.title),
 ];
 
 const cases = [
@@ -500,7 +517,7 @@ export default function PlataformaPage() {
             ))}
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
             {compactFeatures.map((feature, index) => (
               <Reveal
                 key={feature.title}
@@ -589,11 +606,6 @@ export default function PlataformaPage() {
               </tbody>
             </table>
           </Reveal>
-          <p className="text-sm text-muted-2 mt-6 max-w-3xl mx-auto">
-            Nenhum dos dois caminhos inclui integrações externas específicas
-            (CRM, agendas próprias fora do Google Agenda/Cal.com) — isso faz
-            parte do escopo da implementação completa consultiva.
-          </p>
         </Section>
 
         {/* Calculadora de ROI */}
@@ -682,7 +694,7 @@ export default function PlataformaPage() {
                   Volume de conversas sob medida
                 </li>
               </ul>
-              <CTAButton href={WHATSAPP_LINK} external variant="secondary" icon={false}>
+              <CTAButton href={LEAD_EXTRACTOR_WHATSAPP_LINK} external variant="secondary" icon={false}>
                 Falar com a gente
               </CTAButton>
             </Reveal>
@@ -728,7 +740,7 @@ export default function PlataformaPage() {
               cenário e confirma se essa é a melhor opção pra você agora.
             </p>
             <div className="relative">
-              <CTAButton href={WHATSAPP_LINK} external size="lg">
+              <CTAButton href={LEAD_EXTRACTOR_WHATSAPP_LINK} external size="lg">
                 Falar no WhatsApp
               </CTAButton>
             </div>
@@ -776,6 +788,34 @@ export default function PlataformaPage() {
           </Reveal>
         </Section>
 
+        {/* Resumo das funcionalidades */}
+        <Section divider className="bg-tint">
+          <Reveal className="max-w-2xl mx-auto text-center mb-12">
+            <Eyebrow>Resumo</Eyebrow>
+            <SectionTitle>Tudo que vem com o seu acesso.</SectionTitle>
+          </Reveal>
+          <Reveal delay={80} className="max-w-4xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+              {allFeatureTitles.map((title) => (
+                <div key={title} className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M5 13l4 4L19 7"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span className="text-sm text-muted">{title}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+
         {/* CTA final */}
         <Section divider>
           <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
@@ -801,12 +841,12 @@ export default function PlataformaPage() {
           <p>Plataforma by Revolução AI</p>
           <div className="flex items-center gap-6">
             <a
-              href={WHATSAPP_LINK}
+              href={LEAD_EXTRACTOR_WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-text transition-colors"
             >
-              {WHATSAPP_NUMBER_DISPLAY}
+              {LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY}
             </a>
             <a href={`mailto:${EMAIL}`} className="hover:text-text transition-colors">
               {EMAIL}

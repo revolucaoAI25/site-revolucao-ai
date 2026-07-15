@@ -94,6 +94,13 @@ const paths: Record<string, ReactNode> = {
       <path d="M13 4.3h4.6a2 2 0 0 1 2 2v5.4a2 2 0 0 1-2 2H17v2.3l-2.7-2.3" />
     </>
   ),
+  code: (
+    <>
+      <path d="M8.5 7.5 3.5 12l5 4.5" />
+      <path d="M15.5 7.5l5 4.5-5 4.5" />
+      <path d="M13 5l-2 14" />
+    </>
+  ),
 };
 
 export type FeatureIconName = keyof typeof paths;

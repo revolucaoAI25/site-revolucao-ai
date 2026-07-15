@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { BusinessInfoForm } from "@/components/plataforma/BusinessInfoForm";
-import { WHATSAPP_LINK, WHATSAPP_NUMBER_DISPLAY } from "@/lib/links";
+import {
+  LEAD_EXTRACTOR_WHATSAPP_LINK,
+  LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY,
+} from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Assinatura recebida — Plataforma",
@@ -85,12 +88,12 @@ export default async function ObrigadoPage({
           <p className="text-center text-sm text-muted">
             Alguma dúvida enquanto isso?{" "}
             <a
-              href={WHATSAPP_LINK}
+              href={LEAD_EXTRACTOR_WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="text-accent hover:underline"
             >
-              Fala com a gente ({WHATSAPP_NUMBER_DISPLAY})
+              Fala com a gente ({LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY})
             </a>
           </p>
         </Container>

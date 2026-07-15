@@ -5,7 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { WHATSAPP_LINK, WHATSAPP_NUMBER_DISPLAY } from "@/lib/links";
+import {
+  LEAD_EXTRACTOR_WHATSAPP_LINK,
+  LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY,
+} from "@/lib/links";
 
 const PLANOS = {
   start: { label: "Start", conversas: "200 conversas/mês", preco: "R$399/mês" },
@@ -222,12 +225,12 @@ export function PlataformaAssinarForm() {
               <p className="text-center text-sm text-muted mt-6">
                 Problema no pagamento?{" "}
                 <a
-                  href={WHATSAPP_LINK}
+                  href={LEAD_EXTRACTOR_WHATSAPP_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent hover:underline"
                 >
-                  Fala com a gente ({WHATSAPP_NUMBER_DISPLAY})
+                  Fala com a gente ({LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY})
                 </a>
               </p>
             </>
