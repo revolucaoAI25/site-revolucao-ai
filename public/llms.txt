@@ -1,0 +1,20 @@
+# Revolução AI
+
+> Agentes de IA para pré-vendas via WhatsApp, e formação para quem quer construir ou escalar uma agência de IA.
+
+O Revolução AI implementa agentes de IA que qualificam, atendem e agendam leads no WhatsApp automaticamente, 24 horas por dia — script consistente, sem as variações que acontecem numa equipe humana. Também ensina outras pessoas a construírem uma agência de IA de resultado, e oferece produtos de entrada (ferramenta de prospecção e acesso self-service à plataforma) pra quem quer começar com orçamento menor.
+
+## Produtos e páginas
+
+- [Home](https://www.revolucao-ai.com/): visão geral do Revolução AI — implementação de agentes de IA e formação para agências de IA.
+- [Agentes de IA para Pré-Vendas](https://www.revolucao-ai.com/agentes-de-ia): implementação completa de agentes de IA no WhatsApp que qualificam, atendem e agendam leads no automático.
+- [Formação para Agências de IA](https://www.revolucao-ai.com/formacao): curso e mentoria pra quem quer construir ou escalar uma agência de IA lucrativa e previsível.
+- [Lead Extractor](https://www.revolucao-ai.com/lead-extractor): ferramenta de prospecção ativa que encontra leads qualificados via Google Maps e CNPJ, com automação de busca direto pro Google Sheets.
+- [Plataforma](https://www.revolucao-ai.com/plataforma): acesso self-service à Chatflux — a mesma plataforma usada nas implementações completas — com treinamento guiado pra construir o próprio agente de IA, com ou sem uma primeira versão pronta (Agente Pronto).
+
+## Contato
+
+- WhatsApp: +55 31 3157-6084
+- E-mail: contato@revolucao-ai.com
+- Instagram: https://instagram.com/revolucao.ai
+- Endereço: Rua Sergipe, 1440 - Savassi, Belo Horizonte (MG)

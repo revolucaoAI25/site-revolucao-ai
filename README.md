@@ -321,11 +321,54 @@ Sem mexer em conteúdo/estrutura das páginas, só na parte técnica:
   pra garantir que o painel nunca apareça no Google mesmo que alguém
   linke pra lá (já são protegidos por login, isso é defesa extra).
 
-Pendência sua: como o domínio mudou de provedor recentemente, confirma se
-`www.revolucao-ai.com` é mesmo o domínio de produção configurado na
-Vercel (foi o que apareceu marcado como "Production" na tela de domínios)
-— se for o apex sem `www`, é só trocar o `siteUrl` em `src/app/layout.tsx`,
-`src/app/robots.ts` e `src/app/sitemap.ts`.
+Domínio de produção confirmado: `www.revolucao-ai.com` (já é o que está
+em `siteUrl` nos três arquivos acima).
+
+### GEO (Generative Engine Optimization)
+
+Igual ao SEO acima, sem mexer em conteúdo/estrutura — só deixando o site
+mais fácil de ler, entender e citar por mecanismos de IA generativa
+(ChatGPT, Perplexity, Google AI Overviews etc.):
+
+- `src/lib/faq-jsonld.ts` — gera um JSON-LD `FAQPage` a partir dos
+  mesmos itens já exibidos em cada `FAQAccordion` (nenhuma pergunta ou
+  resposta nova, só a mesma marcada de um jeito que IA/buscadores
+  conseguem extrair e citar direto). Aplicado nas 5 páginas públicas que
+  têm FAQ (Home, Agentes de IA, Formação, Lead Extractor, Plataforma).
+- `public/llms.txt` — convenção emergente (parecida com `robots.txt`, mas
+  pra mecanismos de IA) com um resumo direto do que é o Revolução AI, os
+  produtos/páginas e contato — pensado pra ser consumido por LLMs que
+  buscam entender o site rapidamente.
+- `src/app/robots.ts` — além da regra geral, adiciona permissão explícita
+  pros principais rastreadores de IA (GPTBot, ClaudeBot, PerplexityBot,
+  Google-Extended, CCBot etc.), deixando claro que o conteúdo pode ser
+  lido e citado por eles.
+
+## Google Search Console (páginas antigas do Wix ainda aparecendo)
+
+Depois da migração de domínio, é normal o Google ainda mostrar por um
+tempo páginas antigas do site no Wix (ele só atualiza o índice quando
+re-rastreia). Como o Next.js já responde 404 de verdade pra qualquer URL
+antiga que não existe mais na estrutura nova, isso se resolve sozinho aos
+poucos — mas dá pra acelerar:
+
+1. Cria (se ainda não tiver) uma propriedade do domínio em
+   [Google Search Console](https://search.google.com/search-console) pra
+   `www.revolucao-ai.com`.
+2. Em **Sitemaps**, envia `https://www.revolucao-ai.com/sitemap.xml`
+   (gerado automaticamente por `src/app/sitemap.ts`).
+3. Em **Inspeção de URL**, cola a URL de cada página nova importante
+   (Home, Agentes de IA, Formação, Lead Extractor, Plataforma) e clica em
+   "Solicitar indexação" — acelera o Google revisitar essas páginas.
+4. Pra cada URL antiga do Wix que ainda aparecer na busca (tipo as de
+   blog que não existem mais na estrutura nova): usa a ferramenta
+   **Removals** (Remoções) no Search Console pra pedir a remoção
+   temporária dela dos resultados — funciona rápido (geralmente em
+   horas) enquanto o Google não reprocessa o índice de vez.
+5. Se alguma dessas URLs antigas correspondia a conteúdo que ainda existe
+   (só que em outro caminho no site novo), o ideal é criar um redirect
+   301 da URL antiga pra nova — me manda a lista de URLs antigas que
+   você quer preservar que eu configuro isso em `next.config.ts`.
 
 ## Deploy
 

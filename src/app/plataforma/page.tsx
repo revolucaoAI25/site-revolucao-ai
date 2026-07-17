@@ -18,6 +18,35 @@ import {
   EMAIL,
 } from "@/lib/links";
 import { PLANO_INFO, TAXA_AGENTE_PRONTO, type Plano } from "@/lib/asaas-plataforma";
+import { faqPageJsonLd } from "@/lib/faq-jsonld";
+
+const faqItems = [
+  {
+    question: "Isso é a mesma coisa que a implementação completa do Revolução AI?",
+    answer:
+      "Não. Aqui você tem acesso à mesma ferramenta e capacitação pra construir e ajustar seu agente sozinho. Na implementação completa, o Revolução AI cuida de todo o diagnóstico, estratégia, integrações e acompanhamento de resultado.",
+  },
+  {
+    question: "Consigo integrar com meu CRM ou sistema de agendamento próprio?",
+    answer:
+      "A gente não faz essa integração por você nesse produto, mas é totalmente possível fazer — a integração nativa pronta, sem esforço, é só com Google Agenda/Cal.com. Pra CRM externo ou agenda própria, você (ou quem cuida da parte técnica do seu negócio) configura por conta própria, com a ajuda da IA de apoio dentro da plataforma.",
+  },
+  {
+    question: "E se eu quiser migrar para a implementação completa depois?",
+    answer:
+      "Sim, é possível. Muitos clientes começam pela plataforma e, ao sentir a necessidade de mais suporte, estratégia ou integrações, avançam para a implementação completa.",
+  },
+  {
+    question: "Preciso saber programar para usar a plataforma?",
+    answer:
+      "Não. A construção do agente é feita por configuração — prompt, base de perguntas e respostas, follow-ups — sem necessidade de código.",
+  },
+  {
+    question: "O que acontece se eu não conseguir configurar sozinho?",
+    answer:
+      "Você tem suporte via e-mail e uma IA de apoio dentro da própria plataforma pra ajudar nos ajustes. Se preferir que o Revolução AI monte a primeira versão pra você, essa é a proposta do Agente Pronto.",
+  },
+];
 
 const title = "Plataforma — Construa seu Agente de IA para Pré-Vendas";
 const description =
@@ -779,6 +808,10 @@ export default function PlataformaPage() {
 
         {/* FAQ */}
         <Section id="faq" divider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(faqItems)) }}
+          />
           <Reveal>
             <Eyebrow>Perguntas frequentes</Eyebrow>
             <SectionTitle className="mb-10 max-w-2xl">
@@ -786,35 +819,7 @@ export default function PlataformaPage() {
             </SectionTitle>
           </Reveal>
           <Reveal delay={100} className="max-w-3xl">
-            <FAQAccordion
-              items={[
-                {
-                  question: "Isso é a mesma coisa que a implementação completa do Revolução AI?",
-                  answer:
-                    "Não. Aqui você tem acesso à mesma ferramenta e capacitação pra construir e ajustar seu agente sozinho. Na implementação completa, o Revolução AI cuida de todo o diagnóstico, estratégia, integrações e acompanhamento de resultado.",
-                },
-                {
-                  question: "Consigo integrar com meu CRM ou sistema de agendamento próprio?",
-                  answer:
-                    "A gente não faz essa integração por você nesse produto, mas é totalmente possível fazer — a integração nativa pronta, sem esforço, é só com Google Agenda/Cal.com. Pra CRM externo ou agenda própria, você (ou quem cuida da parte técnica do seu negócio) configura por conta própria, com a ajuda da IA de apoio dentro da plataforma.",
-                },
-                {
-                  question: "E se eu quiser migrar para a implementação completa depois?",
-                  answer:
-                    "Sim, é possível. Muitos clientes começam pela plataforma e, ao sentir a necessidade de mais suporte, estratégia ou integrações, avançam para a implementação completa.",
-                },
-                {
-                  question: "Preciso saber programar para usar a plataforma?",
-                  answer:
-                    "Não. A construção do agente é feita por configuração — prompt, base de perguntas e respostas, follow-ups — sem necessidade de código.",
-                },
-                {
-                  question: "O que acontece se eu não conseguir configurar sozinho?",
-                  answer:
-                    "Você tem suporte via e-mail e uma IA de apoio dentro da própria plataforma pra ajudar nos ajustes. Se preferir que o Revolução AI monte a primeira versão pra você, essa é a proposta do Agente Pronto.",
-                },
-              ]}
-            />
+            <FAQAccordion items={faqItems} />
           </Reveal>
         </Section>
 

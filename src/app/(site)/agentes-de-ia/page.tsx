@@ -10,6 +10,30 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 import { TechLogos } from "@/components/ui/TechLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
+import { faqPageJsonLd } from "@/lib/faq-jsonld";
+
+const faqItems = [
+  {
+    question: "Funciona para o meu nicho?",
+    answer:
+      "Já aplicamos essa solução com sucesso em escritórios de advocacia, clínicas, estética, odontologia, franquias e outros negócios que recebem leads via tráfego ou indicação.",
+  },
+  {
+    question: "Preciso ter equipe técnica para tocar isso?",
+    answer:
+      "Não. Toda a implementação, integração e configuração é feita pela nossa equipe. Você não precisa se envolver em nada técnico.",
+  },
+  {
+    question: "E se a IA errar ou não souber responder algo?",
+    answer:
+      "O agente é treinado com dados reais do seu negócio e passa por calibragem antes e depois de entrar em operação. Além disso, a otimização é contínua — não é um sistema que roda sozinho sem acompanhamento.",
+  },
+  {
+    question: "Isso substitui minha equipe comercial?",
+    answer:
+      "Não necessariamente — em muitos casos, o agente libera a equipe para focar em fechamento, atendimento presencial e relacionamento, enquanto cuida da triagem, qualificação e agendamento.",
+  },
+];
 
 const title = "Agentes de IA para Pré-Vendas";
 const description =
@@ -458,6 +482,10 @@ export default function AgentesDeIA() {
 
       {/* 6.11 FAQ */}
       <Section divider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(faqItems)) }}
+        />
         <Reveal>
           <Eyebrow>Perguntas frequentes</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
@@ -465,30 +493,7 @@ export default function AgentesDeIA() {
           </SectionTitle>
         </Reveal>
         <Reveal delay={100} className="max-w-3xl">
-          <FAQAccordion
-            items={[
-              {
-                question: "Funciona para o meu nicho?",
-                answer:
-                  "Já aplicamos essa solução com sucesso em escritórios de advocacia, clínicas, estética, odontologia, franquias e outros negócios que recebem leads via tráfego ou indicação.",
-              },
-              {
-                question: "Preciso ter equipe técnica para tocar isso?",
-                answer:
-                  "Não. Toda a implementação, integração e configuração é feita pela nossa equipe. Você não precisa se envolver em nada técnico.",
-              },
-              {
-                question: "E se a IA errar ou não souber responder algo?",
-                answer:
-                  "O agente é treinado com dados reais do seu negócio e passa por calibragem antes e depois de entrar em operação. Além disso, a otimização é contínua — não é um sistema que roda sozinho sem acompanhamento.",
-              },
-              {
-                question: "Isso substitui minha equipe comercial?",
-                answer:
-                  "Não necessariamente — em muitos casos, o agente libera a equipe para focar em fechamento, atendimento presencial e relacionamento, enquanto cuida da triagem, qualificação e agendamento.",
-              },
-            ]}
-          />
+          <FAQAccordion items={faqItems} />
         </Reveal>
       </Section>
 

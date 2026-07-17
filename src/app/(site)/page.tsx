@@ -12,6 +12,25 @@ import { InstagramShowcase } from "@/components/ui/InstagramShowcase";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 import { INSTAGRAM_LINK, INSTAGRAM_HANDLE } from "@/lib/links";
+import { faqPageJsonLd } from "@/lib/faq-jsonld";
+
+const faqItems = [
+  {
+    question: "O Revolução AI é uma empresa de chatbot?",
+    answer:
+      "Não. Chatbot responde perguntas soltas. Nós implementamos uma solução comercial completa — agente, infraestrutura e inteligência comercial juntos, desenhada para gerar agendamento e conversão.",
+  },
+  {
+    question: "Vocês atendem qualquer tipo de negócio?",
+    answer:
+      "Atendemos negócios que recebem leads via tráfego ou indicação e precisam de mais velocidade e consistência no pré-vendas.",
+  },
+  {
+    question: "Além da implementação, vocês também ensinam a fazer isso?",
+    answer:
+      "Sim. Além da agência, temos uma frente de formação para quem quer construir ou escalar uma agência de IA própria.",
+  },
+];
 
 export default function Home() {
   return (
@@ -333,6 +352,10 @@ export default function Home() {
 
       {/* 5.8 FAQ */}
       <Section divider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(faqItems)) }}
+        />
         <Reveal>
           <Eyebrow>Perguntas frequentes</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
@@ -340,26 +363,7 @@ export default function Home() {
           </SectionTitle>
         </Reveal>
         <Reveal delay={100} className="max-w-3xl">
-          <FAQAccordion
-            items={[
-              {
-                question: "O Revolução AI é uma empresa de chatbot?",
-                answer:
-                  "Não. Chatbot responde perguntas soltas. Nós implementamos uma solução comercial completa — agente, infraestrutura e inteligência comercial juntos, desenhada para gerar agendamento e conversão.",
-              },
-              {
-                question: "Vocês atendem qualquer tipo de negócio?",
-                answer:
-                  "Atendemos negócios que recebem leads via tráfego ou indicação e precisam de mais velocidade e consistência no pré-vendas.",
-              },
-              {
-                question:
-                  "Além da implementação, vocês também ensinam a fazer isso?",
-                answer:
-                  "Sim. Além da agência, temos uma frente de formação para quem quer construir ou escalar uma agência de IA própria.",
-              },
-            ]}
-          />
+          <FAQAccordion items={faqItems} />
         </Reveal>
       </Section>
 

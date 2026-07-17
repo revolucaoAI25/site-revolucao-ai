@@ -16,6 +16,40 @@ import {
   LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK,
   LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK,
 } from "@/lib/links";
+import { faqPageJsonLd } from "@/lib/faq-jsonld";
+
+const faqItems = [
+  {
+    question: "Preciso saber programar ou configurar algo técnico?",
+    answer:
+      "Não. Depois de assinar, você só usa: escolhe o nicho, a região e os filtros — a ferramenta faz o resto.",
+  },
+  {
+    question: "Preciso ter minha própria chave de API do Google Maps?",
+    answer:
+      "Sim, a busca por Google Maps usa a API do Google e depende de uma chave sua (gratuita de criar). A ferramenta já vem com um sistema automático que rotaciona o uso entre suas chaves, mantendo tudo dentro do limite gratuito da API e evitando gastos extras.",
+  },
+  {
+    question: "Os planos têm fidelidade?",
+    answer:
+      "O mensal não tem fidelidade, cancele quando quiser. O anual é um compromisso de 12 meses, faturado em parcelas fixas.",
+  },
+  {
+    question: "Funciona pra qualquer nicho e região?",
+    answer:
+      "O Google Maps busca negócios no Brasil e em outros países. A busca por CNPJ é exclusiva para empresas brasileiras, com dados da Receita Federal.",
+  },
+  {
+    question: "Os leads exportados somem se eu cancelar?",
+    answer:
+      "Não. Tudo que já foi exportado pro seu Google Sheets ou baixado em Excel continua seu, independente da assinatura.",
+  },
+  {
+    question: "Posso usar no celular?",
+    answer:
+      "Sim, a plataforma é responsiva — mas a experiência é melhor no desktop, principalmente pra visualizar tabelas com muitas colunas.",
+  },
+];
 
 const title = "Lead Extractor — Ferramenta de Prospecção Ativa";
 const description =
@@ -807,6 +841,10 @@ export default function LeadExtractor() {
 
         {/* FAQ */}
         <Section id="faq" divider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(faqItems)) }}
+          />
           <Reveal>
             <Eyebrow>Perguntas frequentes</Eyebrow>
             <SectionTitle className="mb-10 max-w-2xl">
@@ -814,40 +852,7 @@ export default function LeadExtractor() {
             </SectionTitle>
           </Reveal>
           <Reveal delay={100} className="max-w-3xl">
-            <FAQAccordion
-              items={[
-                {
-                  question: "Preciso saber programar ou configurar algo técnico?",
-                  answer:
-                    "Não. Depois de assinar, você só usa: escolhe o nicho, a região e os filtros — a ferramenta faz o resto.",
-                },
-                {
-                  question: "Preciso ter minha própria chave de API do Google Maps?",
-                  answer:
-                    "Sim, a busca por Google Maps usa a API do Google e depende de uma chave sua (gratuita de criar). A ferramenta já vem com um sistema automático que rotaciona o uso entre suas chaves, mantendo tudo dentro do limite gratuito da API e evitando gastos extras.",
-                },
-                {
-                  question: "Os planos têm fidelidade?",
-                  answer:
-                    "O mensal não tem fidelidade, cancele quando quiser. O anual é um compromisso de 12 meses, faturado em parcelas fixas.",
-                },
-                {
-                  question: "Funciona pra qualquer nicho e região?",
-                  answer:
-                    "O Google Maps busca negócios no Brasil e em outros países. A busca por CNPJ é exclusiva para empresas brasileiras, com dados da Receita Federal.",
-                },
-                {
-                  question: "Os leads exportados somem se eu cancelar?",
-                  answer:
-                    "Não. Tudo que já foi exportado pro seu Google Sheets ou baixado em Excel continua seu, independente da assinatura.",
-                },
-                {
-                  question: "Posso usar no celular?",
-                  answer:
-                    "Sim, a plataforma é responsiva — mas a experiência é melhor no desktop, principalmente pra visualizar tabelas com muitas colunas.",
-                },
-              ]}
-            />
+            <FAQAccordion items={faqItems} />
           </Reveal>
         </Section>
 

@@ -6,6 +6,25 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { Reveal } from "@/components/ui/Reveal";
+import { faqPageJsonLd } from "@/lib/faq-jsonld";
+
+const faqItems = [
+  {
+    question: "Preciso saber programar para construir agentes de IA?",
+    answer:
+      "Não. Ensinamos o processo de estruturação, venda e entrega — incluindo o uso de ferramentas que não exigem código.",
+  },
+  {
+    question: "Como funciona o ensino de vocês?",
+    answer:
+      "Temos formatos para cada momento: desde um ebook gratuito, passando por curso e mentoria, até uma implementação comercial completa dentro da sua própria agência. Dependendo do cenário em que você estiver, a gente te ajuda a entender qual faz mais sentido.",
+  },
+  {
+    question: "Em quanto tempo consigo ver resultado?",
+    answer:
+      "Depende do seu ponto de partida e da sua dedicação — costuma levar de algumas semanas a alguns meses para os primeiros resultados, seguindo o mesmo caminho que usamos para sair do zero a uma agência de seis dígitos.",
+  },
+];
 
 const title = "Formação para Agências de IA";
 const description =
@@ -326,6 +345,10 @@ export default function Formacao() {
 
       {/* 7.7 FAQ */}
       <Section divider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(faqItems)) }}
+        />
         <Reveal>
           <Eyebrow>Perguntas frequentes</Eyebrow>
           <SectionTitle className="mb-10 max-w-2xl">
@@ -333,26 +356,7 @@ export default function Formacao() {
           </SectionTitle>
         </Reveal>
         <Reveal delay={100} className="max-w-3xl">
-          <FAQAccordion
-            items={[
-              {
-                question:
-                  "Preciso saber programar para construir agentes de IA?",
-                answer:
-                  "Não. Ensinamos o processo de estruturação, venda e entrega — incluindo o uso de ferramentas que não exigem código.",
-              },
-              {
-                question: "Como funciona o ensino de vocês?",
-                answer:
-                  "Temos formatos para cada momento: desde um ebook gratuito, passando por curso e mentoria, até uma implementação comercial completa dentro da sua própria agência. Dependendo do cenário em que você estiver, a gente te ajuda a entender qual faz mais sentido.",
-              },
-              {
-                question: "Em quanto tempo consigo ver resultado?",
-                answer:
-                  "Depende do seu ponto de partida e da sua dedicação — costuma levar de algumas semanas a alguns meses para os primeiros resultados, seguindo o mesmo caminho que usamos para sair do zero a uma agência de seis dígitos.",
-              },
-            ]}
-          />
+          <FAQAccordion items={faqItems} />
         </Reveal>
       </Section>
 
