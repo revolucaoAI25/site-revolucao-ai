@@ -7,10 +7,16 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { Reveal } from "@/components/ui/Reveal";
 
+const title = "Formação para Agências de IA";
+const description =
+  "Aprenda a construir ou escalar uma agência de IA lucrativa e previsível, com o método validado na prática pelo Revolução AI.";
+
 export const metadata: Metadata = {
-  title: "Formação para Agências de IA",
-  description:
-    "Aprenda a construir ou escalar uma agência de IA lucrativa e previsível, com o método validado na prática pelo Revolução AI.",
+  title,
+  description,
+  alternates: { canonical: "/formacao" },
+  openGraph: { title, description, type: "website" },
+  twitter: { card: "summary", title, description },
 };
 
 export default function Formacao() {

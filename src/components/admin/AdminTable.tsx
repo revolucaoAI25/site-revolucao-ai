@@ -33,15 +33,25 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
   const [search, setSearch] = useState("");
   const [source, setSource] = useState<"todos" | AdminRecord["source"]>("todos");
   const [stage, setStage] = useState<"todos" | Stage>("todos");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<AdminRecord | null>(null);
   const [deleting, setDeleting] = useState(false);
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
+    // Comparação por dia local (não UTC), pra "De"/"Até" baterem com o que
+    // o admin vê no seletor de data, independente do fuso do navegador.
+    const fromDay = dateFrom ? new Date(`${dateFrom}T00:00:00`) : null;
+    const toDay = dateTo ? new Date(`${dateTo}T23:59:59`) : null;
+
     return records.filter((r) => {
       if (source !== "todos" && r.source !== source) return false;
       if (stage !== "todos" && r.stage !== stage) return false;
+      const createdAt = new Date(r.createdAt);
+      if (fromDay && createdAt < fromDay) return false;
+      if (toDay && createdAt > toDay) return false;
       if (!term) return true;
       return (
         r.name?.toLowerCase().includes(term) ||
@@ -50,7 +60,7 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
         r.detail.toLowerCase().includes(term)
       );
     });
-  }, [records, search, source, stage]);
+  }, [records, search, source, stage, dateFrom, dateTo]);
 
   function toggleSelected(key: string) {
     setSelected((prev) => {
@@ -156,6 +166,41 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+        <label className="flex items-center gap-2 text-sm text-muted-2">
+          De
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            max={dateTo || undefined}
+            className="rounded-2xl border border-white/10 bg-surface-2 px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50"
+          />
+        </label>
+        <label className="flex items-center gap-2 text-sm text-muted-2">
+          Até
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            min={dateFrom || undefined}
+            className="rounded-2xl border border-white/10 bg-surface-2 px-4 py-2.5 text-sm focus:outline-none focus:border-accent/50"
+          />
+        </label>
+        {(dateFrom || dateTo) && (
+          <button
+            type="button"
+            onClick={() => {
+              setDateFrom("");
+              setDateTo("");
+            }}
+            className="text-xs font-semibold text-muted hover:text-text transition-colors cursor-pointer"
+          >
+            Limpar datas
+          </button>
+        )}
       </div>
 
       <div className="flex items-center justify-between">

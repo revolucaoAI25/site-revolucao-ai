@@ -17,10 +17,33 @@ import {
   LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK,
 } from "@/lib/links";
 
+const title = "Lead Extractor — Ferramenta de Prospecção Ativa";
+const description =
+  "Encontre centenas de leads qualificados com Google Maps e CNPJ, e mantenha uma prospecção automática rodando sozinha, direto pro Google Sheets.";
+
 export const metadata: Metadata = {
-  title: "Lead Extractor — Ferramenta de Prospecção Ativa",
-  description:
-    "Encontre centenas de leads qualificados com Google Maps e CNPJ, e mantenha uma prospecção automática rodando sozinha, direto pro Google Sheets.",
+  title,
+  description,
+  alternates: { canonical: "/lead-extractor" },
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    images: [
+      {
+        url: "/lead-extractor/hero-dashboard.png",
+        width: 1344,
+        height: 556,
+        alt: "Painel do Lead Extractor",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/lead-extractor/hero-dashboard.png"],
+  },
 };
 
 type ComparativoValor = true | false | string;

@@ -258,9 +258,9 @@ dados (`src/lib/admin-data.ts`, que junta `leads` + `asaas_checkouts` +
   momento pra corrigir ou mover à mão — e editar
   (nome/e-mail/telefone/estágio) ou excluir cada card direto ali.
 - **`/admin/tabela`** — tabela detalhada, com busca por nome/e-mail/telefone,
-  filtro por fonte/estágio, edição por linha, exclusão individual e exclusão
-  em massa (seleciona várias linhas com as caixinhas e clica em "Excluir
-  selecionados").
+  filtro por fonte/estágio/data (De/Até, por dia), edição por linha, exclusão
+  individual e exclusão em massa (seleciona várias linhas com as caixinhas e
+  clica em "Excluir selecionados").
 
 Toda edição/exclusão passa por `/api/admin/records` (`src/app/api/admin/records/route.ts`),
 que exige sessão válida (verificada de novo ali, além do proxy — rota de
@@ -296,6 +296,36 @@ depende delas no momento de logar) retorna erro — o painel não tem como
 funcionar sem login configurado, então aqui não existe modo "degradado";
 o resto do site continua funcionando normalmente, já que o proxy só roda
 nas rotas `/admin`.
+
+## SEO
+
+Sem mexer em conteúdo/estrutura das páginas, só na parte técnica:
+
+- `src/app/robots.ts` e `src/app/sitemap.ts` — geram `/robots.txt` e
+  `/sitemap.xml` dinamicamente (rotas nativas do Next.js). O sitemap lista
+  as páginas públicas (Home, Agentes de IA, Formação, Lead Extractor,
+  Plataforma); o robots bloqueia `/admin`, `/api` e as páginas de
+  "obrigado" do checkout.
+- `src/app/layout.tsx` — `metadataBase` corrigido pro domínio real
+  (`https://www.revolucao-ai.com`, antes apontava pra um domínio errado),
+  Open Graph + Twitter Card padrão (com imagem), e um JSON-LD de
+  `Organization` (nome, logo, Instagram, telefone) pra melhorar como o
+  Google entende o negócio.
+- Cada página pública (`agentes-de-ia`, `formacao`, `lead-extractor`,
+  `plataforma`) ganhou seu próprio `openGraph`/`twitter` (título e
+  descrição específicos, em vez de herdar o genérico do layout raiz) e
+  `alternates.canonical` apontando pro próprio caminho — isso deixa o
+  preview de compartilhamento (WhatsApp, redes sociais) correto pra cada
+  página, não só a genérica do site inteiro.
+- `/admin/*` e `/admin/login` — `robots: { index: false, follow: false }`,
+  pra garantir que o painel nunca apareça no Google mesmo que alguém
+  linke pra lá (já são protegidos por login, isso é defesa extra).
+
+Pendência sua: como o domínio mudou de provedor recentemente, confirma se
+`www.revolucao-ai.com` é mesmo o domínio de produção configurado na
+Vercel (foi o que apareceu marcado como "Production" na tela de domínios)
+— se for o apex sem `www`, é só trocar o `siteUrl` em `src/app/layout.tsx`,
+`src/app/robots.ts` e `src/app/sitemap.ts`.
 
 ## Deploy
 

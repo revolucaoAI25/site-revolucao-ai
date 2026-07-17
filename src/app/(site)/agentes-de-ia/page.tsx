@@ -11,10 +11,16 @@ import { TechLogos } from "@/components/ui/TechLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 
+const title = "Agentes de IA para Pré-Vendas";
+const description =
+  "Agentes de IA no WhatsApp que qualificam, atendem e agendam seus leads no automático, 24 horas por dia.";
+
 export const metadata: Metadata = {
-  title: "Agentes de IA para Pré-Vendas",
-  description:
-    "Agentes de IA no WhatsApp que qualificam, atendem e agendam seus leads no automático, 24 horas por dia.",
+  title,
+  description,
+  alternates: { canonical: "/agentes-de-ia" },
+  openGraph: { title, description, type: "website" },
+  twitter: { card: "summary", title, description },
 };
 
 const gains = [

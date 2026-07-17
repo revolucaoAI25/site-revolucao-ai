@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getSupabaseAuthServerClient } from "@/lib/supabase-auth-server";
 import { AdminNav } from "@/components/admin/AdminNav";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 /**
  * O proxy.ts já barra quem não tem sessão antes de chegar aqui, mas

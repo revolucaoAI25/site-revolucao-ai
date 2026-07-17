@@ -19,10 +19,16 @@ import {
 } from "@/lib/links";
 import { PLANO_INFO, TAXA_AGENTE_PRONTO, type Plano } from "@/lib/asaas-plataforma";
 
+const title = "Plataforma — Construa seu Agente de IA para Pré-Vendas";
+const description =
+  "Acesso completo à Chatflux, a plataforma por trás dos resultados do Revolução AI, com treinamento guiado pra você construir seu próprio agente de IA para WhatsApp.";
+
 export const metadata: Metadata = {
-  title: "Plataforma — Construa seu Agente de IA para Pré-Vendas",
-  description:
-    "Acesso completo à Chatflux, a plataforma por trás dos resultados do Revolução AI, com treinamento guiado pra você construir seu próprio agente de IA para WhatsApp.",
+  title,
+  description,
+  alternates: { canonical: "/plataforma" },
+  openGraph: { title, description, type: "website" },
+  twitter: { card: "summary", title, description },
 };
 
 const flowSteps: { icon: FeatureIconName; title: string; description: string }[] = [
