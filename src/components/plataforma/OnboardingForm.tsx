@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import {
   emptyOnboardingData,
   type OnboardingData,
   type TipoAgente,
 } from "@/lib/onboarding-types";
 import { CalcomTutorialVideo } from "./CalcomTutorialVideo";
-import { VideoPlaceholder } from "./VideoPlaceholder";
 
 const SUPPORT_EMAIL = "suporte@revolucao-ai.com";
 const FACEBOOK_BM_EMAIL = "jvitor.no@gmail.com";
@@ -376,10 +375,11 @@ const steps: Step[] = [
               helper="Precisamos disso pra configurar sua agenda dentro da plataforma — fica salvo com o mesmo acesso restrito de todos os seus outros dados aqui."
             />
             <TextArea
-              label="Quantas agendas (calendários) você vai sincronizar no Cal.com?"
+              label="Quais agendas do Google você sincronizou no Cal.com?"
               required
               rows={3}
-              helper="Se você tiver mais de um funcionário, closer ou vendedor que também vai ter reuniões agendadas pela IA, é preciso sincronizar (conectar) a agenda de cada um deles no Cal.com — não só a sua. Descreva quantas agendas serão sincronizadas e pra quem é cada uma. Se alguma estiver numa conta diferente da que você passou o login acima, avise aqui: vamos precisar do acesso dela também."
+              helper="Dentro da conta do Cal.com que você criou, conecte (sincronize) a agenda do Google de cada funcionário, closer ou vendedor que também vai ter reuniões marcadas pela IA — não só a sua. Depois, liste aqui quais agendas foram sincronizadas e de quem é cada uma (nome da pessoa/função). É essa lista que a gente usa pra criar os eventos certos pra cada um na hora de configurar o agente."
+              placeholder="Ex.: agenda da Maria (closer) e agenda do João (vendedor), ambas sincronizadas no Cal.com."
               value={data.calcom.quantidadeAgendas}
               onChange={(v) => patch("calcom")("quantidadeAgendas", v)}
             />
@@ -452,18 +452,24 @@ const steps: Step[] = [
           onChange={(v) => patch("facebookBm")("temBm", v)}
         />
         {data.facebookBm.temBm === "Não" && (
-          <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-surface-2/50 p-6">
-            <div>
-              <p className="text-sm font-semibold mb-2">Como criar sua Business Manager (BM)</p>
-              <p className="text-sm text-muted-2 leading-relaxed mb-4">
-                Sem problema — leva poucos minutos. Acesse business.facebook.com, clique em
-                &quot;Criar conta&quot;, informe o nome da sua empresa, seu nome completo e um
-                e-mail comercial, e confirme os dados básicos do negócio. Assista ao vídeo
-                abaixo se preferir ver o passo a passo, e depois volte aqui pra adicionar o
-                e-mail acima com Controle total.
-              </p>
-              <VideoPlaceholder label="Como criar sua Business Manager no Facebook" />
-            </div>
+          <div className="flex flex-col gap-3 rounded-3xl border border-white/10 bg-surface-2/50 p-6">
+            <p className="text-sm font-semibold">Como criar sua Business Manager (BM)</p>
+            <p className="text-sm text-muted-2 leading-relaxed">
+              Sem problema — leva poucos minutos. Passo a passo:
+            </p>
+            <ol className="flex flex-col gap-2 text-sm text-muted-2 leading-relaxed list-decimal pl-5">
+              <li>Acesse business.facebook.com e clique em &quot;Criar conta&quot;.</li>
+              <li>
+                Informe o nome da sua empresa, seu nome completo e um e-mail comercial (não
+                precisa ser o mesmo do seu Facebook pessoal).
+              </li>
+              <li>Confirme os dados básicos do negócio (país, endereço etc.).</li>
+              <li>
+                Com a BM criada, volte no passo anterior desta etapa e adicione o e-mail{" "}
+                <span className="text-text font-semibold">{FACEBOOK_BM_EMAIL}</span> com{" "}
+                <span className="text-text font-semibold">Controle total</span>.
+              </li>
+            </ol>
           </div>
         )}
         <ToggleField
@@ -952,6 +958,10 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
   const step = steps[stepIndex];
   const isLastStep = stepIndex === steps.length - 1;
 
+  useEffect(() => {
+    if (started) window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [stepIndex, started]);
+
   function goBack() {
     setError(null);
     setStepIndex((i) => Math.max(0, i - 1));
@@ -1013,7 +1023,7 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
         <p className="text-muted leading-relaxed text-sm max-w-md mx-auto">
           {isPreview
             ? "No modo real (com um checkout válido), essa tela confirmaria o envio pro nosso time começar a montar o agente."
-            : "Nosso time já vai começar a montar a primeira versão do seu agente com base nessas respostas."}
+            : "Em breve seu agente estará pronto! Nosso time já começa a montar a primeira versão com base nessas respostas, e vamos te atualizando sobre o andamento do processo."}
         </p>
       </div>
     );

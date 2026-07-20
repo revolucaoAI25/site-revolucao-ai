@@ -2,7 +2,13 @@ import type { MetadataRoute } from "next";
 
 const siteUrl = "https://www.revolucao-ai.com";
 
-const disallow = ["/admin", "/admin/", "/api/", "/*/assinar/obrigado"];
+const disallow = [
+  "/admin",
+  "/admin/",
+  "/api/",
+  "/*/assinar/obrigado",
+  "/plataforma/onboarding",
+];
 
 /**
  * Rastreadores de mecanismos de IA generativa (ChatGPT, Perplexity, Claude,

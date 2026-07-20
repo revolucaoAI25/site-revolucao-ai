@@ -266,9 +266,9 @@ banco).
 
 O vídeo-tutorial de como criar a conta no Cal.com já está hospedado no
 Panda Video (`src/components/plataforma/CalcomTutorialVideo.tsx`). O
-vídeo de como criar uma Business Manager ainda é placeholder
-(`VideoPlaceholder`) até termos o link/ID de um vídeo próprio pra isso.
-O campo de anexos principal do negócio (fotos, vídeos, depoimentos)
+tutorial de como criar uma Business Manager é só texto (passo a passo
+numerado, exibido quando o cliente marca que ainda não tem uma BM) — sem
+vídeo por enquanto. O campo de anexos principal do negócio (fotos, vídeos, depoimentos)
 continua sendo um campo de link (Google Drive, WeTransfer etc.) em vez
 de upload direto, pra não precisar de infraestrutura de Storage — já o
 CNPJ/documento da Business Manager é upload de arquivo de verdade, salvo
