@@ -6,7 +6,7 @@ import {
   type OnboardingData,
   type TipoAgente,
 } from "@/lib/onboarding-types";
-import { VideoPlaceholder } from "./VideoPlaceholder";
+import { CalcomTutorialVideo } from "./CalcomTutorialVideo";
 
 type ObjectSection =
   | "contato"
@@ -189,7 +189,7 @@ const steps: Step[] = [
                 seu agente vai marcar as reuniões automaticamente. Depois de criar, informe
                 o login abaixo pra gente configurar tudo.
               </p>
-              <VideoPlaceholder label="Como criar sua conta no Cal.com" />
+              <CalcomTutorialVideo />
             </div>
             <Field
               label="E-mail de login no Cal.com"
