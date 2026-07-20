@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { STAGES, type AdminRecord, type Stage } from "@/lib/admin-types";
+import { STAGES, type AdminRecord, type PlataformaCheckoutRow, type Stage } from "@/lib/admin-types";
 import { EditRecordModal, type RecordUpdates } from "./EditRecordModal";
+import { OnboardingInfoModal } from "./OnboardingInfoModal";
 
 const STAGE_LABELS: Record<Stage, string> = Object.fromEntries(
   STAGES.map((s) => [s.stage, s.label])
@@ -37,6 +38,7 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
   const [dateTo, setDateTo] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<AdminRecord | null>(null);
+  const [viewingOnboarding, setViewingOnboarding] = useState<AdminRecord | null>(null);
   const [deleting, setDeleting] = useState(false);
 
   const filtered = useMemo(() => {
@@ -275,6 +277,16 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
                 <td className="py-3 px-4 text-muted">{r.detail}</td>
                 <td className="py-3 px-4 text-muted">{STAGE_LABELS[r.stage]}</td>
                 <td className="py-3 px-4 whitespace-nowrap">
+                  {r.source === "plataforma" &&
+                    (r.raw as PlataformaCheckoutRow).business_info && (
+                      <button
+                        type="button"
+                        onClick={() => setViewingOnboarding(r)}
+                        className="text-xs font-semibold text-accent hover:underline cursor-pointer mr-3"
+                      >
+                        Ver onboarding
+                      </button>
+                    )}
                   <button
                     type="button"
                     onClick={() => setEditing(r)}
@@ -308,6 +320,13 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
           record={editing}
           onClose={() => setEditing(null)}
           onSaved={(updates) => handleSaved(editing, updates)}
+        />
+      )}
+
+      {viewingOnboarding && (
+        <OnboardingInfoModal
+          data={(viewingOnboarding.raw as PlataformaCheckoutRow).business_info ?? {}}
+          onClose={() => setViewingOnboarding(null)}
         />
       )}
     </div>

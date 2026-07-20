@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { BusinessInfoForm } from "@/components/plataforma/BusinessInfoForm";
 import {
   LEAD_EXTRACTOR_WHATSAPP_LINK,
   LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY,
@@ -83,7 +82,23 @@ export default async function ObrigadoPage({
             </p>
           </div>
 
-          {isAgentePronto && checkoutId && <BusinessInfoForm checkoutId={checkoutId} />}
+          {isAgentePronto && checkoutId && (
+            <div className="card-surface rounded-3xl p-8 sm:p-10 text-center">
+              <h2 className="text-lg font-black tracking-tight mb-3">
+                Falta pouco pra gente montar seu agente
+              </h2>
+              <p className="text-muted leading-relaxed mb-6">
+                Preencha o formulário de onboarding com as informações do seu negócio —
+                é a partir dele que nosso time monta a primeira versão do seu agente de IA.
+              </p>
+              <Link
+                href={`/plataforma/onboarding?checkoutId=${checkoutId}`}
+                className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors"
+              >
+                Preencher formulário de onboarding
+              </Link>
+            </div>
+          )}
 
           <p className="text-center text-sm text-muted">
             Alguma dúvida enquanto isso?{" "}

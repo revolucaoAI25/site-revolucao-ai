@@ -5,6 +5,8 @@
  * e não pode ser importado (nem só os tipos/consts) por código de cliente.
  */
 
+import type { OnboardingData } from "@/lib/onboarding-types";
+
 export type LeadRow = {
   id: string;
   created_at: string;
@@ -44,7 +46,7 @@ export type PlataformaCheckoutRow = {
   asaas_customer_id: string | null;
   status: string;
   confirmed_at: string | null;
-  business_info: Record<string, string> | null;
+  business_info: Partial<OnboardingData> | null;
   stage: string | null;
 };
 

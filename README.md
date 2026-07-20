@@ -230,11 +230,32 @@ existente distingue as duas cobranças pelo campo `payment.subscription`
 do evento (presente só na cobrança recorrente).
 
 Na página de obrigado, se o cliente escolheu Agente Pronto, aparece um
-formulário pra contar sobre o negócio (o que vende, público-alvo,
-objeções, etc.) — salvo em `business_info` (jsonb) via `POST
-/api/plataforma-business-info`, pro time montar a primeira versão do
-agente. Usa as mesmas variáveis de ambiente do Asaas já documentadas
-acima (`ASAAS_API_KEY`, `ASAAS_ENV`, `ASAAS_CHECKOUT_STARTED_WEBHOOK_URL`,
+CTA que leva pra `/plataforma/onboarding?checkoutId=<id>` — um
+formulário multi-etapas (`src/components/plataforma/OnboardingForm.tsx`,
+tipos em `src/lib/onboarding-types.ts`) que cobre, em ordem: contato,
+tipo de atendimento (agendamento e/ou venda direta — se tiver
+agendamento, pede pra criar conta no Cal.com e informar login/senha),
+dados do negócio, leads/funil, o script de atendimento da IA (etapa mais
+enfatizada — é o que mais define o comportamento do agente), follow-ups,
+personalidade do agente e FAQ. Ao enviar, salva o objeto inteiro em
+`business_info` (jsonb) via `POST /api/plataforma-business-info`, pro
+time montar a primeira versão do agente. O painel admin tem um botão
+"Ver onboarding" nos registros da Plataforma que já têm `business_info`
+preenchido (`src/components/admin/OnboardingInfoModal.tsx`).
+
+Acessando `/plataforma/onboarding` **sem** `checkoutId` na URL, o
+formulário entra em modo de pré-visualização (aviso âmbar no topo) —
+dá pra revisar o formulário inteiro sem precisar comprar um plano, mas
+o envio final só simula (não grava nada no banco).
+
+O vídeo-tutorial de como criar a conta no Cal.com ainda está como
+placeholder (`VideoPlaceholder`) até termos o link/ID do Panda Video.
+O campo de anexos (fotos, vídeos, scripts) do formulário original virou
+um campo de link (Google Drive, WeTransfer etc.) em vez de upload
+direto, pra não precisar de infraestrutura de Storage.
+
+Usa as mesmas variáveis de ambiente do Asaas já documentadas acima
+(`ASAAS_API_KEY`, `ASAAS_ENV`, `ASAAS_CHECKOUT_STARTED_WEBHOOK_URL`,
 `ASAAS_WEBHOOK_TOKEN`, `ASAAS_WEBHOOK_FORWARD_URL`) — não precisa de
 nenhuma variável nova.
 

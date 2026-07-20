@@ -91,8 +91,12 @@ create table if not exists public.plataforma_checkouts (
   asaas_customer_id text,
   status text not null default 'iniciado',
   confirmed_at timestamptz,
-  -- Preenchido pelo cliente na página de obrigado, só quando agente_pronto
-  -- é true — informações do negócio pra gente montar a primeira versão do
+  -- Preenchido pelo cliente no formulário de onboarding multi-etapas
+  -- (/plataforma/onboarding?checkoutId=..., linkado a partir da página de
+  -- obrigado quando agente_pronto é true) — objeto rico (ver OnboardingData
+  -- em src/lib/onboarding-types.ts) com contato, tipo de atendimento,
+  -- credenciais do Cal.com, dados do negócio, funil, script de atendimento,
+  -- follow-ups, personalidade e FAQ, usado pra montar a primeira versão do
   -- agente (ver /api/plataforma-business-info).
   business_info jsonb,
   stage text

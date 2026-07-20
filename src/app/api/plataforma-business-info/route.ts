@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase-server";
+import type { OnboardingData } from "@/lib/onboarding-types";
 
 type Payload = {
   checkoutId?: string;
-  businessInfo?: Record<string, string>;
+  businessInfo?: OnboardingData;
 };
 
 /**
