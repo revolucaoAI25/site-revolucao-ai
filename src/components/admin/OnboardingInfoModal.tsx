@@ -85,8 +85,19 @@ export function OnboardingInfoModal({
               <>
                 <Row label="E-mail Cal.com" value={data.calcom.email} />
                 <Row label="Senha Cal.com" value={data.calcom.senha} />
+                <Row label="Quantidade de agendas" value={data.calcom.quantidadeAgendas} />
+                <Row label="Duração do atendimento" value={data.calcom.duracaoAtendimento} />
+                <Row label="Disponibilidade padrão" value={data.calcom.disponibilidadePadrao} />
               </>
             )}
+          </Section>
+        )}
+
+        {data.facebookBm && (
+          <Section title="Business Manager (Facebook)">
+            <Row label="Já tem BM?" value={data.facebookBm.temBm} />
+            <Row label="Acesso concedido?" value={data.facebookBm.acessoConcedido} />
+            <Row label="CNPJ / documento" value={data.facebookBm.documento} />
           </Section>
         )}
 
@@ -164,9 +175,10 @@ export function OnboardingInfoModal({
           </Section>
         )}
 
-        {data.consideracoesAdicionais && (
-          <Section title="Considerações adicionais">
-            <Row label="Observações" value={data.consideracoesAdicionais} />
+        {(data.linkArquivosAdicionais || data.consideracoesAdicionais) && (
+          <Section title="Revisão final">
+            <Row label="Arquivos adicionais" value={data.linkArquivosAdicionais} />
+            <Row label="Considerações adicionais" value={data.consideracoesAdicionais} />
           </Section>
         )}
       </div>

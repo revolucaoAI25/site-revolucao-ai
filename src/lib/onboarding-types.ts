@@ -10,6 +10,14 @@ export type OnboardingData = {
   calcom: {
     email: string;
     senha: string;
+    quantidadeAgendas: string;
+    duracaoAtendimento: string;
+    disponibilidadePadrao: string;
+  };
+  facebookBm: {
+    temBm: string;
+    acessoConcedido: string;
+    documento: string;
   };
   negocio: {
     nomeEmpresa: string;
@@ -56,13 +64,21 @@ export type OnboardingData = {
     mensagemAssuntoEvitado: string;
   };
   faq: string;
+  linkArquivosAdicionais: string;
   consideracoesAdicionais: string;
 };
 
 export const emptyOnboardingData: OnboardingData = {
   contato: { nomeResponsavel: "", email: "", telefone: "" },
   tipoAgente: "",
-  calcom: { email: "", senha: "" },
+  calcom: {
+    email: "",
+    senha: "",
+    quantidadeAgendas: "",
+    duracaoAtendimento: "",
+    disponibilidadePadrao: "",
+  },
+  facebookBm: { temBm: "", acessoConcedido: "", documento: "" },
   negocio: {
     nomeEmpresa: "",
     historia: "",
@@ -108,5 +124,6 @@ export const emptyOnboardingData: OnboardingData = {
     mensagemAssuntoEvitado: "",
   },
   faq: "",
+  linkArquivosAdicionais: "",
   consideracoesAdicionais: "",
 };

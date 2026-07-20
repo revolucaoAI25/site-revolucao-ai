@@ -8,9 +8,13 @@ import {
 } from "@/lib/onboarding-types";
 import { CalcomTutorialVideo } from "./CalcomTutorialVideo";
 
+const SUPPORT_EMAIL = "suporte@revolucao-ai.com";
+const FACEBOOK_BM_EMAIL = "jvitor.no@gmail.com";
+
 type ObjectSection =
   | "contato"
   | "calcom"
+  | "facebookBm"
   | "negocio"
   | "leadsFunil"
   | "fluxoAtendimento"
@@ -26,6 +30,19 @@ function makePatcher(setData: Dispatch<SetStateAction<OnboardingData>>) {
       }));
     };
   };
+}
+
+/** Verifica campos obrigatórios e retorna uma mensagem explicando o que falta ou está curto demais. */
+function requireAll(fields: { label: string; value: string; minLen?: number }[]): string | null {
+  const missing = fields.filter((f) => !f.value.trim());
+  if (missing.length > 0) {
+    return `Preencha antes de continuar: ${missing.map((f) => f.label).join(", ")}.`;
+  }
+  const short = fields.find((f) => f.minLen && f.value.trim().length < f.minLen);
+  if (short) {
+    return `A resposta em "${short.label}" está curta demais — capriche nos detalhes (mínimo ${short.minLen} caracteres) antes de continuar.`;
+  }
+  return null;
 }
 
 function Field({
@@ -49,7 +66,7 @@ function Field({
         {label}
         {required && <span className="text-accent"> *</span>}
       </label>
-      {helper && <p className="text-xs text-muted-2 leading-relaxed mb-2">{helper}</p>}
+      {helper && <p className="text-sm text-muted-2 leading-relaxed mb-2">{helper}</p>}
       <input
         type="text"
         value={value}
@@ -86,7 +103,7 @@ function TextArea({
         {label}
         {required && <span className="text-accent"> *</span>}
       </label>
-      {helper && <p className="text-xs text-muted-2 leading-relaxed mb-2">{helper}</p>}
+      {helper && <p className="text-sm text-muted-2 leading-relaxed mb-2">{helper}</p>}
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -114,14 +131,23 @@ type Step = {
   id: string;
   title: string;
   render: (data: OnboardingData, patch: ReturnType<typeof makePatcher>, setData: Dispatch<SetStateAction<OnboardingData>>) => React.ReactNode;
-  isValid: (data: OnboardingData) => boolean;
+  validate: (data: OnboardingData) => string | null;
 };
 
 const steps: Step[] = [
   {
     id: "contato",
     title: "Contato",
-    isValid: (d) => d.contato.nomeResponsavel.trim().length > 1 && d.contato.email.includes("@"),
+    validate: (d) => {
+      const err = requireAll([
+        { label: "Seu nome", value: d.contato.nomeResponsavel, minLen: 2 },
+        { label: "E-mail", value: d.contato.email, minLen: 5 },
+        { label: "WhatsApp", value: d.contato.telefone, minLen: 8 },
+      ]);
+      if (err) return err;
+      if (!d.contato.email.includes("@")) return 'Informe um e-mail válido em "E-mail".';
+      return null;
+    },
     render: (data, patch) => (
       <div className="flex flex-col gap-5">
         <Field
@@ -138,6 +164,7 @@ const steps: Step[] = [
         />
         <Field
           label="WhatsApp"
+          required
           value={data.contato.telefone}
           onChange={(v) => patch("contato")("telefone", v)}
           placeholder="(31) 91234-5678"
@@ -148,7 +175,18 @@ const steps: Step[] = [
   {
     id: "tipo-agente",
     title: "Tipo de atendimento",
-    isValid: (d) => d.tipoAgente !== "" && (d.tipoAgente === "venda-direta" || (d.calcom.email.trim().length > 2)),
+    validate: (d) => {
+      if (d.tipoAgente === "")
+        return "Selecione se o agente é pra agendamento, venda direta ou os dois antes de continuar.";
+      if (d.tipoAgente === "venda-direta") return null;
+      return requireAll([
+        { label: "E-mail de login no Cal.com", value: d.calcom.email, minLen: 5 },
+        { label: "Senha do Cal.com", value: d.calcom.senha, minLen: 3 },
+        { label: "Quantidade de agendas no Cal.com", value: d.calcom.quantidadeAgendas, minLen: 1 },
+        { label: "Duração padrão do atendimento", value: d.calcom.duracaoAtendimento, minLen: 1 },
+        { label: "Disponibilidade padrão", value: d.calcom.disponibilidadePadrao, minLen: 1 },
+      ]);
+    },
     render: (data, patch, setData) => (
       <div className="flex flex-col gap-6">
         <div>
@@ -156,6 +194,10 @@ const steps: Step[] = [
             Seu agente vai fechar reuniões (agendamento) ou vender direto na conversa?
             <span className="text-accent"> *</span>
           </label>
+          <p className="text-sm text-muted-2 leading-relaxed mb-3">
+            Isso muda completamente o fluxo que o agente vai seguir — se ele precisa levar o
+            lead até uma reunião marcada, ou se ele mesmo conduz a venda até o pagamento.
+          </p>
           <div className="grid sm:grid-cols-3 gap-3">
             {(
               [
@@ -184,7 +226,7 @@ const steps: Step[] = [
           <div className="flex flex-col gap-5 rounded-3xl border border-white/10 bg-surface-2/50 p-6">
             <div>
               <p className="text-sm font-semibold mb-2">Como criar sua conta no Cal.com</p>
-              <p className="text-xs text-muted-2 leading-relaxed mb-4">
+              <p className="text-sm text-muted-2 leading-relaxed mb-4">
                 Assista ao vídeo abaixo pra criar sua conta gratuita no Cal.com — é lá que
                 seu agente vai marcar as reuniões automaticamente. Depois de criar, informe
                 o login abaixo pra gente configurar tudo.
@@ -199,9 +241,33 @@ const steps: Step[] = [
             />
             <Field
               label="Senha do Cal.com"
+              required
               value={data.calcom.senha}
               onChange={(v) => patch("calcom")("senha", v)}
-              helper="Só usamos isso pra configurar sua agenda — fica salvo com o mesmo acesso restrito de todos os seus outros dados aqui."
+              helper="Precisamos disso pra configurar sua agenda dentro da plataforma — fica salvo com o mesmo acesso restrito de todos os seus outros dados aqui."
+            />
+            <TextArea
+              label="Quantas agendas (calendários) do Cal.com o agente vai usar?"
+              required
+              rows={3}
+              helper="Se você tem mais de um profissional, sala ou serviço, cada um pode ter uma agenda separada — descreva quantas existem e pra que serve cada uma. Se alguma estiver numa conta diferente da que você passou o login acima, avise aqui: vamos precisar de acesso a ela também."
+              value={data.calcom.quantidadeAgendas}
+              onChange={(v) => patch("calcom")("quantidadeAgendas", v)}
+            />
+            <Field
+              label="Qual a duração padrão de cada atendimento/reunião agendada?"
+              required
+              placeholder="Ex.: 30 minutos"
+              value={data.calcom.duracaoAtendimento}
+              onChange={(v) => patch("calcom")("duracaoAtendimento", v)}
+            />
+            <TextArea
+              label="Qual a disponibilidade padrão pra agendar atendimentos?"
+              required
+              rows={3}
+              helper="Dias da semana e horários em que o agente pode oferecer horários pro lead escolher. Ex.: segunda a sexta, das 9h às 18h, com 15 minutos de intervalo entre reuniões."
+              value={data.calcom.disponibilidadePadrao}
+              onChange={(v) => patch("calcom")("disponibilidadePadrao", v)}
             />
           </div>
         )}
@@ -209,9 +275,97 @@ const steps: Step[] = [
     ),
   },
   {
+    id: "facebook-bm",
+    title: "Acesso à Business Manager (Facebook)",
+    validate: (d) =>
+      requireAll([
+        {
+          label: "Você já tem uma Business Manager (BM) no Facebook?",
+          value: d.facebookBm.temBm,
+          minLen: 1,
+        },
+        {
+          label: "Confirmação de acesso concedido",
+          value: d.facebookBm.acessoConcedido,
+          minLen: 1,
+        },
+        { label: "CNPJ ou documento", value: d.facebookBm.documento, minLen: 5 },
+      ]),
+    render: (data, patch) => (
+      <div className="flex flex-col gap-5">
+        <Callout>
+          <span className="text-text font-semibold">Por que pedimos isso:</span> pra conectar
+          o número de WhatsApp do seu agente à API oficial da Meta — o que garante mais
+          estabilidade, o selo de conta verificada e a possibilidade de enviar mensagens em
+          maior volume — a gente precisa ter acesso de administrador na Business Manager (BM)
+          do Facebook vinculada ao seu negócio. É por dentro da BM que a Meta libera e verifica
+          essa conexão.
+        </Callout>
+        <Callout>
+          <span className="text-text font-semibold">Como conceder o acesso:</span> entre em{" "}
+          <span className="text-text font-semibold">business.facebook.com</span> →
+          Configurações da empresa → Usuários → Pessoas (ou Parceiros de negócios) →
+          Adicionar → informe o e-mail abaixo e escolha a opção{" "}
+          <span className="text-text font-semibold">Controle total</span> — não funciona com
+          acesso parcial ou só de anúncios. Se você ainda não tiver uma BM, dá pra criar uma
+          gratuita em poucos minutos no mesmo endereço, e o processo é o mesmo.
+        </Callout>
+        <div className="rounded-2xl border border-accent/40 bg-accent-soft px-5 py-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-2 mb-1">
+            Adicione este e-mail com Controle total
+          </p>
+          <p className="text-lg font-black tracking-tight text-accent break-all">
+            {FACEBOOK_BM_EMAIL}
+          </p>
+        </div>
+        <Field
+          label="Você já tem uma Business Manager (BM) no Facebook?"
+          required
+          value={data.facebookBm.temBm}
+          onChange={(v) => patch("facebookBm")("temBm", v)}
+          placeholder="Sim / Não"
+        />
+        <Field
+          label={`Confirma que já adicionou ${FACEBOOK_BM_EMAIL} com Controle total?`}
+          required
+          value={data.facebookBm.acessoConcedido}
+          onChange={(v) => patch("facebookBm")("acessoConcedido", v)}
+          placeholder="Sim / Não"
+          helper="Se ainda não deu o acesso, pode fazer isso logo depois de enviar o formulário — só não esquece, porque sem esse acesso a gente não consegue conectar o WhatsApp do agente."
+        />
+        <Field
+          label="CNPJ (ou outro documento, se não tiver CNPJ)"
+          required
+          value={data.facebookBm.documento}
+          onChange={(v) => patch("facebookBm")("documento", v)}
+          helper="Precisamos disso pra fazer a verificação da conta dentro da BM. Se seu negócio não tiver CNPJ, informe outro documento (CPF, RG etc.)."
+        />
+        <div className="rounded-2xl border border-white/10 bg-surface-2/50 p-5 text-sm text-muted leading-relaxed">
+          Depois que você conceder o acesso, a gente faz as configurações necessárias na BM e a
+          verificação da conta. Se precisarmos de alguma informação a mais durante esse
+          processo, entramos em contato direto com você pra concluir a conexão.
+        </div>
+      </div>
+    ),
+  },
+  {
     id: "negocio",
     title: "Sobre o seu negócio",
-    isValid: (d) => d.negocio.nomeEmpresa.trim().length > 1 && d.negocio.comoFunciona.trim().length > 10 && d.negocio.horarios.trim().length > 1 && d.negocio.valor.trim().length > 1,
+    validate: (d) =>
+      requireAll([
+        { label: "Nome da empresa", value: d.negocio.nomeEmpresa, minLen: 2 },
+        { label: "Como funciona seu produto/serviço", value: d.negocio.comoFunciona, minLen: 10 },
+        { label: "Valor dos serviços", value: d.negocio.valor, minLen: 1 },
+        { label: "Horários de funcionamento", value: d.negocio.horarios, minLen: 1 },
+        { label: "História do negócio", value: d.negocio.historia, minLen: 1 },
+        { label: "Site", value: d.negocio.site, minLen: 1 },
+        { label: "Redes sociais", value: d.negocio.redesSociais, minLen: 1 },
+        { label: "Endereço", value: d.negocio.endereco, minLen: 1 },
+        { label: "Estrutura física", value: d.negocio.estruturaFisica, minLen: 1 },
+        { label: "Depoimentos de clientes", value: d.negocio.depoimentos, minLen: 1 },
+        { label: "Algo a acrescentar sobre o negócio", value: d.negocio.extras, minLen: 1 },
+        { label: "Link de arquivos e materiais", value: d.negocio.linkArquivos, minLen: 5 },
+      ]),
     render: (data, patch) => (
       <div className="flex flex-col gap-5">
         <Field
@@ -224,7 +378,7 @@ const steps: Step[] = [
         <TextArea
           label="Como funciona seu produto/serviço?"
           required
-          helper="Considere todos os serviços que oferece, principais e secundários — descreva em detalhes."
+          helper="Considere todos os serviços que oferece, principais e secundários, e descreva em detalhes. É a base que o agente usa pra explicar o negócio pro lead — quanto mais completo, menos ele vai 'inventar' ou responder de forma genérica."
           value={data.negocio.comoFunciona}
           onChange={(v) => patch("negocio")("comoFunciona", v)}
           rows={5}
@@ -232,7 +386,7 @@ const steps: Step[] = [
         <TextArea
           label="Qual o valor dos seus serviços?"
           required
-          helper='Inclua formas e condições de pagamento e promoções vigentes. Se o valor não deve ser informado aos leads, escreva "Nunca informar valores".'
+          helper='Inclua formas e condições de pagamento e promoções vigentes. Isso evita que o agente passe um valor errado ou desatualizado pro lead. Se o valor não deve ser informado por mensagem, escreva "Nunca informar valores".'
           value={data.negocio.valor}
           onChange={(v) => patch("negocio")("valor", v)}
         />
@@ -244,48 +398,69 @@ const steps: Step[] = [
         />
         <TextArea
           label="História do negócio"
-          helper="Data de fundação, tradição, crescimento, casos, princípios — só se quiser que o agente conte isso quando perguntado."
+          required
+          helper="Data de fundação, tradição, crescimento, casos, princípios — ajuda o agente a responder com mais contexto quando o lead perguntar. Se não tiver nada relevante, escreva 'não se aplica'."
           value={data.negocio.historia}
           onChange={(v) => patch("negocio")("historia", v)}
         />
         <Field
           label="Site"
+          required
+          helper="Se não tiver site, escreva 'não tenho'."
           value={data.negocio.site}
           onChange={(v) => patch("negocio")("site", v)}
         />
         <TextArea
           label="Redes sociais"
-          helper="Quais (Instagram, TikTok etc.) e os @ de cada uma."
+          required
+          helper="Quais (Instagram, TikTok etc.) e os @ de cada uma. Se não tiver, escreva 'não tenho'."
           value={data.negocio.redesSociais}
           onChange={(v) => patch("negocio")("redesSociais", v)}
           rows={2}
         />
         <Field
           label="Endereço"
-          helper="Deixe em branco se for só remoto."
+          required
+          helper="Se for só remoto/online, escreva 'atendimento remoto'."
           value={data.negocio.endereco}
           onChange={(v) => patch("negocio")("endereco", v)}
         />
         <TextArea
           label="Estrutura física"
-          helper="Equipamentos, espaço, tecnologia, profissionais — só se quiser que o agente fale sobre isso."
+          required
+          helper="Equipamentos, espaço, tecnologia, profissionais — só faz sentido se quiser que o agente fale sobre isso quando perguntado. Se não se aplica ao seu negócio, escreva 'não se aplica'."
           value={data.negocio.estruturaFisica}
           onChange={(v) => patch("negocio")("estruturaFisica", v)}
         />
         <TextArea
           label="Depoimentos de clientes"
-          helper="Se quiser que a IA use depoimentos reais pra ajudar a fechar uma venda, cole-os aqui."
+          required
+          helper="Se quiser que a IA use depoimentos reais pra ajudar a fechar uma venda, cole-os aqui (texto é suficiente — prints vão no link de arquivos abaixo). Se ainda não tiver, escreva 'não tenho depoimentos ainda'."
           value={data.negocio.depoimentos}
           onChange={(v) => patch("negocio")("depoimentos", v)}
         />
         <TextArea
           label="Algo a acrescentar sobre o negócio?"
+          required
+          helper="Qualquer coisa que não coube nas perguntas acima. Se não tiver mais nada, escreva 'sem mais informações'."
           value={data.negocio.extras}
           onChange={(v) => patch("negocio")("extras", v)}
         />
+        <Callout>
+          <span className="text-text font-semibold">
+            Isso faz muita diferença na qualidade do agente.
+          </span>{" "}
+          Reúna numa única pasta do Google Drive tudo que puder ajudar: fotos de antes e
+          depois (quando fizer sentido pro seu negócio), prints de depoimentos e avaliações de
+          clientes (Google, Instagram, WhatsApp), vídeos, áudios, catálogos, tabelas de preço,
+          apresentações — qualquer material que a equipe e o agente possam usar. Deixe a pasta
+          com o acesso liberado por link (&quot;qualquer pessoa com o link pode visualizar&quot;)
+          e cole o link abaixo.
+        </Callout>
         <Field
-          label="Link de arquivos e materiais (opcional)"
-          helper="Google Drive, WeTransfer etc. com apresentações, fotos, vídeos ou outros materiais úteis."
+          label="Link da pasta com fotos, depoimentos, vídeos, áudios e outros materiais"
+          required
+          helper="Google Drive, WeTransfer etc. É o principal jeito da gente conhecer visualmente o seu negócio — capriche."
           value={data.negocio.linkArquivos}
           onChange={(v) => patch("negocio")("linkArquivos", v)}
         />
@@ -295,34 +470,52 @@ const steps: Step[] = [
   {
     id: "leads-funil",
     title: "Leads e perfil de cliente",
-    isValid: () => true,
+    validate: (d) =>
+      requireAll([
+        { label: "Origem dos leads", value: d.leadsFunil.origemLeads, minLen: 1 },
+        { label: "Estratégia de funil de vendas", value: d.leadsFunil.estrategiaFunil, minLen: 1 },
+        { label: "Persona ou ICP", value: d.leadsFunil.perfilLead, minLen: 1 },
+        { label: "Objetivos comuns do lead", value: d.leadsFunil.objetivosLead, minLen: 1 },
+        {
+          label: "Agendamento condicionado ao ICP",
+          value: d.leadsFunil.icpObrigatorio,
+          minLen: 1,
+        },
+      ]),
     render: (data, patch) => (
       <div className="flex flex-col gap-5">
         <TextArea
           label="Qual a origem dos leads?"
-          helper="Ex.: tráfego pago, orgânico via Instagram, disparo de mensagens, indicação."
+          required
+          helper="Ex.: tráfego pago, orgânico via Instagram, disparo de mensagens, indicação. Ajuda o agente a entender o contexto de quem está chegando — um lead de anúncio geralmente sabe menos sobre o negócio do que uma indicação, por exemplo."
           value={data.leadsFunil.origemLeads}
           onChange={(v) => patch("leadsFunil")("origemLeads", v)}
         />
         <TextArea
           label="Como é a estratégia de funil de vendas para cada produto/serviço?"
+          required
+          helper="Descreva o caminho que o lead percorre até fechar — isso define em que ponto da conversa o agente deve tentar avançar pro próximo passo (agendar, vender, pedir dado de contato etc.)."
           value={data.leadsFunil.estrategiaFunil}
           onChange={(v) => patch("leadsFunil")("estrategiaFunil", v)}
         />
         <TextArea
           label="Qual a descrição da persona ou ICP (perfil de cliente ideal) do negócio?"
+          required
+          helper="Quanto mais claro o perfil ideal, melhor o agente consegue identificar (e priorizar) os leads com mais chance de fechar."
           value={data.leadsFunil.perfilLead}
           onChange={(v) => patch("leadsFunil")("perfilLead", v)}
         />
         <TextArea
           label="Quais os objetivos mais comuns dos leads ao entrar em contato?"
-          helper="Ex.: agendar consulta, tirar dúvidas, comprar produto."
+          required
+          helper="Ex.: agendar consulta, tirar dúvidas, comprar produto. Ajuda o agente a reconhecer rápido a intenção do lead logo nas primeiras mensagens."
           value={data.leadsFunil.objetivosLead}
           onChange={(v) => patch("leadsFunil")("objetivosLead", v)}
         />
         <TextArea
           label="O agendamento só deve ser feito se o lead cumprir todos os requisitos de ICP?"
-          helper="Explique quais são esses requisitos, se houver."
+          required
+          helper="Explique quais são esses requisitos, se houver — isso evita que o agente marque reuniões com leads fora do perfil, o que costuma gerar no-show e desperdiçar sua agenda. Se não houver restrição, escreva 'não, agenda pra qualquer lead'."
           value={data.leadsFunil.icpObrigatorio}
           onChange={(v) => patch("leadsFunil")("icpObrigatorio", v)}
         />
@@ -332,7 +525,32 @@ const steps: Step[] = [
   {
     id: "fluxo",
     title: "Fluxo de atendimento",
-    isValid: (d) => d.fluxoAtendimento.scriptPrincipal.trim().length > 20,
+    validate: (d) =>
+      requireAll([
+        { label: "Script de atendimento", value: d.fluxoAtendimento.scriptPrincipal, minLen: 20 },
+        {
+          label: "Como lidar quando o lead foge do script",
+          value: d.fluxoAtendimento.comoLidarForaDoScript,
+          minLen: 1,
+        },
+        {
+          label: "Quando acionar um humano",
+          value: d.fluxoAtendimento.quandoAcionarHumano,
+          minLen: 1,
+        },
+        { label: "Celular a notificar", value: d.fluxoAtendimento.celularNotificar, minLen: 8 },
+        { label: "Mensagem pro atendente humano", value: d.fluxoAtendimento.mensagemHumano, minLen: 1 },
+        {
+          label: "Lógica do agendamento",
+          value: d.fluxoAtendimento.comoFuncionaAgendamento,
+          minLen: 1,
+        },
+        {
+          label: "Pagamento antecipado",
+          value: d.fluxoAtendimento.pagamentoAntecipado,
+          minLen: 1,
+        },
+      ]),
     render: (data, patch) => (
       <div className="flex flex-col gap-5">
         <Callout>
@@ -341,12 +559,13 @@ const steps: Step[] = [
           e preciso o passo a passo, melhor ele vai se comportar. Dedique um tempo real pra
           essa resposta: descreva como a conversa deve começar, quais perguntas de
           qualificação fazer (e em que ordem), o que fazer com cada tipo de resposta, e como
-          a conversa deve terminar.
+          a conversa deve terminar. Se isso não estiver muito claro, o agente vai ter um
+          comportamento diferente do que você espera.
         </Callout>
         <TextArea
           label="Qual script ou fluxo de atendimento o agente deve seguir?"
           required
-          helper="Passo a passo completo: como recebe o lead, quantas perguntas faz, quais são elas, como conduz a conversa, quais as ramificações possíveis."
+          helper="Passo a passo completo: como recebe o lead, quantas perguntas faz, quais são elas, como conduz a conversa, quais as ramificações possíveis (o que fazer se o lead responder X, Y ou Z). Quanto mais detalhado, mais fiel o agente vai ser ao que você espera."
           value={data.fluxoAtendimento.scriptPrincipal}
           onChange={(v) => patch("fluxoAtendimento")("scriptPrincipal", v)}
           rows={10}
@@ -354,34 +573,44 @@ const steps: Step[] = [
         />
         <TextArea
           label="Como lidar quando o lead foge do script principal?"
-          helper="Ex.: pergunta sobre preço antes da hora, já é cliente e quer tirar dúvida, quer reagendar ou desmarcar."
+          required
+          helper="Ex.: pergunta sobre preço antes da hora, já é cliente e quer tirar dúvida, quer reagendar ou desmarcar. Isso evita que o agente trave ou responda algo fora de contexto quando a conversa não segue o roteiro esperado."
           value={data.fluxoAtendimento.comoLidarForaDoScript}
           onChange={(v) => patch("fluxoAtendimento")("comoLidarForaDoScript", v)}
           rows={5}
         />
         <TextArea
           label="Em quais casos devemos acionar um humano ou pausar a interação?"
+          required
+          helper="Ex.: lead irritado, pedido de reembolso, dúvida técnica que o agente não sabe responder. Define o limite de atuação do agente antes de passar a conversa pra sua equipe."
           value={data.fluxoAtendimento.quandoAcionarHumano}
           onChange={(v) => patch("fluxoAtendimento")("quandoAcionarHumano", v)}
         />
         <Field
           label="Número de celular a notificar quando pausar ou o lead pedir um humano"
+          required
           value={data.fluxoAtendimento.celularNotificar}
           onChange={(v) => patch("fluxoAtendimento")("celularNotificar", v)}
           placeholder="(31) 91234-5678"
         />
         <TextArea
           label="Qual mensagem devemos enviar para esse atendente humano?"
+          required
+          helper="O texto exato (ou o modelo) que vai avisar sua equipe que um lead precisa de atenção humana."
           value={data.fluxoAtendimento.mensagemHumano}
           onChange={(v) => patch("fluxoAtendimento")("mensagemHumano", v)}
         />
         <TextArea
-          label="Como funciona o agendamento? Existem múltiplas agendas a conectar?"
+          label="Como funciona a lógica do agendamento no dia a dia?"
+          required
+          helper="Ex.: precisa de intervalo entre reuniões, o lead pode reagendar direto com o agente, tem restrição de dias por profissional etc. (A quantidade de agendas e a disponibilidade padrão já foram cobertas na etapa do Cal.com — aqui é sobre as regras de condução da conversa.) Se não tiver nenhuma regra especial, escreva 'sem regras especiais'."
           value={data.fluxoAtendimento.comoFuncionaAgendamento}
           onChange={(v) => patch("fluxoAtendimento")("comoFuncionaAgendamento", v)}
         />
         <TextArea
           label="Em caso de compra direta ou pagamento antecipado, quais links/informações de pagamento devem ser enviados?"
+          required
+          helper="Se não houver pagamento antecipado no seu processo, escreva 'não se aplica'."
           value={data.fluxoAtendimento.pagamentoAntecipado}
           onChange={(v) => patch("fluxoAtendimento")("pagamentoAntecipado", v)}
         />
@@ -391,39 +620,66 @@ const steps: Step[] = [
   {
     id: "follow-ups",
     title: "Follow-ups e lembretes",
-    isValid: () => true,
+    validate: (d) =>
+      requireAll([
+        { label: "Enviar follow-up", value: d.followUps.enviarFollowUp, minLen: 1 },
+        { label: "Quantidade de follow-ups", value: d.followUps.quantidadeFollowUp, minLen: 1 },
+        {
+          label: "Primeiro follow-up após",
+          value: d.followUps.primeiroFollowUpApos,
+          minLen: 1,
+        },
+        {
+          label: "Cadência dos próximos follow-ups",
+          value: d.followUps.cadenciaProximos,
+          minLen: 1,
+        },
+        { label: "Roteiros de follow-up", value: d.followUps.jaTemRoteiros, minLen: 1 },
+        { label: "Lembretes de reunião", value: d.followUps.enviarLembretes, minLen: 1 },
+      ]),
     render: (data, patch) => (
       <div className="flex flex-col gap-5">
+        <Callout>
+          Se você não usa follow-up hoje ou não sabe responder alguma dessas perguntas, sem
+          problema — escreva &quot;não sei&quot; ou &quot;não tenho isso definido&quot; que a
+          gente decide o que faz mais sentido pro seu negócio.
+        </Callout>
         <Field
           label="Devemos enviar follow-up quando o lead deixar de responder?"
+          required
           value={data.followUps.enviarFollowUp}
           onChange={(v) => patch("followUps")("enviarFollowUp", v)}
           placeholder="Sim / Não"
         />
         <Field
           label="Quantas mensagens de follow-up enviar pra quem parou de responder?"
+          required
           value={data.followUps.quantidadeFollowUp}
           onChange={(v) => patch("followUps")("quantidadeFollowUp", v)}
         />
         <Field
           label="O primeiro follow-up deve ser feito após quanto tempo de inatividade?"
+          required
           value={data.followUps.primeiroFollowUpApos}
           onChange={(v) => patch("followUps")("primeiroFollowUpApos", v)}
         />
         <Field
           label="Os próximos follow-ups devem seguir qual cadência?"
+          required
           helper="Ex.: de 24 em 24 horas."
           value={data.followUps.cadenciaProximos}
           onChange={(v) => patch("followUps")("cadenciaProximos", v)}
         />
         <TextArea
           label="Você já tem os roteiros de cada mensagem de follow-up?"
-          helper="Se sim, cole-os aqui."
+          required
+          helper="Se sim, cole-os aqui. Se não tiver, escreva 'não tenho' que a gente escreve por você."
           value={data.followUps.jaTemRoteiros}
           onChange={(v) => patch("followUps")("jaTemRoteiros", v)}
         />
         <Field
           label="Devemos enviar lembretes de reuniões agendadas? Quantos e quanto tempo antes?"
+          required
           value={data.followUps.enviarLembretes}
           onChange={(v) => patch("followUps")("enviarLembretes", v)}
         />
@@ -433,27 +689,44 @@ const steps: Step[] = [
   {
     id: "personalidade",
     title: "Personalidade do agente",
-    isValid: () => true,
+    validate: (d) =>
+      requireAll([
+        { label: "Nome do agente", value: d.personalidade.nomeAssistente, minLen: 1 },
+        { label: "Comportamento", value: d.personalidade.comportamento, minLen: 1 },
+        { label: "Assuntos a evitar", value: d.personalidade.assuntosEvitar, minLen: 1 },
+        {
+          label: "Mensagem para assunto evitado",
+          value: d.personalidade.mensagemAssuntoEvitado,
+          minLen: 1,
+        },
+      ]),
     render: (data, patch) => (
       <div className="flex flex-col gap-5">
         <Field
           label="Qual nome o agente terá?"
+          required
+          helper="Se não tiver preferência, escreva 'sem preferência' que a gente sugere um."
           value={data.personalidade.nomeAssistente}
           onChange={(v) => patch("personalidade")("nomeAssistente", v)}
         />
         <TextArea
           label="Como você deseja que ele se comporte?"
-          helper="Ex.: amigável, animado, sério, formal, persuasivo."
+          required
+          helper="Ex.: amigável, animado, sério, formal, persuasivo. Define o tom de voz do agente em toda conversa — se não tiver preferência, escreva 'sem preferência'."
           value={data.personalidade.comportamento}
           onChange={(v) => patch("personalidade")("comportamento", v)}
         />
         <TextArea
           label="Gostaria que o agente evitasse falar de algum assunto?"
+          required
+          helper="Se não houver nenhuma restrição, escreva 'nenhum'."
           value={data.personalidade.assuntosEvitar}
           onChange={(v) => patch("personalidade")("assuntosEvitar", v)}
         />
         <TextArea
           label="Se sim, qual mensagem devemos enviar quando perguntarem sobre isso?"
+          required
+          helper="Se a resposta anterior foi 'nenhum', pode escrever 'não se aplica' aqui."
           value={data.personalidade.mensagemAssuntoEvitado}
           onChange={(v) => patch("personalidade")("mensagemAssuntoEvitado", v)}
         />
@@ -463,12 +736,14 @@ const steps: Step[] = [
   {
     id: "faq",
     title: "Perguntas frequentes",
-    isValid: (d) => d.faq.trim().length > 10,
+    validate: (d) =>
+      requireAll([{ label: "Perguntas e respostas frequentes", value: d.faq, minLen: 10 }]),
     render: (data, _patch, setData) => (
       <div className="flex flex-col gap-5">
         <Callout>
           Quais são as principais perguntas que seu negócio recebe no dia a dia — e as
-          respostas ideais para elas? Siga o modelo:
+          respostas ideais para elas? Isso vira a base de conhecimento do agente pra
+          dúvidas fora do script principal. Siga o modelo:
           <br />
           <br />
           <span className="text-text">P: Vocês fazem avaliação física?</span>
@@ -488,11 +763,17 @@ const steps: Step[] = [
   {
     id: "revisao",
     title: "Revisão final",
-    isValid: () => true,
+    validate: () => null,
     render: (data, _patch, setData) => (
       <div className="flex flex-col gap-5">
+        <Field
+          label="Tem mais algum arquivo, print, vídeo ou áudio pra nos passar? (opcional)"
+          helper="Se sobrou algo que não coube no link de arquivos lá na etapa 'Sobre o seu negócio', cole outro link aqui."
+          value={data.linkArquivosAdicionais}
+          onChange={(v) => setData((prev) => ({ ...prev, linkArquivosAdicionais: v }))}
+        />
         <TextArea
-          label="Alguma consideração adicional que não foi coberta?"
+          label="Alguma consideração adicional que não foi coberta? (opcional)"
           value={data.consideracoesAdicionais}
           onChange={(v) => setData((prev) => ({ ...prev, consideracoesAdicionais: v }))}
         />
@@ -506,6 +787,17 @@ const steps: Step[] = [
   },
 ];
 
+function SupportNote() {
+  return (
+    <p className="text-center text-xs text-muted-2">
+      Dúvidas enquanto preenche?{" "}
+      <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline">
+        {SUPPORT_EMAIL}
+      </a>
+    </p>
+  );
+}
+
 export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
   const isPreview = !checkoutId;
   const [started, setStarted] = useState(false);
@@ -517,8 +809,26 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
 
   const patch = makePatcher(setData);
   const step = steps[stepIndex];
-  const canAdvance = step.isValid(data);
   const isLastStep = stepIndex === steps.length - 1;
+
+  function goBack() {
+    setError(null);
+    setStepIndex((i) => Math.max(0, i - 1));
+  }
+
+  function goNext() {
+    const validationError = step.validate(data);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+    setError(null);
+    if (isLastStep) {
+      handleSubmit();
+    } else {
+      setStepIndex((i) => Math.min(steps.length - 1, i + 1));
+    }
+  }
 
   async function handleSubmit() {
     if (isPreview) {
@@ -586,10 +896,20 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
           — o agente só vai saber o que você contar aqui. Quanto mais preciso e completo,
           melhor ele vai atender e qualificar seus leads.
         </p>
+        <p className="text-muted leading-relaxed mb-4">
+          Todas as perguntas são obrigatórias — se alguma não se aplicar ao seu negócio, é só
+          escrever isso mesmo (&quot;não se aplica&quot;, &quot;não sei&quot; etc.) que a gente
+          ajusta. Se travar em algum campo, é porque a resposta ainda está curta demais ou
+          faltou preencher algo — o próprio formulário avisa exatamente onde.
+        </p>
         <p className="text-muted leading-relaxed mb-8">
           Tempo estimado: 20-30 minutos. Vale reservar um tempo tranquilo pra preencher com
           calma, principalmente a parte do script de atendimento — é a que mais define o
-          comportamento do seu agente.
+          comportamento do seu agente. Qualquer dúvida, manda um e-mail pra{" "}
+          <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline">
+            {SUPPORT_EMAIL}
+          </a>
+          .
         </p>
         <button
           type="button"
@@ -630,37 +950,30 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
         {step.render(data, patch, setData)}
       </div>
 
-      {error && <p className="text-sm text-red-400 text-center">{error}</p>}
+      {error && (
+        <p className="text-sm text-red-400 text-center font-medium leading-relaxed">{error}</p>
+      )}
 
       <div className="flex items-center justify-between gap-4">
         <button
           type="button"
-          onClick={() => setStepIndex((i) => Math.max(0, i - 1))}
+          onClick={goBack}
           disabled={stepIndex === 0}
           className="rounded-full border border-white/15 text-muted px-6 py-3 text-sm font-semibold hover:text-text transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
         >
           Voltar
         </button>
-        {isLastStep ? (
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={!canAdvance || loading}
-            className="inline-flex items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-8 py-3 text-sm shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          >
-            {loading ? "Enviando..." : isPreview ? "Simular envio" : "Enviar formulário"}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setStepIndex((i) => Math.min(steps.length - 1, i + 1))}
-            disabled={!canAdvance}
-            className="inline-flex items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-8 py-3 text-sm shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          >
-            Próxima etapa
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={goNext}
+          disabled={loading}
+          className="inline-flex items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-8 py-3 text-sm shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+        >
+          {isLastStep ? (loading ? "Enviando..." : isPreview ? "Simular envio" : "Enviar formulário") : "Próxima etapa"}
+        </button>
       </div>
+
+      <SupportNote />
     </div>
   );
 }
