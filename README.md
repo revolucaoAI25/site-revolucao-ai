@@ -235,36 +235,51 @@ formulário multi-etapas (`src/components/plataforma/OnboardingForm.tsx`,
 tipos em `src/lib/onboarding-types.ts`) que cobre, em ordem: contato,
 tipo de atendimento (agendamento e/ou venda direta — se tiver
 agendamento, pede pra criar conta no Cal.com, informar login/senha,
-quantidade de agendas e detalhes de disponibilidade/duração), acesso à
-Business Manager do Facebook (necessário pra conectar o WhatsApp do
-agente à API oficial da Meta — pede confirmação de acesso com controle
-total e CNPJ/documento pra verificação), dados do negócio (com ênfase
-grande num link de pasta do Google Drive com fotos, depoimentos, vídeos
-e áudios), leads/funil, o script de atendimento da IA (etapa mais
-enfatizada — é o que mais define o comportamento do agente), follow-ups,
-personalidade do agente, FAQ e uma revisão final com espaço pra link de
-arquivos extras. Praticamente todos os campos são obrigatórios — se uma
-resposta estiver vazia ou curta demais, o formulário bloqueia o avanço e
-mostra exatamente qual campo precisa de mais atenção. Ao enviar, salva o
-objeto inteiro em `business_info` (jsonb) via `POST
-/api/plataforma-business-info`, pro time montar a primeira versão do
-agente. O painel admin tem um botão "Ver onboarding" nos registros da
-Plataforma que já têm `business_info` preenchido
-(`src/components/admin/OnboardingInfoModal.tsx`).
+quantas agendas serão sincronizadas — importante avisar se tiver mais de
+um funcionário/closer/vendedor com reuniões marcadas pela IA — e
+detalhes de disponibilidade/duração), acesso à Business Manager do
+Facebook (necessário pra conectar o WhatsApp do agente à API oficial da
+Meta — toggle Sim/Não pra quem já tem BM, com tutorial em vídeo
+condicional pra quem ainda não tem, confirmação de acesso com controle
+total, e upload real do CNPJ/documento como arquivo), dados do negócio
+(com ênfase grande num link de pasta do Google Drive com fotos,
+depoimentos, vídeos e áudios), leads/funil, o script de atendimento da
+IA (etapa mais enfatizada — é o que mais define o comportamento do
+agente), follow-ups, personalidade do agente, FAQ e uma revisão final
+com espaço pra link de arquivos extras. Praticamente todos os campos são
+obrigatórios — se uma resposta estiver vazia ou curta demais, o
+formulário bloqueia o avanço e mostra exatamente qual campo precisa de
+mais atenção. Ao enviar, salva o objeto inteiro em `business_info`
+(jsonb) via `POST /api/plataforma-business-info`, pro time montar a
+primeira versão do agente. O painel admin tem um botão "Ver onboarding"
+nos registros da Plataforma que já têm `business_info` preenchido
+(`src/components/admin/OnboardingInfoModal.tsx`), incluindo um botão
+"Ver documento" que gera um link assinado temporário pro CNPJ/documento
+enviado.
 
 Acessando `/plataforma/onboarding` **sem** `checkoutId` na URL, o
 formulário entra em modo de pré-visualização (aviso âmbar no topo) —
-dá pra revisar o formulário inteiro sem precisar comprar um plano, mas
-o envio final só simula (não grava nada no banco).
+dá pra revisar o formulário inteiro sem precisar comprar um plano; o
+upload de documento só simula localmente (sem checkoutId não tem onde
+gravar o arquivo) e o envio final só simula também (não grava nada no
+banco).
 
 O vídeo-tutorial de como criar a conta no Cal.com já está hospedado no
 Panda Video (`src/components/plataforma/CalcomTutorialVideo.tsx`). O
-campo de anexos principal (fotos, vídeos, depoimentos) virou um campo de
-link (Google Drive, WeTransfer etc.) em vez de upload direto, pra não
-precisar de infraestrutura de Storage. O e-mail que recebe acesso de
-controle total na BM do Facebook está hardcoded no componente do
-formulário (`FACEBOOK_BM_EMAIL`) — trocar ali se precisar apontar pra
-outro e-mail no futuro.
+vídeo de como criar uma Business Manager ainda é placeholder
+(`VideoPlaceholder`) até termos o link/ID de um vídeo próprio pra isso.
+O campo de anexos principal do negócio (fotos, vídeos, depoimentos)
+continua sendo um campo de link (Google Drive, WeTransfer etc.) em vez
+de upload direto, pra não precisar de infraestrutura de Storage — já o
+CNPJ/documento da Business Manager é upload de arquivo de verdade, salvo
+no bucket privado `onboarding-documentos` do Supabase Storage (criado em
+`supabase/schema.sql`) via `POST
+/api/plataforma-business-info/upload-documento`; a visualização no
+admin gera um link assinado temporário via `GET
+/api/admin/onboarding-documento-url`, nunca uma URL pública. O e-mail
+que recebe acesso de controle total na BM do Facebook está hardcoded no
+componente do formulário (`FACEBOOK_BM_EMAIL`) — trocar ali se precisar
+apontar pra outro e-mail no futuro.
 
 Usa as mesmas variáveis de ambiente do Asaas já documentadas acima
 (`ASAAS_API_KEY`, `ASAAS_ENV`, `ASAAS_CHECKOUT_STARTED_WEBHOOK_URL`,

@@ -113,6 +113,17 @@ alter table public.plataforma_checkouts enable row level security;
 -- service role (usada pelas rotas /api/plataforma-subscription,
 -- /api/plataforma-business-info e /api/asaas-webhook) grava e atualiza.
 
+-- Bucket privado pra documentos enviados no formulário de onboarding
+-- (CNPJ/documento pra verificação da Business Manager do Facebook, ver
+-- etapa "facebook-bm" em OnboardingForm.tsx). Só a service role
+-- acessa/gera link assinado — o upload passa por
+-- /api/plataforma-business-info/upload-documento e a visualização no
+-- admin por /api/admin/onboarding-documento-url, nunca direto do
+-- navegador do cliente.
+insert into storage.buckets (id, name, public)
+values ('onboarding-documentos', 'onboarding-documentos', false)
+on conflict (id) do nothing;
+
 -- Painel /admin (dashboard, kanban e tabela): não precisa de nenhuma
 -- tabela nova, só lê leads/asaas_checkouts acima com a service role,
 -- depois que o Supabase Auth (login em /admin/login) já confirmou a

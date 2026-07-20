@@ -7,6 +7,7 @@ import {
   type TipoAgente,
 } from "@/lib/onboarding-types";
 import { CalcomTutorialVideo } from "./CalcomTutorialVideo";
+import { VideoPlaceholder } from "./VideoPlaceholder";
 
 const SUPPORT_EMAIL = "suporte@revolucao-ai.com";
 const FACEBOOK_BM_EMAIL = "jvitor.no@gmail.com";
@@ -119,10 +120,133 @@ function TextArea({
   );
 }
 
+function ToggleField({
+  label,
+  value,
+  onChange,
+  required,
+  helper,
+  options = ["Sim", "Não"],
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  required?: boolean;
+  helper?: string;
+  options?: string[];
+}) {
+  return (
+    <div>
+      <label className="block text-sm font-semibold mb-1.5">
+        {label}
+        {required && <span className="text-accent"> *</span>}
+      </label>
+      {helper && <p className="text-sm text-muted-2 leading-relaxed mb-2">{helper}</p>}
+      <div className="grid grid-cols-2 gap-3 max-w-xs">
+        {options.map((opt) => (
+          <button
+            key={opt}
+            type="button"
+            onClick={() => onChange(opt)}
+            className={`rounded-2xl px-4 py-3 text-sm font-semibold transition-colors cursor-pointer ${
+              value === opt
+                ? "bg-accent text-[#07090a]"
+                : "border border-white/15 text-muted hover:text-text"
+            }`}
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FileUploadField({
+  label,
+  helper,
+  required,
+  value,
+  onChange,
+  checkoutId,
+}: {
+  label: string;
+  helper?: string;
+  required?: boolean;
+  value: string;
+  onChange: (value: string) => void;
+  checkoutId: string | null;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setError(null);
+    setFileName(file.name);
+    setUploading(true);
+
+    if (!checkoutId) {
+      // Pré-visualização: não envia de verdade, só simula pra dar pra testar o formulário.
+      setTimeout(() => {
+        onChange(`pré-visualização: ${file.name}`);
+        setUploading(false);
+      }, 400);
+      return;
+    }
+
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      form.append("checkoutId", checkoutId);
+      const res = await fetch("/api/plataforma-business-info/upload-documento", {
+        method: "POST",
+        body: form,
+      });
+      if (!res.ok) throw new Error();
+      const json = (await res.json()) as { path: string };
+      onChange(json.path);
+    } catch {
+      setError("Não foi possível enviar o arquivo — tenta de novo.");
+      onChange("");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  return (
+    <div>
+      <label className="block text-sm font-semibold mb-1.5">
+        {label}
+        {required && <span className="text-accent"> *</span>}
+      </label>
+      {helper && <p className="text-sm text-muted-2 leading-relaxed mb-2">{helper}</p>}
+      <label className="flex items-center justify-center gap-3 w-full rounded-2xl border border-dashed border-white/15 bg-surface-2 px-5 py-6 cursor-pointer hover:border-accent/40 transition-colors text-center">
+        <input type="file" accept="image/*,.pdf" className="hidden" onChange={handleFile} />
+        <span className="text-sm font-medium text-muted">
+          {uploading
+            ? "Enviando..."
+            : fileName
+              ? `Arquivo selecionado: ${fileName}`
+              : value
+                ? "Arquivo enviado — clique pra trocar"
+                : "Clique pra escolher o arquivo (foto ou PDF)"}
+        </span>
+      </label>
+      {error && <p className="text-xs text-red-400 mt-1.5">{error}</p>}
+    </div>
+  );
+}
+
 function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-accent/30 bg-accent-soft px-5 py-4 text-sm text-muted leading-relaxed">
-      {children}
+    <div className="flex gap-3 rounded-2xl border border-accent/30 bg-accent-soft px-5 py-4 text-sm text-muted leading-relaxed">
+      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent text-xs font-bold">
+        i
+      </span>
+      <div>{children}</div>
     </div>
   );
 }
@@ -130,7 +254,12 @@ function Callout({ children }: { children: React.ReactNode }) {
 type Step = {
   id: string;
   title: string;
-  render: (data: OnboardingData, patch: ReturnType<typeof makePatcher>, setData: Dispatch<SetStateAction<OnboardingData>>) => React.ReactNode;
+  render: (
+    data: OnboardingData,
+    patch: ReturnType<typeof makePatcher>,
+    setData: Dispatch<SetStateAction<OnboardingData>>,
+    checkoutId: string | null
+  ) => React.ReactNode;
   validate: (data: OnboardingData) => string | null;
 };
 
@@ -247,10 +376,10 @@ const steps: Step[] = [
               helper="Precisamos disso pra configurar sua agenda dentro da plataforma — fica salvo com o mesmo acesso restrito de todos os seus outros dados aqui."
             />
             <TextArea
-              label="Quantas agendas (calendários) do Cal.com o agente vai usar?"
+              label="Quantas agendas (calendários) você vai sincronizar no Cal.com?"
               required
               rows={3}
-              helper="Se você tem mais de um profissional, sala ou serviço, cada um pode ter uma agenda separada — descreva quantas existem e pra que serve cada uma. Se alguma estiver numa conta diferente da que você passou o login acima, avise aqui: vamos precisar de acesso a ela também."
+              helper="Se você tiver mais de um funcionário, closer ou vendedor que também vai ter reuniões agendadas pela IA, é preciso sincronizar (conectar) a agenda de cada um deles no Cal.com — não só a sua. Descreva quantas agendas serão sincronizadas e pra quem é cada uma. Se alguma estiver numa conta diferente da que você passou o login acima, avise aqui: vamos precisar do acesso dela também."
               value={data.calcom.quantidadeAgendas}
               onChange={(v) => patch("calcom")("quantidadeAgendas", v)}
             />
@@ -289,17 +418,16 @@ const steps: Step[] = [
           value: d.facebookBm.acessoConcedido,
           minLen: 1,
         },
-        { label: "CNPJ ou documento", value: d.facebookBm.documento, minLen: 5 },
+        { label: "Documento (CNPJ ou outro) enviado", value: d.facebookBm.documento, minLen: 5 },
       ]),
-    render: (data, patch) => (
+    render: (data, patch, _setData, checkoutId) => (
       <div className="flex flex-col gap-5">
         <Callout>
           <span className="text-text font-semibold">Por que pedimos isso:</span> pra conectar
           o número de WhatsApp do seu agente à API oficial da Meta — o que garante mais
-          estabilidade, o selo de conta verificada e a possibilidade de enviar mensagens em
-          maior volume — a gente precisa ter acesso de administrador na Business Manager (BM)
-          do Facebook vinculada ao seu negócio. É por dentro da BM que a Meta libera e verifica
-          essa conexão.
+          estabilidade e a possibilidade de enviar mensagens em maior volume — a gente precisa
+          ter acesso de administrador na Business Manager (BM) do Facebook vinculada ao seu
+          negócio. É por dentro da BM que a Meta libera e verifica essa conexão.
         </Callout>
         <Callout>
           <span className="text-text font-semibold">Como conceder o acesso:</span> entre em{" "}
@@ -307,8 +435,7 @@ const steps: Step[] = [
           Configurações da empresa → Usuários → Pessoas (ou Parceiros de negócios) →
           Adicionar → informe o e-mail abaixo e escolha a opção{" "}
           <span className="text-text font-semibold">Controle total</span> — não funciona com
-          acesso parcial ou só de anúncios. Se você ainda não tiver uma BM, dá pra criar uma
-          gratuita em poucos minutos no mesmo endereço, e o processo é o mesmo.
+          acesso parcial ou só de anúncios.
         </Callout>
         <div className="rounded-2xl border border-accent/40 bg-accent-soft px-5 py-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-2 mb-1">
@@ -318,27 +445,41 @@ const steps: Step[] = [
             {FACEBOOK_BM_EMAIL}
           </p>
         </div>
-        <Field
+        <ToggleField
           label="Você já tem uma Business Manager (BM) no Facebook?"
           required
           value={data.facebookBm.temBm}
           onChange={(v) => patch("facebookBm")("temBm", v)}
-          placeholder="Sim / Não"
         />
-        <Field
+        {data.facebookBm.temBm === "Não" && (
+          <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-surface-2/50 p-6">
+            <div>
+              <p className="text-sm font-semibold mb-2">Como criar sua Business Manager (BM)</p>
+              <p className="text-sm text-muted-2 leading-relaxed mb-4">
+                Sem problema — leva poucos minutos. Acesse business.facebook.com, clique em
+                &quot;Criar conta&quot;, informe o nome da sua empresa, seu nome completo e um
+                e-mail comercial, e confirme os dados básicos do negócio. Assista ao vídeo
+                abaixo se preferir ver o passo a passo, e depois volte aqui pra adicionar o
+                e-mail acima com Controle total.
+              </p>
+              <VideoPlaceholder label="Como criar sua Business Manager no Facebook" />
+            </div>
+          </div>
+        )}
+        <ToggleField
           label={`Confirma que já adicionou ${FACEBOOK_BM_EMAIL} com Controle total?`}
           required
           value={data.facebookBm.acessoConcedido}
           onChange={(v) => patch("facebookBm")("acessoConcedido", v)}
-          placeholder="Sim / Não"
           helper="Se ainda não deu o acesso, pode fazer isso logo depois de enviar o formulário — só não esquece, porque sem esse acesso a gente não consegue conectar o WhatsApp do agente."
         />
-        <Field
-          label="CNPJ (ou outro documento, se não tiver CNPJ)"
+        <FileUploadField
+          label="Envie o CNPJ (ou outro documento, se não tiver CNPJ)"
           required
           value={data.facebookBm.documento}
           onChange={(v) => patch("facebookBm")("documento", v)}
-          helper="Precisamos disso pra fazer a verificação da conta dentro da BM. Se seu negócio não tiver CNPJ, informe outro documento (CPF, RG etc.)."
+          checkoutId={checkoutId}
+          helper="Precisamos disso pra fazer a verificação da conta dentro da BM. Se seu negócio não tiver CNPJ, envie outro documento (CPF, RG etc.). Aceita foto ou PDF."
         />
         <div className="rounded-2xl border border-white/10 bg-surface-2/50 p-5 text-sm text-muted leading-relaxed">
           Depois que você conceder o acesso, a gente faz as configurações necessárias na BM e a
@@ -886,9 +1027,22 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
             Modo de pré-visualização — nenhuma resposta será salva.
           </div>
         )}
-        <h1 className="text-2xl font-black tracking-tight mb-4">
-          Formulário de onboarding do seu agente
-        </h1>
+        <div className="flex items-center gap-3 mb-4">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M9 12h6M9 16h6M9 8h2M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+          <h1 className="text-2xl font-black tracking-tight">
+            Formulário de onboarding do seu agente
+          </h1>
+        </div>
         <p className="text-muted leading-relaxed mb-4">
           Esse formulário existe pra entender à fundo o seu negócio e montar a primeira
           versão do seu agente de IA. Responda com{" "}
@@ -937,17 +1091,31 @@ export function OnboardingForm({ checkoutId }: { checkoutId: string | null }) {
           </span>
           <span>{step.title}</span>
         </div>
-        <div className="h-1.5 rounded-full bg-surface-2 overflow-hidden">
+        <div className="h-1.5 rounded-full bg-surface-2 overflow-hidden mb-3">
           <div
             className="h-full rounded-full bg-accent transition-[width] duration-300"
             style={{ width: `${((stepIndex + 1) / steps.length) * 100}%` }}
           />
         </div>
+        <div className="flex flex-wrap gap-1.5">
+          {steps.map((s, i) => (
+            <span
+              key={s.id}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === stepIndex
+                  ? "w-6 bg-accent"
+                  : i < stepIndex
+                    ? "w-1.5 bg-accent/50"
+                    : "w-1.5 bg-surface-2"
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
-      <div className="card-surface rounded-3xl p-8 sm:p-10">
+      <div key={step.id} className="card-surface rounded-3xl p-8 sm:p-10 animate-fade-in-up">
         <h2 className="text-xl font-black tracking-tight mb-6">{step.title}</h2>
-        {step.render(data, patch, setData)}
+        {step.render(data, patch, setData, checkoutId)}
       </div>
 
       {error && (

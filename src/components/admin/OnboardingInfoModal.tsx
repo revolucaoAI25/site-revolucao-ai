@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { OnboardingData } from "@/lib/onboarding-types";
 
 const TIPO_AGENTE_LABELS: Record<string, string> = {
@@ -16,6 +17,56 @@ function Row({ label, value }: { label: string; value: string | undefined | null
         {label}
       </p>
       <p className="text-sm text-text whitespace-pre-wrap leading-relaxed">{value}</p>
+    </div>
+  );
+}
+
+/** CNPJ/documento enviado no onboarding — armazenado como path privado no Storage, nunca como URL pública. */
+function DocumentLink({ path }: { path: string | undefined }) {
+  const [loading, setLoading] = useState(false);
+
+  if (!path || !path.trim()) return null;
+
+  if (path.startsWith("pré-visualização:")) {
+    return (
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-2 mb-1">
+          CNPJ / documento
+        </p>
+        <p className="text-sm text-muted">{path} (modo de pré-visualização, sem arquivo real)</p>
+      </div>
+    );
+  }
+
+  async function handleClick() {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `/api/admin/onboarding-documento-url?path=${encodeURIComponent(path!)}`
+      );
+      if (!res.ok) throw new Error();
+      const json = (await res.json()) as { url: string };
+      window.open(json.url, "_blank", "noopener,noreferrer");
+    } catch {
+      alert("Não foi possível abrir o documento.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-widest text-muted-2 mb-1">
+        CNPJ / documento
+      </p>
+      <button
+        type="button"
+        onClick={handleClick}
+        disabled={loading}
+        className="text-sm text-accent hover:underline cursor-pointer disabled:opacity-50"
+      >
+        {loading ? "Abrindo..." : "Ver documento"}
+      </button>
     </div>
   );
 }
@@ -97,7 +148,7 @@ export function OnboardingInfoModal({
           <Section title="Business Manager (Facebook)">
             <Row label="Já tem BM?" value={data.facebookBm.temBm} />
             <Row label="Acesso concedido?" value={data.facebookBm.acessoConcedido} />
-            <Row label="CNPJ / documento" value={data.facebookBm.documento} />
+            <DocumentLink path={data.facebookBm.documento} />
           </Section>
         )}
 
