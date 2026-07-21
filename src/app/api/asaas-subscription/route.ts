@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
       cpfCnpj,
       phone: telefone,
     });
-    const checkoutUrl = await createCheckout(plano, customerId, req.nextUrl.origin);
+    const checkoutUrl = await createCheckout(checkoutRecordId, plano, customerId, req.nextUrl.origin);
 
     const supabase = getSupabaseServerClient();
     if (supabase && checkoutRecordId) {

@@ -98,12 +98,16 @@ export async function findOrCreateCustomer(input: {
  *   "parcelado", que são cobranças independentes a cada mês).
  */
 export async function createCheckout(
+  checkoutId: string | null,
   plano: Plano,
   customerId: string,
   origin: string
 ): Promise<string> {
+  const successUrl = checkoutId
+    ? `${origin}/lead-extractor/assinar/obrigado?checkoutId=${checkoutId}&plano=${plano}`
+    : `${origin}/lead-extractor/assinar/obrigado?plano=${plano}`;
   const callback = {
-    successUrl: `${origin}/lead-extractor/assinar/obrigado?plano=${plano}`,
+    successUrl,
     cancelUrl: `${origin}/lead-extractor/assinar?plano=${plano}`,
     expiredUrl: `${origin}/lead-extractor/assinar?plano=${plano}`,
   };

@@ -160,10 +160,9 @@ Em ambos os casos o navegador é redirecionado pro checkout hospedado no
 próprio Asaas pra concluir o pagamento — o site nunca recebe nem processa
 dado de cartão. Assim que a pessoa termina o checkout, o próprio Asaas
 (via `callback.successUrl`) redireciona de volta pra
-`/lead-extractor/assinar/obrigado`, avisando que o time entra em contato
-nas próximas horas com os acessos.
+`/lead-extractor/assinar/obrigado?checkoutId=<id>&plano=...`.
 
-### Registro do lead e ativação (Supabase)
+### Registro do lead, ativação e criação automática da conta (Supabase)
 
 Assim que o formulário é enviado — antes mesmo de saber se a pessoa vai
 concluir o pagamento — os dados já são salvos na tabela
@@ -171,7 +170,33 @@ concluir o pagamento — os dados já são salvos na tabela
 pra não perder o lead se ela abandonar o checkout. Quando o webhook do
 Asaas confirma o pagamento (`PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED`), o
 `/api/asaas-webhook` atualiza esse mesmo registro pra `status: 'confirmado'`
-— é o "cliente ativo".
+— é o "cliente ativo" — **e cria automaticamente a conta do cliente na
+plataforma Lead Extractor**, via a API de provisionamento de usuários
+(serviço à parte, hospedado no Railway; cliente em
+`src/lib/lead-extractor-api.ts`):
+
+- `role` sempre `"user"` (nunca admin).
+- `email`: o mesmo informado no checkout. `password`: gerada
+  automaticamente (primeiro nome do cliente + sufixo numérico aleatório,
+  ver `generateLeadExtractorPassword`) — o cliente não escolhe senha.
+- Créditos de CNPJ (`cdd_credits`): sempre 3000 iniciais + 3000/mês de
+  renovação automática.
+- Créditos de Google Maps: sempre via chave de API própria do cliente
+  (`maps_credits_enabled: false`, sem saldo nenhum da nossa parte).
+- Instagram: só fica visível (`instagram_visible`) pra quem assinou o
+  **plano anual** — mensal não tem acesso a essa aba. Quando visível,
+  também é sempre via chave de API própria (`instagram_credits_enabled:
+  false`, sem sistema de créditos).
+
+O `user_id` retornado e a senha gerada ficam salvos em
+`lead_extractor_user_id`/`lead_extractor_password` no próprio registro de
+`asaas_checkouts`. A página de obrigado (com `checkoutId` na URL) faz
+polling em `/api/lead-extractor-checkout-status` a cada poucos segundos
+(`src/components/lead-extractor/LeadExtractorCredentials.tsx`) até a
+conta existir, e então mostra login, senha e um botão pra entrar
+direto na plataforma (`LEAD_EXTRACTOR_APP_LINK` em `src/lib/links.ts`) —
+sem precisar de contato manual do time. Sem `checkoutId` na URL (links
+antigos), cai no aviso genérico de "nosso time entra em contato".
 
 Variáveis de ambiente necessárias (local em `.env.local`, e na Vercel em
 Project Settings → Environment Variables):
@@ -190,6 +215,11 @@ Project Settings → Environment Variables):
   recebe uma notificação (já com nome/e-mail/telefone do cliente) toda vez
   que um pagamento é confirmado, pra alguém liberar o acesso manualmente
   (além da atualização automática no Supabase acima).
+- `LEAD_EXTRACTOR_API_KEY` — chave da API de provisionamento de usuários
+  do Lead Extractor (header `X-API-Key`). **Sem essa variável configurada,
+  a conta não é criada automaticamente** (fica só registrado o pagamento
+  confirmado) — o erro fica logado no console da função, sem quebrar o
+  resto do webhook.
 
 Sem `ASAAS_API_KEY` configurada, o formulário mostra um aviso pedindo pra
 chamar no WhatsApp em vez de quebrar — dá pra publicar o resto do site

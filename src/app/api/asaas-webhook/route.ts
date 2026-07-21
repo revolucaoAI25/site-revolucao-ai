@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase-server";
+import { createLeadExtractorUser, generateLeadExtractorPassword } from "@/lib/lead-extractor-api";
 
 /**
  * Eventos que indicam que o pagamento entrou de fato — é o gatilho pra
@@ -36,6 +37,7 @@ type CheckoutRecord = {
   cpf_cnpj: string;
   telefone: string;
   status: string;
+  lead_extractor_user_id: string | null;
 };
 
 type PlataformaRecord = {
@@ -56,7 +58,7 @@ async function findCheckoutRecord(customerId: string): Promise<CheckoutRecord | 
 
   const { data, error } = await supabase
     .from("asaas_checkouts")
-    .select("id, plano, nome, email, cpf_cnpj, telefone, status")
+    .select("id, plano, nome, email, cpf_cnpj, telefone, status, lead_extractor_user_id")
     .eq("asaas_customer_id", customerId)
     .order("created_at", { ascending: false })
     .limit(1)
@@ -140,6 +142,38 @@ async function markPlataformaConfirmed(recordId: string) {
 
   if (error) {
     console.error("[asaas-webhook] Falha ao atualizar status (plataforma) no Supabase:", error);
+  }
+}
+
+/**
+ * Cria automaticamente a conta do cliente na plataforma Lead Extractor
+ * (ver src/lib/lead-extractor-api.ts) assim que a assinatura é confirmada,
+ * e salva o login gerado no Supabase pra página de obrigado exibir. Só
+ * roda uma vez por checkout — se já tiver `lead_extractor_user_id`, o
+ * provisionamento já aconteceu (proteção extra além da checagem de
+ * `status !== "confirmado"` já feita antes de chamar esta função).
+ */
+async function provisionLeadExtractorAccount(record: CheckoutRecord) {
+  if (record.lead_extractor_user_id) return;
+
+  const password = generateLeadExtractorPassword(record.nome);
+  const result = await createLeadExtractorUser({
+    email: record.email,
+    password,
+    instagramVisible: record.plano === "anual",
+  });
+  if (!result) return;
+
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return;
+
+  const { error } = await supabase
+    .from("asaas_checkouts")
+    .update({ lead_extractor_user_id: result.userId, lead_extractor_password: password })
+    .eq("id", record.id);
+
+  if (error) {
+    console.error("[asaas-webhook] Falha ao salvar credenciais do Lead Extractor:", error);
   }
 }
 
@@ -273,7 +307,10 @@ export async function POST(req: NextRequest) {
       // Idempotência: se já processamos essa confirmação antes (o Asaas
       // pode reenviar o mesmo evento), não atualiza nem encaminha de novo.
       if (!record || record.status !== "confirmado") {
-        if (record) await markCheckoutConfirmed(record.id);
+        if (record) {
+          await markCheckoutConfirmed(record.id);
+          await provisionLeadExtractorAccount(record);
+        }
         await forwardPaymentConfirmed(event, payment, record);
       }
     }

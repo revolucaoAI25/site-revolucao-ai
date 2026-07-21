@@ -62,6 +62,14 @@ update public.asaas_checkouts
   set stage = case when status = 'confirmado' then 'confirmado' else 'iniciou-checkout' end
   where stage is null;
 
+-- Preenchidos pelo /api/asaas-webhook assim que o pagamento é confirmado —
+-- cria automaticamente a conta do cliente na plataforma Lead Extractor via
+-- API de provisionamento (ver src/lib/lead-extractor-api.ts) e guarda aqui
+-- o id do usuário criado e a senha gerada, pra página de obrigado
+-- (?checkoutId=...) mostrar o login pronto pro cliente.
+alter table public.asaas_checkouts add column if not exists lead_extractor_user_id text;
+alter table public.asaas_checkouts add column if not exists lead_extractor_password text;
+
 create index if not exists asaas_checkouts_customer_id_idx
   on public.asaas_checkouts (asaas_customer_id);
 create index if not exists asaas_checkouts_created_at_idx

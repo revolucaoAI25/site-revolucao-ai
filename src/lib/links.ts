@@ -58,6 +58,14 @@ export const LEAD_EXTRACTOR_CHECKOUT_MENSAL_LINK = "/lead-extractor/assinar?plan
 export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = "/lead-extractor/assinar?plano=anual";
 
 /**
+ * URL da plataforma Lead Extractor em si (fora do site institucional) —
+ * pra onde o cliente entra com o login/senha criados automaticamente
+ * assim que o pagamento é confirmado (ver /api/asaas-webhook e
+ * LeadExtractorCredentials.tsx).
+ */
+export const LEAD_EXTRACTOR_APP_LINK = "https://lead-extractor-revolucao-ai.up.railway.app/";
+
+/**
  * LP da Plataforma (acesso self-service à Chatflux + add-on Agente
  * Pronto) — resultado "outro produto" do pop-up de Agentes de IA, pra
  * quem quer resultado com IA mas não tem orçamento pra implementação
