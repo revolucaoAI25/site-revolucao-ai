@@ -14,7 +14,7 @@ import {
   PRODUTO_LOW_TICKET_LINK,
 } from "./links";
 
-export type FlowId = "agentes" | "formacao";
+export type FlowId = "agentes" | "formacao" | "plataforma-upgrade";
 
 export type FlowResult = {
   kind: "result";
@@ -253,7 +253,35 @@ export const formacaoFlow: QualificationFlow = {
   },
 };
 
+// Quem chega até aqui já é cliente da plataforma pedindo a implementação
+// completa — sem perguntas de volume/orçamento, direto pro agendamento.
+export const plataformaUpgradeFlow: QualificationFlow = {
+  id: "plataforma-upgrade",
+  title: "Quero uma implementação mais completa",
+  startStepId: "contato-agendar",
+  steps: {
+    "contato-agendar": {
+      id: "contato-agendar",
+      question: "Antes de continuar, só precisamos de algumas informações.",
+      helper: CONTATO_HELPER,
+      kind: "contact",
+      options: [],
+      next: "result:agendar",
+    },
+  },
+  results: {
+    agendar: {
+      kind: "result",
+      title: "Vamos agendar uma conversa sobre a implementação completa.",
+      description:
+        "A gente cuida da construção, dos ajustes e do suporte do seu agente, com toda a nossa expertise, pra você alcançar mais resultado, mais rápido. Escolha o melhor horário abaixo.",
+      embed: { provider: "calendly", url: CALENDLY_AGENTE_LINK },
+    },
+  },
+};
+
 export const flows: Record<FlowId, QualificationFlow> = {
   agentes: agentesFlow,
   formacao: formacaoFlow,
+  "plataforma-upgrade": plataformaUpgradeFlow,
 };

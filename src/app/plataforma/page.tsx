@@ -12,6 +12,7 @@ import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/Featu
 import { FeatureScreenshot } from "@/components/plataforma/FeatureScreenshot";
 import { PlataformaDemoVideo } from "@/components/plataforma/PlataformaDemoVideo";
 import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
+import { ScheduleCallLink } from "@/components/plataforma/ScheduleCallLink";
 import {
   LEAD_EXTRACTOR_WHATSAPP_LINK,
   LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY,
@@ -466,16 +467,17 @@ export default function PlataformaPage() {
             <Reveal>
               <Eyebrow>Pra quem é</Eyebrow>
               <SectionTitle className="mb-6">
-                O caminho pra quem quer começar agora com IA no pré-vendas.
+                Pra quem recebe leads, atende no WhatsApp ou Instagram, e
+                quer automatizar isso com IA de verdade.
               </SectionTitle>
               <p className="text-muted leading-relaxed text-base">
-                Você já entende o potencial de um agente de IA no
-                pré-vendas, mas ainda não é o momento de contratar uma
-                implementação completa — seja por orçamento, seja porque
-                prefere colocar a mão na massa e construir você mesmo. Esse
-                é o caminho pra quem quer começar agora, com a mesma
-                tecnologia usada por negócios que já geram centenas de
-                reuniões por mês com IA.
+                Você recebe leads (ou quer fazer disparos pra uma base) e
+                faz atendimento comercial pelo WhatsApp ou Instagram — e
+                quer automatizar esse atendimento com uma IA de alta
+                qualidade, que performa de verdade e é fácil de construir e
+                ajustar. Você tem controle total de tudo: CRM com Kanban
+                integrado, dashboard de métricas, chat centralizado, e
+                agendamento automático de reuniões, consultas ou vendas.
               </p>
             </Reveal>
             <Reveal delay={100} className="rounded-3xl border border-accent/20 bg-accent-soft p-8">
@@ -940,6 +942,13 @@ export default function PlataformaPage() {
                 Quero o Agente Pronto
               </CTAButton>
             </div>
+            <p className="relative mt-8 text-sm text-muted max-w-lg mx-auto">
+              Quer uma implementação mais completa? A gente cuida da
+              construção, dos ajustes e do suporte do seu agente, com toda a
+              nossa expertise, pra você alcançar mais resultado, mais
+              rápido.{" "}
+              <ScheduleCallLink>Agendar uma conversa</ScheduleCallLink>
+            </p>
           </Reveal>
         </Section>
       </main>
