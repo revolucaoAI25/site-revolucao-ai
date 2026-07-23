@@ -75,9 +75,9 @@ export default async function ObrigadoPage({
                 : "Sua assinatura está confirmada."}
             </p>
             <p className="text-muted leading-relaxed">
-              Em breve você recebe, pelo WhatsApp e por e-mail, o acesso à
-              plataforma e o treinamento guiado — pra você usar a
-              ferramenta com o máximo de qualidade.
+              Em breve você recebe por e-mail o acesso à plataforma e o
+              treinamento guiado — pra você usar a ferramenta com o
+              máximo de qualidade.
             </p>
           </div>
 
