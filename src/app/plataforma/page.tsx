@@ -463,40 +463,22 @@ export default function PlataformaPage() {
 
         {/* Para quem é */}
         <Section divider>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <Reveal>
-              <Eyebrow>Pra quem é</Eyebrow>
-              <SectionTitle className="mb-6">
-                Pra quem recebe leads, atende no WhatsApp ou Instagram, e
-                quer automatizar isso com IA de verdade.
-              </SectionTitle>
-              <p className="text-muted leading-relaxed text-base">
-                Você recebe leads (ou quer fazer disparos pra uma base) e
-                faz atendimento comercial pelo WhatsApp ou Instagram — e
-                quer automatizar esse atendimento com uma IA de alta
-                qualidade, que performa de verdade e é fácil de construir e
-                ajustar. Você tem controle total de tudo: CRM com Kanban
-                integrado, dashboard de métricas, chat centralizado, e
-                agendamento automático de reuniões, consultas ou vendas.
-              </p>
-            </Reveal>
-            <Reveal delay={100} className="rounded-3xl border border-accent/20 bg-accent-soft p-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-accent mb-3">
-                Importante
-              </p>
-              <p className="text-muted leading-relaxed text-[15px]">
-                Aqui você compra <span className="text-text font-semibold">ferramenta + capacitação</span> —
-                a mesma plataforma que usamos com nossos clientes, e um
-                treinamento guiado pra você aprender a usar. Na{" "}
-                <Link href="/agentes-de-ia" className="text-accent hover:underline">
-                  implementação completa
-                </Link>
-                , a gente entrega estratégia, execução e acompanhamento de
-                resultado. São produtos diferentes, pra momentos diferentes
-                — essa é a porta de entrada.
-              </p>
-            </Reveal>
-          </div>
+          <Reveal className="max-w-2xl mx-auto text-center">
+            <Eyebrow>Pra quem é</Eyebrow>
+            <SectionTitle className="mb-6">
+              Pra quem recebe leads, atende no WhatsApp ou Instagram, e
+              quer automatizar isso com IA de verdade.
+            </SectionTitle>
+            <p className="text-muted leading-relaxed text-base">
+              Você recebe leads (ou quer fazer disparos pra uma base) e
+              faz atendimento comercial pelo WhatsApp ou Instagram — e
+              quer automatizar esse atendimento com uma IA de alta
+              qualidade, que performa de verdade e é fácil de construir e
+              ajustar. Você tem controle total de tudo: CRM com Kanban
+              integrado, dashboard de métricas, chat centralizado, e
+              agendamento automático de reuniões, consultas ou vendas.
+            </p>
+          </Reveal>
         </Section>
 
         {/* Como funciona */}
