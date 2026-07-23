@@ -184,6 +184,14 @@ const featureBlocks: {
       },
     ],
     placeholder: "Central de atendimento (chat)",
+    screenshots: [
+      {
+        src: "/plataforma/screenshots/chat-conversas.png",
+        alt: "Central de atendimento com conversas em tempo real e ações rápidas",
+        width: 1365,
+        height: 600,
+      },
+    ],
   },
   {
     eyebrow: "Acompanhamento e organização",
@@ -209,6 +217,12 @@ const featureBlocks: {
     ],
     placeholder: "Kanban e dashboard de métricas",
     screenshots: [
+      {
+        src: "/plataforma/screenshots/kanban.png",
+        alt: "Kanban do funil de leads, com etapas e oportunidades organizadas",
+        width: 1346,
+        height: 544,
+      },
       {
         src: "/plataforma/screenshots/metricas.png",
         alt: "Dashboard de métricas: novas conversas, status e eventos em tempo real",
