@@ -608,9 +608,11 @@ export default function PlataformaPage() {
               <h3 className="text-lg font-bold mb-3">Acesso à plataforma</h3>
               <p className="text-muted leading-relaxed text-[15px]">
                 Você recebe acesso completo à Chatflux e ao treinamento
-                guiado, e constrói seu agente do zero, no seu ritmo. Ideal pra quem
-                gosta de colocar a mão na massa e quer aprender a fundo como
-                funciona.
+                guiado, e constrói seu agente do zero, no seu ritmo — contando
+                com uma IA própria da plataforma que te ajuda a escrever o
+                prompt, o script de atendimento e as demais configurações.
+                Ideal pra quem gosta de colocar a mão na massa e quer aprender
+                a fundo como funciona.
               </p>
             </Reveal>
             <Reveal
@@ -627,8 +629,8 @@ export default function PlataformaPage() {
                 prompt e fluxo de conversa configurados e prontos pra
                 rodar. Você recebe acesso à plataforma e ao mesmo
                 treinamento guiado, pra fazer os ajustes que quiser depois —
-                inclusive com a ajuda de uma IA própria da plataforma, que te
-                auxilia a escrever e configurar o comportamento do seu
+                com a mesma IA de apoio do Caminho A à disposição, te
+                ajudando a escrever e configurar o comportamento do seu
                 agente. Ideal pra quem quer começar já com uma base pronta,
                 sem abrir mão de assumir os ajustes no dia a dia.
               </p>
