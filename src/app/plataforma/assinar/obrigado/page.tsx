@@ -67,18 +67,17 @@ export default async function ObrigadoPage({
               </svg>
             </span>
             <h1 className="text-2xl font-black tracking-tight mb-3">
-              Recebemos seu pedido!
+              Recebemos seu pagamento!
             </h1>
             <p className="text-muted leading-relaxed mb-1">
               {planoLabel
-                ? `Assinatura do plano ${planoLabel} em processamento.`
-                : "Sua assinatura está em processamento."}
+                ? `Assinatura do plano ${planoLabel} confirmada.`
+                : "Sua assinatura está confirmada."}
             </p>
             <p className="text-muted leading-relaxed">
-              Assim que o pagamento for confirmado, nosso time entra em
-              contato nas próximas horas — pelo WhatsApp ou e-mail — com os
-              acessos e o passo a passo pra você começar a usar a
-              plataforma.
+              Em breve você recebe, pelo WhatsApp e por e-mail, o acesso à
+              plataforma e o treinamento guiado — pra você usar a
+              ferramenta com o máximo de qualidade.
             </p>
           </div>
 
