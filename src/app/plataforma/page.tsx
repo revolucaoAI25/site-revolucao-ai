@@ -10,7 +10,7 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/FeatureIcon";
 import { ScreenshotPlaceholder } from "@/components/plataforma/ScreenshotPlaceholder";
-import { VideoPlaceholder } from "@/components/plataforma/VideoPlaceholder";
+import { PlataformaDemoVideo } from "@/components/plataforma/PlataformaDemoVideo";
 import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
 import {
   LEAD_EXTRACTOR_WHATSAPP_LINK,
@@ -218,7 +218,8 @@ const compactFeatures: FeatureItem[] = [
   {
     icon: "sparkles",
     title: "IA de apoio pra ajustes",
-    description: "Uma IA própria da plataforma te ajuda a configurar e ajustar o agente sempre que precisar.",
+    description:
+      "Uma IA própria da plataforma te ajuda a escrever e ajustar o prompt, o script de atendimento e as configurações do seu agente — mesmo se você optou pelo Agente Pronto.",
   },
   {
     icon: "code",
@@ -509,7 +510,7 @@ export default function PlataformaPage() {
             <SectionTitle>A plataforma rodando, na prática.</SectionTitle>
           </Reveal>
           <Reveal delay={80} className="max-w-4xl mx-auto">
-            <VideoPlaceholder label="Demonstração da Chatflux" />
+            <PlataformaDemoVideo />
           </Reveal>
         </Section>
 
@@ -625,9 +626,11 @@ export default function PlataformaPage() {
                 e o Revolução AI monta a primeira versão do seu agente —
                 prompt e fluxo de conversa configurados e prontos pra
                 rodar. Você recebe acesso à plataforma e ao mesmo
-                treinamento guiado, pra fazer os ajustes que quiser depois. Ideal pra
-                quem quer começar já com uma base pronta, sem abrir mão de
-                assumir os ajustes no dia a dia.
+                treinamento guiado, pra fazer os ajustes que quiser depois —
+                inclusive com a ajuda de uma IA própria da plataforma, que te
+                auxilia a escrever e configurar o comportamento do seu
+                agente. Ideal pra quem quer começar já com uma base pronta,
+                sem abrir mão de assumir os ajustes no dia a dia.
               </p>
             </Reveal>
           </div>
