@@ -118,6 +118,14 @@ const featureBlocks: {
           "Configure exatamente como ele deve se comportar, com instruções detalhadas — não é um bot genérico com respostas padronizadas.",
       },
     ],
+    screenshots: [
+      {
+        src: "/plataforma/screenshots/whatsapp-chat.png",
+        alt: "Conversa do agente no WhatsApp qualificando um lead",
+        width: 1036,
+        height: 672,
+      },
+    ],
   },
   {
     eyebrow: "Follow-up, lembretes e agendamento",
