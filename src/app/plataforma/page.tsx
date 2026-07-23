@@ -10,6 +10,7 @@ import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/FeatureIcon";
 import { ScreenshotPlaceholder } from "@/components/plataforma/ScreenshotPlaceholder";
+import { FeatureScreenshot } from "@/components/plataforma/FeatureScreenshot";
 import { PlataformaDemoVideo } from "@/components/plataforma/PlataformaDemoVideo";
 import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
 import {
@@ -87,11 +88,14 @@ const flowSteps: { icon: FeatureIconName; title: string; description: string }[]
 
 type FeatureItem = { icon: FeatureIconName; title: string; description: string };
 
+type FeatureScreenshotItem = { src: string; alt: string; width: number; height: number };
+
 const featureBlocks: {
   eyebrow: string;
   title: string;
   bullets: FeatureItem[];
   placeholder: string;
+  screenshots?: FeatureScreenshotItem[];
 }[] = [
   {
     eyebrow: "Conversa que qualifica sozinha",
@@ -141,6 +145,14 @@ const featureBlocks: {
       },
     ],
     placeholder: "Configuração de follow-up e agenda",
+    screenshots: [
+      {
+        src: "/plataforma/screenshots/apps.png",
+        alt: "Apps da plataforma com Follow-Ups e Agendamento ativados",
+        width: 1365,
+        height: 557,
+      },
+    ],
   },
   {
     eyebrow: "Central de atendimento",
@@ -196,6 +208,14 @@ const featureBlocks: {
       },
     ],
     placeholder: "Kanban e dashboard de métricas",
+    screenshots: [
+      {
+        src: "/plataforma/screenshots/metricas.png",
+        alt: "Dashboard de métricas: novas conversas, status e eventos em tempo real",
+        width: 1004,
+        height: 551,
+      },
+    ],
   },
 ];
 
@@ -533,7 +553,15 @@ export default function PlataformaPage() {
                 <Reveal
                   className={blockIndex % 2 === 1 ? "order-2 lg:order-1" : "order-2"}
                 >
-                  <ScreenshotPlaceholder label={block.placeholder} />
+                  {block.screenshots && block.screenshots.length > 0 ? (
+                    <div className="flex flex-col gap-4">
+                      {block.screenshots.map((shot) => (
+                        <FeatureScreenshot key={shot.src} {...shot} />
+                      ))}
+                    </div>
+                  ) : (
+                    <ScreenshotPlaceholder label={block.placeholder} />
+                  )}
                 </Reveal>
                 <Reveal
                   delay={80}
