@@ -9,7 +9,6 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { FeatureIcon, type FeatureIconName } from "@/components/plataforma/FeatureIcon";
-import { ScreenshotPlaceholder } from "@/components/plataforma/ScreenshotPlaceholder";
 import { FeatureScreenshot } from "@/components/plataforma/FeatureScreenshot";
 import { PlataformaDemoVideo } from "@/components/plataforma/PlataformaDemoVideo";
 import { PlataformaROICalculator } from "@/components/plataforma/PlataformaROICalculator";
@@ -94,7 +93,6 @@ const featureBlocks: {
   eyebrow: string;
   title: string;
   bullets: FeatureItem[];
-  placeholder: string;
   screenshots?: FeatureScreenshotItem[];
 }[] = [
   {
@@ -120,7 +118,6 @@ const featureBlocks: {
           "Configure exatamente como ele deve se comportar, com instruções detalhadas — não é um bot genérico com respostas padronizadas.",
       },
     ],
-    placeholder: "Chat do agente no WhatsApp",
   },
   {
     eyebrow: "Follow-up, lembretes e agendamento",
@@ -144,7 +141,6 @@ const featureBlocks: {
           "Conectado à sua agenda (Google Agenda), agenda reuniões e consultas direto na conversa, sem intervenção manual.",
       },
     ],
-    placeholder: "Configuração de follow-up e agenda",
     screenshots: [
       {
         src: "/plataforma/screenshots/apps.png",
@@ -183,7 +179,6 @@ const featureBlocks: {
           "Direcione o atendimento manual pra pessoa certa da sua equipe continuar a conversa.",
       },
     ],
-    placeholder: "Central de atendimento (chat)",
     screenshots: [
       {
         src: "/plataforma/screenshots/chat-conversas.png",
@@ -215,7 +210,6 @@ const featureBlocks: {
         description: "Define exatamente quando ele deve atuar — dias e horários de atendimento.",
       },
     ],
-    placeholder: "Kanban e dashboard de métricas",
     screenshots: [
       {
         src: "/plataforma/screenshots/kanban.png",
@@ -559,52 +553,76 @@ export default function PlataformaPage() {
           </Reveal>
 
           <div className="flex flex-col gap-16">
-            {featureBlocks.map((block, blockIndex) => (
-              <div
-                key={block.eyebrow}
-                className="grid lg:grid-cols-2 gap-10 items-center"
-              >
-                <Reveal
-                  className={blockIndex % 2 === 1 ? "order-2 lg:order-1" : "order-2"}
+            {featureBlocks.map((block, blockIndex) =>
+              block.screenshots && block.screenshots.length > 0 ? (
+                <div
+                  key={block.eyebrow}
+                  className="grid lg:grid-cols-2 gap-10 items-center"
                 >
-                  {block.screenshots && block.screenshots.length > 0 ? (
+                  <Reveal
+                    className={blockIndex % 2 === 1 ? "order-2 lg:order-1" : "order-2"}
+                  >
                     <div className="flex flex-col gap-4">
                       {block.screenshots.map((shot) => (
                         <FeatureScreenshot key={shot.src} {...shot} />
                       ))}
                     </div>
-                  ) : (
-                    <ScreenshotPlaceholder label={block.placeholder} />
-                  )}
-                </Reveal>
-                <Reveal
-                  delay={80}
-                  className={blockIndex % 2 === 1 ? "order-1 lg:order-2" : "order-1"}
-                >
-                  <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
-                    {block.eyebrow}
-                  </p>
-                  <h3 className="text-xl font-black tracking-tight mb-6 text-balance">
-                    {block.title}
-                  </h3>
-                  <div className="flex flex-col gap-5">
-                    {block.bullets.map((bullet) => (
-                      <div key={bullet.title} className="flex gap-4">
-                        <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent-soft text-accent">
-                          <FeatureIcon name={bullet.icon} size={18} />
-                        </span>
-                        <div>
-                          <h4 className="font-bold text-sm mb-1">{bullet.title}</h4>
-                          <p className="text-muted text-sm leading-relaxed">
-                            {bullet.description}
-                          </p>
+                  </Reveal>
+                  <Reveal
+                    delay={80}
+                    className={blockIndex % 2 === 1 ? "order-1 lg:order-2" : "order-1"}
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+                      {block.eyebrow}
+                    </p>
+                    <h3 className="text-xl font-black tracking-tight mb-6 text-balance">
+                      {block.title}
+                    </h3>
+                    <div className="flex flex-col gap-5">
+                      {block.bullets.map((bullet) => (
+                        <div key={bullet.title} className="flex gap-4">
+                          <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent-soft text-accent">
+                            <FeatureIcon name={bullet.icon} size={18} />
+                          </span>
+                          <div>
+                            <h4 className="font-bold text-sm mb-1">{bullet.title}</h4>
+                            <p className="text-muted text-sm leading-relaxed">
+                              {bullet.description}
+                            </p>
+                          </div>
                         </div>
-                      </div>
+                      ))}
+                    </div>
+                  </Reveal>
+                </div>
+              ) : (
+                <div key={block.eyebrow}>
+                  <Reveal className="max-w-2xl mb-8">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+                      {block.eyebrow}
+                    </p>
+                    <h3 className="text-xl font-black tracking-tight text-balance">
+                      {block.title}
+                    </h3>
+                  </Reveal>
+                  <div className="grid sm:grid-cols-3 gap-6">
+                    {block.bullets.map((bullet, bulletIndex) => (
+                      <Reveal
+                        key={bullet.title}
+                        delay={bulletIndex * 60}
+                        className="card-surface card-hover rounded-3xl p-7 flex flex-col h-full"
+                      >
+                        <FeatureIconBadge icon={bullet.icon} />
+                        <h4 className="font-bold text-base mb-2">{bullet.title}</h4>
+                        <p className="text-muted leading-relaxed text-[15px]">
+                          {bullet.description}
+                        </p>
+                      </Reveal>
                     ))}
                   </div>
-                </Reveal>
-              </div>
-            ))}
+                </div>
+              )
+            )}
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
