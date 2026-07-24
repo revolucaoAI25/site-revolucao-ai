@@ -179,6 +179,12 @@ const fluxoIcons = {
       <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
     </>
   ),
+  send: (
+    <>
+      <path d="M22 2 11 13" />
+      <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+    </>
+  ),
 };
 
 const fluxo: { icon: keyof typeof fluxoIcons; title: string; description: string }[] = [
@@ -205,6 +211,12 @@ const fluxo: { icon: keyof typeof fluxoIcons; title: string; description: string
     title: "Receba os leads",
     description:
       "Direto no Google Sheets, ou baixe em Excel/CSV — prontos pra prospectar.",
+  },
+  {
+    icon: "send",
+    title: "Dispare no WhatsApp",
+    description:
+      "Conecte um número e já dispare campanhas pros leads extraídos, sem sair da plataforma.",
   },
 ];
 
@@ -383,8 +395,8 @@ export default function LeadExtractor() {
               Um resumo de como a ferramenta entrega valor, de ponta a ponta.
             </SectionTitle>
           </Reveal>
-          <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
-            <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-accent/40 via-accent/20 to-accent/40" />
+          <div className="relative grid sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-12">
+            <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-px bg-gradient-to-r from-accent/40 via-accent/20 to-accent/40" />
             {fluxo.map((step, index) => (
               <Reveal key={step.title} delay={index * 80} className="relative flex flex-col items-center text-center">
                 <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-accent/40 bg-bg text-accent shadow-[0_0_20px_rgba(0,200,83,0.25)] mb-5">
@@ -567,6 +579,12 @@ export default function LeadExtractor() {
                   <span className="text-accent shrink-0">—</span>
                   Múltiplos horários por dia, planilha de destino própria, e
                   pause ou retome quando quiser.
+                </li>
+                <li className="flex gap-3 text-base text-muted leading-relaxed">
+                  <span className="text-accent shrink-0">—</span>
+                  Vincule a uma campanha de disparo: todo lead novo que a
+                  automação encontrar já entra direto pra receber suas
+                  mensagens de WhatsApp, sem configurar nada separado.
                 </li>
               </ul>
             </Reveal>
