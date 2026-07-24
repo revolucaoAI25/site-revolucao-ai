@@ -35,6 +35,11 @@ const faqItems = [
       "O mensal não tem fidelidade, cancele quando quiser. O anual é um compromisso de 12 meses, faturado em parcelas fixas.",
   },
   {
+    question: "Os disparos de WhatsApp têm algum custo além da assinatura?",
+    answer:
+      "A função em si não tem custo adicional — vem incluída nos dois planos. Você pode conectar um número de WhatsApp; números extras custam R$50 cada. Pelo canal não-oficial (QR Code) o disparo é ilimitado; pela API oficial do WhatsApp Business, a Meta cobra um valor por mensagem enviada, à parte da sua assinatura.",
+  },
+  {
     question: "Funciona pra qualquer nicho e região?",
     answer:
       "O Google Maps busca negócios no Brasil e em outros países. A busca por CNPJ é exclusiva para empresas brasileiras, com dados da Receita Federal.",
@@ -100,6 +105,10 @@ const comparativo: { dimensao: string; valores: ComparativoValor[] }[] = [
   {
     dimensao: "Enriquecimento Avançado 360°",
     valores: [true, false, false, false, "Parcial"],
+  },
+  {
+    dimensao: "Disparo de WhatsApp integrado",
+    valores: [true, false, false, false, false],
   },
   {
     dimensao: "Preço de entrada",
@@ -207,6 +216,7 @@ const planoFeatures = [
   "Exportação automática pro Google Sheets + Excel/CSV",
   "Enriquecimento Avançado 360° (CNPJ + Google Maps)",
   "Histórico completo de buscas",
+  "Disparos de WhatsApp integrados (não-oficial ou API oficial)",
 ];
 
 const enriquecimento = [

@@ -33,7 +33,10 @@ export function generateLeadExtractorPassword(nome: string): string {
  * nunca cria admin por aqui. Créditos de CNPJ vêm com saldo inicial e
  * renovação mensal fixos (3000/3000); Maps e Instagram sempre via chave de
  * API própria do usuário (sem sistema de créditos da Revolução AI) —
- * Instagram só fica visível pra quem assinou o plano anual.
+ * Instagram só fica visível pra quem assinou o plano anual. Disparos de
+ * WhatsApp (`disparo_habilitado`) vêm sempre habilitados — a API fica
+ * `false` por padrão se não for enviado, e o recurso é incluído nos dois
+ * planos, sem custo adicional.
  */
 export async function createLeadExtractorUser(input: {
   email: string;
@@ -62,6 +65,7 @@ export async function createLeadExtractorUser(input: {
         maps_credits_enabled: false,
         instagram_visible: input.instagramVisible,
         instagram_credits_enabled: false,
+        disparo_habilitado: true,
       }),
     });
 

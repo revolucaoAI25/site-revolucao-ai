@@ -187,6 +187,9 @@ plataforma Lead Extractor**, via a API de provisionamento de usuários
   **plano anual** — mensal não tem acesso a essa aba. Quando visível,
   também é sempre via chave de API própria (`instagram_credits_enabled:
   false`, sem sistema de créditos).
+- Disparos de WhatsApp (`disparo_habilitado: true`): incluído nos dois
+  planos, sem custo adicional — a API fica desligada por padrão pra quem
+  não enviar esse campo, então é preciso mandar sempre `true` aqui.
 
 O `user_id` retornado e a senha gerada ficam salvos em
 `lead_extractor_user_id`/`lead_extractor_password` no próprio registro de
