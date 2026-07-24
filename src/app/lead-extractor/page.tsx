@@ -620,6 +620,57 @@ export default function LeadExtractor() {
           </div>
         </Section>
 
+        {/* Disparos de WhatsApp */}
+        <Section divider>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <Reveal>
+              <Eyebrow>Disparos de WhatsApp</Eyebrow>
+              <SectionTitle className="mb-6">
+                Extraiu o lead? Dispara pra ele sem sair da plataforma.
+              </SectionTitle>
+              <ul className="space-y-4">
+                <li className="flex gap-3 text-base text-muted leading-relaxed">
+                  <span className="text-accent shrink-0">—</span>
+                  Conecte um número por QR Code (instantâneo) ou pela API
+                  oficial do WhatsApp Business, e monte campanhas com
+                  cadência de mensagens automática entre etapas.
+                </li>
+                <li className="flex gap-3 text-base text-muted leading-relaxed">
+                  <span className="text-accent shrink-0">—</span>
+                  Dispare pra quem você já buscou, pra uma planilha do
+                  Google Sheets, ou pra números digitados na hora — com
+                  opt-out automático por contato.
+                </li>
+                <li className="flex gap-3 text-base text-muted leading-relaxed">
+                  <span className="text-accent shrink-0">—</span>
+                  Vincule a um gatilho de busca: todo lead novo que sua
+                  automação encontrar já entra direto na campanha, sem
+                  configurar nada de novo.
+                </li>
+              </ul>
+              <p className="text-muted-2 text-sm mt-6">
+                Incluído nos planos Mensal e Anual, sem custo adicional.
+              </p>
+            </Reveal>
+            <Reveal delay={100} className="flex flex-col gap-4">
+              <Image
+                src="/lead-extractor/disparos-instancias.png"
+                alt="Tela de Disparos do Lead Extractor conectando um número de WhatsApp"
+                width={1123}
+                height={521}
+                className="w-full h-auto rounded-2xl border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]"
+              />
+              <Image
+                src="/lead-extractor/disparos-campanha.png"
+                alt="Criação de uma nova campanha de disparo no Lead Extractor"
+                width={1129}
+                height={527}
+                className="w-full h-auto rounded-2xl border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]"
+              />
+            </Reveal>
+          </div>
+        </Section>
+
         {/* E ainda tem */}
         <Section divider>
           <Reveal>
