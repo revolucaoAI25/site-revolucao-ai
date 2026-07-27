@@ -196,10 +196,13 @@ O `user_id` retornado e a senha gerada ficam salvos em
 `asaas_checkouts`. A página de obrigado (com `checkoutId` na URL) faz
 polling em `/api/lead-extractor-checkout-status` a cada poucos segundos
 (`src/components/lead-extractor/LeadExtractorCredentials.tsx`) até a
-conta existir, e então mostra login, senha e um botão pra entrar
-direto na plataforma (`LEAD_EXTRACTOR_APP_LINK` em `src/lib/links.ts`) —
-sem precisar de contato manual do time. Sem `checkoutId` na URL (links
-antigos), cai no aviso genérico de "nosso time entra em contato".
+conta existir, e então mostra login, senha, um botão pra entrar
+direto na plataforma (`LEAD_EXTRACTOR_APP_LINK`) e um link pro guia
+completo de uso (`LEAD_EXTRACTOR_GUIDE_LINK`, um Google Docs) — tudo em
+`src/lib/links.ts`. Fecha o onboarding sozinho, sem precisar de contato
+manual do time nem de um guia individual por cliente. Sem `checkoutId`
+na URL (links antigos), cai no aviso genérico de "nosso time entra em
+contato".
 
 Variáveis de ambiente necessárias (local em `.env.local`, e na Vercel em
 Project Settings → Environment Variables):

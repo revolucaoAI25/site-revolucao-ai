@@ -66,6 +66,14 @@ export const LEAD_EXTRACTOR_CHECKOUT_ANUAL_LINK = "/lead-extractor/assinar?plano
 export const LEAD_EXTRACTOR_APP_LINK = "https://lead-extractor-revolucao-ai.up.railway.app/";
 
 /**
+ * Guia completo de uso do Lead Extractor (Google Docs) — mostrado junto
+ * com login/senha assim que a conta é criada (LeadExtractorCredentials.tsx).
+ * Fecha o onboarding sozinho, sem precisar de nenhum guia individual do time.
+ */
+export const LEAD_EXTRACTOR_GUIDE_LINK =
+  "https://docs.google.com/document/d/1fjWZz_HizcIbrskeWzrWN8SITCWEBt5dj3SQkwr0fuk/edit?usp=sharing";
+
+/**
  * LP da Plataforma (acesso self-service à Chatflux + add-on Agente
  * Pronto) — resultado "outro produto" do pop-up de Agentes de IA, pra
  * quem quer resultado com IA mas não tem orçamento pra implementação

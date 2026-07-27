@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LEAD_EXTRACTOR_APP_LINK } from "@/lib/links";
+import { LEAD_EXTRACTOR_APP_LINK, LEAD_EXTRACTOR_GUIDE_LINK } from "@/lib/links";
 
 const POLL_INTERVAL_MS = 3000;
 const TIMEOUT_MS = 90_000;
@@ -122,14 +122,22 @@ export function LeadExtractorCredentials({ checkoutId }: { checkoutId: string })
         href={LEAD_EXTRACTOR_APP_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors mb-4"
+        className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors mb-3"
       >
         Entrar na plataforma
       </a>
 
+      <a
+        href={LEAD_EXTRACTOR_GUIDE_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.03] text-text font-semibold px-6 py-3.5 hover:border-accent/60 hover:text-accent transition-colors mb-4"
+      >
+        Ver guia completo de uso
+      </a>
+
       <p className="text-muted leading-relaxed text-sm">
-        Em breve a gente te manda um guia de como usar. Recomendamos trocar a senha assim que
-        entrar pela primeira vez.
+        Recomendamos trocar a senha assim que entrar pela primeira vez.
       </p>
     </div>
   );
