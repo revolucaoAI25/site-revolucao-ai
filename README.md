@@ -220,7 +220,25 @@ Project Settings → Environment Variables):
 - `ASAAS_WEBHOOK_FORWARD_URL` — opcional; URL do Make.com/Zapier/etc que
   recebe uma notificação (já com nome/e-mail/telefone do cliente) toda vez
   que um pagamento é confirmado, pra alguém liberar o acesso manualmente
-  (além da atualização automática no Supabase acima).
+  (além da atualização automática no Supabase acima). Essa mesma URL
+  recebe eventos de produtos diferentes (Lead Extractor e Plataforma) —
+  **e também qualquer outra cobrança confirmada na mesma conta Asaas que
+  não bata com nenhum checkout feito pelo site** (ex.: fatura avulsa de
+  implementação, lançada manualmente no painel do Asaas). O campo
+  `event` do corpo enviado é sempre um nome nosso, nunca o
+  `PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED` cru do Asaas — é isso que dá pra
+  usar como filtro no Make/Zapier pra só seguir a automação nos casos
+  certos:
+  - `LEAD_EXTRACTOR_ASSINATURA_CONFIRMADA` — assinatura do Lead Extractor.
+  - `PLATAFORMA_ASSINATURA_CONFIRMADA` — assinatura da Plataforma.
+  - `PLATAFORMA_TAXA_CONFIRMADA` — taxa de implementação do Agente Pronto
+    (ainda não é a assinatura confirmada, só um aviso).
+  - `PAGAMENTO_NAO_RECONHECIDO` — pagamento confirmado no Asaas que não
+    corresponde a nenhum checkout registrado pelo site. **Ignore este
+    evento na automação** — ele só existe pra manter visibilidade desses
+    casos, não deve liberar nenhum acesso automaticamente. O evento
+    original do Asaas ainda vem disponível no campo `asaasEvent`, se
+    precisar depurar.
 - `LEAD_EXTRACTOR_API_KEY` — chave da API de provisionamento de usuários
   do Lead Extractor (header `X-API-Key`). **Sem essa variável configurada,
   a conta não é criada automaticamente** (fica só registrado o pagamento

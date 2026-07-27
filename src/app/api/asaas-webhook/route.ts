@@ -222,6 +222,14 @@ async function forwardPlataformaPaymentConfirmed(
  * com todos os dados do lead que a gente já tem — incluindo o plano
  * escolhido — pra quem receber conseguir liberar o acesso sem precisar
  * abrir o painel do Asaas.
+ *
+ * O `event` enviado aqui é sempre um nome próprio nosso (nunca o
+ * `PAYMENT_CONFIRMED`/`PAYMENT_RECEIVED` cru do Asaas) — isso é o que
+ * permite montar um filtro no Make/Zapier que só segue adiante pros
+ * pagamentos que de fato vieram do site (Lead Extractor ou Plataforma),
+ * ignorando qualquer outra cobrança feita na mesma conta Asaas (ex.:
+ * faturas avulsas de implementação, lançadas manualmente) — essas caem em
+ * `PAGAMENTO_NAO_RECONHECIDO`, que não bate com nenhum checkout nosso.
  */
 async function forwardPaymentConfirmed(
   event: string,
@@ -241,7 +249,8 @@ async function forwardPaymentConfirmed(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        event,
+        event: record ? "LEAD_EXTRACTOR_ASSINATURA_CONFIRMADA" : "PAGAMENTO_NAO_RECONHECIDO",
+        asaasEvent: event,
         payment: {
           id: payment.id,
           value: payment.value,
