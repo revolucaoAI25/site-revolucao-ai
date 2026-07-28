@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { STAGES, type AdminRecord, type PlataformaCheckoutRow, type Stage } from "@/lib/admin-types";
+import { STAGES, type AdminRecord, type LeadRow, type PlataformaCheckoutRow, type Stage } from "@/lib/admin-types";
 import { EditRecordModal, type RecordUpdates } from "./EditRecordModal";
 import { OnboardingInfoModal } from "./OnboardingInfoModal";
+import { LeadAnswersModal } from "./LeadAnswersModal";
 
 const STAGE_LABELS: Record<Stage, string> = Object.fromEntries(
   STAGES.map((s) => [s.stage, s.label])
@@ -39,6 +40,7 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [editing, setEditing] = useState<AdminRecord | null>(null);
   const [viewingOnboarding, setViewingOnboarding] = useState<AdminRecord | null>(null);
+  const [viewingAnswers, setViewingAnswers] = useState<AdminRecord | null>(null);
   const [deleting, setDeleting] = useState(false);
 
   const filtered = useMemo(() => {
@@ -287,6 +289,15 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
                         Ver onboarding
                       </button>
                     )}
+                  {r.source === "popup" && (r.raw as LeadRow).answers?.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setViewingAnswers(r)}
+                      className="text-xs font-semibold text-accent hover:underline cursor-pointer mr-3"
+                    >
+                      Ver respostas
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={() => setEditing(r)}
@@ -327,6 +338,13 @@ export function AdminTable({ records: initialRecords }: { records: AdminRecord[]
         <OnboardingInfoModal
           data={(viewingOnboarding.raw as PlataformaCheckoutRow).business_info ?? {}}
           onClose={() => setViewingOnboarding(null)}
+        />
+      )}
+
+      {viewingAnswers && (
+        <LeadAnswersModal
+          record={viewingAnswers.raw as LeadRow}
+          onClose={() => setViewingAnswers(null)}
         />
       )}
     </div>
