@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { STAGES, type AdminRecord, type Stage } from "@/lib/admin-types";
 import { EditRecordModal, type RecordUpdates } from "./EditRecordModal";
+import { RecordDetailModal } from "./RecordDetailModal";
 
 const SOURCE_LABELS: Record<AdminRecord["source"], string> = {
   popup: "Pop-up",
@@ -36,6 +37,7 @@ export function AdminKanbanBoard({ records: initialRecords }: { records: AdminRe
   const [records, setRecords] = useState(initialRecords);
   const [dragKey, setDragKey] = useState<string | null>(null);
   const [editing, setEditing] = useState<AdminRecord | null>(null);
+  const [viewingDetail, setViewingDetail] = useState<AdminRecord | null>(null);
 
   async function moveToStage(key: string, stage: Stage) {
     const record = records.find((r) => recordKey(r) === key);
@@ -66,6 +68,7 @@ export function AdminKanbanBoard({ records: initialRecords }: { records: AdminRe
       });
       if (!res.ok) throw new Error();
       setRecords((prev) => prev.filter((r) => recordKey(r) !== recordKey(record)));
+      setViewingDetail(null);
     } catch {
       alert("Não foi possível excluir. Tenta de novo.");
     }
@@ -134,7 +137,8 @@ export function AdminKanbanBoard({ records: initialRecords }: { records: AdminRe
                           setDragKey(key);
                         }}
                         onDragEnd={() => setDragKey(null)}
-                        className={`card-surface rounded-2xl p-4 flex flex-col gap-1.5 cursor-grab active:cursor-grabbing transition-opacity ${
+                        onClick={() => setViewingDetail(record)}
+                        className={`card-surface card-hover rounded-2xl p-4 flex flex-col gap-1.5 cursor-grab active:cursor-grabbing transition-opacity ${
                           dragKey === key ? "opacity-40" : ""
                         }`}
                       >
@@ -163,14 +167,20 @@ export function AdminKanbanBoard({ records: initialRecords }: { records: AdminRe
                         <div className="flex gap-3 mt-1">
                           <button
                             type="button"
-                            onClick={() => setEditing(record)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditing(record);
+                            }}
                             className="text-xs font-semibold text-accent hover:underline cursor-pointer"
                           >
                             Editar
                           </button>
                           <button
                             type="button"
-                            onClick={() => handleDelete(record)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDelete(record);
+                            }}
                             className="text-xs font-semibold text-red-400 hover:underline cursor-pointer"
                           >
                             Excluir
@@ -191,6 +201,18 @@ export function AdminKanbanBoard({ records: initialRecords }: { records: AdminRe
           record={editing}
           onClose={() => setEditing(null)}
           onSaved={(updates) => handleSaved(editing, updates)}
+        />
+      )}
+
+      {viewingDetail && (
+        <RecordDetailModal
+          record={viewingDetail}
+          onClose={() => setViewingDetail(null)}
+          onEdit={() => {
+            setEditing(viewingDetail);
+            setViewingDetail(null);
+          }}
+          onDelete={() => handleDelete(viewingDetail)}
         />
       )}
     </div>
