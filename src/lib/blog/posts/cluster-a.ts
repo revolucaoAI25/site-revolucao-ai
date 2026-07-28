@@ -91,6 +91,23 @@ export const clusterAPosts: BlogPost[] = [
         content:
           "Além do conteúdo, o agente também é configurado pra soar como a marca por trás dele — mais formal num escritório de advocacia, mais direto numa operação de vendas de alto volume. Esse ajuste de tom acontece na configuração inicial e é refinado durante o período de teste, junto com o vocabulário que a empresa já usa de verdade com os próprios clientes.",
       },
+      { type: "h3", text: "Ele entende áudio e entende imagem, ou só texto?" },
+      {
+        type: "p",
+        content:
+          "Boa parte das mensagens que chegam no WhatsApp de uma empresa brasileira não é texto digitado — é áudio. Um agente de IA bem implementado transcreve e entende esses áudios como entenderia uma mensagem escrita, então o cliente não precisa mudar o próprio comportamento pra ser bem atendido. Imagens também entram nesse pacote na maioria dos casos: alguém manda a foto de um produto perguntando \"vocês têm esse modelo?\" e o agente processa a imagem junto com a pergunta.",
+      },
+      {
+        type: "p",
+        content:
+          "Isso importa porque limitar o agente a só entender texto obrigaria o cliente a se adaptar — e a maior parte das pessoas simplesmente não faz isso, volta a esperar por um humano ou desiste da conversa no meio do caminho.",
+      },
+      { type: "h3", text: "Como ele começa a conversa com quem nunca falou com a empresa" },
+      {
+        type: "p",
+        content:
+          "A primeira mensagem pra alguém que nunca conversou com a empresa é configurada com cuidado — geralmente uma saudação curta e direta, que situa a pessoa sobre onde ela caiu e já abre espaço pra ela dizer o que precisa, em vez de um textão institucional. Também entra na configuração se o agente se apresenta como uma inteligência artificial logo de cara ou não: depende de como a empresa quer se posicionar, e os dois caminhos são usados na prática.",
+      },
       { type: "h2", text: "Quando ele passa a conversa pra um humano (e quando não precisa)" },
       {
         type: "p",
@@ -122,7 +139,7 @@ export const clusterAPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Nenhum desses pontos exige reinventar o atendimento do zero — a maioria parte do que o time já faz manualmente, só que sem depender de alguém estar disponível naquele instante exato.",
+          "Nenhum desses pontos exige reinventar o atendimento do zero — a maioria parte do que o time já faz manualmente, só que sem depender de alguém estar disponível naquele instante exato. O último item da lista, por exemplo: quando alguém para de responder no meio de uma negociação, o agente pode voltar a escrever depois de um tempo — perguntando se ainda há interesse, ou oferecendo tirar uma última dúvida — em vez de simplesmente deixar aquele contato esfriar até virar uma venda perdida.",
       },
       {
         type: "cta",
@@ -141,6 +158,11 @@ export const clusterAPosts: BlogPost[] = [
         question: "O agente de IA substitui totalmente o atendimento humano?",
         answer:
           "Depende de como a operação é desenhada. Em algumas empresas o agente conduz sozinho até o agendamento ou até a venda, sem precisar de ninguém no meio. Em outras, faz mais sentido ele atuar até um certo ponto e passar pra um humano decidir o resto. Os dois formatos funcionam bem — o que muda é o tipo de negócio e a complexidade da decisão final.",
+      },
+      {
+        question: "O agente consegue entender áudio e imagem, ou só texto?",
+        answer:
+          "Sim, na maioria das implementações o agente transcreve e entende mensagens de áudio, e também processa imagens simples enviadas pelo cliente — não é preciso que a pessoa escreva pra ser atendida.",
       },
       {
         question: "O agente consegue soar como a minha marca, e não como um robô genérico?",
@@ -193,6 +215,38 @@ export const clusterAPosts: BlogPost[] = [
         type: "p",
         content:
           "Existem também soluções que já vêm com um agente montado pra um tipo específico de negócio — clínica, imobiliária, escritório de advocacia — que a empresa adapta com seus próprios dados em vez de começar do zero. Isso reduz o tempo de configuração, mas só funciona bem se o negócio realmente se encaixar no nicho que a plataforma pensou.",
+      },
+      { type: "h2", text: "Comparando os três formatos lado a lado" },
+      {
+        type: "ul",
+        items: [
+          [
+            { text: "Tempo até estar no ar: ", bold: true },
+            "self-service costuma ser o mais rápido pra sair do papel; sob medida leva mais tempo porque inclui levantamento e ajuste; pré-configurado por nicho fica no meio termo.",
+          ],
+          [
+            { text: "Quem mantém depois: ", bold: true },
+            "no self-service, a própria empresa; no sob medida, o fornecedor; no pré-configurado por nicho, geralmente a empresa, com apoio pontual.",
+          ],
+          [
+            { text: "Flexibilidade: ", bold: true },
+            "sob medida se adapta ao negócio real, do jeito que ele é; pré-configurado por nicho só cobre bem o que já foi pensado pra aquele nicho específico; self-service depende inteiramente de quem senta pra configurar.",
+          ],
+        ],
+      },
+      { type: "h2", text: "O que geralmente fica de fora, mesmo em bons contratos" },
+      {
+        type: "p",
+        content:
+          "Vale alinhar isso antes de assinar, porque são pontos que costumam gerar surpresa depois:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Custo de mensageria cobrado pela própria Meta quando a conexão é pela API oficial — é separado do valor pago ao fornecedor",
+          "Produção de conteúdo novo, como fotos de catálogo ou textos de campanha, quando o agente também participa de divulgação",
+          "Treinamento do time humano pra usar o painel de acompanhamento das conversas, quando ele existe",
+        ],
       },
       { type: "h2", text: "Sinais de que o fornecedor não está preparado" },
       {
@@ -336,6 +390,11 @@ export const clusterAPosts: BlogPost[] = [
           "O que pode ser negociado e o que definitivamente não pode",
         ],
       },
+      {
+        type: "p",
+        content:
+          "Dessa conversa sai um material vivo — não precisa ser formal, mas precisa estar organizado — com respostas padrão, políticas e exceções. Esse material continua sendo atualizado depois: é o que, na prática, vira a memória do agente.",
+      },
       { type: "h2", text: "2. Configuração e testes internos" },
       {
         type: "p",
@@ -345,7 +404,7 @@ export const clusterAPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Essa etapa também inclui simular de propósito os casos difíceis: cliente insistente pedindo desconto fora da política, pergunta capciosa, tentativa de fazer o agente prometer algo que não deveria. É melhor descobrir essas falhas num teste interno do que na primeira conversa real com um cliente.",
+          "Um teste típico simula algo como: \"quero um desconto maior do que vocês oferecem, ou vou fechar com o concorrente\". O que se verifica é se o agente sabe até onde pode ceder — ou se reconhece que aquilo precisa ser escalado pra alguém decidir — em vez de simplesmente inventar uma condição especial pra encerrar a objeção.",
       },
       { type: "h2", text: "3. Ajuste com conversas reais" },
       {
@@ -356,7 +415,7 @@ export const clusterAPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Na prática, isso significa revisar uma amostra das conversas toda semana durante o primeiro mês, procurando por três coisas: perguntas sem resposta boa, momentos em que o agente deveria ter transferido pra um humano e não transferiu, e formulações que soam artificiais perto do jeito que a empresa realmente fala.",
+          "Na prática, isso significa revisar uma amostra das conversas toda semana durante o primeiro mês, procurando por três coisas: perguntas sem resposta boa, momentos em que o agente deveria ter transferido pra um humano e não transferiu, e formulações que soam artificiais perto do jeito que a empresa realmente fala. O ideal é que alguém da empresa e alguém de quem implementou revisem juntos — a empresa reconhece se a resposta soa certa pro tom do negócio, e quem implementou ajusta a configuração técnica por trás.",
       },
       {
         type: "callout",
@@ -370,11 +429,22 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "p",
+        content:
+          "Uma cadência comum é revisar mensalmente: o que mudou no negócio, o que mudou no comportamento dos clientes, e se algum tipo novo de pergunta começou a aparecer com frequência suficiente pra entrar na base de conhecimento.",
+      },
+      {
+        type: "p",
         content: [
           "Esse acompanhamento também é o momento de olhar se o agente está de fato reduzindo o tempo de resposta e o volume de perguntas repetidas — não só se está funcionando, mas se está gerando ",
           { text: "o resultado que justificou o investimento", href: "/blog/agente-de-ia-whatsapp-vale-a-pena-pequenas-empresas" },
           ".",
         ],
+      },
+      { type: "h2", text: "Quanto tempo cada etapa costuma levar, relativamente" },
+      {
+        type: "p",
+        content:
+          "Levantamento costuma ser a etapa mais rápida, já que depende só de uma ou duas conversas bem feitas. Configuração e testes internos levam mais, porque envolvem simular vários cenários antes de qualquer cliente real ver o agente. Ajuste com conversas reais é a etapa mais longa de todas, porque continua acontecendo enquanto o agente estiver ativo — não existe uma data de \"pronto\" definitiva, só um ponto em que os ajustes ficam cada vez mais raros.",
       },
       {
         type: "cta",
@@ -398,6 +468,11 @@ export const clusterAPosts: BlogPost[] = [
         question: "Como é medido o ajuste do agente nas primeiras semanas?",
         answer:
           "Revisando uma amostra das conversas reais, procurando perguntas sem boa resposta, momentos que deveriam ter sido transferidos pra um humano, e formulações que ainda soam artificiais.",
+      },
+      {
+        question: "Quem participa da revisão das conversas nas primeiras semanas?",
+        answer:
+          "O ideal é alguém da empresa junto com alguém de quem implementou — a empresa valida se o tom está certo, e quem implementou ajusta a configuração técnica.",
       },
       {
         question: "O que acontece se o agente errar uma resposta depois de lançado?",
@@ -563,6 +638,16 @@ export const clusterAPosts: BlogPost[] = [
         type: "callout",
         text: "Não é sobre o tamanho da empresa — é sobre quanto tempo humano está sendo gasto em conversa repetitiva.",
       },
+      { type: "h3", text: "Sinais concretos de que vale a pena" },
+      {
+        type: "ul",
+        items: [
+          "O time já reclama de responder a mesma coisa todo dia",
+          "Mensagens ficam sem resposta por horas, principalmente à noite e no fim de semana",
+          "Picos de campanha ou promoção sempre geram atraso perceptível no atendimento",
+          "A qualidade da resposta varia muito dependendo de quem está atendendo naquele dia",
+        ],
+      },
       { type: "h2", text: "Quando ainda não compensa" },
       {
         type: "p",
@@ -573,6 +658,15 @@ export const clusterAPosts: BlogPost[] = [
         type: "p",
         content:
           "Um consultório que atende poucos pacientes por semana e recebe poucas mensagens por dia dificilmente sente diferença de imediato. Já uma operação que recebe centenas de mensagens por dia sobre os mesmos produtos ou serviços sente a diferença já na primeira semana — o volume é o que define isso, não o faturamento da empresa.",
+      },
+      { type: "h3", text: "Sinais de que ainda não compensa (por enquanto)" },
+      {
+        type: "ul",
+        items: [
+          "O volume de mensagens ainda é baixo o suficiente pra uma pessoa dar conta sem esforço",
+          "Cada conversa exige negociação muito específica desde a primeira mensagem, sem padrão nenhum",
+          "O negócio está no meio de uma mudança grande de produto ou processo, e a base de conhecimento ainda mudaria toda semana",
+        ],
       },
       { type: "h2", text: "A mesma lógica vale pra empresas maiores" },
       {
@@ -586,6 +680,10 @@ export const clusterAPosts: BlogPost[] = [
         type: "p",
         content:
           "Uma forma simples de estimar: multiplique quantas horas por semana o time gasta respondendo perguntas repetidas pelo custo dessa hora, e compare com o valor mensal do agente. Se o resultado já for positivo mesmo sendo conservador nas contas, o resto — atendimento mais rápido, menos gente desistindo no meio da conversa — é ganho adicional.",
+      },
+      {
+        type: "callout",
+        text: "Só como exercício hipotético: se o time gasta 8 horas por semana respondendo a mesma dúvida repetida, e essa hora custa em torno de R$40, isso já representa cerca de R$1.280 por mês só nesse tipo de conversa — sem contar o que se perde em vendas que esfriam por demora. Cada operação deveria fazer essa conta com os próprios números, não com esse exemplo.",
       },
       {
         type: "p",
@@ -738,6 +836,11 @@ export const clusterAPosts: BlogPost[] = [
           ", então o volume de mensagens chegando ao mesmo tempo não faz o agente ficar mais lento em nenhuma delas individualmente.",
         ],
       },
+      {
+        type: "p",
+        content:
+          "Isso não quer dizer que a capacidade seja infinita — existe sim um limite técnico de processamento por trás de qualquer sistema. Mas esse limite fica muito acima do volume que a grande maioria das operações de WhatsApp gera no dia a dia, então na prática quem sente o gargalo primeiro é sempre o lado humano, não o agente.",
+      },
       { type: "h2", text: "Onde o limite real aparece" },
       {
         type: "p",
@@ -816,6 +919,12 @@ export const clusterAPosts: BlogPost[] = [
     intro:
       "Tempo de resposta no WhatsApp é um dos fatores que mais pesa na decisão de compra, e é também um dos mais fáceis de medir — ou a mensagem foi respondida em minutos, ou ficou esperando. A razão do agente de IA melhorar esse número não é misteriosa: ela é estrutural, não promocional.",
     body: [
+      { type: "h2", text: "O que conta como \"tempo de resposta\"" },
+      {
+        type: "p",
+        content:
+          "Geralmente é medido como o intervalo entre a mensagem do cliente chegar e a primeira resposta de verdade ser enviada — não uma mensagem automática de \"já te retornamos\", uma resposta real. Empresas que hoje demoram horas costumam medir isso em horas, às vezes até no dia seguinte; com um agente de IA, esse intervalo cai pra segundos, porque não existe fila de espera do lado da IA.",
+      },
       { type: "h2", text: "Por que o tempo de resposta cai" },
       {
         type: "p",
@@ -854,6 +963,11 @@ export const clusterAPosts: BlogPost[] = [
         type: "p",
         content:
           "O ganho mais direto não é um número abstrato de porcentagem — é a experiência concreta de quem manda mensagem às 22h e recebe resposta na hora, em vez de esperar até o próximo dia útil. Isso vale tanto pra uma operação pequena quanto pra uma empresa grande com múltiplas frentes de atendimento: em qualquer escala, tempo de resposta lento tende a custar oportunidade perdida.",
+      },
+      {
+        type: "p",
+        content:
+          "Vale ser honesto: não existe um estudo independente medindo especificamente o quanto isso melhora em cada empresa — o ganho real depende de quão lento era o atendimento antes de começar. O que é estrutural, e não depende de nenhuma promessa, é que os três fatores acima eliminam o tempo morto que hoje existe entre a mensagem chegar e alguém do time conseguir olhar.",
       },
       {
         type: "p",
