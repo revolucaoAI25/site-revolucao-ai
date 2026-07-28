@@ -137,7 +137,14 @@ export default function ZeroAosDezK() {
 
       <main>
         {/* Hero */}
-        <Section>
+        <Section
+          decor={
+            <>
+              <div className="absolute inset-0 bg-grid" />
+              <div className="glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2" />
+            </>
+          }
+        >
           <Reveal className="max-w-3xl mx-auto text-center">
             <Eyebrow>Do Zero aos 10K com Agentes de IA</Eyebrow>
             <p className="text-muted leading-relaxed text-base sm:text-lg mb-2">
@@ -201,10 +208,13 @@ export default function ZeroAosDezK() {
             </p>
           </Reveal>
 
-          <Reveal delay={120} className="flex justify-center mt-10">
+          <Reveal delay={120} className="flex flex-col items-center gap-3 mt-10">
             <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="lg">
               Quero começar agora
             </CTAButton>
+            <p className="text-muted-2 text-sm">
+              ⏱️ Acesso imediato após a confirmação
+            </p>
           </Reveal>
         </Section>
 
@@ -226,7 +236,7 @@ export default function ZeroAosDezK() {
                   Atualmente tenho faturamento de{" "}
                   <span className="text-text font-semibold">6 dígitos</span> e
                   já atendi mais de{" "}
-                  <span className="text-text font-semibold">90 clientes</span>{" "}
+                  <span className="text-text font-semibold">100 clientes</span>{" "}
                   na minha agência.
                 </p>
                 <p>Mas eu já estive exatamente onde você está agora.</p>
@@ -406,9 +416,10 @@ export default function ZeroAosDezK() {
                 delay={index * 80}
                 className="card-surface rounded-3xl p-7"
               >
-                <h3 className="font-black text-lg mb-4 text-accent">
-                  {bloco.title}
-                </h3>
+                <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
+                  {index + 1}
+                </span>
+                <h3 className="font-black text-lg mb-3">{bloco.title}</h3>
                 <ul className="flex flex-col gap-2 text-muted text-[15px] leading-relaxed">
                   {bloco.bullets.map((bullet) => (
                     <li key={bullet} className="flex gap-3">
