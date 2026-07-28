@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { StatGrid } from "@/components/ui/StatGrid";
@@ -494,6 +495,11 @@ export default function AgentesDeIA() {
         </Reveal>
         <Reveal delay={100} className="max-w-3xl">
           <FAQAccordion items={faqItems} />
+        </Reveal>
+        <Reveal delay={140} className="max-w-3xl mt-8">
+          <Link href="/blog" className="text-sm text-muted hover:text-accent transition-colors">
+            Quer entender melhor antes de decidir? Leia mais no blog →
+          </Link>
         </Reveal>
       </Section>
 

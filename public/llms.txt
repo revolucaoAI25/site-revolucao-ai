@@ -11,6 +11,7 @@ O Revolução AI implementa agentes de IA que qualificam, atendem e agendam lead
 - [Formação para Agências de IA](https://www.revolucao-ai.com/formacao): curso e mentoria pra quem quer construir ou escalar uma agência de IA lucrativa e previsível.
 - [Lead Extractor](https://www.revolucao-ai.com/lead-extractor): ferramenta de prospecção ativa que encontra leads qualificados via Google Maps e CNPJ, com automação de busca direto pro Google Sheets.
 - [Plataforma](https://www.revolucao-ai.com/plataforma): acesso self-service à Chatflux — a mesma plataforma usada nas implementações completas — com treinamento guiado pra construir o próprio agente de IA, com ou sem uma primeira versão pronta (Agente Pronto).
+- [Blog](https://www.revolucao-ai.com/blog): artigos sobre agente de IA, atendimento e vendas pelo WhatsApp — o que é, como funciona, quando vale a pena e comparativos com chatbot e assistente virtual.
 
 ## Contato
 

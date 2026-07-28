@@ -11,6 +11,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/agentes-de-ia", label: "Agentes de IA" },
   { href: "/formacao", label: "Formação" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function Nav() {
