@@ -35,12 +35,18 @@ export const PRODUTO_GRATUITO_LINK =
   "https://docs.google.com/document/d/11u8-q8Z2Qr_j5W7udWUTlWlp1MsjpXDVhcWOth5ncBc/edit?usp=sharing";
 
 /**
- * Curso Zero aos 10K (R$37) — resultado "baixo ticket" do pop-up de
+ * Curso Zero aos 10K (R$37,90) — resultado "baixo ticket" do pop-up de
  * Formação, pra quem consegue investir algo mas não chega aos R$3.000 da
- * reunião.
+ * reunião. Rota interna (ver src/app/zero-aos-10k) — antes apontava pra
+ * uma LP hospedada fora do site (pages.net.br).
  */
-export const PRODUTO_LOW_TICKET_LINK =
-  "https://revolucao-ai.pages.net.br/zero-aos-10k-4";
+export const PRODUTO_LOW_TICKET_LINK = "/zero-aos-10k";
+
+/**
+ * Checkout do curso Zero aos 10K — hospedado na Kiwify (fora do Asaas,
+ * produto de baixo ticket separado dos outros produtos do site).
+ */
+export const ZERO_AOS_10K_CHECKOUT_LINK = "https://pay.kiwify.com.br/MnBz0ac";
 
 /**
  * LP do Lead Extractor — resultado "só preciso de uma base de leads pra
