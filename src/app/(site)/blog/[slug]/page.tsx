@@ -62,13 +62,13 @@ export default async function BlogPostPage({
         />
       )}
 
-      <Reveal>
+      <Reveal className="max-w-2xl mx-auto">
         <Link href="/blog" className="text-sm text-muted hover:text-accent transition-colors">
           ← Voltar pro blog
         </Link>
       </Reveal>
 
-      <Reveal delay={40} className="max-w-2xl mt-6 mb-8">
+      <Reveal delay={40} className="max-w-2xl mx-auto mt-6 mb-8">
         <Eyebrow>Blog</Eyebrow>
         <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-balance mb-6">
           {post.title}
@@ -76,13 +76,13 @@ export default async function BlogPostPage({
         <AuthorByline date={post.date} />
       </Reveal>
 
-      <Reveal delay={80} className="max-w-2xl">
+      <Reveal delay={80} className="max-w-2xl mx-auto">
         <p className="text-lg text-text leading-relaxed mb-8 font-medium">{post.intro}</p>
         <BlogBody blocks={post.body} />
       </Reveal>
 
       {post.faq.length > 0 && (
-        <Reveal delay={100} className="max-w-2xl mt-14">
+        <Reveal delay={100} className="max-w-2xl mx-auto mt-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted-2 mb-5">
             Perguntas frequentes
           </p>
@@ -91,7 +91,7 @@ export default async function BlogPostPage({
       )}
 
       {related.length > 0 && (
-        <Reveal delay={120} className="max-w-4xl mt-14">
+        <Reveal delay={120} className="max-w-4xl mx-auto mt-14">
           <RelatedPosts posts={related} />
         </Reveal>
       )}

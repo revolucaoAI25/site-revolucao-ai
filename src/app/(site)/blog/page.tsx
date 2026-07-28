@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 const title = "Blog — Revolução AI";
 const description =
-  "Conteúdo sobre agentes de IA, atendimento e vendas pelo WhatsApp: como funciona, quando vale a pena e o que considerar antes de contratar.";
+  "O que aprendemos implementando agentes de IA de verdade no WhatsApp: o que funciona, o que não funciona e o que vale saber antes de contratar.";
 
 export const metadata: Metadata = {
   title,
@@ -33,12 +33,11 @@ export default function BlogPage() {
       <Reveal>
         <Eyebrow>Blog</Eyebrow>
         <SectionTitle className="mb-4 max-w-2xl">
-          Agente de IA, atendimento e vendas pelo WhatsApp
+          Sobre agente de IA, atendimento e vendas no WhatsApp
         </SectionTitle>
         <p className="text-muted max-w-2xl mb-12 leading-relaxed">
-          Conteúdo direto sobre o que um agente de IA faz de verdade, quando
-          vale a pena contratar um, e como isso muda o atendimento e as
-          vendas de quem usa WhatsApp pra vender.
+          Textos diretos sobre o que a gente aprendeu implementando agentes
+          de IA de verdade — sem prometer milagre, sem enrolação.
         </p>
       </Reveal>
 

@@ -25,14 +25,26 @@ export const CLUSTER_LABELS: Record<BlogCluster, string> = {
   termos: "Chatbot e assistente de IA",
 };
 
-/** Um trecho de texto simples, ou um trecho com link embutido (usado com moderação, só onde faz sentido). */
-export type InlineRun = string | { text: string; href: string; external?: boolean };
+/**
+ * Um trecho de texto simples, em negrito (destaque de termo/ideia-chave), ou
+ * com link embutido — usado com moderação, só onde ajuda a leitura ou faz
+ * sentido linkar.
+ */
+export type InlineRun =
+  | string
+  | { text: string; bold: true }
+  | { text: string; href: string; external?: boolean };
 
 export type BlogBlock =
   | { type: "p"; content: string | InlineRun[] }
   | { type: "h2"; text: string }
   | { type: "h3"; text: string }
   | { type: "ul"; items: (string | InlineRun[])[] }
+  | {
+      /** Destaque visual pra um dado, definição curta ou virada de chave — não é o CTA final, é uma pausa no meio do texto. */
+      type: "callout";
+      text: string;
+    }
   | {
       type: "cta";
       /** Texto curto acima do botão — não é headline de venda, é só a ponte natural pro próximo passo. */

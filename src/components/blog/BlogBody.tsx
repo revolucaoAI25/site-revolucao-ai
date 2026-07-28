@@ -6,36 +6,34 @@ function Runs({ content }: { content: string | InlineRun[] }) {
   if (typeof content === "string") return <>{content}</>;
   return (
     <>
-      {content.map((run, i) =>
-        typeof run === "string" ? (
-          <span key={i}>{run}</span>
-        ) : run.external ? (
-          <a
-            key={i}
-            href={run.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent"
-          >
+      {content.map((run, i) => {
+        if (typeof run === "string") return <span key={i}>{run}</span>;
+        if ("bold" in run) {
+          return (
+            <strong key={i} className="text-text font-semibold">
+              {run.text}
+            </strong>
+          );
+        }
+        const linkClass =
+          "text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent";
+        return run.external ? (
+          <a key={i} href={run.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
             {run.text}
           </a>
         ) : (
-          <Link
-            key={i}
-            href={run.href}
-            className="text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent"
-          >
+          <Link key={i} href={run.href} className={linkClass}>
             {run.text}
           </Link>
-        )
-      )}
+        );
+      })}
     </>
   );
 }
 
 export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
   return (
-    <div className="flex flex-col gap-5 text-[15px] sm:text-base leading-relaxed text-muted">
+    <div className="flex flex-col gap-5 text-[15px] sm:text-base leading-relaxed text-text/85">
       {blocks.map((block, i) => {
         switch (block.type) {
           case "h2":
@@ -71,6 +69,15 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
                   </li>
                 ))}
               </ul>
+            );
+          case "callout":
+            return (
+              <p
+                key={i}
+                className="border-l-2 border-accent/50 pl-4 py-1 text-text font-medium"
+              >
+                {block.text}
+              </p>
             );
           case "cta":
             return (
