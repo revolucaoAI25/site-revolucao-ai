@@ -62,18 +62,21 @@ export const clusterAPosts: BlogPost[] = [
         content:
           "Um agente bem configurado admite quando uma pergunta foge do que ele tem registrado, em vez de arriscar uma resposta inventada. Nesses casos, ele registra a dúvida e encaminha pra alguém do time completar — o que também vira um sinal de que aquele tipo de pergunta precisa entrar na base de conhecimento.",
       },
-      { type: "h2", text: "Onde ele para e chama alguém do time" },
+      { type: "h2", text: "Quando ele passa a conversa pra um humano (e quando não precisa)" },
       {
         type: "p",
-        content:
-          "Nem toda conversa deveria terminar com a IA sozinha, e um agente bem configurado sabe reconhecer isso. Reclamação séria, negociação de condição especial, ou qualquer situação em que a pessoa peça claramente para falar com alguém — o agente identifica esses momentos e transfere a conversa levando o histórico junto, sem fazer o cliente repetir tudo desde o início.",
+        content: [
+          "Isso depende de como a operação foi desenhada, não existe uma regra única. Em boa parte dos casos, o agente ",
+          { text: "conduz a conversa inteira sozinho", bold: true },
+          " — da primeira mensagem até o agendamento ou até o fechamento da venda — sem precisar de ninguém no meio do caminho. Em outras operações, faz mais sentido que ele atue até um certo ponto (entender a necessidade, qualificar, tirar dúvida) e então transfira pra alguém decidir o restante.",
+        ],
       },
       {
         type: "p",
         content: [
-          "A ideia não é eliminar o time humano da equação, é tirar dele o peso das perguntas repetitivas pra sobrar tempo pra decisão que realmente exige uma pessoa. Esse comportamento de transferência é uma das partes que mais importa acertar durante ",
+          "Quando existe essa transferência, o agente leva o histórico da conversa junto, sem fazer o cliente repetir tudo desde o início. Se e quando isso acontece é definido durante ",
           { text: "a implementação do agente", href: "/blog/como-implementar-agente-de-ia-atendimento-whatsapp" },
-          ".",
+          ", de acordo com o tipo de decisão que aquele negócio precisa tomar antes de fechar.",
         ],
       },
       { type: "h2", text: "O que já dá pra automatizar hoje, na prática" },
@@ -103,12 +106,12 @@ export const clusterAPosts: BlogPost[] = [
       {
         question: "Um agente de IA para WhatsApp funciona no número comum ou precisa ser Business?",
         answer:
-          "Funciona melhor integrado à API oficial do WhatsApp Business, que permite automação e múltiplos atendimentos simultâneos sem risco de bloqueio. Dá pra usar num número novo ou no que a empresa já usa — o contato que os clientes conhecem não muda.",
+          "O número precisa ser um WhatsApp Business, não um WhatsApp pessoal comum. A partir daí, a conexão pode ser feita pela API oficial da Meta ou por uma conexão não oficial — as duas são usadas na prática, cada uma com vantagens diferentes, e dá pra usar num número novo ou no que a empresa já usa.",
       },
       {
         question: "O agente de IA substitui totalmente o atendimento humano?",
         answer:
-          "Não é essa a proposta. Ele absorve o volume — perguntas repetidas, agendamento, primeira triagem — e libera o time para as decisões que realmente exigem uma pessoa, como negociação e casos fora do padrão.",
+          "Depende de como a operação é desenhada. Em algumas empresas o agente conduz sozinho até o agendamento ou até a venda, sem precisar de ninguém no meio. Em outras, faz mais sentido ele atuar até um certo ponto e passar pra um humano decidir o resto. Os dois formatos funcionam bem — o que muda é o tipo de negócio e a complexidade da decisão final.",
       },
       {
         question: "Quanto tempo leva para colocar um agente de IA para funcionar no WhatsApp?",
@@ -181,10 +184,19 @@ export const clusterAPosts: BlogPost[] = [
       { type: "h2", text: "Onde entra a implementação completa" },
       {
         type: "p",
+        content:
+          "Vale notar que \"implementação sob medida\" pode significar coisas bem diferentes na prática. Tem fornecedor que entrega só o script de conversa da IA, e tem quem monta a operação inteira em volta dela — integração com os sistemas que a empresa já usa, scripts comerciais pensados pra converter, lembretes que reduzem falta em agendamento, follow-up automático pra recuperar quem sumiu no meio da conversa.",
+      },
+      {
+        type: "callout",
+        text: "É essa segunda parte que costuma fazer a diferença entre um agente que só responde mensagem e um agente que realmente move o resultado do negócio.",
+      },
+      {
+        type: "p",
         content: [
-          "A Revolução AI trabalha no segundo modelo: ",
+          "A Revolução AI trabalha nesse segundo formato: ",
           { text: "implementação de agentes de IA para pré-vendas", href: "/agentes-de-ia" },
-          ", cuidando de levantamento, configuração, testes e ajuste com base nas conversas reais dos primeiros clientes atendidos.",
+          ", cuidando de levantamento, configuração, integrações, inteligência comercial e ajuste com base nas conversas reais dos primeiros clientes atendidos — não só o agente em si, mas a operação em volta dele.",
         ],
       },
       {
@@ -329,7 +341,7 @@ export const clusterAPosts: BlogPost[] = [
     cluster: "whatsapp",
     title: "Agente de IA para WhatsApp Business: como funciona a integração",
     metaDescription:
-      "A diferença entre o app WhatsApp Business e a API oficial, e por que isso importa para quem quer um agente de IA de verdade.",
+      "As duas formas de conectar um agente de IA a um número de WhatsApp Business — oficial e não oficial — e quando cada uma faz mais sentido.",
     keyword: "agente de ia para whatsapp business",
     date: "2026-07-29",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -339,52 +351,38 @@ export const clusterAPosts: BlogPost[] = [
       "servicos-agente-de-ia-integracao-whatsapp",
     ],
     intro:
-      "Muita gente usa o termo WhatsApp Business para duas coisas diferentes: o aplicativo grátis que qualquer empresa baixa na loja de aplicativos, e a API oficial que permite automação de verdade. Um agente de IA precisa da segunda — e entender essa diferença evita frustração antes de contratar qualquer coisa.",
+      "Existem duas formas de conectar um agente de IA a um número de WhatsApp: pela API oficial da Meta, ou por uma conexão não oficial, parecida com o WhatsApp Web. As duas são usadas na prática, e a escolha certa depende do volume de mensagens e do orçamento da operação — não existe uma resposta única. O que não muda é que o número precisa ser um WhatsApp Business, não um WhatsApp pessoal comum.",
     body: [
-      { type: "h2", text: "O aplicativo não foi feito para automação" },
+      { type: "h2", text: "As duas formas de conectar um agente" },
+      { type: "h3", text: "Conexão oficial (API da Meta)" },
       {
         type: "p",
         content:
-          "O app WhatsApp Business (o mesmo que qualquer pessoa instala no celular) foi pensado para uma pessoa atendendo manualmente, com respostas automáticas simples de ausência e catálogo de produtos. Ele não foi projetado para uma inteligência artificial ler, entender e responder mensagens em tempo real.",
+          "É a via oficial da Meta pra empresas conectarem sistemas ao WhatsApp. Costuma ser mais estável em volumes altos, permite múltiplos atendimentos simultâneos nativamente, e dá acesso a recursos como mensagens de template aprovadas pra reengajar contatos fora da janela normal de conversa. Em compensação, o processo de verificação da empresa é mais burocrático, e normalmente existe um custo por conversa cobrado pela própria Meta.",
       },
+      { type: "h3", text: "Conexão não oficial (tipo WhatsApp Web)" },
       {
         type: "p",
         content: [
-          "Forçar esse tipo de automação nesse ambiente costuma esbarrar em ",
-          { text: "bloqueio ou instabilidade", bold: true },
-          ", porque a Meta identifica um padrão de uso que foge do esperado pra uma conta pessoal ou de pequena empresa — e a penalidade mais comum é a suspensão temporária do número.",
+          "Funciona conectando o agente através de uma sessão parecida com a que abre quando alguém usa o WhatsApp Web no computador. É mais rápida de configurar, não depende de aprovação da Meta e não tem custo de mensageria — o que costuma torná-la ",
+          { text: "mais barata pra operações menores", bold: true },
+          ". O ponto de atenção é que, em volumes muito altos, existe algum risco de instabilidade, já que não é o caminho pensado oficialmente pela Meta pra esse tipo de uso.",
         ],
-      },
-      { type: "h2", text: "A API oficial é o que viabiliza o agente" },
-      {
-        type: "p",
-        content:
-          "A API do WhatsApp Business é a via oficial da Meta para empresas conectarem sistemas — inclusive um agente de IA — diretamente ao número de WhatsApp. É essa integração que permite o agente responder no mesmo número que os clientes já conhecem, sem precisar migrar para outro canal.",
-      },
-      { type: "h3", text: "O que essa mudança realmente destrava" },
-      {
-        type: "ul",
-        items: [
-          "Múltiplos atendimentos simultâneos, sem fila de espera",
-          "Integração direta com CRM, agenda e outras ferramentas da empresa",
-          "Envio de mensagens automatizadas dentro das regras da Meta",
-          "Histórico de conversa preservado mesmo com troca de atendente",
-        ],
-      },
-      { type: "h2", text: "O que muda na prática pra empresa" },
-      {
-        type: "p",
-        content:
-          "A verificação e a configuração da API costumam ficar por conta de quem implementa o agente — a empresa não precisa entender de infraestrutura técnica para isso.",
       },
       {
         type: "callout",
-        text: "O número final continua sendo o número da empresa — mesma foto de perfil, mesmo nome, e em muitos casos até o selo de conta verificada.",
+        text: "Não existe uma forma certa pra todo mundo — a Revolução AI conecta das duas maneiras, dependendo do volume de mensagens e do que faz mais sentido pro orçamento e pra operação de cada cliente.",
+      },
+      { type: "h2", text: "O que não muda: o número precisa ser Business" },
+      {
+        type: "p",
+        content:
+          "Independente da forma de conexão escolhida, o número usado pelo agente precisa ser uma conta WhatsApp Business — não um WhatsApp pessoal comum. É isso que garante recursos como perfil comercial, catálogo e, dependendo do caso, o selo de conta verificada.",
       },
       {
         type: "p",
         content: [
-          "Quem já tem WhatsApp comum não perde o histórico de contato: o processo normalmente migra o mesmo número que a empresa já divulga, como detalhamos em ",
+          "A verificação e a configuração técnica costumam ficar por conta de quem implementa o agente, e o número final continua sendo o número que a empresa já divulga. Detalhamos as diferenças práticas entre as duas formas de conexão em ",
           { text: "Número de WhatsApp comum ou API oficial", href: "/blog/numero-comum-ou-api-oficial-agente-de-ia-whatsapp" },
           ".",
         ],
@@ -398,19 +396,19 @@ export const clusterAPosts: BlogPost[] = [
     ],
     faq: [
       {
-        question: "Preciso trocar de número para usar a API oficial do WhatsApp Business?",
+        question: "Preciso usar a API oficial pra ter um agente de IA no WhatsApp?",
         answer:
-          "Não necessariamente. Dá para migrar o número que a empresa já usa para a API oficial, mantendo o histórico de contato com os clientes.",
+          "Não necessariamente. A conexão pode ser oficial (via API da Meta) ou não oficial (tipo WhatsApp Web) — as duas funcionam na prática, e a escolha depende do volume de mensagens e do orçamento da operação.",
       },
       {
         question: "A empresa perde o selo verde de conta verificada ao integrar um agente de IA?",
         answer:
-          "Não. A verificação da conta é independente de quem responde as mensagens — o selo continua vinculado ao número e ao CNPJ da empresa.",
+          "Não necessariamente — a verificação depende do número já ser (ou passar a ser) uma conta comercial verificada pela Meta, o que é independente de qual conexão o agente usa.",
       },
       {
-        question: "Quem cuida da parte técnica dessa integração?",
+        question: "Quem decide qual forma de conexão usar?",
         answer:
-          "Normalmente quem implementa o agente cuida de toda a configuração técnica da API, sem exigir conhecimento técnico da empresa contratante.",
+          "Normalmente quem implementa o agente avalia o volume esperado de mensagens e o orçamento, e recomenda a opção que faz mais sentido — a decisão final é sempre alinhada com o cliente.",
       },
     ],
   },
@@ -499,7 +497,7 @@ export const clusterAPosts: BlogPost[] = [
     cluster: "whatsapp",
     title: "Número de WhatsApp comum ou API oficial: o que muda pra ter um agente de IA",
     metaDescription:
-      "As diferenças práticas entre usar o WhatsApp comum e a API oficial ao colocar um agente de IA pra atender clientes.",
+      "Dá pra manter o número que a empresa já usa? Sim — o que muda é a forma como ele se conecta ao agente. Entenda os dois caminhos possíveis.",
     keyword: "agente ia whatsapp business api",
     date: "2026-07-30",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -509,74 +507,67 @@ export const clusterAPosts: BlogPost[] = [
       "servicos-agente-de-ia-integracao-whatsapp",
     ],
     intro:
-      "É comum uma empresa querer manter o WhatsApp do jeito que sempre usou e só \"adicionar\" um agente de IA por cima. Na prática, isso não funciona bem — a estrutura por trás precisa mudar para a automação funcionar de forma estável, e entender essa diferença evita expectativa errada.",
+      "Uma dúvida comum antes de contratar: dá pra manter o número que a empresa já usa, ou precisa trocar tudo? A resposta curta é que dá pra manter o número — o que muda é a forma como ele se conecta ao agente, e aí existem dois caminhos possíveis, cada um com vantagens diferentes.",
     body: [
-      { type: "h2", text: "O que o WhatsApp comum permite" },
+      { type: "h2", text: "O WhatsApp pessoal não é o ponto de partida" },
       {
         type: "p",
         content:
-          "No aplicativo comum (pessoal ou Business), só um dispositivo principal responde por vez, e qualquer automação externa que tente ler e responder mensagens automaticamente entra numa zona de risco de bloqueio, porque não é esse o uso que a plataforma prevê para esse tipo de conta.",
+          "Se a empresa hoje atende por um número de WhatsApp pessoal (sem ser Business), o primeiro passo é migrar pra uma conta WhatsApp Business — isso é obrigatório, independente da forma de conexão escolhida depois. A boa notícia é que essa migração mantém o mesmo número e o mesmo histórico de contato com os clientes.",
       },
+      { type: "h2", text: "A partir daí, duas formas de conectar o agente" },
+      { type: "h3", text: "Conexão oficial (API da Meta)" },
       {
         type: "p",
         content:
-          "Isso vale tanto pro aplicativo pessoal quanto pro WhatsApp Business App — ambos foram desenhados pra uma pessoa (ou poucas, no caso do Business) respondendo manualmente, não pra um sistema externo processando mensagens em escala.",
+          "Passa pela API oficial da Meta, com verificação da empresa e, geralmente, custo por conversa cobrado pela própria Meta. Costuma ser a escolha mais robusta pra quem já opera em volume alto de mensagens.",
       },
-      { type: "h2", text: "O que a API oficial libera" },
-      {
-        type: "p",
-        content:
-          "A API oficial foi criada justamente para isso: sistemas externos — como um agente de IA — se conectarem ao número de forma estável, com múltiplos atendimentos simultâneos e suporte real a automação dentro das regras da Meta.",
-      },
-      {
-        type: "ul",
-        items: [
-          "Múltiplos atendimentos simultâneos, sem fila",
-          "Integração com CRM, agenda e outras ferramentas da empresa",
-          "Envio de mensagem automatizada dentro das regras da Meta",
-          "Relatórios de conversa mais completos que o app comum",
-        ],
-      },
-      { type: "h2", text: "Vale migrar o número que a empresa já usa" },
-      {
-        type: "p",
-        content:
-          "A boa notícia é que a migração normalmente é feita no mesmo número que a empresa já divulga, sem trocar o contato que os clientes conhecem.",
-      },
-      {
-        type: "callout",
-        text: "O processo técnico dessa migração normalmente fica por conta de quem implementa o agente — a empresa só participa validando que o número final está certo.",
-      },
+      { type: "h3", text: "Conexão não oficial (tipo WhatsApp Web)" },
       {
         type: "p",
         content: [
-          "Detalhamos como fica essa integração na prática, incluindo o selo de verificação, em ",
+          "Conecta o agente através de uma sessão parecida com o WhatsApp Web, sem custo de mensageria e sem processo de aprovação. Costuma ser a escolha mais rápida e mais barata pra quem está começando ou tem volume menor. Comparamos as duas em mais detalhe em ",
           { text: "Agente de IA para WhatsApp Business", href: "/blog/agente-de-ia-whatsapp-business-integracao" },
           ".",
         ],
       },
       {
+        type: "callout",
+        text: "As duas conexões são usadas na prática — a Revolução AI recomenda uma ou outra dependendo do volume de mensagens e do orçamento, não existe uma resposta certa pra todo mundo.",
+      },
+      { type: "h2", text: "O que acontece com o número que a empresa já usa" },
+      {
+        type: "p",
+        content:
+          "Em qualquer um dos dois caminhos, o número final costuma ser o mesmo que a empresa já divulga — muda a forma como ele se conecta ao agente, não o contato que os clientes conhecem.",
+      },
+      {
+        type: "p",
+        content:
+          "A configuração técnica dessa conexão normalmente fica por conta de quem implementa o agente, sem exigir nada técnico da empresa — ela só participa confirmando que o número final está certo.",
+      },
+      {
         type: "cta",
-        lead: "Quer entender como ficaria essa migração no seu caso?",
+        lead: "Quer entender como ficaria essa conexão no seu caso?",
         label: "Falar com a Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
     faq: [
       {
-        question: "Dá risco de banir o número ao usar automação no WhatsApp comum?",
+        question: "Preciso trocar de número pra ter um agente de IA no WhatsApp?",
         answer:
-          "Sim, esse é justamente o risco de tentar automatizar fora da API oficial — a plataforma não foi pensada para esse uso e pode bloquear o número.",
+          "Não. Seja qual for a forma de conexão escolhida, o número que a empresa já usa normalmente é mantido — o que muda é como ele se conecta ao agente.",
       },
       {
-        question: "A API oficial custa mais caro que o WhatsApp comum?",
+        question: "Existe uma forma de conexão melhor que a outra?",
         answer:
-          "Tem custos próprios de mensageria definidos pela Meta, mas costumam ser diluídos dentro do serviço de implementação do agente, sem virar uma cobrança separada e confusa para a empresa.",
+          "Depende do volume de mensagens e do orçamento. A conexão oficial tende a ser mais robusta em volume alto; a não oficial costuma ser mais rápida e mais barata pra quem está começando. As duas são válidas.",
       },
       {
-        question: "É possível manter o mesmo número da empresa na API oficial?",
+        question: "Preciso ter WhatsApp Business pra usar um agente de IA?",
         answer:
-          "Sim, essa é a forma mais comum de migração — o número e o contato que os clientes já conhecem continuam os mesmos.",
+          "Sim, o número precisa ser uma conta WhatsApp Business — não um WhatsApp pessoal comum. Se a empresa ainda não tem isso, a migração é simples e mantém o mesmo número.",
       },
     ],
   },
