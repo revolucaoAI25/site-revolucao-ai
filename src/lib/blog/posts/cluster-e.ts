@@ -160,7 +160,7 @@ export const clusterEPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Um agente de IA bem implementado não tem 13º, férias, nem rotatividade — ele atende no mesmo padrão de qualidade todos os dias do mês, inclusive fins de semana e madrugada, sem custo adicional por isso. O investimento mensal costuma ficar numa faixa que se compara ao custo real de um único atendente CLT — mas cobrindo volume que, dependendo da operação, exigiria dois, três ou mais atendentes humanos pra dar conta.",
+          "Um agente de IA bem implementado não tem 13º, férias, nem rotatividade — ele atende no mesmo padrão de qualidade todos os dias do mês, inclusive fins de semana e madrugada, sem custo adicional por isso. O investimento mensal costuma ficar bem abaixo do custo real de um único atendente CLT — em muitos casos, menos da metade —, cobrindo ainda por cima um volume que, dependendo da operação, exigiria dois, três ou mais atendentes humanos pra dar conta.",
       },
       {
         type: "h3", text: "O que essa comparação não deveria virar" },
@@ -257,7 +257,7 @@ export const clusterEPosts: BlogPost[] = [
         content: [
           "Faz sentido pra quem já tem alguém internamente disposto a aprender a ferramenta, testar cenários e revisar conversas com frequência — e pra quem quer manter controle direto sobre a configuração. A ",
           { text: "Chatflux", href: "/plataforma" },
-          ", por exemplo, é a plataforma por trás dos resultados do Revolução AI disponível também em formato self-service, com treinamento guiado — pensada exatamente pra esse perfil de empresa.",
+          ", por exemplo, é a plataforma por trás dos resultados do Revolução AI disponível também em formato self-service, com planos a partir de algumas centenas de reais por mês e treinamento guiado — pensada exatamente pra esse perfil de empresa.",
         ],
       },
       { type: "h2", text: "Quando a implementação completa faz mais sentido" },
@@ -431,6 +431,19 @@ export const clusterEPosts: BlogPost[] = [
           " — se o negócio muda preço, lança produto novo ou percebe que uma pergunta comum não estava prevista, o ajuste tende a ser cobrado à parte, ou simplesmente não acontece.",
         ],
       },
+      {
+        type: "ul",
+        items: [
+          [
+            { text: "O que costuma vir incluso: ", bold: true },
+            "levantamento inicial, configuração da base de conhecimento, testes internos e o lançamento em si.",
+          ],
+          [
+            { text: "O que costuma ficar de fora: ", bold: true },
+            "qualquer ajuste depois de um período curto inicial, atualização de preço ou catálogo, e acompanhamento de resultado ao longo do tempo.",
+          ],
+        ],
+      },
       { type: "h2", text: "Assinatura: o que costuma incluir" },
       {
         type: "ul",
@@ -459,10 +472,16 @@ export const clusterEPosts: BlogPost[] = [
         content:
           "Projeto fechado costuma fazer sentido pra operações muito simples, com pouca variação de produto ou preço ao longo do tempo — onde o ajuste contínuo tem menos trabalho pra fazer. Assinatura faz mais sentido pra qualquer negócio que muda com frequência (preço, catálogo, campanha) ou que depende do agente performar cada vez melhor com o tempo, não só continuar no ar.",
       },
+      { type: "h3", text: "Um exemplo de onde o projeto fechado costuma travar" },
+      {
+        type: "p",
+        content:
+          "Uma loja lança uma coleção nova três meses depois de contratar um projeto fechado. O agente continua respondendo com base no catálogo antigo, porque ninguém incluiu atualização de base de conhecimento no contrato — e o ajuste vira uma cobrança avulsa, ou fica esquecido até alguém perceber que o agente está dando informação desatualizada pro cliente.",
+      },
       {
         type: "p",
         content: [
-          "Vale entender exatamente o que está incluso em cada proposta antes de comparar valores — detalhamos isso item a item em ",
+          "É por isso que uma implementação do Revolução AI trabalha principalmente no modelo de assinatura: o ajuste contínuo já faz parte do que é vendido, não um extra que a empresa precisa lembrar de contratar depois. Vale entender exatamente o que está incluso em cada proposta antes de comparar valores — detalhamos isso item a item em ",
           { text: "o que costuma estar incluído no preço de um agente de IA", href: "/blog/o-que-esta-incluido-no-preco-de-um-agente-de-ia" },
           ".",
         ],
@@ -551,6 +570,15 @@ export const clusterEPosts: BlogPost[] = [
         type: "callout",
         text: "Vale alinhar esses pontos antes de assinar, não depois — são exatamente os itens que mais geram surpresa de custo no meio do contrato.",
       },
+      { type: "h3", text: "Um exemplo de custo escondido comum" },
+      {
+        type: "p",
+        content: [
+          "Uma empresa contrata um agente achando que o valor mensal cobre tudo, e só descobre um mês depois que a mensageria da Meta é cobrada à parte — porque ninguém perguntou isso antes de assinar. Não é má-fé do fornecedor, na maioria dos casos: é ",
+          { text: "um item que simplesmente não estava explícito na proposta", bold: true },
+          ", porque proposta nenhuma lista tudo de forma espontânea. Cabe a quem contrata perguntar.",
+        ],
+      },
       { type: "h2", text: "Como usar essa lista pra comparar propostas" },
       {
         type: "p",
@@ -558,6 +586,12 @@ export const clusterEPosts: BlogPost[] = [
           "Pegue duas propostas e marque, item por item, o que cada uma inclui explicitamente. É comum uma proposta mais barata simplesmente ter deixado mais itens de fora — não necessariamente ser mais eficiente. Detalhamos um roteiro completo de perguntas pra fazer antes de assinar em ",
           { text: "como comparar propostas de fornecedores de agente de IA", href: "/blog/como-comparar-propostas-de-fornecedores-de-agente-de-ia" },
           ".",
+        ],
+      },
+      {
+        type: "p",
+        content: [
+          "Numa implementação completa do Revolução AI, esses itens entram alinhados desde a proposta inicial — levantamento, configuração, integração com o número existente e ajuste com conversas reais fazem parte do escopo, e o que fica de fora (como a mensageria da própria Meta) é dito com transparência antes de fechar, não descoberto depois.",
         ],
       },
       {
