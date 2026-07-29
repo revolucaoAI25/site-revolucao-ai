@@ -79,8 +79,8 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer ver os dois lados dessa conta aplicados ao seu negócio?",
-        label: "Conhecer os agentes de IA da Revolução AI",
+        lead: "Script pensado pra qualificar, follow-up automático de quem sumiu, integração com o que a empresa já usa — é essa camada de inteligência comercial que a Revolução AI implementa junto com o agente.",
+        label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
     ],
@@ -170,7 +170,7 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer ver qual caminho faz mais sentido pro seu site?",
+        lead: "A Revolução AI avalia seu tipo de operação, recomenda o canal que converte mais e configura o mesmo agente nos dois pontos de entrada — site e WhatsApp.",
         label: "Falar com a Revolução AI",
         href: "/agentes-de-ia",
       },
@@ -267,8 +267,8 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer desenhar isso pro seu tipo de operação?",
-        label: "Conversar com a Revolução AI",
+        lead: "Esse mapeamento — onde o agente conduz sozinho e onde um humano precisa entrar — é feito olhando o funil real do seu negócio. É assim que a Revolução AI desenha cada implementação.",
+        label: "Mapear isso pro seu negócio",
         href: "/agentes-de-ia",
       },
     ],
@@ -358,8 +358,8 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer configurar isso certo desde o início?",
-        label: "Falar com a Revolução AI",
+        lead: "Gatilhos de transferência, resumo de contexto pro humano, regra de quando parar de insistir sozinho — tudo isso é definido na implementação da Revolução AI, com base no funil real do seu negócio.",
+        label: "Configurar isso com a Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
@@ -484,8 +484,8 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer evitar esses erros desde a implementação?",
-        label: "Falar com a Revolução AI",
+        lead: "Base de conhecimento sempre atualizada, inteligência comercial embutida e acompanhamento contínuo — é exatamente o que uma implementação da Revolução AI cobre desde o primeiro dia, pra evitar esses erros.",
+        label: "Evitar esses erros com a Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
@@ -568,7 +568,7 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer parar de perder venda por causa do horário?",
+        lead: "Capturar o interesse no instante em que ele existe, de madrugada ou no meio do expediente, com o encaminhamento certo pros casos que ainda precisam de humano — é isso que a implementação da Revolução AI garante.",
         label: "Conhecer os agentes de IA da Revolução AI",
         href: "/agentes-de-ia",
       },
@@ -653,7 +653,7 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer um agente que soa como a sua empresa de verdade?",
+        lead: "Vocabulário, ritmo e apresentação ajustados ao que a sua empresa já usa com os clientes, refinados nas primeiras semanas de conversa real — é assim que a Revolução AI configura o tom de cada agente.",
         label: "Falar com a Revolução AI",
         href: "/agentes-de-ia",
       },
@@ -730,8 +730,8 @@ export const clusterBPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer fazer essa conta completa pro seu caso?",
-        label: "Conversar com a Revolução AI",
+        lead: "A Revolução AI monta essa conta com os dois lados — o que cai de custo e o que sobe em conversão — usando os números reais da sua operação, não uma média genérica de mercado.",
+        label: "Fazer essa conta com a Revolução AI",
         href: "/agentes-de-ia",
       },
     ],

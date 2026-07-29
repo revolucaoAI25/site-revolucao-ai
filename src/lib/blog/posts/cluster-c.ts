@@ -79,8 +79,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer ver esse processo desenhado pro seu funil comercial?",
-        label: "Conhecer os agentes de IA da Revolução AI",
+        lead: "Objeções mapeadas, critérios de qualificação e o ponto certo de passar pro vendedor — a Revolução AI levanta e configura tudo isso olhando o funil real da sua operação de vendas.",
+        label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
     ],
@@ -173,7 +173,7 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer um SDR de IA qualificando seus leads desde a primeira mensagem?",
+        lead: "Se o seu gargalo é qualificação e não prospecção, a Revolução AI configura os critérios certos pro seu negócio — orçamento, urgência e encaixe — direto na primeira conversa do WhatsApp.",
         label: "Falar com a Revolução AI",
         href: "/agentes-de-ia",
       },
@@ -261,8 +261,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer descobrir em qual cenário sua operação se encaixa?",
-        label: "Conversar com a Revolução AI",
+        lead: "Esse mapeamento entre o que o agente conduz sozinho e o que precisa de um vendedor é feito na implementação da Revolução AI, em conversa direta com quem já vende no seu negócio hoje.",
+        label: "Mapear isso com a Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
@@ -358,8 +358,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer esse funil de qualificação desenhado pro seu negócio?",
-        label: "Falar com a Revolução AI",
+        lead: "Conectar, aprofundar, qualificar, elevar autoridade — a Revolução AI desenha essas etapas com as perguntas certas pro seu tipo de negócio, e ajusta com base nas primeiras conversas reais.",
+        label: "Desenhar isso pro seu negócio",
         href: "/agentes-de-ia",
       },
     ],
@@ -448,8 +448,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer parar de perder venda por falta de um segundo contato?",
-        label: "Conhecer os agentes de IA da Revolução AI",
+        lead: "Cadência de follow-up com contexto real da conversa, não uma cobrança genérica — é essa inteligência comercial que a Revolução AI configura pra recuperar quem esfriou no seu funil.",
+        label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
     ],
@@ -541,8 +541,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer ver a diferença na prática, no seu funil de vendas?",
-        label: "Falar com a Revolução AI",
+        lead: "A Revolução AI implementa um agente de verdade — que acompanha a pessoa mudando de assunto, argumenta objeção específica e faz follow-up sozinho — não um chatbot de menu com nome novo.",
+        label: "Ver a diferença na prática",
         href: "/agentes-de-ia",
       },
     ],
@@ -628,7 +628,7 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer saber que resultado isso pode gerar no seu funil?",
+        lead: "Resposta no primeiro minuto, recuperação de quem sumiu, volume qualificado que chega pronto pro vendedor — são esses indicadores que a Revolução AI acompanha depois de cada implementação, não uma promessa de porcentagem.",
         label: "Conversar com a Revolução AI",
         href: "/agentes-de-ia",
       },

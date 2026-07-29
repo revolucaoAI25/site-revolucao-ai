@@ -143,8 +143,8 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Se quiser ver como isso funcionaria no WhatsApp da sua empresa,",
-        label: "conheça os agentes de IA da Revolução AI",
+        lead: "A Revolução AI monta essa base de conhecimento, ajusta o tom de voz e desenha os critérios de transferência pra humano — a implementação completa de um agente de IA pro WhatsApp da sua empresa.",
+        label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
     ],
@@ -310,7 +310,7 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer entender como funcionaria pro seu caso específico?",
+        lead: "Levantamento, configuração, integrações, inteligência comercial e ajuste com base em conversas reais — é esse o formato de implementação que a Revolução AI entrega, sem a empresa precisar mexer em nada técnico.",
         label: "Ver como funciona a implementação",
         href: "/agentes-de-ia",
       },
@@ -448,8 +448,8 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Se quiser saber como esse processo funcionaria no seu negócio,",
-        label: "fale com a Revolução AI",
+        lead: "Esse é exatamente o processo — levantamento, configuração, ajuste com conversas reais e acompanhamento contínuo — que a Revolução AI conduz do início ao fim no seu negócio.",
+        label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
     ],
@@ -582,8 +582,8 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer ver qual forma de conexão faz mais sentido pro seu volume?",
-        label: "Falar com a Revolução AI",
+        lead: "A Revolução AI avalia seu volume de mensagens, orçamento e quanto o time humano ainda precisa participar, e configura a forma de conexão certa — tradicional, coexistência ou não oficial.",
+        label: "Descobrir a melhor forma de conexão",
         href: "/agentes-de-ia",
       },
     ],
@@ -695,8 +695,8 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer fazer essa conta pro seu caso específico?",
-        label: "Conversar com a Revolução AI",
+        lead: "A Revolução AI já fez essa conta com operações de portes bem diferentes — faz esse cálculo com os números reais do seu negócio antes de qualquer decisão.",
+        label: "Fazer essa conta com a Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
@@ -781,7 +781,7 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer entender qual forma de conexão faz mais sentido no seu caso?",
+        lead: "A Revolução AI cuida de toda a configuração técnica dessa migração — o número que seus clientes já conhecem continua o mesmo, e você só participa confirmando a informação.",
         label: "Falar com a Revolução AI",
         href: "/agentes-de-ia",
       },
@@ -873,8 +873,8 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer ver isso funcionando no seu WhatsApp?",
-        label: "Conhecer os agentes de IA da Revolução AI",
+        lead: "Da capacidade de atender picos de demanda ao dimensionamento certo do time que recebe as transferências — a Revolução AI desenha essa estrutura inteira, não só o agente.",
+        label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
     ],
@@ -979,7 +979,7 @@ export const clusterAPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Quer parar de perder gente por demora na resposta?",
+        lead: "Resposta em segundos, sem fila e sem depender de horário comercial — é isso que a Revolução AI implementa e ajusta com base nas conversas reais do seu WhatsApp.",
         label: "Conhecer os agentes de IA da Revolução AI",
         href: "/agentes-de-ia",
       },
