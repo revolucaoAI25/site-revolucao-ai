@@ -14,6 +14,7 @@ export const clusterGPosts: BlogPost[] = [
       "como-escolher-ferramenta-de-ia-para-atendimento",
       "servicos-agente-de-ia-integracao-whatsapp",
       "provedores-api-oficial-whatsapp-bsp-o-que-muda",
+      "ferramentas-de-ia-para-prospeccao-de-leads",
     ],
     intro:
       "Segundo levantamentos recentes do setor, 44% das empresas brasileiras já usam algum tipo de IA conversacional no atendimento, e 58% já aplicam IA em alguma parte da operação comercial — com e-commerce e fintechs na ponta da adoção. O mercado de ferramentas cresceu junto, e hoje existem pelo menos quatro categorias bem diferentes disputando esse espaço.",
@@ -315,6 +316,7 @@ export const clusterGPosts: BlogPost[] = [
       "agencia-de-ia-ou-plataforma-self-service-comparacao",
       "erros-comuns-automatizar-atendimento-com-ia",
       "crm-com-ia-integrada-ou-agente-de-ia-a-parte",
+      "chatbot-gratuito-ou-pago-vale-a-pena-investir",
     ],
     intro:
       "Ferramentas no-code de IA prometem montar um agente sem escrever uma linha de código — e cumprem essa promessa até certo ponto. Elas resolvem bem o básico: responder pergunta simples, seguir um fluxo pré-definido, integrar com WhatsApp de forma direta. O que elas não resolvem sozinhas é o trabalho de levantamento, qualificação comercial complexa e ajuste contínuo — que continua exigindo alguém dedicando tempo real a isso.",
@@ -514,6 +516,7 @@ export const clusterGPosts: BlogPost[] = [
       "o-que-e-um-agente-de-ia",
       "ferramentas-de-ia-para-atendimento-no-whatsapp",
       "agente-de-ia-para-vendas",
+      "assistente-virtual-de-voz-e-assistente-de-texto-diferenca",
     ],
     intro:
       "Agente de voz com IA é a versão falada do que já existe em texto: um sistema que entende fala, decide o que responder e conduz uma ligação telefônica sem um humano do outro lado. A tecnologia amadureceu bastante nos últimos dois anos, mas a maturidade ainda varia conforme o tipo de uso — funciona bem em alguns cenários e ainda engatinha em outros.",

@@ -627,6 +627,8 @@ export const clusterAPosts: BlogPost[] = [
       "agente-de-ia-para-whatsapp",
       "quantas-conversas-agente-de-ia-atende-ao-mesmo-tempo",
       "agente-de-ia-reduz-tempo-de-resposta-whatsapp",
+      "como-implementar-agente-de-ia-atendimento-ao-cliente-no-site",
+      "whatsapp-principal-canal-de-vendas-pequenas-empresas-brasil",
     ],
     intro:
       "A resposta honesta é: depende do volume de mensagens e do que está travando hoje, não do tamanho da empresa em si. Um agente de IA compensa quando o problema é repetição — a mesma dúvida, a mesma pergunta de preço, o mesmo agendamento, dezenas de vezes por semana. Quando o volume ainda é baixo o suficiente para uma pessoa dar conta sem esforço, o retorno é menor — e isso vale tanto pra uma empresa pequena quanto pra uma equipe grande com um produto de nicho.",

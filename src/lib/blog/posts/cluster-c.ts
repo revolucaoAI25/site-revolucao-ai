@@ -14,6 +14,7 @@ export const clusterCPosts: BlogPost[] = [
       "o-que-e-agente-de-ia-sdr",
       "como-agente-de-ia-qualifica-lead-antes-do-vendedor",
       "quanto-agente-de-ia-vendas-aumenta-conversao",
+      "chatbot-de-vendas-online-como-configurar",
     ],
     intro:
       "Existe um fator que decide mais vendas do que a maioria dos times comerciais imagina: quão rápido alguém responde depois que o lead demonstra interesse. Um agente de IA para vendas existe justamente pra garantir que essa resposta aconteça no primeiro minuto, todas as vezes — e pra conduzir a conversa a partir dali com a mesma lógica que um vendedor bem treinado usaria.",
@@ -306,6 +307,7 @@ export const clusterCPosts: BlogPost[] = [
       "agente-de-ia-para-vendas",
       "agente-de-ia-vende-sozinho-ou-ajuda-time-comercial",
       "agente-de-ia-recuperar-clientes-que-sumiram",
+      "assistente-virtual-comercial-qualifica-ou-so-tira-duvida",
     ],
     intro:
       "Qualificar não é uma pergunta só — é uma sequência. A maioria das qualificações bem feitas segue um raciocínio parecido, independente do negócio: primeiro conectar com o que a pessoa precisa, depois aprofundar, só então qualificar de verdade, e aí decidir o próximo passo.",
@@ -403,6 +405,8 @@ export const clusterCPosts: BlogPost[] = [
       "como-agente-de-ia-qualifica-lead-antes-do-vendedor",
       "agente-de-ia-para-vendas",
       "quanto-agente-de-ia-vendas-aumenta-conversao",
+      "agente-de-ia-para-infoprodutor",
+      "agente-de-ia-atende-cliente-antigo-ou-so-lead-novo",
     ],
     intro:
       "Tem lead que compra na primeira conversa, e tem lead que só compra depois de ser lembrado algumas vezes. O problema é que, na maioria das empresas, é justamente essa segunda tentativa que nunca acontece — porque exige alguém lembrar de voltar a escrever pra quem já saiu da cabeça no meio da correria do dia.",

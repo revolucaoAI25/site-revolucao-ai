@@ -14,6 +14,7 @@ export const clusterBPosts: BlogPost[] = [
       "agente-de-ia-substitui-atendente-humano",
       "agente-de-ia-reduz-custo-atendimento",
       "erros-comuns-automatizar-atendimento-com-ia",
+      "de-atendimento-reativo-para-proativo-mudanca-ia-generativa",
     ],
     intro:
       "Quando alguém pergunta como um agente de IA otimiza o atendimento, a resposta mais comum fica só na metade: responde mais rápido, atende mais gente, custa menos hora de trabalho humano. Isso é real, mas é só um lado da conta. O outro lado — o que acontece com conversão, comparecimento e faturamento quando o atendimento melhora — costuma pesar mais no resultado final do que a economia de tempo.",
@@ -618,6 +619,7 @@ export const clusterBPosts: BlogPost[] = [
       "agente-de-ia-para-whatsapp",
       "como-agente-de-ia-otimiza-atendimento-ao-cliente",
       "erros-comuns-automatizar-atendimento-com-ia",
+      "cliente-sabe-que-esta-falando-com-agente-de-ia",
     ],
     intro:
       "Um agente de IA que soa como um robô de central telefônica afasta gente antes mesmo de responder a primeira pergunta. Manter a conversa natural é sobre escrever do jeito que a empresa realmente fala com os próprios clientes — não um tom genérico de assistente virtual copiado de qualquer outro negócio.",

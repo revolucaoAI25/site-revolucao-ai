@@ -321,6 +321,7 @@ export const clusterEPosts: BlogPost[] = [
       "agente-de-ia-whatsapp-vale-a-pena-pequenas-empresas",
       "quanto-agente-de-ia-vendas-aumenta-conversao",
       "custo-atendente-humano-vs-agente-de-ia",
+      "quanto-tempo-demora-para-implementar-um-agente-de-ia",
     ],
     intro:
       "Quem pergunta \"em quanto tempo isso se paga\" geralmente quer um número único — mas o prazo real depende de quanto volume repetitivo a operação já tem hoje, e de quão rápido o agente é ajustado depois do lançamento. O que dá pra fazer é entender os fatores que aceleram ou atrasam esse retorno, e estimar com os próprios números, não com uma média de mercado que não foi medida na sua operação.",
@@ -638,6 +639,7 @@ export const clusterEPosts: BlogPost[] = [
       "servicos-agente-de-ia-integracao-whatsapp",
       "erros-comuns-automatizar-atendimento-com-ia",
       "o-que-esta-incluido-no-preco-de-um-agente-de-ia",
+      "assistente-virtual-empresarial-o-que-considerar-antes-de-contratar",
     ],
     intro:
       "Comparar só o valor mensal de duas propostas é como comparar dois carros só pelo preço, sem olhar o que vem de série. O fornecedor mais barato às vezes é simplesmente o que deixou mais coisa de fora do escopo — e isso só aparece depois de contratado, quando alguém precisa efetivamente configurar e manter o agente.",
@@ -744,6 +746,7 @@ export const clusterEPosts: BlogPost[] = [
       "servicos-agente-de-ia-integracao-whatsapp",
       "custo-atendente-humano-vs-agente-de-ia",
       "como-comparar-propostas-de-fornecedores-de-agente-de-ia",
+      "mercado-migra-de-ter-chatbot-para-ter-resultado-comprovado",
     ],
     intro:
       "Duas empresas do mesmo porte, no mesmo segmento, contratam agentes de IA em datas parecidas. Uma escolhe a proposta mais barata, que entrega só o script de conversa. A outra paga um pouco mais por uma implementação completa. Seis meses depois, o resultado das duas conta uma história bem diferente — e não é sobre a tecnologia em si, é sobre tudo que rodeia ela.",

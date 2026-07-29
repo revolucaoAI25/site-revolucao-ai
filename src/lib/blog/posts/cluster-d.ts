@@ -501,6 +501,7 @@ export const clusterDPosts: BlogPost[] = [
       "agente-de-ia-para-consultoria",
       "erros-comuns-automatizar-atendimento-com-ia",
       "agente-de-ia-substitui-atendente-humano",
+      "agente-de-ia-para-advocacia",
     ],
     intro:
       "Escritório de engenharia, arquitetura, projetos, perícia, ou qualquer serviço técnico especializado costuma ter o mesmo dilema: quem responde o WhatsApp é a mesma pessoa que devia estar produzindo o trabalho técnico. Toda hora gasta respondendo \"vocês fazem esse tipo de projeto?\" é uma hora a menos dedicada ao que realmente gera entrega — e ainda assim, não responder também custa cliente.",
@@ -926,6 +927,7 @@ export const clusterDPosts: BlogPost[] = [
       "agente-de-ia-vende-sozinho-ou-ajuda-time-comercial",
       "agente-de-ia-para-escritorios-em-geral",
       "como-agente-de-ia-qualifica-lead-antes-do-vendedor",
+      "agente-de-ia-para-contabilidade",
     ],
     intro:
       "Consultoria costuma ser venda de ticket alto e ciclo mais longo — a decisão raramente acontece na primeira conversa, e o fechamento depende de uma reunião de diagnóstico bem conduzida. O problema mais comum é essa reunião começar do zero, com o consultor perguntando \"me conta um pouco sobre sua empresa\" pra alguém que já escreveu isso todo no WhatsApp antes — sem nenhuma autoridade construída até ali.",

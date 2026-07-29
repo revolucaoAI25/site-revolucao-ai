@@ -397,6 +397,7 @@ export const clusterIPosts: BlogPost[] = [
       "agente-de-ia-whatsapp-vale-a-pena-pequenas-empresas",
       "quanto-o-mercado-de-agentes-de-ia-esta-crescendo",
       "agencia-de-ia-ou-plataforma-self-service-comparacao",
+      "chatbot-para-pequenas-empresas-por-onde-comecar",
     ],
     intro:
       "A resposta honesta é: ainda não completamente, mas o intervalo está encolhendo rápido. Dados do Census Bureau dos Estados Unidos mostram adoção de IA subindo com o tamanho da empresa — cerca de 37% entre firmas com mais de 250 funcionários, contra 32% entre firmas de 100 a 249 — mas o crescimento mais recente concentrou-se justamente nas empresas de porte médio pra cima, não só nas gigantes.",

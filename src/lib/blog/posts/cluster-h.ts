@@ -219,6 +219,7 @@ export const clusterHPosts: BlogPost[] = [
       "como-escrever-base-de-conhecimento-do-seu-agente",
       "como-manter-atendimento-humanizado-com-agente-de-ia",
       "como-testar-agente-de-ia-antes-de-colocar-no-ar",
+      "chatbot-com-ia-entende-girias-e-erros-de-portugues",
     ],
     intro:
       "Se a base de conhecimento é o que o agente sabe, as instruções são como ele se comporta — o tom de voz, os limites do que pode prometer, e quando deve chamar um humano. Escrever isso bem é diferente de escrever uma base de conhecimento: aqui o trabalho é definir personalidade e regra, não conteúdo.",

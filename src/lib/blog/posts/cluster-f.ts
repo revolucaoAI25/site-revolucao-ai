@@ -14,6 +14,7 @@ export const clusterFPosts: BlogPost[] = [
       "o-que-e-ia-generativa",
       "o-que-e-um-agente-autonomo-de-ia",
       "diferenca-chatbot-de-vendas-e-agente-de-ia-para-vendas",
+      "chatbot-consegue-executar-acoes-ou-so-responder-perguntas",
     ],
     intro:
       "O termo \"agente de IA\" virou moda rápido demais, e isso fez muita gente usar como sinônimo de qualquer automação com inteligência artificial no nome. Não é bem assim. Um agente de IA tem três características que um chatbot comum não tem: ele entende linguagem livre, decide o que fazer com base em contexto, e age — responde, consulta sistema, encaminha — sem depender de um fluxo fixo desenhado com antecedência para cada situação possível.",
@@ -129,6 +130,7 @@ export const clusterFPosts: BlogPost[] = [
       "o-que-e-um-agente-de-ia",
       "ia-generativa-ou-preditiva-agente-de-vendas",
       "o-que-e-processamento-de-linguagem-natural",
+      "historia-dos-chatbots-do-eliza-a-ia-generativa",
     ],
     intro:
       "Automação tradicional segue regra: se acontece X, faz Y. IA generativa não funciona por regra fixa — ela constrói a resposta em tempo real, considerando o contexto daquela conversa específica, do mesmo jeito que uma pessoa formularia uma frase nova sob demanda, em vez de escolher entre opções pré-escritas.",
@@ -219,6 +221,7 @@ export const clusterFPosts: BlogPost[] = [
       "o-que-e-ia-generativa",
       "o-que-e-um-agente-de-ia",
       "agente-de-ia-para-whatsapp",
+      "diferenca-entre-bot-e-inteligencia-artificial-conversacional",
     ],
     intro:
       "Processamento de linguagem natural (PLN) é o campo da inteligência artificial que ensina um sistema a entender, interpretar e responder linguagem humana — texto escrito, e também áudio transcrito. É essa tecnologia, especificamente, que permite um agente de IA entender uma mensagem de WhatsApp escrita do jeito que as pessoas realmente escrevem, com gíria, erro de digitação e frase corrida.",
@@ -505,6 +508,7 @@ export const clusterFPosts: BlogPost[] = [
       "o-que-e-base-de-conhecimento-agente-de-ia",
       "o-que-e-ia-generativa",
       "como-implementar-agente-de-ia-atendimento-whatsapp",
+      "chatbot-inteligente-aprende-sozinho-mito-ou-verdade",
     ],
     intro:
       "\"Treinar a IA\" soa como um processo técnico complexo, de meses, envolvendo cientista de dados — e é aí que a maioria das pessoas erra a expectativa. Pra um agente comercial, treinar significa configurar contexto: alimentar o agente com a informação real do negócio e ajustar com base em conversas reais. Não é ensinar um modelo de linguagem do zero.",
