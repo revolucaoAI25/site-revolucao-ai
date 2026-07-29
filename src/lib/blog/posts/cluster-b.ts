@@ -18,11 +18,16 @@ export const clusterBPosts: BlogPost[] = [
     intro:
       "Quando alguém pergunta como um agente de IA otimiza o atendimento, a resposta mais comum fica só na metade: responde mais rápido, atende mais gente, custa menos hora de trabalho humano. Isso é real, mas é só um lado da conta. O outro lado — o que acontece com conversão, comparecimento e faturamento quando o atendimento melhora — costuma pesar mais no resultado final do que a economia de tempo.",
     body: [
-      { type: "h2", text: "O que 'otimizar' significa na prática" },
+      { type: "h2", text: "O que \"otimizar\" significa na prática" },
       {
         type: "p",
         content:
           "Otimizar atendimento não é só deixar mais rápido. É deixar mais consistente — a mesma qualidade de resposta às 9h da manhã e às 23h de uma sexta-feira — e liberar quem hoje responde mensagem repetida pra fazer o trabalho que só uma pessoa consegue fazer bem: negociar, resolver exceção, cuidar de quem já é cliente.",
+      },
+      {
+        type: "p",
+        content:
+          "Existe ainda uma terceira camada, menos falada: um atendimento otimizado gera dado. Cada conversa registrada mostra o que os clientes mais perguntam, onde mais travam antes de fechar, e quais objeções se repetem — informação que antes ficava perdida na cabeça de quem atendia, sem nunca virar decisão de negócio.",
       },
       { type: "h2", text: "O lado do custo" },
       {
@@ -48,6 +53,20 @@ export const clusterBPosts: BlogPost[] = [
       {
         type: "callout",
         text: "Custo evitado é dinheiro que deixa de sair; conversão a mais é dinheiro que passa a entrar. Os dois importam, mas o segundo costuma ter um teto bem mais alto.",
+      },
+      { type: "h2", text: "Onde entra a inteligência comercial" },
+      {
+        type: "p",
+        content:
+          "Um agente que só responde pergunta otimiza uma parte pequena do processo. O ganho maior aparece quando o agente também conduz o cliente — com script pensado pra qualificar, argumentos que respondem objeção antes dela travar a conversa, e follow-up automático pra quem sumiu no meio do caminho.",
+      },
+      {
+        type: "p",
+        content: [
+          "É essa camada — ",
+          { text: "inteligência comercial", bold: true },
+          " — que separa um agente que só evita reclamação de um agente que efetivamente vende mais. E é o que diferencia uma implementação completa de um script de respostas genérico.",
+        ],
       },
       { type: "h2", text: "Onde a otimização esbarra em limite" },
       {
@@ -77,14 +96,14 @@ export const clusterBPosts: BlogPost[] = [
           "Enviando lembrete automático antes do horário marcado, sem depender de alguém lembrar de fazer isso manualmente.",
       },
       {
+        question: "O que é inteligência comercial num agente de IA?",
+        answer:
+          "É a camada que vai além de responder pergunta: script pensado pra qualificar e converter, argumentos pra objeção comum, e follow-up automático pra quem parou de responder.",
+      },
+      {
         question: "A velocidade de resposta realmente afeta a decisão de compra?",
         answer:
           "Sim — boa parte do que faz alguém desistir de comprar não é o preço, é a demora ou a inconsistência ao tirar uma dúvida simples antes de decidir.",
-      },
-      {
-        question: "Existe algo que a otimização não deveria automatizar por completo?",
-        answer:
-          "Depende da operação. Decisões de negociação fora do padrão e casos que envolvem risco maior costumam continuar exigindo um humano, mesmo numa operação bem otimizada.",
       },
     ],
   },
@@ -126,11 +145,22 @@ export const clusterBPosts: BlogPost[] = [
         type: "callout",
         text: "A vantagem de levar pro WhatsApp não é só técnica — é comportamental: a pessoa continua a conversa de onde parou, mesmo depois de fechar o site.",
       },
+      { type: "h2", text: "Onde esse botão costuma entrar no site" },
+      {
+        type: "p",
+        content:
+          "Não precisa ficar só no rodapé. Um botão fixo que acompanha a rolagem da página, um link direto na página de cada produto ou serviço, e até um QR code em material físico (cartão, fachada, embalagem) que leva pra essa mesma conversa — todos apontam pro mesmo agente, com o mesmo histórico e a mesma base de conhecimento por trás.",
+      },
       { type: "h2", text: "Como isso se conecta com o agente de IA" },
       {
         type: "p",
         content:
           "Nos dois casos, o agente é o mesmo por trás — a mesma base de conhecimento, o mesmo tom de voz, as mesmas regras de quando transferir pra um humano. O que muda é só o canal de entrada: dentro do site, ou pelo WhatsApp que a pessoa já usa todos os dias.",
+      },
+      {
+        type: "p",
+        content:
+          "Também dá pra saber de onde cada conversa veio — se entrou pelo botão do site, por um anúncio ou por indicação — o que ajuda a entender qual canal está trazendo mais gente pronta pra comprar, e não só mais volume de mensagem.",
       },
       { type: "h2", text: "Qual escolher" },
       {
@@ -155,6 +185,11 @@ export const clusterBPosts: BlogPost[] = [
         question: "Por que o WhatsApp costuma converter mais que um chat de site no Brasil?",
         answer:
           "Porque reduz o atrito: a pessoa já usa o WhatsApp todos os dias, não precisa aprender uma ferramenta nova, e a conversa continua de onde parou mesmo depois de fechar o site.",
+      },
+      {
+        question: "Dá pra saber de qual página do site veio cada conversa?",
+        answer:
+          "Sim, o botão pode ser configurado por página ou por canal, o que ajuda a entender qual origem está trazendo gente mais próxima de comprar.",
       },
       {
         question: "Um widget de chat no site ainda faz sentido em algum caso?",
@@ -187,6 +222,11 @@ export const clusterBPosts: BlogPost[] = [
         content:
           "Quando a decisão de compra é relativamente padronizada — preço fixo, condição já definida, agendamento simples — o agente costuma conduzir sozinho sem perda de qualidade. Quando a decisão envolve negociação caso a caso, avaliação técnica ou uma relação de confiança construída ao longo do tempo, o humano continua tendo um papel insubstituível em algum ponto da conversa.",
       },
+      {
+        type: "p",
+        content:
+          "Isso não é definido no improviso depois que o agente já está no ar — é desenhado junto com o cliente durante a implementação, olhando o funil real daquele negócio: onde a conversa normalmente entra, o que precisa acontecer pra ela avançar (entender a necessidade, aprofundar, qualificar, gerar confiança), e em que ponto — se houver algum — faz sentido levar pra um humano fechar.",
+      },
       { type: "h2", text: "Onde o agente costuma conduzir sozinho, do início ao fim" },
       {
         type: "ul",
@@ -210,15 +250,20 @@ export const clusterBPosts: BlogPost[] = [
       { type: "h2", text: "O time humano muda de função, não desaparece" },
       {
         type: "p",
+        content:
+          "Um exemplo concreto: numa operação em que o time gastava boa parte do dia respondendo \"qual o horário de vocês\" e \"qual o valor\", esse mesmo time passa a dedicar as horas livres pra ligar pra quem já demonstrou interesse forte, negociar condição com quem está indeciso, e cuidar de quem já é cliente — trabalho que gera resultado direto, e que antes simplesmente não sobrava tempo pra fazer.",
+      },
+      {
+        type: "p",
         content: [
-          "Quando o agente absorve o volume repetitivo, o time humano não fica sem trabalho — passa a dedicar o tempo a coisas que só uma pessoa faz bem: fechar negociações mais complexas, cuidar de clientes já existentes, e resolver os casos que ",
-          { text: "o agente identifica e transfere", href: "/blog/como-funciona-transferencia-agente-de-ia-para-humano" },
-          ". Isso costuma gerar mais resultado por pessoa, não menos gente trabalhando.",
+          "Isso costuma gerar mais resultado por pessoa, não menos gente trabalhando — o volume que o agente absorve é justamente o que ",
+          { text: "não exigia o julgamento de um humano", href: "/blog/como-funciona-transferencia-agente-de-ia-para-humano" },
+          " em primeiro lugar.",
         ],
       },
       {
         type: "callout",
-        text: "A pergunta certa não é 'o agente substitui humano?' — é 'que tipo de decisão essa operação específica precisa que um humano tome?'.",
+        text: "A pergunta certa não é \"o agente substitui humano?\" — é \"que tipo de decisão essa operação específica precisa que um humano tome, e em que ponto do funil isso acontece?\".",
       },
       {
         type: "cta",
@@ -237,6 +282,11 @@ export const clusterBPosts: BlogPost[] = [
         question: "O time de atendimento perde espaço quando o agente assume o volume?",
         answer:
           "Na prática, o time costuma passar a fazer um trabalho de maior valor — negociação, retenção, casos complexos — em vez de desaparecer.",
+      },
+      {
+        question: "Quem decide em que ponto o agente para e passa pra um humano?",
+        answer:
+          "Isso é desenhado junto com o cliente durante a implementação, olhando o funil real do negócio — não é uma regra genérica igual pra todo mundo.",
       },
       {
         question: "Como decidir se a minha operação precisa de humano em algum ponto?",
@@ -270,14 +320,26 @@ export const clusterBPosts: BlogPost[] = [
           "A pessoa pede explicitamente para falar com alguém",
           "Reclamação séria ou insatisfação evidente",
           "Negociação de condição fora da política padrão",
+          "A conversa avançou até o ponto do funil em que a operação decidiu que um humano assume",
           "A mesma dúvida aparece de um jeito que a base de conhecimento não cobre",
         ],
+      },
+      {
+        type: "p",
+        content:
+          "Esses gatilhos não são genéricos — cada operação define os próprios, com base no funil real: uma imobiliária pode transferir assim que alguém confirma interesse numa visita presencial, enquanto uma loja pode transferir só em caso de reclamação, deixando o resto inteiramente com o agente.",
       },
       { type: "h2", text: "O que vai junto na transferência" },
       {
         type: "p",
         content:
-          "Um handoff bem feito leva o resumo da conversa até ali — o que a pessoa já perguntou, o que já foi respondido, em que ponto a decisão travou. Isso evita a pior experiência possível: o cliente ter que contar tudo de novo pra um humano depois de já ter explicado a mesma coisa pra IA.",
+          "Um handoff bem feito leva o resumo da conversa até ali — o que a pessoa já perguntou, o que já foi respondido, em que ponto a decisão travou, e qualquer informação que o cliente já deu (nome, o que procura, orçamento mencionado). Isso evita a pior experiência possível: o cliente ter que contar tudo de novo pra um humano depois de já ter explicado a mesma coisa pra IA.",
+      },
+      { type: "h3", text: "Como o humano fica sabendo que precisa entrar" },
+      {
+        type: "p",
+        content:
+          "A notificação chega pro time por onde ele já acompanha o dia a dia — dentro do próprio painel de conversas, ou um aviso direto pra quem está de plantão naquele momento — junto com o resumo, pra que a pessoa consiga assumir sem precisar reler a conversa inteira do zero.",
       },
       { type: "h2", text: "O erro mais comum: o loop que trava o cliente" },
       {
@@ -292,7 +354,7 @@ export const clusterBPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Esse critério de \"depois de quantas tentativas transferir\" é definido durante a configuração do agente, junto com todos os outros gatilhos de transferência — não é algo que se resolve sozinho depois de pronto.",
+          "Esse critério de \"depois de quantas tentativas transferir\" é definido durante a configuração do agente, junto com todos os outros gatilhos de transferência — não é algo que se resolve sozinho depois de pronto, e costuma ser ajustado nas primeiras semanas de uso real, quando aparecem os casos que ninguém previu.",
       },
       {
         type: "cta",
@@ -305,7 +367,7 @@ export const clusterBPosts: BlogPost[] = [
       {
         question: "O cliente precisa repetir tudo quando o agente transfere pra um humano?",
         answer:
-          "Não, numa implementação bem feita. O histórico e um resumo da conversa vão junto na transferência.",
+          "Não, numa implementação bem feita. O histórico e um resumo da conversa vão junto na transferência, incluindo informações que o cliente já deu.",
       },
       {
         question: "Depois de quantas tentativas sem sucesso o agente deveria transferir?",
@@ -313,9 +375,14 @@ export const clusterBPosts: BlogPost[] = [
           "Uma prática comum é transferir depois de duas tentativas sem sucesso na mesma dúvida, em vez de insistir e deixar o cliente preso num loop.",
       },
       {
-        question: "É possível configurar quando exatamente o agente transfere?",
+        question: "Os gatilhos de transferência são iguais pra qualquer tipo de negócio?",
         answer:
-          "Sim, os gatilhos de transferência fazem parte da configuração inicial do agente e podem ser ajustados conforme a operação exige.",
+          "Não, são definidos com base no funil real de cada operação — o que faz sentido transferir numa imobiliária pode ser diferente do que faz sentido numa loja.",
+      },
+      {
+        question: "Como o atendente humano sabe que precisa assumir uma conversa?",
+        answer:
+          "Recebe uma notificação com o resumo do que já foi conversado, pelo canal que o time já usa pra acompanhar o atendimento no dia a dia.",
       },
     ],
   },
@@ -325,17 +392,17 @@ export const clusterBPosts: BlogPost[] = [
     cluster: "atendimento",
     title: "Erros mais comuns ao automatizar o atendimento com IA (e como evitar)",
     metaDescription:
-      "Base de conhecimento desatualizada, loop sem saída, falta de manutenção: os erros que mais derrubam projetos de atendimento com IA, e como evitá-los.",
+      "Base de conhecimento desatualizada, contratar sem experiência, tentar fazer sozinho: os erros que mais derrubam projetos de atendimento com IA.",
     keyword: "erros automação atendimento ia",
     date: "2026-08-05",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-funciona-transferencia-agente-de-ia-para-humano",
-      "como-implementar-agente-de-ia-atendimento-whatsapp",
+      "servicos-agente-de-ia-integracao-whatsapp",
       "como-agente-de-ia-otimiza-atendimento-ao-cliente",
     ],
     intro:
-      "A maior parte dos projetos de atendimento com IA que dá errado não falha pela tecnologia em si — falha por decisões de processo tomadas antes ou depois da configuração. Levantamentos do setor apontam que a maioria desses problemas se repete: são erros conhecidos, e evitáveis.",
+      "A maior parte dos projetos de atendimento com IA que dá errado não falha pela tecnologia em si — falha por decisões de processo tomadas antes ou depois da configuração. Levantamentos do setor apontam que a maioria desses problemas se repete: são erros conhecidos, evitáveis, e que costumam apontar exatamente pra o que uma implementação bem feita resolve desde o início.",
     body: [
       { type: "h2", text: "Base de conhecimento desatualizada ou incompleta" },
       {
@@ -350,7 +417,43 @@ export const clusterBPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Preço que mudou e não foi atualizado, produto descontinuado que o agente ainda oferece, política nova que só o time sabe de cor — cada uma dessas lacunas vira uma resposta errada em algum momento.",
+          "Preço que mudou e não foi atualizado, produto descontinuado que o agente ainda oferece, política nova que só o time sabe de cor — cada uma dessas lacunas vira uma resposta errada em algum momento. É por isso que uma implementação séria trata o acompanhamento pós-lançamento como parte do serviço, não como algo que a empresa precisa lembrar de contratar depois.",
+      },
+      { type: "h2", text: "Configurar um agente sem inteligência comercial" },
+      {
+        type: "p",
+        content:
+          "Existe uma diferença grande entre um agente que só responde pergunta e um agente que conduz a conversa até o resultado. Muita implementação no mercado para no primeiro: tira dúvida, mas não qualifica, não contorna objeção, não faz follow-up de quem sumiu.",
+      },
+      {
+        type: "p",
+        content: [
+          "Isso é justamente o que separa um script genérico de uma implementação com ",
+          { text: "inteligência comercial", bold: true },
+          " embutida — quando o agente também é responsável por avançar a conversa em direção ao agendamento ou à venda, não só por evitar reclamação.",
+        ],
+      },
+      { type: "h2", text: "Contratar um fornecedor sem experiência real" },
+      {
+        type: "p",
+        content:
+          "Alguns sinais aparecem antes mesmo de assinar contrato: o fornecedor promete atender qualquer tipo de negócio sem perguntar nada específico primeiro, não consegue explicar um caso real de implementação, ou não tem processo definido pra levantamento e ajuste — só entrega e some.",
+      },
+      {
+        type: "p",
+        content:
+          "Experiência real aparece em detalhe: em como o fornecedor pergunta sobre o funil de vendas antes de configurar qualquer coisa, e em como ele já sabe antecipar os tipos de objeção e exceção que aquele tipo de negócio costuma enfrentar.",
+      },
+      { type: "h2", text: "Tentar fazer tudo sozinho, sem suporte especializado" },
+      {
+        type: "p",
+        content:
+          "Montar um agente de IA por conta própria é possível, mas exige tempo pra aprender a ferramenta, testar cenários e corrigir erros — tempo que normalmente sai de quem já tem outras responsabilidades no negócio. O resultado mais comum é um agente que fica no ar, mas nunca recebe o refinamento que faria ele realmente performar bem.",
+      },
+      {
+        type: "p",
+        content:
+          "Isso não quer dizer que fazer sozinho seja sempre errado — pra quem tem tempo e perfil pra isso, existe caminho self-service. O erro é subestimar o tempo que isso realmente consome, achando que é só configurar uma vez e esquecer.",
       },
       { type: "h2", text: "Tratar a implementação como \"pronto e esquecido\"" },
       {
@@ -379,12 +482,6 @@ export const clusterBPosts: BlogPost[] = [
         content:
           "Quando o agente não reconhece que não sabe responder e insiste repetindo a mesma frase, o cliente sente que está preso numa conversa que não sai do lugar — um dos jeitos mais rápidos de perder a confiança de quem está do outro lado.",
       },
-      { type: "h2", text: "Ignorar a LGPD" },
-      {
-        type: "p",
-        content:
-          "Um agente que conversa no WhatsApp coleta e processa dados pessoais em cada mensagem, o que ativa as obrigações da LGPD normalmente — não existe exceção só porque quem responde é uma inteligência artificial. Isso inclui deixar claro, desde o início da conversa, que o atendimento é automatizado, e mencionar o uso de IA na política de privacidade da empresa.",
-      },
       {
         type: "cta",
         lead: "Quer evitar esses erros desde a implementação?",
@@ -399,14 +496,24 @@ export const clusterBPosts: BlogPost[] = [
           "Base de conhecimento desatualizada ou incompleta — é apontado como o motivo mais frequente de projetos que não performam bem, mais do que qualquer limitação técnica.",
       },
       {
+        question: "O que significa um agente ter inteligência comercial?",
+        answer:
+          "Significa que ele não só responde dúvida — também qualifica, contorna objeção e faz follow-up de quem sumiu, avançando a conversa em direção ao resultado.",
+      },
+      {
+        question: "Como saber se um fornecedor tem experiência real, não só discurso de venda?",
+        answer:
+          "Presta atenção em como ele pergunta sobre o funil do negócio antes de configurar qualquer coisa, e se consegue explicar casos reais e antecipar objeções comuns do seu tipo de negócio.",
+      },
+      {
+        question: "Fazer o agente sozinho, sem fornecedor especializado, é sempre um erro?",
+        answer:
+          "Não necessariamente — existe caminho self-service pra quem tem tempo e perfil pra isso. O erro é subestimar o tempo real que configurar e manter isso bem exige.",
+      },
+      {
         question: "Depois de configurado, o agente ainda precisa de manutenção?",
         answer:
           "Sim. Tratar a implementação como algo pronto e definitivo, sem revisão contínua, é um dos erros mais comuns e mais fáceis de evitar.",
-      },
-      {
-        question: "Um agente de IA no WhatsApp precisa seguir a LGPD?",
-        answer:
-          "Sim, integralmente. Ele coleta e processa dados pessoais em cada conversa, o que ativa as obrigações da lei da mesma forma que qualquer outro sistema — incluindo deixar claro que o atendimento é automatizado.",
       },
     ],
   },
@@ -447,6 +554,12 @@ export const clusterBPosts: BlogPost[] = [
         type: "callout",
         text: "Um lead que esfria durante a noite raramente volta a escrever no dia seguinte com a mesma vontade — ele já resolveu com quem respondeu primeiro.",
       },
+      { type: "h2", text: "Não é só sobre \"fora do horário\"" },
+      {
+        type: "p",
+        content:
+          "Mesmo dentro do horário comercial, o agente trabalha em paralelo ao time — atendendo quem escreve enquanto todo mundo já está numa outra conversa, absorvendo o pico do fim de tarde, cuidando de quem manda mensagem durante o almoço. A ideia de \"24 horas\" costuma ser lida só como \"funciona de madrugada\", mas o ganho de estar sempre disponível aparece o dia inteiro, não só fora do expediente.",
+      },
       { type: "h2", text: "Limites: o que não deveria ser resolvido sozinho de madrugada" },
       {
         type: "p",
@@ -467,6 +580,11 @@ export const clusterBPosts: BlogPost[] = [
           "Não só. O ganho mais importante costuma ser capturar o interesse do cliente no momento em que ele existe, em vez de deixar esfriar até o próximo dia útil.",
       },
       {
+        question: "O agente só é útil fora do horário comercial?",
+        answer:
+          "Não. Durante o expediente ele também absorve picos de mensagem e atende em paralelo ao time, mesmo quando todo mundo já está ocupado noutra conversa.",
+      },
+      {
         question: "Uma emergência é resolvida só pela IA de madrugada?",
         answer:
           "Não deveria. Situações de urgência real costumam ter um encaminhamento específico configurado, mesmo fora do horário comercial.",
@@ -484,7 +602,7 @@ export const clusterBPosts: BlogPost[] = [
     cluster: "atendimento",
     title: "Como manter o atendimento com \"cara de humano\" usando um agente de IA",
     metaDescription:
-      "Vocabulário, ritmo de resposta e transparência: como um agente de IA soa natural sem perder a exigência legal de avisar que é automatizado.",
+      "Vocabulário, ritmo de resposta e apresentação: como um agente de IA soa natural e como o tom é ajustado pra cada marca, na prática.",
     keyword: "agente de ia atendimento humanizado",
     date: "2026-08-06",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -494,25 +612,34 @@ export const clusterBPosts: BlogPost[] = [
       "erros-comuns-automatizar-atendimento-com-ia",
     ],
     intro:
-      "Um agente de IA que soa como um robô de central telefônica afasta gente antes mesmo de responder a primeira pergunta. Manter a conversa natural não é sobre esconder que é uma IA — é sobre escrever do jeito que a empresa realmente fala com os próprios clientes.",
+      "Um agente de IA que soa como um robô de central telefônica afasta gente antes mesmo de responder a primeira pergunta. Manter a conversa natural é sobre escrever do jeito que a empresa realmente fala com os próprios clientes — não um tom genérico de assistente virtual copiado de qualquer outro negócio.",
     body: [
-      { type: "h2", text: "Por que isso importa (além de soar bem)" },
-      {
-        type: "p",
-        content:
-          "A forma como o agente se comunica afeta diretamente se a pessoa continua a conversa ou desiste no meio. Mas existe também um motivo que vai além da experiência: no Brasil, é uma boa prática — e em muitos casos uma exigência prevista pela LGPD — deixar claro logo no início que o atendimento é automatizado, sem que isso precise soar frio ou burocrático.",
-      },
       { type: "h2", text: "Vocabulário e ritmo de resposta" },
       {
         type: "p",
         content:
           "O vocabulário do agente é ajustado com base no que a própria empresa já usa — as gírias do nicho, o grau de formalidade, até o tamanho médio das mensagens. Um escritório de advocacia tende a escrever frases mais longas e formais; uma loja de roupa jovem tende a escrever curto e direto. O agente aprende esse padrão durante a configuração, não usa um tom genérico de \"assistente virtual\".",
       },
-      { type: "h2", text: "Transparência: dizer que é IA atrapalha a experiência?" },
       {
         type: "p",
         content:
-          "Na prática, não — desde que a apresentação seja feita de forma natural, não como um aviso legal robótico. Uma saudação simples que já deixa claro o contexto costuma resolver isso sem soar artificial, e ainda cumpre a exigência de transparência.",
+          "Isso inclui até detalhes pequenos que fazem diferença: se a empresa usa emoji nas conversas, se costuma chamar o cliente pelo primeiro nome, se prefere frases curtas separadas em várias mensagens (como as pessoas normalmente escrevem no WhatsApp) em vez de um texto único mais longo.",
+      },
+      { type: "h2", text: "Como a primeira mensagem é pensada" },
+      {
+        type: "p",
+        content:
+          "A apresentação inicial é decidida junto com a empresa — algumas preferem se apresentar como \"assistente virtual da [marca]\", outras preferem não nomear nada e simplesmente responder de forma natural. Não existe uma regra universal certa; existe a que combina com o posicionamento daquela marca específica.",
+      },
+      {
+        type: "callout",
+        text: "O objetivo não é enganar ninguém fingindo ser humano — é fazer a conversa fluir sem soar como um script decorado.",
+      },
+      { type: "h2", text: "Isso é ajustado com o tempo, não só no início" },
+      {
+        type: "p",
+        content:
+          "O tom que soa certo na configuração inicial nem sempre é o que soa certo depois de algumas semanas de conversas reais — é normal ajustar formalidade, tamanho de resposta e até expressões específicas conforme aparecem exemplos reais de como os clientes daquele negócio realmente escrevem e reagem.",
       },
       { type: "h2", text: "Erros que quebram a ilusão (e não precisam)" },
       {
@@ -533,19 +660,19 @@ export const clusterBPosts: BlogPost[] = [
     ],
     faq: [
       {
-        question: "Preciso avisar que o atendimento é feito por IA?",
-        answer:
-          "Sim, é uma boa prática e em geral uma exigência de transparência prevista pela LGPD — mas isso pode ser feito de forma natural, sem soar burocrático.",
-      },
-      {
-        question: "Dizer que é uma IA afasta o cliente?",
-        answer:
-          "Na prática, não, quando a apresentação é feita de forma natural. O que afasta é uma resposta genérica ou fora do tom que a empresa normalmente usa.",
-      },
-      {
         question: "O tom de voz do agente pode ser diferente pra cada empresa?",
         answer:
-          "Sim, é ajustado com base no vocabulário e no grau de formalidade que a própria empresa já usa com os clientes.",
+          "Sim, é ajustado com base no vocabulário e no grau de formalidade que a própria empresa já usa com os clientes, incluindo uso de emoji e tamanho médio das mensagens.",
+      },
+      {
+        question: "O agente precisa se apresentar como assistente virtual?",
+        answer:
+          "Isso é decidido junto com a empresa conforme o posicionamento da marca — não existe uma única forma certa pra todo mundo.",
+      },
+      {
+        question: "O tom do agente muda depois de configurado?",
+        answer:
+          "Sim, é comum ajustar formalidade e vocabulário nas primeiras semanas, conforme aparecem exemplos reais de como os clientes escrevem e reagem.",
       },
     ],
   },
@@ -555,7 +682,7 @@ export const clusterBPosts: BlogPost[] = [
     cluster: "atendimento",
     title: "Agente de IA reduz custo com equipe de atendimento? O que considerar antes",
     metaDescription:
-      "Sim, reduz — mas olhar só o custo é ver metade da equação. O que cai no custo, o que sobe no resultado, e o que considerar antes de decidir.",
+      "Sim, reduz — mas olhar só o custo é ver metade da equação. O que cai no custo, o que sobe no resultado, e o risco de decidir só pelo preço.",
     keyword: "agente de ia reduzir custo atendimento",
     date: "2026-08-06",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -586,6 +713,12 @@ export const clusterBPosts: BlogPost[] = [
         type: "callout",
         text: "Focar só no custo é olhar metade da equação — o ganho de conversão costuma pesar mais no resultado final do que a economia de hora de atendimento.",
       },
+      { type: "h2", text: "O risco de escolher só pelo preço mais baixo" },
+      {
+        type: "p",
+        content:
+          "Um agente montado só pra reduzir custo, sem inteligência comercial nem acompanhamento contínuo, pode até economizar hora de atendimento — e ainda assim converter pior do que o atendimento humano que ele substituiu, se ninguém cuidar da qualidade das respostas com o tempo. Nesse caso, a economia de custo vira prejuízo disfarçado.",
+      },
       { type: "h2", text: "Antes de decidir com base só no custo" },
       {
         type: "p",
@@ -612,6 +745,11 @@ export const clusterBPosts: BlogPost[] = [
         question: "Por que o ganho de conversão pesa mais que a economia de custo?",
         answer:
           "Porque a economia de custo tem um teto — o quanto se gastava antes — enquanto o ganho de conversão e retenção pode crescer junto com o volume do negócio.",
+      },
+      {
+        question: "Escolher o agente mais barato do mercado é sempre a melhor decisão?",
+        answer:
+          "Não necessariamente. Um agente sem inteligência comercial e sem acompanhamento contínuo pode converter pior do que o atendimento que substituiu, mesmo custando menos.",
       },
       {
         question: "Vale a pena decidir só olhando quanto isso reduz de custo?",
