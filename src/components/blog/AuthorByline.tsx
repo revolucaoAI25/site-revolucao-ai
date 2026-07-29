@@ -11,7 +11,7 @@ export function AuthorByline({ date }: { date: string }) {
     <div className="flex items-center gap-3">
       <Image
         src="/team/lucas.jpg"
-        alt="Lucas Magalhães, fundador da Revolução AI"
+        alt="Lucas Magalhães, fundador do Revolução AI"
         width={44}
         height={44}
         className="rounded-full object-cover border border-white/10"
@@ -19,7 +19,7 @@ export function AuthorByline({ date }: { date: string }) {
       <div className="text-sm">
         <p className="font-semibold text-text">Lucas Magalhães</p>
         <p className="text-muted-2">
-          Fundador da Revolução AI · {formatted}
+          Fundador do Revolução AI · {formatted}
         </p>
       </div>
     </div>

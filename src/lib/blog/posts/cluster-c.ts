@@ -74,12 +74,12 @@ export const clusterCPosts: BlogPost[] = [
         content: [
           "O funil comercial de cada negócio é levantado antes de qualquer configuração — quais objeções aparecem toda semana, o que costuma fazer alguém desistir, em que ponto vale a pena um humano assumir. Esse é o mesmo ",
           { text: "processo de levantamento", href: "/blog/como-implementar-agente-de-ia-atendimento-whatsapp" },
-          " usado em qualquer implementação séria, só que aplicado ao lado comercial da conversa, não só ao atendimento.",
+          " que o Revolução AI usa em qualquer implementação séria, só que aplicado ao lado comercial da conversa, não só ao atendimento.",
         ],
       },
       {
         type: "cta",
-        lead: "Objeções mapeadas, critérios de qualificação e o ponto certo de passar pro vendedor — a Revolução AI levanta e configura tudo isso olhando o funil real da sua operação de vendas.",
+        lead: "Quer ver esse processo desenhado pro seu funil comercial?",
         label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
@@ -173,8 +173,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Se o seu gargalo é qualificação e não prospecção, a Revolução AI configura os critérios certos pro seu negócio — orçamento, urgência e encaixe — direto na primeira conversa do WhatsApp.",
-        label: "Falar com a Revolução AI",
+        lead: "Se o seu gargalo é qualificação e não prospecção, o Revolução AI configura os critérios certos pro seu negócio — orçamento, urgência e encaixe — direto na primeira conversa do WhatsApp.",
+        label: "Falar com o Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
@@ -257,12 +257,12 @@ export const clusterCPosts: BlogPost[] = [
       {
         type: "p",
         content:
-          "Esse mapeamento acontece antes do agente ir ao ar — é conversa direta com quem já vende hoje, entendendo onde a negociação realmente precisa de julgamento humano e onde ela segue um padrão que pode ser conduzido sozinho.",
+          "Esse mapeamento acontece antes do agente ir ao ar — é o que o Revolução AI faz em conversa direta com quem já vende hoje, entendendo onde a negociação realmente precisa de julgamento humano e onde ela segue um padrão que pode ser conduzido sozinho.",
       },
       {
         type: "cta",
-        lead: "Esse mapeamento entre o que o agente conduz sozinho e o que precisa de um vendedor é feito na implementação da Revolução AI, em conversa direta com quem já vende no seu negócio hoje.",
-        label: "Mapear isso com a Revolução AI",
+        lead: "Quer descobrir em qual cenário sua operação se encaixa?",
+        label: "Mapear isso com o Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
@@ -358,7 +358,7 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Conectar, aprofundar, qualificar, elevar autoridade — a Revolução AI desenha essas etapas com as perguntas certas pro seu tipo de negócio, e ajusta com base nas primeiras conversas reais.",
+        lead: "Conectar, aprofundar, qualificar, elevar autoridade — o Revolução AI desenha essas etapas com as perguntas certas pro seu tipo de negócio, e ajusta com base nas primeiras conversas reais.",
         label: "Desenhar isso pro seu negócio",
         href: "/agentes-de-ia",
       },
@@ -448,7 +448,7 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Cadência de follow-up com contexto real da conversa, não uma cobrança genérica — é essa inteligência comercial que a Revolução AI configura pra recuperar quem esfriou no seu funil.",
+        lead: "Cadência de follow-up com contexto real da conversa, não uma cobrança genérica — é essa inteligência comercial que o Revolução AI configura pra recuperar quem esfriou no seu funil.",
         label: "Conhecer a implementação completa",
         href: "/agentes-de-ia",
       },
@@ -541,7 +541,7 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "A Revolução AI implementa um agente de verdade — que acompanha a pessoa mudando de assunto, argumenta objeção específica e faz follow-up sozinho — não um chatbot de menu com nome novo.",
+        lead: "O Revolução AI implementa um agente de verdade — que acompanha a pessoa mudando de assunto, argumenta objeção específica e faz follow-up sozinho — não um chatbot de menu com nome novo.",
         label: "Ver a diferença na prática",
         href: "/agentes-de-ia",
       },
@@ -628,8 +628,8 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "cta",
-        lead: "Resposta no primeiro minuto, recuperação de quem sumiu, volume qualificado que chega pronto pro vendedor — são esses indicadores que a Revolução AI acompanha depois de cada implementação, não uma promessa de porcentagem.",
-        label: "Conversar com a Revolução AI",
+        lead: "Resposta no primeiro minuto, recuperação de quem sumiu, volume qualificado que chega pronto pro vendedor — são esses indicadores que o Revolução AI acompanha depois de cada implementação, não uma promessa de porcentagem.",
+        label: "Conversar com o Revolução AI",
         href: "/agentes-de-ia",
       },
     ],
