@@ -783,7 +783,7 @@ export const clusterGPosts: BlogPost[] = [
         content: [
           "A pergunta certa não é só \"integra com agenda?\" — é ",
           { text: "\"integra com a MINHA agenda?\"", bold: true },
-          ". Se a empresa usa Google Agenda, a resposta costuma ser simples: a maioria das ferramentas já suporta isso nativamente, sem trabalho extra. Se usa outro sistema — Outlook, uma agenda própria de software de gestão, um sistema interno —, a resposta depende de duas coisas.",
+          ". Google Agenda é o sistema mais comum de ter suporte nativo pronto — mas isso varia de ferramenta pra ferramenta, não é garantido em qualquer plataforma. Vale confirmar diretamente antes de assumir que já vem pronto. Se usa outro sistema — Outlook, uma agenda própria de software de gestão, um sistema interno —, a resposta depende de duas coisas.",
         ],
       },
       {
@@ -824,7 +824,7 @@ export const clusterGPosts: BlogPost[] = [
       {
         question: "Essa integração exige trocar de sistema de agenda?",
         answer:
-          "Não necessariamente — se for Google Agenda, costuma já vir pronta nativamente; se for outro sistema, depende de ele ter API pública pra construir uma integração customizada em cima dela.",
+          "Não necessariamente — Google Agenda é o sistema com suporte nativo mais comum entre as plataformas, mas isso varia e não é garantido; se for outro sistema, depende de ele ter API pública pra construir uma integração customizada em cima dela.",
       },
       {
         question: "E se o sistema de agenda da empresa não tem API?",
