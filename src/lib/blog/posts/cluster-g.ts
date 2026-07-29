@@ -649,8 +649,25 @@ export const clusterGPosts: BlogPost[] = [
         content: [
           "O ",
           { text: "Extrator de Leads", href: "/lead-extractor" },
-          " do Revolução AI, por exemplo, usa dados públicos de CNPJ pra identificar e enriquecer leads com o perfil certo pro negócio — segmento, porte, localização — entregando uma base pronta pra abordagem ativa, em vez de uma lista genérica sem filtro nenhum.",
+          " do Revolução AI, por exemplo, combina duas fontes principais de busca: ",
+          { text: "Google Maps", bold: true },
+          ", pra encontrar negócios locais por nicho e região (com telefone, site e avaliações já coletados, e funcionando também fora do Brasil), e ",
+          { text: "CNPJ da Receita Federal", bold: true },
+          ", pra prospecção B2B estruturada por CNAE, estado e porte da empresa, exclusiva pra negócios brasileiros.",
         ],
+      },
+      {
+        type: "p",
+        content: [
+          "As duas fontes também se cruzam: o modo de ",
+          { text: "enriquecimento avançado", bold: true },
+          " pega uma empresa encontrada pelo CNPJ e confirma se ela realmente aparece pro público no Google Maps — telefone, site e volume de avaliação —, filtrando CNPJ aberto no papel de negócio que de fato está ativo e visível. Existe ainda uma terceira fonte, extração via Instagram (seguidores ou comentaristas de perfis públicos), útil quando o nicho prospectado se concentra mais nessa rede do que no Maps ou na Receita.",
+        ],
+      },
+      {
+        type: "p",
+        content:
+          "Depois de extraída, essa base pode ser usada direto pra disparo automático de campanha de WhatsApp dentro da própria ferramenta, ou exportada pro Google Sheets — entregando uma base pronta pra abordagem ativa, em vez de uma lista genérica comprada sem filtro nenhum.",
       },
       { type: "h2", text: "Prospecção e qualificação trabalhando juntas" },
       {
@@ -686,7 +703,7 @@ export const clusterGPosts: BlogPost[] = [
       {
         question: "Como uma ferramenta de IA identifica leads com o perfil certo?",
         answer:
-          "Usando critérios como localização, segmento e porte do negócio — por exemplo, com base em dados públicos de CNPJ — em vez de uma lista genérica sem filtro.",
+          "Cruzando fontes diferentes conforme o tipo de negócio — Google Maps pra negócios locais com presença pública, CNPJ da Receita Federal pra prospecção B2B estruturada, às vezes redes sociais — em vez de uma lista genérica comprada sem filtro.",
       },
       {
         question: "Vale a pena ter prospecção e qualificação ao mesmo tempo?",
