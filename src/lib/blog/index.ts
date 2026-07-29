@@ -4,6 +4,7 @@ import { clusterBPosts } from "./posts/cluster-b";
 import { clusterCPosts } from "./posts/cluster-c";
 import { clusterDPosts } from "./posts/cluster-d";
 import { clusterEPosts } from "./posts/cluster-e";
+import { clusterFPosts } from "./posts/cluster-f";
 
 const allPosts: BlogPost[] = [
   ...clusterAPosts,
@@ -11,6 +12,7 @@ const allPosts: BlogPost[] = [
   ...clusterCPosts,
   ...clusterDPosts,
   ...clusterEPosts,
+  ...clusterFPosts,
 ];
 
 function todayIso() {
