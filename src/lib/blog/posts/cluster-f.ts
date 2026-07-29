@@ -8,7 +8,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "Um agente de IA entende, decide e age — um chatbot só segue roteiro. Veja a diferença real entre os dois, com exemplo lado a lado.",
     keyword: "o que é agente de ia",
-    date: "2026-08-25",
+    date: "2026-08-21",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-ia-generativa",
@@ -123,7 +123,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "IA generativa não segue script — ela constrói a resposta em tempo real, com base em contexto. Entenda a diferença pra automação tradicional.",
     keyword: "o que é ia generativa",
-    date: "2026-08-26",
+    date: "2026-08-28",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-um-agente-de-ia",
@@ -213,7 +213,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "PLN é a tecnologia que permite um agente de IA entender texto livre, áudio e até gírias regionais. Veja como isso funciona na prática de uma conversa.",
     keyword: "o que é processamento de linguagem natural",
-    date: "2026-08-26",
+    date: "2026-08-31",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-ia-generativa",
@@ -306,7 +306,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "RPA repete uma tarefa exatamente como foi programada; agente de IA conversa e decide. Veja onde cada tecnologia se encaixa melhor.",
     keyword: "agente de ia e automação rpa diferença",
-    date: "2026-08-27",
+    date: "2026-08-31",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-um-agente-de-ia",
@@ -396,7 +396,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "A base de conhecimento é o que o agente consulta antes de responder. Veja o que entra nela, como é montada, e por que a qualidade dela define tudo.",
     keyword: "o que é base de conhecimento agente de ia",
-    date: "2026-08-27",
+    date: "2026-08-19",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-implementar-agente-de-ia-atendimento-whatsapp",
@@ -499,7 +499,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "Treinar um agente de IA comercial não é ensinar um modelo do zero — é configurar contexto e base de conhecimento. Veja o mito e a realidade.",
     keyword: "treinar agente de ia o que significa",
-    date: "2026-08-28",
+    date: "2026-09-02",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-base-de-conhecimento-agente-de-ia",
@@ -602,7 +602,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "Um agente de vendas usa os dois tipos de IA — generativa pra conversar, preditiva pra pontuar lead. Entenda onde cada uma entra no processo.",
     keyword: "ia generativa ou preditiva",
-    date: "2026-08-28",
+    date: "2026-09-08",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-ia-generativa",
@@ -700,7 +700,7 @@ export const clusterFPosts: BlogPost[] = [
     metaDescription:
       "Um agente autônomo decide os próprios passos numa conversa longa; um assistente simples só responde uma pergunta de cada vez. Veja a diferença.",
     keyword: "agente autonomo de ia o que é",
-    date: "2026-08-31",
+    date: "2026-09-01",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-um-agente-de-ia",

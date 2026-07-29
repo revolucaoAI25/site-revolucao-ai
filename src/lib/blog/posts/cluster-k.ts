@@ -8,7 +8,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Chatbot de menu fixo, por palavra-chave ou com IA generativa: cada tipo resolve um problema diferente. Veja a diferença real entre eles, e como saber qual o seu negócio precisa.",
     keyword: "tipos de chatbot",
-    date: "2026-09-22",
+    date: "2026-09-23",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-um-agente-de-ia",
@@ -217,7 +217,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Um trava fora do roteiro, o outro entende o que foi dito de qualquer jeito. Veja um exemplo lado a lado da diferença entre chatbot de regras e chatbot com IA generativa.",
     keyword: "chatbot de regras x ia generativa",
-    date: "2026-09-23",
+    date: "2026-09-14",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "tipos-de-chatbot-quais-existem-e-como-escolher",
@@ -321,7 +321,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "\"Inteligente\" virou adjetivo de propaganda. Veja o checklist real de capacidades que separam um assistente virtual genuinamente inteligente de um script bem vendido.",
     keyword: "assistente virtual inteligente",
-    date: "2026-09-24",
+    date: "2026-09-15",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "chatbot-de-regras-vs-chatbot-com-ia-generativa",
@@ -542,7 +542,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Catálogo, qualificação e link de fechamento no momento certo: veja os elementos que fazem um chatbot de vendas online funcionar de verdade, em vez de só responder dúvida solta.",
     keyword: "chatbot de vendas online",
-    date: "2026-09-25",
+    date: "2026-10-01",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-envia-orcamento-catalogo-ou-pdf",
@@ -648,7 +648,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Não é uma questão de nome, é uma questão de capacidade. Veja o ponto exato em que um chatbot comum passa a merecer ser chamado de agente de IA.",
     keyword: "quando chatbot vira agente de ia",
-    date: "2026-09-25",
+    date: "2026-10-01",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "chatbot-assistente-virtual-e-agente-de-ia-sao-a-mesma-coisa",
@@ -748,7 +748,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Ferramenta gratuita resolve o básico, mas tem limite. Veja o que geralmente separa um chatbot gratuito de uma plataforma paga, e quando faz sentido migrar de uma pra outra.",
     keyword: "chatbot gratuito ou pago",
-    date: "2026-09-28",
+    date: "2026-09-29",
     destino: { label: "Chatflux — Plataforma de Agentes de IA", href: "/plataforma" },
     relatedSlugs: [
       "agencia-de-ia-ou-plataforma-self-service-comparacao",
@@ -842,7 +842,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "A ideia de um chatbot que \"aprende sozinho\" sem nenhuma supervisão é mais mito do que realidade. Veja como o aprendizado de um agente de IA realmente acontece na prática.",
     keyword: "chatbot aprende sozinho",
-    date: "2026-09-28",
+    date: "2026-09-30",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-significa-treinar-um-agente-de-ia",
@@ -942,7 +942,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "\"Bot\" costuma ter fama ruim, associado a spam e automação rasa. Veja por que isso não é o mesmo que inteligência artificial conversacional, e por que a confusão prejudica quem usa a tecnologia boa.",
     keyword: "diferenca bot inteligencia artificial conversacional",
-    date: "2026-09-29",
+    date: "2026-10-02",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "chatbot-assistente-virtual-e-agente-de-ia-sao-a-mesma-coisa",
@@ -1146,7 +1146,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Os dois usam IA por trás, mas a maturidade e o uso ideal são diferentes. Veja a diferença real entre assistente virtual de voz e de texto, e onde cada um funciona melhor hoje.",
     keyword: "assistente virtual de voz x texto",
-    date: "2026-09-30",
+    date: "2026-10-05",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agentes-de-voz-com-ia-vale-a-pena",
@@ -1248,7 +1248,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Sim, na maior parte dos casos — e isso muda bastante o resultado no dia a dia. Veja por que um chatbot com IA generativa lida bem com linguagem informal, ao contrário do chatbot tradicional.",
     keyword: "chatbot entende girias erros portugues",
-    date: "2026-09-30",
+    date: "2026-10-02",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "chatbot-de-regras-vs-chatbot-com-ia-generativa",
@@ -1348,7 +1348,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "De um programa de 1966 até a IA generativa de hoje: veja como a tecnologia de chatbot evoluiu ao longo de décadas, e por que o salto mais recente é diferente de todos os anteriores.",
     keyword: "historia dos chatbots",
-    date: "2026-10-01",
+    date: "2026-10-05",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-ia-generativa",
@@ -1453,7 +1453,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Um checklist prático pra decidir bem: veja os pontos que realmente importam na hora de contratar um assistente virtual empresarial, além do preço e da apresentação de vendas.",
     keyword: "assistente virtual empresarial contratar",
-    date: "2026-10-01",
+    date: "2026-09-22",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-comparar-propostas-de-fornecedores-de-agente-de-ia",
@@ -1561,7 +1561,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Automatizar a caixa de mensagens do Instagram é possível e já é recurso nativo em algumas plataformas. Veja como um chatbot pro Instagram Direct funciona na prática.",
     keyword: "chatbot para instagram direct",
-    date: "2026-10-02",
+    date: "2026-09-21",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-conectar-agente-de-ia-whatsapp-instagram",
@@ -1651,7 +1651,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Sim, com a integração certa, um único chatbot consegue centralizar o atendimento de vários canais no mesmo lugar. Veja como isso funciona, e por que faz diferença pro time acompanhar.",
     keyword: "chatbot multicanal",
-    date: "2026-10-02",
+    date: "2026-09-21",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "chatbot-para-instagram-direct-como-funciona",
@@ -1741,7 +1741,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "Depende de como foi configurado, mas a diferença muda todo o resultado comercial. Veja a diferença entre um assistente que só informa e um que ativamente qualifica quem está do outro lado.",
     keyword: "assistente virtual comercial qualifica lead",
-    date: "2026-10-05",
+    date: "2026-09-28",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-agente-de-ia-qualifica-lead-antes-do-vendedor",
@@ -1853,7 +1853,7 @@ export const clusterKPosts: BlogPost[] = [
     metaDescription:
       "A fama de \"chatbot chato\" vem de uma geração específica de ferramenta, não da tecnologia em si. Veja o que realmente causa frustração no atendimento automatizado, e como evitar.",
     keyword: "chatbot deixa cliente irritado",
-    date: "2026-10-05",
+    date: "2026-09-25",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "chatbot-de-regras-vs-chatbot-com-ia-generativa",

@@ -98,7 +98,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "Imagem, catálogo, PDF de orçamento: veja o que um agente de IA bem configurado consegue enviar direto na conversa do WhatsApp, e onde entra a diferença entre anexo pronto e orçamento sob medida.",
     keyword: "agente de ia envia pdf catalogo",
-    date: "2026-09-17",
+    date: "2026-09-28",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-conectar-agente-de-ia-whatsapp-instagram",
@@ -188,7 +188,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "Erro acontece, a questão é o que vem depois. Veja como funciona a correção de um agente de IA depois de uma resposta errada, e por que isso não é motivo pra desistir da automação.",
     keyword: "agente de ia erro resposta",
-    date: "2026-09-17",
+    date: "2026-09-11",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-testar-agente-de-ia-antes-de-colocar-no-ar",
@@ -278,7 +278,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "Transparência é escolha de configuração, não obrigação técnica. Veja os dois caminhos possíveis e por que ser claro sobre o uso de IA costuma ajudar mais do que atrapalhar a conversão.",
     keyword: "transparencia agente de ia atendimento",
-    date: "2026-09-18",
+    date: "2026-09-30",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-manter-atendimento-humanizado-com-agente-de-ia",
@@ -370,7 +370,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "Nem toda operação está no momento certo pra um agente de IA. Veja os cenários honestos em que vale esperar ou repensar o formato, antes de investir numa implementação completa.",
     keyword: "quando nao vale a pena agente de ia",
-    date: "2026-09-18",
+    date: "2026-09-25",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "quanto-tempo-leva-para-ter-retorno-com-agente-de-ia",
@@ -449,7 +449,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "Cobrar direto na conversa é possível, mas não é um recurso pronto de fábrica. Entenda como funciona a integração de pagamento com agente de IA, e o que precisa ser configurado pra isso.",
     keyword: "agente de ia pix pagamento",
-    date: "2026-09-21",
+    date: "2026-09-17",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-esta-incluido-no-preco-de-um-agente-de-ia",
@@ -535,7 +535,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "De poucas semanas a alguns meses, dependendo da complexidade. Veja o que realmente influencia o prazo de implementação de um agente de IA, e por que o lançamento não é o fim do processo.",
     keyword: "tempo implementacao agente de ia",
-    date: "2026-09-21",
+    date: "2026-09-09",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-significa-treinar-um-agente-de-ia",
@@ -620,7 +620,7 @@ export const clusterJPosts: BlogPost[] = [
     metaDescription:
       "Depende de como o agente é configurado. Veja os dois papéis que um agente de IA pode assumir — qualificar quem chega agora e reativar quem já é cliente — e como decidir o que priorizar.",
     keyword: "agente de ia cliente antigo",
-    date: "2026-09-22",
+    date: "2026-09-16",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-recuperar-clientes-que-sumiram",

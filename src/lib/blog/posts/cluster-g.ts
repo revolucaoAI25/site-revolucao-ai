@@ -8,7 +8,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "Do bot self-service ao provedor de API oficial, passando por CRMs com IA embutida: veja o mapa de categorias de ferramentas antes de escolher uma.",
     keyword: "ferramentas de ia para atendimento whatsapp",
-    date: "2026-08-31",
+    date: "2026-08-18",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-escolher-ferramenta-de-ia-para-atendimento",
@@ -105,7 +105,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "Entende texto livre ou só palavra-chave? Processa áudio e imagem? Um checklist prático de sete pontos pra avaliar qualquer ferramenta antes de contratar.",
     keyword: "como escolher ferramenta de ia atendimento",
-    date: "2026-09-01",
+    date: "2026-08-24",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "ferramentas-de-ia-para-atendimento-no-whatsapp",
@@ -209,7 +209,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "A IA de um CRM ajuda o vendedor a trabalhar; um agente de IA à parte conduz a conversa com o cliente sozinho. Veja quando cada um faz sentido.",
     keyword: "crm com ia ou agente de ia",
-    date: "2026-09-01",
+    date: "2026-09-14",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "ferramentas-de-ia-para-atendimento-no-whatsapp",
@@ -309,7 +309,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "Ferramentas no-code resolvem bem fluxo simples e volume baixo. Veja onde elas costumam bater teto, e quando vale complementar com apoio especializado.",
     keyword: "ferramentas no-code de ia",
-    date: "2026-09-02",
+    date: "2026-08-27",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agencia-de-ia-ou-plataforma-self-service-comparacao",
@@ -415,7 +415,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "Um BSP é o intermediário credenciado pela Meta entre sua empresa e a API oficial. Veja o que avaliar antes de escolher um, e o que muda em 2026.",
     keyword: "provedor api oficial whatsapp bsp",
-    date: "2026-09-02",
+    date: "2026-09-08",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-whatsapp-business-integracao",
@@ -508,7 +508,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "A tecnologia avançou rápido em 2026, mas ainda tem maturidade desigual conforme o uso. Veja onde agentes de voz com IA já funcionam bem, e onde ainda não.",
     keyword: "agente de voz ia",
-    date: "2026-09-03",
+    date: "2026-09-01",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-um-agente-de-ia",
@@ -611,7 +611,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "Prospecção é sobre encontrar quem tem perfil pra comprar antes de qualquer conversa começar. Veja como ferramentas de IA fazem esse trabalho hoje.",
     keyword: "ferramentas de ia para prospecção de leads",
-    date: "2026-09-03",
+    date: "2026-09-15",
     destino: { label: "Extrator de Leads com IA", href: "/lead-extractor" },
     relatedSlugs: [
       "o-que-e-agente-de-ia-sdr",
@@ -725,7 +725,7 @@ export const clusterGPosts: BlogPost[] = [
     metaDescription:
       "Um agente de IA que conversa mas não agenda sozinho ainda deixa trabalho manual no meio do caminho. Veja como a integração com agenda fecha esse ciclo.",
     keyword: "ferramentas de agendamento com ia",
-    date: "2026-09-04",
+    date: "2026-09-02",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-clinica-medica",

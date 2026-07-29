@@ -8,7 +8,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Da base de conhecimento à conexão com o WhatsApp: veja as etapas reais de montar seu próprio agente de IA numa plataforma self-service.",
     keyword: "como criar um agente de ia para whatsapp",
-    date: "2026-09-04",
+    date: "2026-09-10",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "como-escrever-base-de-conhecimento-do-seu-agente",
@@ -119,7 +119,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "A base de conhecimento é o que decide se seu agente responde bem ou improvisa. Veja como transformar informação solta em perguntas e respostas de verdade.",
     keyword: "como escrever base de conhecimento agente de ia",
-    date: "2026-09-07",
+    date: "2026-09-03",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "como-criar-um-agente-de-ia-para-whatsapp-do-zero",
@@ -213,7 +213,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Instruções de comportamento (o prompt) decidem o tom, os limites e a personalidade do agente. Veja como escrever isso sem soar genérico.",
     keyword: "como escrever prompt agente de ia",
-    date: "2026-09-07",
+    date: "2026-09-04",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "como-escrever-base-de-conhecimento-do-seu-agente",
@@ -311,7 +311,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Uma sequência de mensagens bem espaçada recupera parte de quem parou de responder. Veja como configurar isso sem soar insistente.",
     keyword: "como configurar follow-up automatico agente de ia",
-    date: "2026-09-08",
+    date: "2026-09-18",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "agente-de-ia-recuperar-clientes-que-sumiram",
@@ -419,7 +419,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Antes de lançar, o agente precisa estar conectado aos canais certos. Veja o processo prático de conexão, e os detalhes que costumam ser esquecidos.",
     keyword: "como conectar agente de ia whatsapp instagram",
-    date: "2026-09-08",
+    date: "2026-09-17",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "numero-comum-ou-api-oficial-agente-de-ia-whatsapp",
@@ -534,7 +534,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Testar antes do lançamento evita que o primeiro cliente real encontre um erro que ninguém viu. Veja um roteiro prático de cenários pra simular.",
     keyword: "como testar agente de ia antes de lançar",
-    date: "2026-09-09",
+    date: "2026-08-28",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "como-conectar-agente-de-ia-whatsapp-instagram",
@@ -640,7 +640,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Um agente que agenda sozinho, direto na conversa, elimina o vai e vem manual. Veja como configurar essa integração com sua agenda.",
     keyword: "como configurar agendamento integrado agente de ia",
-    date: "2026-09-09",
+    date: "2026-09-03",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "ferramentas-de-agendamento-com-ia",
@@ -782,7 +782,7 @@ export const clusterHPosts: BlogPost[] = [
     metaDescription:
       "Além de saber se o agente está no ar, é preciso saber se ele está performando. Veja quais métricas acompanhar, e o que fazer quando algo foge do esperado.",
     keyword: "metricas agente de ia desempenho",
-    date: "2026-09-10",
+    date: "2026-09-09",
     destino: { label: "Plataforma Chatflux", href: "/plataforma" },
     relatedSlugs: [
       "como-testar-agente-de-ia-antes-de-colocar-no-ar",

@@ -8,7 +8,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Como um agente de IA conduz o fluxo comercial de captação num escritório de advocacia — da primeira mensagem à consulta agendada — sem abrir mão do sigilo.",
     keyword: "agente de ia para advocacia",
-    date: "2026-08-12",
+    date: "2026-08-25",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-consultoria",
@@ -142,7 +142,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "O no-show custa entre 15% e 30% do faturamento de clínicas no Brasil. Veja como um agente de IA conduz a captação de paciente novo e reduz faltas.",
     keyword: "agente de ia para clinica medica",
-    date: "2026-08-13",
+    date: "2026-08-07",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-clinica-de-estetica",
@@ -267,7 +267,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Antes de passar orçamento, o agente conecta, aprofunda, qualifica e eleva a autoridade da clínica com prova social — antes de chamar pro agendamento.",
     keyword: "agente de ia para clinica de estetica",
-    date: "2026-08-13",
+    date: "2026-08-25",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-clinica-medica",
@@ -388,7 +388,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Sem secretária de plantão, um médico autônomo perde consulta por demora e por não reforçar sua própria experiência na conversa. Veja quando compensa.",
     keyword: "agente de ia para medico autonomo",
-    date: "2026-08-14",
+    date: "2026-08-19",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-clinica-medica",
@@ -495,7 +495,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "De engenharia a arquitetura e consultorias técnicas: veja como um agente de IA conduz o fluxo comercial completo sem tirar ninguém do trabalho técnico.",
     keyword: "agente de ia para escritorio",
-    date: "2026-08-14",
+    date: "2026-08-10",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-consultoria",
@@ -601,7 +601,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Prazo de documento, emissão de guia, abertura de empresa: veja como um agente de IA cobre o fluxo comercial de captação e as dúvidas recorrentes.",
     keyword: "agente de ia para contabilidade",
-    date: "2026-08-17",
+    date: "2026-08-26",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "erros-comuns-automatizar-atendimento-com-ia",
@@ -717,7 +717,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "O sistema de consórcios já passa de 12,7 milhões de participantes ativos no Brasil. Veja o fluxo comercial completo antes da simulação chegar ao vendedor.",
     keyword: "agente de ia para consorcio",
-    date: "2026-08-17",
+    date: "2026-08-26",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-produtos-financeiros",
@@ -819,7 +819,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Em crédito, seguro e investimento, confiança pesa tanto quanto informação. Veja o fluxo comercial completo — conectar, qualificar e elevar autoridade.",
     keyword: "agente de ia para produtos financeiros",
-    date: "2026-08-18",
+    date: "2026-08-24",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-consorcio",
@@ -920,7 +920,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Em vendas de ticket alto, a reunião de diagnóstico rende mais quando já chega com contexto e autoridade construída. Veja o fluxo comercial completo.",
     keyword: "agente de ia para consultoria",
-    date: "2026-08-18",
+    date: "2026-08-17",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-vende-sozinho-ou-ajuda-time-comercial",
@@ -1022,7 +1022,7 @@ export const clusterDPosts: BlogPost[] = [
     metaDescription:
       "Cerca de 70% dos carrinhos são abandonados antes da compra. Veja o fluxo comercial completo que um agente de IA conduz durante um lançamento.",
     keyword: "agente de ia para infoprodutor",
-    date: "2026-08-19",
+    date: "2026-08-07",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "quantas-conversas-agente-de-ia-atende-ao-mesmo-tempo",

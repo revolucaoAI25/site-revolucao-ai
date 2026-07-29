@@ -8,7 +8,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "De US$14 bilhões a mais de US$200 bilhões em previsões de mercado: veja os números reais por trás do crescimento de agentes de IA, e o que isso significa aqui no Brasil.",
     keyword: "mercado de agentes de ia crescimento",
-    date: "2026-09-10",
+    date: "2026-09-07",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "adocao-de-ia-generativa-nas-empresas-ultimos-dois-anos",
@@ -98,7 +98,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "82% dos pequenos negócios brasileiros já vendem pelo WhatsApp, segundo a Sebrae — à frente até do Instagram. Veja o que esse dado revela sobre prioridade de investimento.",
     keyword: "whatsapp canal de vendas pequenas empresas brasil",
-    date: "2026-09-11",
+    date: "2026-09-18",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",
@@ -201,7 +201,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "De 33% em 2023 para 79% em 2025: veja como a adoção de IA generativa nas empresas mudou de patamar em menos de dois anos, segundo dados da McKinsey.",
     keyword: "adoção de ia generativa nas empresas",
-    date: "2026-09-11",
+    date: "2026-09-10",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "quanto-o-mercado-de-agentes-de-ia-esta-crescendo",
@@ -289,7 +289,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "91% dos líderes de atendimento relatam pressão direta da diretoria pra implementar IA em 2026, segundo o Gartner. Veja o que está por trás dessa pressão.",
     keyword: "pressao executiva ia atendimento 2026",
-    date: "2026-09-14",
+    date: "2026-09-22",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "adocao-de-ia-generativa-nas-empresas-ultimos-dois-anos",
@@ -381,7 +381,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "Os dados mostram um cenário misto: adoção ainda cresce mais rápido nas grandes empresas, mas o intervalo está encolhendo. Veja o que isso significa pra quem tem um negócio pequeno.",
     keyword: "pequenas empresas adotando ia",
-    date: "2026-09-14",
+    date: "2026-09-07",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-whatsapp-vale-a-pena-pequenas-empresas",
@@ -481,7 +481,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "Atendimento tradicional espera o cliente escrever. IA generativa permitiu inverter essa lógica — reconectar, lembrar e recuperar antes que o cliente precise voltar a chamar.",
     keyword: "atendimento proativo com ia",
-    date: "2026-09-15",
+    date: "2026-09-24",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-recuperar-clientes-que-sumiram",
@@ -577,7 +577,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "Com a adoção virando maioria, ter um agente de IA deixou de ser diferencial. A nova régua de comparação entre fornecedores é o resultado que cada um comprova entregar.",
     keyword: "resultado comprovado agente de ia",
-    date: "2026-09-15",
+    date: "2026-09-11",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "vale-a-pena-pagar-mais-caro-por-uma-implementacao-completa",
@@ -674,7 +674,7 @@ export const clusterIPosts: BlogPost[] = [
     metaDescription:
       "Texto, áudio, imagem e cada vez mais autonomia de decisão: veja os movimentos recentes que indicam onde a tecnologia de agentes de IA está indo a seguir.",
     keyword: "futuro dos agentes de ia",
-    date: "2026-09-16",
+    date: "2026-09-04",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-um-agente-autonomo-de-ia",

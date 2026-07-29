@@ -8,7 +8,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Como um agente de IA para WhatsApp entende mensagens, guarda contexto, decide o que responder e quando chamar um humano — explicado a fundo.",
     keyword: "agente de ia para whatsapp",
-    date: "2026-07-28",
+    date: "2026-07-29",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "servicos-agente-de-ia-integracao-whatsapp",
@@ -184,7 +184,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Os três tipos de fornecedor de agente de IA para WhatsApp que existem hoje, os sinais de alerta de um fornecedor despreparado, e o que perguntar antes de escolher.",
     keyword: "serviços agente de ia whatsapp",
-    date: "2026-07-28",
+    date: "2026-07-31",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",
@@ -351,7 +351,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "As quatro etapas reais de uma implementação de agente de IA no WhatsApp, com exemplos concretos, do levantamento inicial ao acompanhamento contínuo.",
     keyword: "agente de ia para atendimento whatsapp",
-    date: "2026-07-29",
+    date: "2026-08-04",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",
@@ -489,7 +489,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Cloud API tradicional, coexistência ou conexão não oficial: as três formas de conectar um agente de IA a um número, o custo por template e como funciona a aprovação.",
     keyword: "agente de ia para whatsapp business",
-    date: "2026-07-29",
+    date: "2026-08-11",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "numero-comum-ou-api-oficial-agente-de-ia-whatsapp",
@@ -618,7 +618,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Quando um agente de IA se paga para uma pequena empresa, quando ainda não faz sentido, e por que a mesma lógica vale pra operações maiores.",
     keyword: "agente de ia para pequenas empresas",
-    date: "2026-07-30",
+    date: "2026-07-28",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",
@@ -726,7 +726,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Dá pra manter o número que a empresa já usa? Sim — o que muda é a forma de conexão. Compare Cloud API tradicional, coexistência e conexão não oficial.",
     keyword: "agente ia whatsapp business api",
-    date: "2026-07-30",
+    date: "2026-08-11",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-whatsapp-business-integracao",
@@ -812,7 +812,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Por que um agente de IA não enfileira conversas como um atendente humano, onde fica o verdadeiro limite dessa escala, e como dimensionar o time de apoio.",
     keyword: "agente de ia atendimento simultâneo",
-    date: "2026-07-31",
+    date: "2026-07-30",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",
@@ -909,7 +909,7 @@ export const clusterAPosts: BlogPost[] = [
     metaDescription:
       "Por que o tempo de resposta cai estruturalmente com um agente de IA, e o que os dados de busca no Brasil mostram sobre essa procura.",
     keyword: "agente de ia reduz tempo de resposta",
-    date: "2026-07-31",
+    date: "2026-07-29",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",

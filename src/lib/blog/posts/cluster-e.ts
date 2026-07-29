@@ -8,7 +8,7 @@ export const clusterEPosts: BlogPost[] = [
     metaDescription:
       "Não existe um preço fixo de mercado — o valor muda com volume, integrações e nível de personalização. Veja o que realmente movimenta essa conta.",
     keyword: "quanto custa agente de ia",
-    date: "2026-08-19",
+    date: "2026-08-13",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-esta-incluido-no-preco-de-um-agente-de-ia",
@@ -111,7 +111,7 @@ export const clusterEPosts: BlogPost[] = [
     metaDescription:
       "Um funcionário CLT custa entre 1,6x e 1,8x o salário bruto. Veja a conta real de custo — e o que continua exigindo uma pessoa, mesmo com o agente no ar.",
     keyword: "custo atendente humano vs agente de ia",
-    date: "2026-08-20",
+    date: "2026-08-14",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-substitui-atendente-humano",
@@ -315,7 +315,7 @@ export const clusterEPosts: BlogPost[] = [
     metaDescription:
       "Não existe um prazo universal, mas dá pra estimar. Veja os fatores que aceleram (ou atrasam) o retorno de um agente de IA, com exemplo de conta.",
     keyword: "retorno agente de ia payback",
-    date: "2026-08-21",
+    date: "2026-08-27",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-whatsapp-vale-a-pena-pequenas-empresas",
@@ -524,7 +524,7 @@ export const clusterEPosts: BlogPost[] = [
     metaDescription:
       "Levantamento, configuração, integração, ajuste: veja item por item o que costuma entrar no preço de uma implementação, e o que costuma ficar de fora.",
     keyword: "o que está incluído no preço agente de ia",
-    date: "2026-08-24",
+    date: "2026-08-18",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "quanto-custa-agente-de-ia-para-whatsapp",
@@ -632,7 +632,7 @@ export const clusterEPosts: BlogPost[] = [
     metaDescription:
       "Um roteiro de perguntas pra comparar propostas de verdade — além do valor mensal — e não descobrir depois que faltava metade do escopo.",
     keyword: "como comparar propostas agente de ia",
-    date: "2026-08-24",
+    date: "2026-08-12",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "servicos-agente-de-ia-integracao-whatsapp",
@@ -738,7 +738,7 @@ export const clusterEPosts: BlogPost[] = [
     metaDescription:
       "Compare duas empresas do mesmo porte que contrataram agentes diferentes — uma só o script, outra a operação completa — e o que mudou no resultado.",
     keyword: "vale a pena implementação completa agente de ia",
-    date: "2026-08-25",
+    date: "2026-08-20",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "servicos-agente-de-ia-integracao-whatsapp",

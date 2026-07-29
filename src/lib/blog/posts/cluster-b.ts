@@ -8,7 +8,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Otimizar atendimento não é só responder mais rápido — é o efeito disso em conversão, comparecimento e faturamento. Veja os dois lados dessa conta.",
     keyword: "otimizar atendimento com agente de ia",
-    date: "2026-08-03",
+    date: "2026-07-28",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-substitui-atendente-humano",
@@ -115,7 +115,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Widget de chat no site ou botão que leva pro WhatsApp? As duas formas de atendimento com IA, e por que uma costuma converter mais no Brasil.",
     keyword: "implementar agente de ia atendimento site",
-    date: "2026-08-03",
+    date: "2026-08-10",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-agente-de-ia-otimiza-atendimento-ao-cliente",
@@ -206,7 +206,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Depende da operação: em algumas, o agente conduz sozinho até o fim; em outras, atua até um ponto e passa pra um humano. Veja como decidir.",
     keyword: "agente de ia substitui humano",
-    date: "2026-08-04",
+    date: "2026-08-03",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-funciona-transferencia-agente-de-ia-para-humano",
@@ -311,7 +311,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Os gatilhos mais comuns de transferência, o que vai junto com o cliente, e o erro clássico do loop que trava a conversa — e como evitar.",
     keyword: "agente de ia transferir atendimento humano",
-    date: "2026-08-04",
+    date: "2026-08-14",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-substitui-atendente-humano",
@@ -402,7 +402,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Base de conhecimento desatualizada, contratar sem experiência, tentar fazer sozinho: os erros que mais derrubam projetos de atendimento com IA.",
     keyword: "erros automação atendimento ia",
-    date: "2026-08-05",
+    date: "2026-08-03",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-funciona-transferencia-agente-de-ia-para-humano",
@@ -533,7 +533,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "24 horas não é só sobre economizar plantão — é sobre não perder o momento em que o cliente está mais interessado. Veja o que muda de noite e fim de semana.",
     keyword: "atendimento 24h agente de ia",
-    date: "2026-08-05",
+    date: "2026-08-06",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-agente-de-ia-otimiza-atendimento-ao-cliente",
@@ -612,7 +612,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Vocabulário, ritmo de resposta e apresentação: como um agente de IA soa natural e como o tom é ajustado pra cada marca, na prática.",
     keyword: "agente de ia atendimento humanizado",
-    date: "2026-08-06",
+    date: "2026-08-17",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-whatsapp",
@@ -692,7 +692,7 @@ export const clusterBPosts: BlogPost[] = [
     metaDescription:
       "Sim, reduz — mas olhar só o custo é ver metade da equação. O que cai no custo, o que sobe no resultado, e o risco de decidir só pelo preço.",
     keyword: "agente de ia reduzir custo atendimento",
-    date: "2026-08-06",
+    date: "2026-07-30",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-agente-de-ia-otimiza-atendimento-ao-cliente",

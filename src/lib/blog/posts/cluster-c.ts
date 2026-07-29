@@ -8,7 +8,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "Velocidade de resposta é um dos fatores que mais decide uma venda pelo WhatsApp. Veja como um agente de IA conduz o processo comercial na prática.",
     keyword: "agente de ia para vendas",
-    date: "2026-08-07",
+    date: "2026-08-04",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-agente-de-ia-sdr",
@@ -120,7 +120,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "SDR de IA não é a mesma coisa que ferramenta de prospecção. Entenda a diferença, o que o Gartner projeta pra função, e onde ele funciona melhor.",
     keyword: "o que é agente de ia sdr",
-    date: "2026-08-07",
+    date: "2026-08-12",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-vendas",
@@ -209,7 +209,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "As duas coisas acontecem na prática, dependendo do tipo de venda. Veja um exemplo real de cada formato e como decidir qual se aplica ao seu negócio.",
     keyword: "agente de ia vende sozinho",
-    date: "2026-08-10",
+    date: "2026-08-05",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "o-que-e-agente-de-ia-sdr",
@@ -297,7 +297,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "O funil que a maioria das qualificações segue: conectar, aprofundar, qualificar e elevar a autoridade antes do próximo passo. Veja como isso funciona.",
     keyword: "agente de ia qualificação de leads",
-    date: "2026-08-10",
+    date: "2026-08-06",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-vendas",
@@ -394,7 +394,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "A maioria dos leads convertidos precisa de várias tentativas de contato — e é justamente aí que a maior parte das empresas desiste primeiro.",
     keyword: "agente de ia recuperar lead",
-    date: "2026-08-11",
+    date: "2026-08-05",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "como-agente-de-ia-qualifica-lead-antes-do-vendedor",
@@ -484,7 +484,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "Um segue roteiro fixo, o outro conduz a conversa com raciocínio próprio. Veja a diferença em cada etapa do processo comercial, lado a lado.",
     keyword: "chatbot de vendas vs agente de ia",
-    date: "2026-08-11",
+    date: "2026-08-13",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-vende-sozinho-ou-ajuda-time-comercial",
@@ -577,7 +577,7 @@ export const clusterCPosts: BlogPost[] = [
     metaDescription:
       "Os números que existem sobre velocidade de resposta e canal de conversa são reais — mas o resultado depende de como o agente é implementado, não só da tecnologia.",
     keyword: "agente de ia aumenta conversão vendas",
-    date: "2026-08-12",
+    date: "2026-07-31",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
     relatedSlugs: [
       "agente-de-ia-para-vendas",
