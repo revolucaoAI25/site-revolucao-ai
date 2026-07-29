@@ -9,6 +9,7 @@ import { clusterGPosts } from "./posts/cluster-g";
 import { clusterHPosts } from "./posts/cluster-h";
 import { clusterIPosts } from "./posts/cluster-i";
 import { clusterJPosts } from "./posts/cluster-j";
+import { clusterKPosts } from "./posts/cluster-k";
 
 const allPosts: BlogPost[] = [
   ...clusterAPosts,
@@ -21,6 +22,7 @@ const allPosts: BlogPost[] = [
   ...clusterHPosts,
   ...clusterIPosts,
   ...clusterJPosts,
+  ...clusterKPosts,
 ];
 
 function todayIso() {
