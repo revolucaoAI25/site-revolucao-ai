@@ -168,8 +168,11 @@ export const clusterCPosts: BlogPost[] = [
       },
       {
         type: "p",
-        content:
-          "Isso bate exatamente com o que a prática mostra: o agente absorve o volume de qualificação inicial — que é repetitivo e segue um padrão — e libera o time humano pra investir tempo nas contas que realmente exigem relacionamento e negociação caso a caso. A previsão do Gartner também é de que os agentes de IA vão superar vendedores humanos em número por volta de 10 para 1 até 2028 — o que reforça que a discussão não é mais \"se\" isso vai acontecer, é \"como\" implementar bem.",
+        content: [
+          "Isso bate exatamente com o que a prática mostra: o agente absorve o volume de qualificação inicial — que é repetitivo e segue um padrão — e libera o time humano pra investir tempo nas contas que realmente exigem relacionamento e negociação caso a caso. A ",
+          { text: "previsão do Gartner", href: "https://www.gartner.com/en/newsroom/press-releases/2025-11-18-gartner-predicts-by-2028-ai-agents-will-outnumber-sellers-by-10x-yet-fewer-than-40-percent-of-sellers-will-report-ai-agents-improved-productivity", external: true },
+          " também é de que os agentes de IA vão superar vendedores humanos em número por volta de 10 para 1 até 2028 — o que reforça que a discussão não é mais \"se\" isso vai acontecer, é \"como\" implementar bem.",
+        ],
       },
       {
         type: "cta",
@@ -575,7 +578,7 @@ export const clusterCPosts: BlogPost[] = [
     cluster: "vendas",
     title: "Quanto um agente de IA de vendas consegue aumentar a conversão?",
     metaDescription:
-      "Os números que existem sobre velocidade de resposta e canal de conversa são reais — mas o resultado depende de como o agente é implementado, não só da tecnologia.",
+      "Os números sobre velocidade de resposta e canal de conversa são reais — mas o resultado depende de como o agente é implementado, não só da tecnologia.",
     keyword: "agente de ia aumenta conversão vendas",
     date: "2026-07-31",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },

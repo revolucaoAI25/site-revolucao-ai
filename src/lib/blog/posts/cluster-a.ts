@@ -182,7 +182,7 @@ export const clusterAPosts: BlogPost[] = [
     cluster: "whatsapp",
     title: "Quais serviços oferecem agente de IA com integração para WhatsApp?",
     metaDescription:
-      "Os três tipos de fornecedor de agente de IA para WhatsApp que existem hoje, os sinais de alerta de um fornecedor despreparado, e o que perguntar antes de escolher.",
+      "Os três tipos de fornecedor de agente de IA para WhatsApp, os sinais de alerta de um fornecedor despreparado, e o que perguntar antes de escolher.",
     keyword: "serviços agente de ia whatsapp",
     date: "2026-07-31",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -487,7 +487,7 @@ export const clusterAPosts: BlogPost[] = [
     cluster: "whatsapp",
     title: "Agente de IA para WhatsApp Business: como funciona a integração",
     metaDescription:
-      "Cloud API tradicional, coexistência ou conexão não oficial: as três formas de conectar um agente de IA a um número, o custo por template e como funciona a aprovação.",
+      "Cloud API tradicional, coexistência ou conexão não oficial: as três formas de conectar um agente a um número, o custo por template e a aprovação.",
     keyword: "agente de ia para whatsapp business",
     date: "2026-08-11",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -503,8 +503,11 @@ export const clusterAPosts: BlogPost[] = [
       { type: "h3", text: "Cloud API tradicional" },
       {
         type: "p",
-        content:
-          "É a via oficial e mais antiga da Meta: o número é registrado direto na plataforma (ou no painel de um provedor autorizado), sem passar por QR code. A partir desse registro, o número fica dedicado à API — ninguém usa mais o aplicativo do WhatsApp Business no celular com esse mesmo número, porque a conexão é só pela nuvem.",
+        content: [
+          "É a via ",
+          { text: "oficial e mais antiga da Meta", href: "https://developers.facebook.com/docs/whatsapp/", external: true },
+          ": o número é registrado direto na plataforma (ou no painel de um provedor autorizado), sem passar por QR code. A partir desse registro, o número fica dedicado à API — ninguém usa mais o aplicativo do WhatsApp Business no celular com esse mesmo número, porque a conexão é só pela nuvem.",
+        ],
       },
       { type: "h3", text: "Cloud API com coexistência (o modo mais novo)" },
       {

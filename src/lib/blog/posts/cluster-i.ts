@@ -6,7 +6,7 @@ export const clusterIPosts: BlogPost[] = [
     cluster: "autoridade",
     title: "Quanto o mercado de agentes de IA está crescendo no mundo e no Brasil",
     metaDescription:
-      "De US$14 bilhões a mais de US$200 bilhões em previsões de mercado: veja os números reais por trás do crescimento de agentes de IA, e o que isso significa aqui no Brasil.",
+      "De US$14 bilhões a mais de US$200 bilhões em previsões de mercado: veja os números reais por trás do crescimento de agentes de IA no mundo e no Brasil.",
     keyword: "mercado de agentes de ia crescimento",
     date: "2026-09-07",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -22,7 +22,9 @@ export const clusterIPosts: BlogPost[] = [
       {
         type: "p",
         content: [
-          "Segundo a Grand View Research, o mercado de IA conversacional foi avaliado em ",
+          "Segundo a ",
+          { text: "Grand View Research", href: "https://www.grandviewresearch.com/industry-analysis/conversational-ai-market-report", external: true },
+          ", o mercado de IA conversacional foi avaliado em ",
           { text: "US$14,29 bilhões em 2025", bold: true },
           ", com projeção de crescimento anual de 23,7% até 2030. Outras consultorias chegam a números parecidos por metodologias diferentes — a MarketsandMarkets estima US$17 bilhões só em 2025, e a Fortune Business Insights projeta o mercado passando de US$18 bilhões já em 2026.",
         ],
@@ -96,7 +98,7 @@ export const clusterIPosts: BlogPost[] = [
     cluster: "autoridade",
     title: "WhatsApp é o principal canal de vendas das pequenas empresas brasileiras: o que os dados mostram",
     metaDescription:
-      "82% dos pequenos negócios brasileiros já vendem pelo WhatsApp, segundo a Sebrae — à frente até do Instagram. Veja o que esse dado revela sobre prioridade de investimento.",
+      "82% dos pequenos negócios brasileiros já vendem pelo WhatsApp, segundo a Sebrae, à frente do Instagram. Veja o que isso revela sobre investimento.",
     keyword: "whatsapp canal de vendas pequenas empresas brasil",
     date: "2026-09-18",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -112,7 +114,9 @@ export const clusterIPosts: BlogPost[] = [
       {
         type: "p",
         content: [
-          "Não é uma preferência isolada — é uma consolidação. O WhatsApp já era o canal mais citado em edições anteriores da pesquisa, e a edição mais recente mostra ",
+          "Não é uma preferência isolada — é uma consolidação. O WhatsApp já era o canal mais citado em edições anteriores da ",
+          { text: "pesquisa Pulso dos Pequenos Negócios da Sebrae", href: "https://agenciasebrae.com.br/dados/whatsapp-se-consolida-nas-vendas-on-line-enquanto-facebook-e-lojas-proprias-perdem-folego/", external: true },
+          ", e a edição mais recente mostra ",
           { text: "crescimento contínuo, mesmo com outros canais perdendo força", bold: true },
           ". Isso indica que o comportamento de compra do consumidor brasileiro já se estabilizou em torno desse canal, não é mais uma fase de teste.",
         ],
@@ -127,7 +131,9 @@ export const clusterIPosts: BlogPost[] = [
         content: [
           "O Brasil é o ",
           { text: "segundo país do mundo em número de usuários do WhatsApp", bold: true },
-          ", atrás só da Índia — a maior parte da população já usa o aplicativo diariamente, o que torna natural que ele vire também o canal comercial preferido. Detalhamos como isso funciona na prática de atendimento em ",
+          ", atrás só da Índia, segundo o ",
+          { text: "relatório Digital 2026 do DataReportal", href: "https://datareportal.com/reports/digital-2026-brazil", external: true },
+          " — a maior parte da população já usa o aplicativo diariamente, o que torna natural que ele vire também o canal comercial preferido. Detalhamos como isso funciona na prática de atendimento em ",
           { text: "agente de IA para WhatsApp", href: "/blog/agente-de-ia-para-whatsapp" },
           ".",
         ],
@@ -239,7 +245,9 @@ export const clusterIPosts: BlogPost[] = [
         content: [
           "O que essa curva mostra não é só \"mais gente usando IA\" — é a ",
           { text: "velocidade da virada", bold: true },
-          ". Tecnologias novas geralmente levam anos pra sair do nicho e virar padrão de mercado; a IA generativa fez esse caminho em menos de 24 meses. Isso muda a régua de comparação: empresas que ainda não adotaram não estão \"esperando a tecnologia amadurecer\" — estão ficando pra trás de uma maioria que já decidiu.",
+          ". Tecnologias novas geralmente levam anos pra sair do nicho e virar padrão de mercado; segundo o levantamento ",
+          { text: "The State of AI, da McKinsey", href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai", external: true },
+          ", a IA generativa fez esse caminho em menos de 24 meses. Isso muda a régua de comparação: empresas que ainda não adotaram não estão \"esperando a tecnologia amadurecer\" — estão ficando pra trás de uma maioria que já decidiu.",
         ],
       },
       { type: "h2", text: "Onde isso aparece no atendimento e nas vendas" },
@@ -305,6 +313,8 @@ export const clusterIPosts: BlogPost[] = [
         content: [
           "Não é uma pressão vinda de dentro das equipes de atendimento — é uma cobrança que vem de cima, da liderança executiva, que já entende IA no atendimento como ",
           { text: "vantagem competitiva urgente, não experimento opcional", bold: true },
+          ", segundo a ",
+          { text: "pesquisa do Gartner", href: "https://www.gartner.com/en/newsroom/press-releases/2026-02-18-gartner-survey-finds-ninety-one-percent-of-customer-service-leaders-under-pressure-to-implement-ai-in-2026", external: true },
           ". Isso muda a dinâmica interna de muitas empresas: em vez de o time de atendimento precisar convencer a diretoria a investir, é a diretoria que está cobrando resultado.",
         ],
       },
@@ -379,7 +389,7 @@ export const clusterIPosts: BlogPost[] = [
     cluster: "autoridade",
     title: "Pequenas empresas estão adotando IA tão rápido quanto as grandes?",
     metaDescription:
-      "Os dados mostram um cenário misto: adoção ainda cresce mais rápido nas grandes empresas, mas o intervalo está encolhendo. Veja o que isso significa pra quem tem um negócio pequeno.",
+      "Os dados mostram um cenário misto: adoção ainda cresce mais rápido nas grandes empresas, mas o intervalo está encolhendo pras pequenas.",
     keyword: "pequenas empresas adotando ia",
     date: "2026-09-07",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -395,7 +405,9 @@ export const clusterIPosts: BlogPost[] = [
       {
         type: "p",
         content: [
-          "Segundo o Census Bureau, através da pesquisa Business Trends and Outlook Survey, a adoção geral de IA entre empresas americanas ficou entre 17% e 20% no período mais recente — e ",
+          "Segundo o ",
+          { text: "Census Bureau, através da pesquisa Business Trends and Outlook Survey", href: "https://www.census.gov/library/stories/2026/05/ai-use-businesses.html", external: true },
+          ", a adoção geral de IA entre empresas americanas ficou entre 17% e 20% no período mais recente — e ",
           { text: "cresce junto com o porte da empresa", bold: true },
           ", mas o crescimento entre dezembro de 2025 e maio de 2026 se concentrou em empresas com 20 ou mais funcionários; entre negócios muito pequenos, a adoção não mudou de forma significativa no mesmo período.",
         ],
@@ -408,7 +420,9 @@ export const clusterIPosts: BlogPost[] = [
       {
         type: "p",
         content: [
-          "Uma pesquisa da Thryv, empresa que atende diretamente pequenos negócios, encontrou adoção saltando de 39% pra 55% entre pequenas empresas americanas em um ano — um crescimento rápido, mas ainda partindo de uma base mais baixa que empresas maiores. O gargalo não costuma ser falta de interesse: é ",
+          "Uma ",
+          { text: "pesquisa da Thryv", href: "https://investor.thryv.com/news/news-details/2025/AI-Adoption-Among-Small-Businesses-Surges-41-in-2025-According-to-New-Survey-from-Thryv/", external: true },
+          ", empresa que atende diretamente pequenos negócios, encontrou adoção saltando de 39% pra 55% entre pequenas empresas americanas em um ano — um crescimento rápido, mas ainda partindo de uma base mais baixa que empresas maiores. O gargalo não costuma ser falta de interesse: é ",
           { text: "falta de tempo e conhecimento técnico interno", bold: true },
           " pra configurar e manter bem uma ferramenta nova, o mesmo ponto que já detalhamos em ",
           { text: "agência de IA ou plataforma self-service", href: "/blog/agencia-de-ia-ou-plataforma-self-service-comparacao" },
@@ -479,7 +493,7 @@ export const clusterIPosts: BlogPost[] = [
     cluster: "autoridade",
     title: "De atendimento reativo pra proativo: a mudança que a IA generativa habilitou",
     metaDescription:
-      "Atendimento tradicional espera o cliente escrever. IA generativa permitiu inverter essa lógica — reconectar, lembrar e recuperar antes que o cliente precise voltar a chamar.",
+      "Atendimento tradicional espera o cliente escrever. A IA generativa permitiu inverter essa lógica — reconectar e recuperar antes que ele precise chamar de novo.",
     keyword: "atendimento proativo com ia",
     date: "2026-09-24",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
@@ -575,7 +589,7 @@ export const clusterIPosts: BlogPost[] = [
     cluster: "autoridade",
     title: "O mercado está migrando de \"ter um chatbot\" pra \"ter resultado comprovado\"",
     metaDescription:
-      "Com a adoção virando maioria, ter um agente de IA deixou de ser diferencial. A nova régua de comparação entre fornecedores é o resultado que cada um comprova entregar.",
+      "Com a adoção virando maioria, ter um agente de IA deixou de ser diferencial. A nova régua é o resultado que cada fornecedor comprova entregar.",
     keyword: "resultado comprovado agente de ia",
     date: "2026-09-11",
     destino: { label: "Agentes de IA para Pré-Vendas", href: "/agentes-de-ia" },
