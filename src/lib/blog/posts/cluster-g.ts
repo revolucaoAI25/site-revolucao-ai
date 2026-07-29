@@ -780,8 +780,28 @@ export const clusterGPosts: BlogPost[] = [
       { type: "h2", text: "O que verificar antes de contratar essa integração" },
       {
         type: "p",
-        content:
-          "Vale confirmar se a integração é com o sistema de agenda que a empresa já usa (Google Agenda, sistema próprio de gestão, planilha), ou se exige migrar pra uma ferramenta nova só pra isso funcionar — a segunda opção costuma gerar atrito desnecessário na adoção.",
+        content: [
+          "A pergunta certa não é só \"integra com agenda?\" — é ",
+          { text: "\"integra com a MINHA agenda?\"", bold: true },
+          ". Se a empresa usa Google Agenda, a resposta costuma ser simples: a maioria das ferramentas já suporta isso nativamente, sem trabalho extra. Se usa outro sistema — Outlook, uma agenda própria de software de gestão, um sistema interno —, a resposta depende de duas coisas.",
+        ],
+      },
+      {
+        type: "ul",
+        items: [
+          [
+            { text: "O sistema tem API pública: ", bold: true },
+            "nesse caso, dá pra construir uma integração customizada — uma função específica que conecta o agente a esse sistema, disparada no momento certo da conversa.",
+          ],
+          [
+            { text: "O sistema não tem API: ", bold: true },
+            "a integração direta simplesmente não é possível — a alternativa costuma ser usar Google Agenda como intermediária, ou manter uma etapa de confirmação manual só pra essa parte específica.",
+          ],
+        ],
+      },
+      {
+        type: "callout",
+        text: "Um erro comum na hora de avaliar propostas é aceitar \"sim, integramos com agenda\" sem perguntar qual agenda — a resposta muda de \"já vem pronto\" pra \"precisamos construir uma integração\" dependendo do sistema, e isso afeta tanto prazo quanto custo.",
       },
       {
         type: "cta",
@@ -804,7 +824,12 @@ export const clusterGPosts: BlogPost[] = [
       {
         question: "Essa integração exige trocar de sistema de agenda?",
         answer:
-          "Não necessariamente — vale confirmar se a integração funciona com o sistema que a empresa já usa, em vez de exigir migração pra uma ferramenta nova.",
+          "Não necessariamente — se for Google Agenda, costuma já vir pronta nativamente; se for outro sistema, depende de ele ter API pública pra construir uma integração customizada em cima dela.",
+      },
+      {
+        question: "E se o sistema de agenda da empresa não tem API?",
+        answer:
+          "Nesse caso a integração direta não é possível — a alternativa costuma ser usar Google Agenda como intermediária ou manter uma etapa de confirmação manual só nessa parte específica.",
       },
       {
         question: "Em que tipo de negócio essa integração importa mais?",

@@ -54,9 +54,17 @@ export const clusterHPosts: BlogPost[] = [
         content: [
           "Numa plataforma como a ",
           { text: "Chatflux", href: "/plataforma" },
-          ", boa parte da complexidade técnica já vem pronta: conexão nativa com WhatsApp e Instagram, ",
+          ", boa parte da complexidade técnica já vem pronta: conexão nativa com WhatsApp e Instagram, agendamento integrado com Google Agenda, ",
           { text: "uma IA de apoio própria da plataforma que ajuda a escrever e ajustar o prompt", bold: true },
           ", painel de acompanhamento em tempo real, e até suporte a múltiplos agentes na mesma conta. O trabalho que sobra pra quem monta é o de conteúdo e comportamento — não o de infraestrutura.",
+        ],
+      },
+      {
+        type: "p",
+        content: [
+          "Vale um alerta honesto: nem toda integração vem pronta assim. Sistemas que já são suportados nativamente (como Google Agenda) funcionam direto; um sistema diferente — outra agenda, um CRM específico, um ERP interno — costuma depender de ter uma API disponível e de construir uma integração customizada em cima dela. Detalhamos esse caso específico do agendamento em ",
+          { text: "como configurar agendamento integrado", href: "/blog/como-configurar-agendamento-integrado-agente-de-ia" },
+          ".",
         ],
       },
       { type: "h2", text: "Quanto tempo isso costuma levar" },
@@ -664,11 +672,40 @@ export const clusterHPosts: BlogPost[] = [
         type: "callout",
         text: "Sem essa integração, o agente resolve metade do problema — conduz bem a conversa, mas reintroduz a mesma demora manual no momento em que o cliente mais quer uma resposta rápida: a confirmação do horário.",
       },
-      { type: "h2", text: "Como configurar isso na prática" },
+      { type: "h2", text: "A primeira pergunta a responder: qual agenda você usa" },
       {
         type: "p",
-        content:
-          "Numa plataforma self-service, essa integração costuma ser um passo de configuração dentro do painel: conectar a conta de agenda, definir a duração padrão de cada compromisso, e configurar o horário de funcionamento — quando o agente pode oferecer horário e quando não deve.",
+        content: [
+          "Antes de configurar qualquer coisa, vale checar qual sistema de agenda o negócio já usa — porque a resposta muda completamente o trabalho pela frente. ",
+          { text: "Se for Google Agenda, a maioria das plataformas self-service (incluindo a Chatflux) já vem com essa integração pronta", bold: true },
+          ": conectar a conta e configurar duração do compromisso costuma ser o suficiente, sem nada além disso pra fazer.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Google Agenda é hoje o padrão que a maioria das plataformas de agente de IA suporta nativamente — é por isso que ele costuma ser a opção mais simples de configurar, não porque seja tecnicamente superior a outras agendas.",
+      },
+      { type: "h3", text: "E se o negócio usa outra agenda?" },
+      {
+        type: "p",
+        content: [
+          "Se o sistema é outro — Outlook, Calendly, uma agenda própria de um software de gestão, ou um sistema interno da empresa —, o caminho depende de duas coisas: ",
+          { text: "se esse sistema tem uma API pública", bold: true },
+          " (uma forma programável de outros sistemas conversarem com ele) e se a plataforma que você está usando permite construir uma integração customizada em cima dela.",
+        ],
+      },
+      {
+        type: "ul",
+        items: [
+          [
+            { text: "Se o sistema tem API: ", bold: true },
+            "dá pra construir uma função específica que conecta o agente a essa agenda — na Chatflux, isso entra no recurso de código customizado, que permite configurar chamadas a sistemas externos disparadas no momento certo da conversa.",
+          ],
+          [
+            { text: "Se o sistema não tem API: ", bold: true },
+            "a integração direta não é possível — nesses casos, a alternativa costuma ser usar Google Agenda como intermediária (sincronizando com o sistema antigo) ou manter uma etapa de confirmação manual só pra essa parte.",
+          ],
+        ],
       },
       { type: "h3", text: "Um exemplo de como isso soa na conversa" },
       {
@@ -713,7 +750,12 @@ export const clusterHPosts: BlogPost[] = [
       {
         question: "Como configurar essa integração numa plataforma self-service?",
         answer:
-          "Geralmente é um passo dentro do painel: conectar a conta de agenda, definir duração padrão do compromisso, e configurar o horário de funcionamento do agente.",
+          "Depende da agenda usada. Com Google Agenda, costuma ser nativo — conectar a conta e definir duração do compromisso já basta. Com outra agenda, depende dela ter uma API e a plataforma permitir construir uma integração customizada em cima dela.",
+      },
+      {
+        question: "O que fazer se a empresa usa uma agenda diferente do Google?",
+        answer:
+          "Verificar se esse sistema tem API pública. Se tiver, dá pra construir uma integração customizada (na Chatflux, via código customizado); se não tiver API, a integração direta não é possível, e a alternativa costuma ser sincronizar com o Google Agenda ou manter uma confirmação manual só nessa etapa.",
       },
       {
         question: "Vale testar o agendamento antes de lançar?",
