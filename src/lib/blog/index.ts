@@ -2,8 +2,9 @@ import type { BlogPost } from "./types";
 import { clusterAPosts } from "./posts/cluster-a";
 import { clusterBPosts } from "./posts/cluster-b";
 import { clusterCPosts } from "./posts/cluster-c";
+import { clusterDPosts } from "./posts/cluster-d";
 
-const allPosts: BlogPost[] = [...clusterAPosts, ...clusterBPosts, ...clusterCPosts];
+const allPosts: BlogPost[] = [...clusterAPosts, ...clusterBPosts, ...clusterCPosts, ...clusterDPosts];
 
 function todayIso() {
   return new Date().toISOString().slice(0, 10);
