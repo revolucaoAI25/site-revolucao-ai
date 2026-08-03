@@ -79,11 +79,11 @@ Abra [http://localhost:3000](http://localhost:3000).
    do Calendly de Agentes de IA como placeholder (autorizado pelo cliente).
    Trocar pelo link definitivo da reunião de vendas da Formação assim que o
    cliente enviar.
-2. **`LEAD_WEBHOOK_URL`** já tem o valor definitivo (Make.com) configurado em
-   `.env.local` para rodar localmente. Falta só adicionar essa mesma
-   variável em Project Settings → Environment Variables na Vercel antes do
-   deploy de produção (arquivos `.env*` não vão pro Git, então essa etapa é
-   manual).
+2. **`LEAD_WEBHOOK_URL`** e **`POPUP_LEAD_WEBHOOK_URL`** já têm o valor
+   definitivo (Make.com) configurado em `.env.local` para rodar localmente.
+   Falta só adicionar as duas variáveis em Project Settings → Environment
+   Variables na Vercel antes do deploy de produção (arquivos `.env*` não vão
+   pro Git, então essa etapa é manual).
 3. **`ASAAS_API_KEY`** ainda não configurada — ver seção **Checkout do Lead
    Extractor (Asaas)** abaixo. Sem ela, o formulário de assinatura mostra um
    aviso pedindo pra falar pelo WhatsApp, sem quebrar o resto do site.
@@ -130,6 +130,16 @@ da Formação (baixo ticket, reunião) só ficam salvos no Supabase, sem
 encaminhamento pro webhook. Sem essa variável configurada, esse
 encaminhamento simplesmente não acontece (não afeta o Supabase nem o
 funcionamento do pop-up).
+
+Separado desse, **todo** lead que preenche qualquer pop-up (qualquer fluxo,
+qualquer resultado, com ou sem contato) é encaminhado pra um segundo
+webhook, configurado em `POPUP_LEAD_WEBHOOK_URL` — hoje apontando pro Make.com
+(`https://hook.us1.make.com/lf1drkmtdjl8zxroix780u3s1gcifi4o`). O payload
+inclui o fluxo, o resultado, a trilha completa de perguntas/respostas, o
+contato (nome/telefone/e-mail, quando já coletado), o id do lead salvo no
+Supabase (quando aplicável) e o horário do envio. Assim como o webhook
+acima, falha nesse encaminhamento não afeta o Supabase nem o pop-up, e sem
+a variável configurada esse envio simplesmente não acontece.
 
 ## Checkout do Lead Extractor (Asaas)
 
