@@ -5,8 +5,8 @@ export const WHATSAPP_LINK = "https://wa.me/553131576084";
  * WhatsApp próprio do Lead Extractor (diferente do WhatsApp geral da
  * Revolução AI acima) — usado nos CTAs de contato e checkout dessa LP.
  */
-export const LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY = "+55 31 3157-5625";
-export const LEAD_EXTRACTOR_WHATSAPP_LINK = "https://wa.me/553131575625";
+export const LEAD_EXTRACTOR_WHATSAPP_NUMBER_DISPLAY = "+55 31 3157-3153";
+export const LEAD_EXTRACTOR_WHATSAPP_LINK = "https://wa.me/553131573153";
 export const EMAIL = "contato@revolucao-ai.com";
 export const INSTAGRAM_HANDLE = "@revolucao.ai";
 export const INSTAGRAM_LINK = "https://instagram.com/revolucao.ai";
