@@ -61,6 +61,8 @@ type LinkTrigger = CommonProps & {
   flow?: never;
   /** Set true for links leaving the site (WhatsApp, checkout, etc). */
   external?: boolean;
+  /** Optional side-effect on click (analytics, pixel events) — doesn't affect navigation. */
+  onClick?: () => void;
 };
 
 export function CTAButton(props: FlowTrigger | LinkTrigger) {
@@ -85,7 +87,7 @@ export function CTAButton(props: FlowTrigger | LinkTrigger) {
     );
   }
 
-  const { href, external } = props as LinkTrigger;
+  const { href, external, onClick } = props as LinkTrigger;
 
   if (external) {
     return (
@@ -93,6 +95,7 @@ export function CTAButton(props: FlowTrigger | LinkTrigger) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={onClick}
         className={classes}
       >
         {children}
@@ -102,7 +105,7 @@ export function CTAButton(props: FlowTrigger | LinkTrigger) {
   }
 
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} onClick={onClick} className={classes}>
       {children}
       {icon && <Arrow />}
     </Link>

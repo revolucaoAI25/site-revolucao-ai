@@ -5,10 +5,12 @@ import Script from "next/script";
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 /**
- * Meta Pixel (Facebook/Instagram Ads) — carregado só nesta página, não em
- * nenhuma outra rota do site. Precisa de NEXT_PUBLIC_META_PIXEL_ID
- * configurado (.env.local local, Vercel em produção); sem essa variável,
- * não renderiza nada e as chamadas de evento em pixel.ts viram no-op.
+ * Meta Pixel (Facebook/Instagram Ads) — só carrega nas páginas que
+ * explicitamente renderizam este componente (hoje: /funil-10k e
+ * /zero-aos-10k-v2), não em todo o site. Precisa de
+ * NEXT_PUBLIC_META_PIXEL_ID configurado (.env.local local, Vercel em
+ * produção); sem essa variável, não renderiza nada e as chamadas de
+ * evento em src/lib/pixel.ts viram no-op.
  */
 export function MetaPixel() {
   if (!PIXEL_ID) return null;

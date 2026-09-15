@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { QuizFunnel } from "./QuizFunnel";
-import { MetaPixel } from "./MetaPixel";
+import { MetaPixel } from "@/components/MetaPixel";
 
 const title = "Descubra seu caminho pra faturar R$10 mil com Agentes de IA";
 const description =

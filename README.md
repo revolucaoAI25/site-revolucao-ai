@@ -88,8 +88,8 @@ Abra [http://localhost:3000](http://localhost:3000).
    Extractor (Asaas)** abaixo. Sem ela, o formulário de assinatura mostra um
    aviso pedindo pra falar pelo WhatsApp, sem quebrar o resto do site.
 4. **`NEXT_PUBLIC_META_PIXEL_ID`** ainda não configurada — ver seção **Meta
-   Pixel do funil `/funil-10k`** abaixo. Sem ela, a página funciona
-   normalmente, só sem disparar nenhum evento de pixel.
+   Pixel (`/funil-10k` e `/zero-aos-10k-v2`)** abaixo. Sem ela, as páginas
+   funcionam normalmente, só sem disparar nenhum evento de pixel.
 
 A logo oficial já está integrada (`public/logo.png`, usada em
 `src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel
@@ -144,12 +144,15 @@ Supabase (quando aplicável) e o horário do envio. Assim como o webhook
 acima, falha nesse encaminhamento não afeta o Supabase nem o pop-up, e sem
 a variável configurada esse envio simplesmente não acontece.
 
-## Meta Pixel do funil `/funil-10k`
+## Meta Pixel (`/funil-10k` e `/zero-aos-10k-v2`)
 
-O funil de quiz do Do Zero aos 10K (`/funil-10k`, ver seção de estrutura —
-uma rota de teste separada da LP normal, pensada pra rodar como página de
-destino de campanha) tem o Meta Pixel (Facebook/Instagram Ads) integrado,
-mas só nessa página — nenhuma outra rota do site carrega o pixel.
+O Meta Pixel (Facebook/Instagram Ads) está integrado em duas páginas do
+funil do Do Zero aos 10K — o funil de quiz (`/funil-10k`) e a LP em uso
+(`/zero-aos-10k-v2`, ver seção de estrutura) — usando o **mesmo** pixel
+(mesma variável de ambiente), pra tudo cair na mesma conta de anúncios sem
+precisar configurar nada duas vezes. Nenhuma outra rota do site carrega o
+pixel: `src/components/MetaPixel.tsx` só roda nas páginas que o importam
+explicitamente.
 
 Pra ativar:
 
@@ -158,20 +161,27 @@ Pra ativar:
    com o ID do pixel do Gerenciador de Eventos do Meta. Precisa do prefixo
    `NEXT_PUBLIC_` porque o valor é usado no navegador, não só no servidor.
 2. Sem essa variável, `MetaPixel.tsx` não renderiza nada e as chamadas de
-   evento em `pixel.ts` viram no-op — a página funciona normalmente, só sem
-   mandar nada pro Meta.
+   evento em `src/lib/pixel.ts` viram no-op — as páginas funcionam
+   normalmente, só sem mandar nada pro Meta.
 
-Eventos disparados automaticamente ao longo do funil:
+Eventos disparados automaticamente:
 
+**Em ambas as páginas:**
 - **`PageView`** — automático, assim que o pixel carrega.
+- **`InitiateCheckout`** — quando clica em qualquer botão que leva pro
+  checkout da Kiwify (`ZERO_AOS_10K_CHECKOUT_LINK` em `src/lib/links.ts`).
+  Na v2 isso passa pelo `CheckoutCTAButton.tsx` (um wrapper client-side do
+  `CTAButton` comum, necessário porque a página é Server Component e não
+  pode passar `onClick` direto pra um Client Component).
+
+**Só no funil de quiz:**
 - **`Lead`** — quando a pessoa termina de preencher nome e WhatsApp (as duas
-  últimas perguntas antes do resultado).
+  últimas perguntas antes do resultado). A v2 não tem esse evento porque não
+  coleta contato — é só a LP em formato de página única.
 - **`ChegouNaOferta`** (evento customizado, via `trackCustom`) — quando a
-  pessoa chega na última etapa (a oferta/preço), tenha clicado no checkout
-  ou não. Útil pra criar público de retargeting de quem viu o preço e não
-  comprou.
-- **`InitiateCheckout`** — quando clica no botão que leva pro checkout da
-  Kiwify (`ZERO_AOS_10K_CHECKOUT_LINK` em `src/lib/links.ts`).
+  pessoa chega na última etapa (a oferta/preço) do quiz, tenha clicado no
+  checkout ou não. Útil pra criar público de retargeting de quem viu o
+  preço e não comprou.
 
 O que **não** dá pra rastrear direto daqui: o evento de **compra
 confirmada**. O checkout roda inteiro dentro da Kiwify, fora do site, e

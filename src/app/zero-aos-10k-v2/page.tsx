@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { CTAButton } from "@/components/ui/CTAButton";
 import { PillarCard } from "@/components/ui/PillarCard";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { Reveal } from "@/components/ui/Reveal";
-import { EMAIL, ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
+import { EMAIL } from "@/lib/links";
 import { ScrollProgress } from "./ScrollProgress";
+import { CheckoutCTAButton } from "./CheckoutCTAButton";
+import { MetaPixel } from "@/components/MetaPixel";
 import effects from "./effects.module.css";
 
 const title = "Do Zero aos 10K com Agentes de IA";
@@ -113,6 +114,7 @@ const ofertaItens = [
 export default function ZeroAosDezKV2() {
   return (
     <>
+      <MetaPixel />
       <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-md border-b border-white/10">
         <ScrollProgress />
         <Container className="flex items-center justify-between h-16 sm:h-20">
@@ -135,9 +137,9 @@ export default function ZeroAosDezKV2() {
             </span>
           </Link>
           <div className="hidden sm:block">
-            <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="md">
+            <CheckoutCTAButton size="md">
               Quero começar agora
-            </CTAButton>
+            </CheckoutCTAButton>
           </div>
         </Container>
       </header>
@@ -240,9 +242,9 @@ export default function ZeroAosDezKV2() {
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-center gap-3 mt-10">
-            <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="lg">
+            <CheckoutCTAButton size="lg">
               Quero começar agora
-            </CTAButton>
+            </CheckoutCTAButton>
             <p className="text-muted-2 text-sm">
               ⏱️ Acesso imediato após a confirmação
             </p>
@@ -680,9 +682,9 @@ export default function ZeroAosDezKV2() {
                 Se você seguir com dedicação e consistência real, os R$10 mil
                 por mês são questão de tempo.
               </p>
-              <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="lg" className="w-full">
+              <CheckoutCTAButton size="lg" className="w-full">
                 Garantir minha vaga por R$37,90
-              </CTAButton>
+              </CheckoutCTAButton>
               <p className="text-muted-2 text-xs text-center mt-4">
                 🔒 Compra segura • acesso imediato
               </p>
@@ -711,9 +713,9 @@ export default function ZeroAosDezKV2() {
               você começa hoje, ou continua vendo os outros começarem.
             </p>
             <div className="relative flex justify-center">
-              <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="lg">
+              <CheckoutCTAButton size="lg">
                 Quero garantir meu acesso
-              </CTAButton>
+              </CheckoutCTAButton>
             </div>
           </Reveal>
         </Section>

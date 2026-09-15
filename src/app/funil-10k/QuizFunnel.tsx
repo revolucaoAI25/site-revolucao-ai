@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
-import { trackPixelEvent, trackPixelCustomEvent } from "./pixel";
+import { trackPixelEvent, trackPixelCustomEvent } from "@/lib/pixel";
 import styles from "./quiz.module.css";
 
 type StepId =
