@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { ClientLogos } from "@/components/ui/ClientLogos";
-import { ContactForm } from "@/components/modal/ContactForm";
-import { submitLead, type LeadAnswer } from "@/lib/leads";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
 import styles from "./quiz.module.css";
 
@@ -19,6 +17,7 @@ type StepId =
   | "contact"
   | "loading"
   | "result"
+  | "curriculo"
   | "social"
   | "offer";
 
@@ -33,6 +32,7 @@ const STEP_ORDER: StepId[] = [
   "contact",
   "loading",
   "result",
+  "curriculo",
   "social",
   "offer",
 ];
@@ -49,6 +49,7 @@ const TOTAL_QUESTIONS = QUESTION_STEP_IDS.length;
 
 type Option = { id: string; label: string };
 type Question = { id: StepId; question: string; options: Option[] };
+type LeadAnswer = { question: string; label: string };
 
 const DESEJO: Question = {
   id: "desejo",
@@ -138,6 +139,25 @@ const MOTIVACAO_OBJETIVO: Record<string, string> = {
   tecnologia: "trabalhar com uma tecnologia que só cresce",
 };
 
+const curriculo = [
+  {
+    title: "Estruturação",
+    bullet: "Posicionamento, oferta e preço definidos — sem gambiarra, sem chutar número.",
+  },
+  {
+    title: "Desenvolvimento",
+    bullet: "Seu primeiro agente de IA no ar, do zero ao WhatsApp funcionando de verdade.",
+  },
+  {
+    title: "Vendas",
+    bullet: "Script de prospecção, roteiro de reunião e follow-up prontos pra usar.",
+  },
+  {
+    title: "Pós-venda",
+    bullet: "Onboarding, suporte e retenção — sem virar refém do cliente.",
+  },
+];
+
 const ofertaItens = [
   "Método completo de estruturação da agência",
   "Passo a passo de desenvolvimento de agentes",
@@ -149,7 +169,9 @@ const ofertaItens = [
 
 const depoimentosSocial = [
   { src: "/zero-aos-10k/depoimento-1.jpg", width: 439, height: 640 },
+  { src: "/zero-aos-10k/depoimento-2.jpg", width: 640, height: 339 },
   { src: "/zero-aos-10k/depoimento-3.jpg", width: 640, height: 492 },
+  { src: "/zero-aos-10k/depoimento-4.jpg", width: 640, height: 603 },
 ];
 
 function ArrowIcon() {
@@ -246,6 +268,73 @@ function BackButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+/**
+ * Só nome + telefone, sem e-mail — enquanto o funil tá em teste não
+ * precisa registrar nada, então nem chama /api/lead (ver handleContactSubmit).
+ */
+function SimpleContactForm({
+  onSubmit,
+}: {
+  onSubmit: (name: string, phone: string) => void;
+}) {
+  const [name, setName] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
+
+  const canSubmit = name.trim().length > 1 && phoneDigits.length >= 10;
+
+  function formatLocalNumber(digits: string): string {
+    const ddd = digits.slice(0, 2);
+    const rest = digits.slice(2, 11);
+    let out = "";
+    if (ddd) out += `(${ddd}`;
+    if (ddd.length === 2) out += ") ";
+    if (rest) {
+      const splitAt = rest.length > 8 ? 5 : 4;
+      const part1 = rest.slice(0, splitAt);
+      const part2 = rest.slice(splitAt);
+      out += part2 ? `${part1}-${part2}` : part1;
+    }
+    return out;
+  }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (!canSubmit) return;
+    onSubmit(name.trim(), `55${phoneDigits}`);
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-5">
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Seu nome"
+        autoComplete="name"
+        className="w-full rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium placeholder:text-muted focus:outline-none focus:border-accent/50"
+      />
+      <div className="flex items-center rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 focus-within:border-accent/50">
+        <span className="font-medium text-muted shrink-0">+55</span>
+        <input
+          type="tel"
+          value={formatLocalNumber(phoneDigits)}
+          onChange={(e) => setPhoneDigits(e.target.value.replace(/\D/g, "").slice(0, 11))}
+          placeholder="(11) 91234-5678"
+          autoComplete="tel-national"
+          className="w-full min-w-0 bg-transparent pl-2 font-medium placeholder:text-muted focus:outline-none"
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={!canSubmit}
+        className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-accent mt-1 cursor-pointer"
+      >
+        Continuar
+      </button>
+    </form>
+  );
+}
+
 function firstName(fullName: string) {
   return fullName.trim().split(" ")[0] || fullName;
 }
@@ -257,9 +346,7 @@ export function QuizFunnel() {
   const [perfilId, setPerfilId] = useState<string | null>(null);
   const [obstaculoId, setObstaculoId] = useState<string | null>(null);
   const [motivacaoId, setMotivacaoId] = useState<string | null>(null);
-  const [contact, setContact] = useState<{ name: string; phone: string; email: string } | null>(
-    null
-  );
+  const [contact, setContact] = useState<{ name: string; phone: string } | null>(null);
 
   function goTo(next: StepId) {
     setHistory((h) => [...h, step]);
@@ -289,20 +376,18 @@ export function QuizFunnel() {
     goNext();
   }
 
-  function handleContactSubmit(name: string, phone: string, email: string) {
-    setContact({ name, phone, email });
-    submitLead({
-      flowId: "funil-quiz-10k",
-      resultKey: obstaculoId ?? "quiz",
-      answers: Object.values(answers),
-      contact: { name, phone, email },
-    });
+  // Enquanto o funil está em teste, não registra em lugar nenhum (nem
+  // Supabase, nem webhook) — só guarda em memória pra personalizar o
+  // resultado com o primeiro nome. Quando for pra valer, plugar aqui o
+  // mesmo submitLead()/api/lead que os pop-ups do site já usam.
+  function handleContactSubmit(name: string, phone: string) {
+    setContact({ name, phone });
     goNext();
   }
 
   useEffect(() => {
     if (step !== "breather") return;
-    const t = setTimeout(() => goNext(), 1800);
+    const t = setTimeout(() => goNext(), 3400);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
@@ -318,7 +403,8 @@ export function QuizFunnel() {
   const progressPct = Math.min(100, (answeredCount / TOTAL_QUESTIONS) * 100);
   const showProgress = step !== "intro";
   const showBack =
-    history.length > 0 && ["desejo", "motivacao", "obstaculo", "tempo", "urgencia", "contact"].includes(step);
+    history.length > 0 &&
+    ["desejo", "motivacao", "obstaculo", "tempo", "urgencia", "contact"].includes(step);
 
   function renderQuestion(q: Question) {
     const qNumber = QUESTION_STEP_IDS.indexOf(q.id) + 1;
@@ -385,10 +471,14 @@ export function QuizFunnel() {
             role="button"
             tabIndex={0}
           >
+            <p className="text-2xl mb-3">💪</p>
             <p className="text-lg sm:text-xl font-bold text-text text-balance">
-              Só mais 2 perguntas rápidas e eu te mostro o plano certo pro seu momento. 💪
+              Boa! Você já está na metade.
             </p>
-            <p className="text-muted-2 text-sm mt-3">Toque pra continuar →</p>
+            <p className="text-muted mt-2">
+              Só mais 2 perguntas rápidas e eu te mostro o plano certo pro seu momento.
+            </p>
+            <p className="text-muted-2 text-sm mt-4">Toque pra continuar →</p>
           </div>
         );
 
@@ -404,7 +494,7 @@ export function QuizFunnel() {
             <p className="text-muted mb-2">
               Pra onde eu te mando o seu diagnóstico personalizado?
             </p>
-            <ContactForm onSubmit={handleContactSubmit} />
+            <SimpleContactForm onSubmit={handleContactSubmit} />
             {showBack && <BackButton onClick={goBack} />}
           </div>
         );
@@ -438,11 +528,16 @@ export function QuizFunnel() {
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Seu diagnóstico
             </p>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-1 text-balance">
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-3 text-balance">
               {nome ? `${nome}, seu` : "Seu"} perfil é:{" "}
               <span className="text-accent">{perfilTitulo}</span>
             </h2>
-            <p className="text-muted leading-relaxed mt-4">{obstaculoTexto}</p>
+            <span
+              className={`inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-1.5 text-sm font-bold text-accent mb-5 ${styles.checkPop}`}
+            >
+              ✓ Alta compatibilidade com o método Zero aos 10K
+            </span>
+            <p className="text-muted leading-relaxed">{obstaculoTexto}</p>
             {objetivoTexto && (
               <p className="text-muted leading-relaxed mt-4">
                 E o seu objetivo —{" "}
@@ -451,12 +546,58 @@ export function QuizFunnel() {
                 foi feito.
               </p>
             )}
+            <ul className="flex flex-col gap-3 mt-6">
+              <CheckItem
+                text="Você já identificou o obstáculo — a maioria nunca chega nem nisso."
+                delayMs={0}
+              />
+              <CheckItem
+                text="Esse obstáculo tem solução direta, testada com mais de 100 alunos."
+                delayMs={150}
+              />
+              <CheckItem text="Só falta um passo: ver como funciona na prática." delayMs={300} />
+            </ul>
             <div className="mt-8">
-              <PrimaryButton onClick={goNext}>Quero ver o plano completo</PrimaryButton>
+              <PrimaryButton onClick={goNext}>Quero ver como funciona</PrimaryButton>
             </div>
           </div>
         );
       }
+
+      case "curriculo":
+        return (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+              O treinamento
+            </p>
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
+              O que tem dentro do Do Zero aos 10K.
+            </h2>
+            <p className="text-muted leading-relaxed mb-6">
+              Não é teoria — é o passo a passo completo, do zero até o primeiro cliente pagando.
+            </p>
+            <div className="flex flex-col gap-3">
+              {curriculo.map((bloco, i) => (
+                <div
+                  key={bloco.title}
+                  style={{ animationDelay: `${i * 90}ms`, animationFillMode: "backwards" }}
+                  className={`flex gap-4 items-start rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 ${styles.optionIn}`}
+                >
+                  <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-xs font-black text-accent">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-bold">{bloco.title}</p>
+                    <p className="text-muted text-sm leading-relaxed mt-1">{bloco.bullet}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8">
+              <PrimaryButton onClick={goNext}>Ver quem já teve resultado</PrimaryButton>
+            </div>
+          </div>
+        );
 
       case "social":
         return (
@@ -464,10 +605,13 @@ export function QuizFunnel() {
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Quem já saiu do zero
             </p>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-6 text-balance">
-              Se funcionou pra eles, funciona pra você.
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
+              Mais de 100 clientes atendidos com esse método.
             </h2>
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <p className="text-muted leading-relaxed mb-6">
+              E dezenas de alunos que começaram exatamente de onde você está agora.
+            </p>
+            <div className="grid grid-cols-2 gap-3 mb-8">
               {depoimentosSocial.map((d) => (
                 <Image
                   key={d.src}
@@ -479,7 +623,7 @@ export function QuizFunnel() {
                 />
               ))}
             </div>
-            <PrimaryButton onClick={goNext}>Continuar</PrimaryButton>
+            <PrimaryButton onClick={goNext}>Ver o investimento</PrimaryButton>
           </div>
         );
 
@@ -505,10 +649,7 @@ export function QuizFunnel() {
               <p className="text-text font-semibold mb-3">O que você leva:</p>
               <ul className="flex flex-col gap-2 mb-8">
                 {ofertaItens.map((item) => (
-                  <li
-                    key={item}
-                    className="flex gap-3 text-muted text-[15px] leading-relaxed"
-                  >
+                  <li key={item} className="flex gap-3 text-muted text-[15px] leading-relaxed">
                     <span className="text-accent shrink-0">✓</span>
                     {item}
                   </li>
