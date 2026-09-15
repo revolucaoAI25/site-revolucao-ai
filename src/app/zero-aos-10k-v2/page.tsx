@@ -192,18 +192,27 @@ export default function ZeroAosDezKV2() {
               <ul className="flex flex-col gap-2">
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Quer entrar no mercado de IA e automações, mas não sabe por
-                  onde começar
+                  Quer entrar no mercado de IA e automações, mas{" "}
+                  <span className="text-text font-semibold">
+                    não sabe por onde começar
+                  </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
                   Já até começou, sabe usar o n8n ou outras ferramentas, mas
-                  ainda não sabe vender e mal viu a cor da grana
+                  ainda{" "}
+                  <span className="text-text font-semibold">
+                    não sabe vender
+                  </span>{" "}
+                  e mal viu a cor da grana
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Está cansado de ver promessas milagrosas que não funcionam na
-                  prática
+                  Está cansado de ver{" "}
+                  <span className="text-text font-semibold">
+                    promessas milagrosas
+                  </span>{" "}
+                  que não funcionam na prática
                 </li>
               </ul>
             </div>
@@ -215,7 +224,6 @@ export default function ZeroAosDezKV2() {
               <span className="text-text font-semibold">plano simples</span>{" "}
               que funciona.
             </p>
-            <p>E esse plano tem nome e sobrenome — o meu.</p>
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-center gap-3 mt-10">
@@ -225,6 +233,17 @@ export default function ZeroAosDezKV2() {
             <p className="text-muted-2 text-sm">
               ⏱️ Acesso imediato após a confirmação
             </p>
+            <div className={`text-muted-2 mt-6 ${effects.bounceCue}`} aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
           </Reveal>
         </Section>
 
@@ -441,7 +460,7 @@ export default function ZeroAosDezKV2() {
               <Reveal
                 key={bloco.title}
                 delay={index * 80}
-                className="card-surface card-hover hover:bg-white/[0.02] rounded-3xl p-7"
+                className="card-surface card-hover hover:bg-white/[0.02] active:scale-[0.98] transition-transform rounded-3xl p-7"
               >
                 <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
                   {index + 1}
@@ -505,7 +524,7 @@ export default function ZeroAosDezKV2() {
                   alt="Depoimento de aluno do treinamento Do Zero aos 10K"
                   width={depoimento.width}
                   height={depoimento.height}
-                  className="w-full h-auto rounded-2xl border border-white/10 transition-all duration-300 hover:border-accent/40 hover:-translate-y-1"
+                  className="w-full h-auto rounded-2xl border border-white/10 transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 active:scale-[0.98]"
                 />
               </Reveal>
             ))}
@@ -571,7 +590,7 @@ export default function ZeroAosDezKV2() {
             <Eyebrow>Do Zero aos 10K com Agentes de IA</Eyebrow>
             <SectionTitle>O investimento.</SectionTitle>
           </Reveal>
-          <Reveal delay={80} className="relative max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1">
+          <Reveal delay={80} className="relative max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.99]">
             <div className="flex flex-wrap items-baseline gap-3 mb-2">
               <span className="text-4xl font-black tracking-tight text-accent">
                 R$ 37,90
