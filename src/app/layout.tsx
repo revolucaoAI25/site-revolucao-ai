@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    other: {
+      "facebook-domain-verification": "8jyw20qv10qc09jxunvgdkbtj5ydw6",
+    },
+  },
   openGraph: {
     title: "Revolução AI",
     description:
