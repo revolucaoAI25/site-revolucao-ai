@@ -166,18 +166,20 @@ export default function ZeroAosDezKV2() {
               Todo mundo parece estar ganhando dinheiro com IA. Menos você.
             </p>
             <p>
-              O mercado está em uma explosão sem precedentes — automações,
-              agências, clientes fechando todos os dias. Só que na hora de
-              entender por onde entrar, você esbarra num labirinto: mil
+              O mercado está explodindo. Você vê gente faturando com
+              automações, construindo agências, fechando clientes. Mas quando
+              tenta entender como entrar, parece um{" "}
+              <span className="text-text font-semibold">labirinto</span> — mil
               ferramentas, mil promessas e nenhuma direção clara.
             </p>
             <p>
-              É exatamente por isso que tanta gente boa trava. Ou pior: começa
-              do jeito errado e desiste no meio do caminho.
+              E é exatamente por isso que tanta gente boa trava. Ou começa do
+              jeito errado e acaba desistindo no meio do caminho.
             </p>
             <div>
               <p className="text-text font-semibold mb-3">
-                Esse conteúdo é pra você se:
+                Se você se encaixa em uma dessas situações, esse conteúdo é
+                pra você:
               </p>
               <ul className="flex flex-col gap-2">
                 <li className="flex gap-3">
@@ -187,26 +189,25 @@ export default function ZeroAosDezKV2() {
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Já sabe usar o n8n ou outras ferramentas, mas ainda não
-                  sabe vender e mal viu a cor da grana
+                  Já até começou, sabe usar o n8n ou outras ferramentas, mas
+                  ainda não sabe vender e mal viu a cor da grana
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Está cansado de promessa milagrosa que não funciona na
+                  Está cansado de ver promessas milagrosas que não funcionam na
                   prática
                 </li>
               </ul>
             </div>
             <p>
-              Mas ainda dá tempo. Dá pra construir uma agência de IA sólida e
-              chegar aos seus primeiros{" "}
+              A verdade é que ainda dá pra entrar agora. Dá pra construir um
+              negócio de IA sólido. E dá pra estar faturando{" "}
               <span className="text-accent font-semibold">R$10 mil por mês</span>{" "}
-              em poucas semanas — com um plano simples, que já funcionou pra
-              centenas de pessoas.
+              de forma relativamente rápida — desde que você tenha um{" "}
+              <span className="text-text font-semibold">plano simples</span>{" "}
+              que funciona.
             </p>
-            <p className="text-text font-semibold">
-              E esse plano tem nome e sobrenome. O meu.
-            </p>
+            <p>E esse plano tem nome e sobrenome — o meu.</p>
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-center gap-3 mt-10">
