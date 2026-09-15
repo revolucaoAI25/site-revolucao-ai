@@ -122,9 +122,18 @@ const QUESTIONS: Record<string, Question> = {
 
 const PERFIL_TITLES: Record<string, string> = {
   zero: "Iniciante Determinado",
-  tecnico: "Técnico Sem Vendas",
+  tecnico: "Técnico Pronto Pra Vender",
   cliente: "Pronto Pra Escalar",
-  explorando: "Em Fase de Decisão",
+  explorando: "Prestes a Dar o Primeiro Passo",
+};
+
+/** Combinado com o perfil no resultado, pra deixar o diagnóstico com
+ * cara de que junta mais de uma resposta, não só a primeira pergunta. */
+const URGENCIA_TAG: Record<string, string> = {
+  "30dias": "que já está pronto pra agir rápido",
+  "2a3meses": "que prefere ir no seu ritmo, mas sem perder tempo",
+  nunca_tentei: "que está prestes a dar o primeiro passo de verdade",
+  so_entender: "que ainda está entendendo se esse é o caminho certo",
 };
 
 const OBSTACULO_TEXTO: Record<string, string> = {
@@ -338,7 +347,7 @@ function BigField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-transparent border-0 border-b-2 border-white/15 focus:border-accent text-2xl sm:text-3xl font-bold placeholder:text-muted-2 placeholder:font-normal py-3 text-center outline-none transition-colors"
+        className="w-full bg-transparent border-0 border-b-2 border-white/15 focus:border-accent text-lg sm:text-xl font-semibold placeholder:text-muted-2 placeholder:font-normal py-3 text-center outline-none transition-colors"
       />
       <div className="mt-10 flex justify-center">
         <PrimaryButton type="submit" disabled={!canSubmit}>
@@ -356,6 +365,7 @@ export function QuizFunnel() {
   const [perfilId, setPerfilId] = useState<string | null>(null);
   const [obstaculoId, setObstaculoId] = useState<string | null>(null);
   const [motivacaoId, setMotivacaoId] = useState<string | null>(null);
+  const [urgenciaId, setUrgenciaId] = useState<string | null>(null);
   const [nameDraft, setNameDraft] = useState("");
   const [phoneDigits, setPhoneDigits] = useState("");
   const [contact, setContact] = useState<{ name: string; phone: string } | null>(null);
@@ -385,6 +395,7 @@ export function QuizFunnel() {
     if (q.id === "desejo") setPerfilId(opt.id);
     if (q.id === "motivacao") setMotivacaoId(opt.id);
     if (q.id === "obstaculo") setObstaculoId(opt.id);
+    if (q.id === "urgencia") setUrgenciaId(opt.id);
     goNext();
   }
 
@@ -402,6 +413,12 @@ export function QuizFunnel() {
     setContact({ name: nameDraft.trim(), phone: `55${phoneDigits}` });
     goNext();
   }
+
+  // Cada etapa começa do topo — sem isso, se a pessoa rolou a página pra
+  // ler a etapa anterior, a próxima etapa entra no meio da rolagem.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [step]);
 
   useEffect(() => {
     if (step !== "breather") return;
@@ -568,15 +585,19 @@ export function QuizFunnel() {
           ? OBSTACULO_TEXTO[obstaculoId]
           : OBSTACULO_TEXTO.ferramenta;
         const objetivoTexto = motivacaoId ? MOTIVACAO_OBJETIVO[motivacaoId] : null;
+        const urgenciaTag = urgenciaId ? URGENCIA_TAG[urgenciaId] : null;
         return (
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-1">
               Seu diagnóstico
             </p>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-3 text-balance">
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-1 text-balance">
               {nome ? `${nome}, seu` : "Seu"} perfil é:{" "}
               <span className="text-accent">{perfilTitulo}</span>
             </h2>
+            {urgenciaTag && (
+              <p className="text-muted text-sm mb-4">Alguém {urgenciaTag}.</p>
+            )}
             <span
               className={`inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-1.5 text-sm font-bold text-accent mb-5 ${styles.checkPop}`}
               style={{ animationFillMode: "both" }}
@@ -793,27 +814,16 @@ export function QuizFunnel() {
 
   return (
     <div className="min-h-dvh flex flex-col bg-bg text-text">
-      <header className="sticky top-0 z-40 bg-bg/90 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-xl mx-auto px-5 py-4 flex items-center gap-2.5">
-          <Image
-            src="/logo.png"
-            alt="Revolução AI"
-            width={28}
-            height={28}
-            className="h-7 w-7 shrink-0 rounded-full"
-            priority
-          />
-          <span className="text-sm font-bold tracking-tight">Do Zero aos 10K</span>
-        </div>
-        {showProgress && (
+      {showProgress && (
+        <header className="sticky top-0 z-40">
           <div className="h-1 bg-white/5">
             <div
               className="h-full bg-accent transition-[width] duration-500 ease-out"
               style={{ width: `${progressPct}%` }}
             />
           </div>
-        )}
-      </header>
+        </header>
+      )}
 
       <main className="flex-1 flex items-center justify-center px-5 py-10">
         <div key={step} className={`w-full max-w-xl ${styles.stepIn}`}>
