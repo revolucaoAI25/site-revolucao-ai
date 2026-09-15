@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
 import { trackPixelEvent, trackPixelCustomEvent } from "@/lib/pixel";
+import { submitLead } from "@/lib/leads";
 import styles from "./quiz.module.css";
 
 type StepId =
@@ -187,6 +188,8 @@ const depoimentosSocial = [
   { src: "/zero-aos-10k/depoimento-2.jpg", width: 640, height: 339 },
   { src: "/zero-aos-10k/depoimento-3.jpg", width: 640, height: 492 },
   { src: "/zero-aos-10k/depoimento-4.jpg", width: 640, height: 603 },
+  { src: "/zero-aos-10k/depoimento-5.jpg", width: 640, height: 350 },
+  { src: "/zero-aos-10k/depoimento-6.jpg", width: 640, height: 309 },
 ];
 
 function formatLocalNumber(digits: string): string {
@@ -400,18 +403,25 @@ export function QuizFunnel() {
     goNext();
   }
 
-  // Enquanto o funil está em teste, nome e telefone ficam só em memória
-  // (pra personalizar o resultado) — nada é enviado pra Supabase nem pro
-  // webhook. Quando for pra valer, plugar aqui o mesmo submitLead()/
-  // /api/lead que os pop-ups do site já usam.
   function handleNameSubmit() {
     if (nameDraft.trim().length < 2) return;
     goNext();
   }
 
+  // Salva no mesmo Supabase/webhook que os pop-ups do site já usam — o
+  // /api/lead aceita contato sem e-mail (a coluna já era nullable, e o
+  // tipo em src/lib/leads.ts foi ajustado pra refletir isso).
   function handlePhoneSubmit() {
     if (phoneDigits.length < 10) return;
-    setContact({ name: nameDraft.trim(), phone: `55${phoneDigits}` });
+    const name = nameDraft.trim();
+    const phone = `55${phoneDigits}`;
+    setContact({ name, phone });
+    submitLead({
+      flowId: "funil-quiz-10k",
+      resultKey: obstaculoId ?? "quiz",
+      answers: Object.values(answers),
+      contact: { name, phone },
+    });
     trackPixelEvent("Lead", { content_name: "Funil Zero aos 10K" });
     goNext();
   }
@@ -737,7 +747,7 @@ export function QuizFunnel() {
             <p className="text-muted leading-relaxed mb-6">
               E gente que começou exatamente de onde você está agora.
             </p>
-            <div className="grid grid-cols-2 gap-3 mb-8">
+            <div className="columns-2 gap-3 mb-8 [&>*]:mb-3 [&>*]:break-inside-avoid">
               {depoimentosSocial.map((d) => (
                 <Image
                   key={d.src}

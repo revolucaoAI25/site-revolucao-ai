@@ -5,7 +5,7 @@ type LeadPayload = {
   flowId?: string;
   resultKey?: string;
   answers?: { question: string; label: string }[];
-  contact?: { name: string; phone: string; email: string } | null;
+  contact?: { name: string; phone: string; email?: string } | null;
 };
 
 /**

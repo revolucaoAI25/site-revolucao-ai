@@ -12,7 +12,7 @@ export async function submitLead(payload: {
   flowId: string;
   resultKey: string;
   answers: LeadAnswer[];
-  contact?: { name: string; phone: string; email: string } | null;
+  contact?: { name: string; phone: string; email?: string } | null;
 }): Promise<string | null> {
   if (typeof window === "undefined") return null;
   try {
