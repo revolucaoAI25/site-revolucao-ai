@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/zero-aos-10k-v2" },
-  robots: { index: false, follow: false },
   openGraph: {
     title,
     description,
@@ -303,11 +302,8 @@ export default function ZeroAosDezKV2() {
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={100} className="group relative">
-              <div
-                className={`absolute -inset-3 rounded-[2rem] border border-accent/25 pointer-events-none ${effects.ringPulse}`}
-              />
-              <div className="relative rounded-3xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_40px_-14px_rgba(0,200,83,0.5)]">
+            <Reveal delay={100} className="group">
+              <div className="rounded-3xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_40px_-14px_rgba(0,200,83,0.5)]">
                 <Image
                   src="/zero-aos-10k/lucas.jpg"
                   alt="Lucas Magalhães"

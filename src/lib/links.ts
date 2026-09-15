@@ -37,10 +37,10 @@ export const PRODUTO_GRATUITO_LINK =
 /**
  * Curso Zero aos 10K (R$37,90) — resultado "baixo ticket" do pop-up de
  * Formação, pra quem consegue investir algo mas não chega aos R$3.000 da
- * reunião. Rota interna (ver src/app/zero-aos-10k) — antes apontava pra
- * uma LP hospedada fora do site (pages.net.br).
+ * reunião. Rota interna (ver src/app/zero-aos-10k-v2, a versão em uso —
+ * a v1 em src/app/zero-aos-10k segue no ar mas não é mais linkada).
  */
-export const PRODUTO_LOW_TICKET_LINK = "/zero-aos-10k";
+export const PRODUTO_LOW_TICKET_LINK = "/zero-aos-10k-v2";
 
 /**
  * Checkout do curso Zero aos 10K — hospedado na Kiwify (fora do Asaas,
