@@ -98,6 +98,10 @@ const depoimentos = [
   { src: "/zero-aos-10k/depoimento-6.jpg", width: 640, height: 309 },
 ];
 
+function AccentBar() {
+  return <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent/70" />;
+}
+
 const ofertaItens = [
   "Método completo de estruturação da agência",
   "Passo a passo de desenvolvimento de agentes",
@@ -146,10 +150,14 @@ export default function ZeroAosDezKV2() {
             <>
               <div className="absolute inset-0 bg-grid" />
               <div
-                className={`glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
+                className={`glow h-[480px] w-[480px] -top-44 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
               />
               <div
-                className={`glow h-[220px] w-[220px] top-20 -right-10 ${effects.floatDrift}`}
+                className={`glow h-[260px] w-[260px] top-16 -right-16 ${effects.floatDrift}`}
+              />
+              <div
+                className={`glow h-[200px] w-[200px] top-10 -left-16 ${effects.floatDrift}`}
+                style={{ animationDelay: "3.5s" }}
               />
             </>
           }
@@ -192,27 +200,33 @@ export default function ZeroAosDezKV2() {
               <ul className="flex flex-col gap-2">
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Quer entrar no mercado de IA e automações, mas{" "}
-                  <span className="text-text font-semibold">
-                    não sabe por onde começar
+                  <span>
+                    Quer entrar no mercado de IA e automações, mas{" "}
+                    <span className="text-text font-semibold">
+                      não sabe por onde começar
+                    </span>
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Já até começou, sabe usar o n8n ou outras ferramentas, mas
-                  ainda{" "}
-                  <span className="text-text font-semibold">
-                    não sabe vender
-                  </span>{" "}
-                  e mal viu a cor da grana
+                  <span>
+                    Já até começou, sabe usar o n8n ou outras ferramentas, mas
+                    ainda{" "}
+                    <span className="text-text font-semibold">
+                      não sabe vender
+                    </span>{" "}
+                    e mal viu a cor da grana
+                  </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Está cansado de ver{" "}
-                  <span className="text-text font-semibold">
-                    promessas milagrosas
-                  </span>{" "}
-                  que não funcionam na prática
+                  <span>
+                    Está cansado de ver{" "}
+                    <span className="text-text font-semibold">
+                      promessas milagrosas
+                    </span>{" "}
+                    que não funcionam na prática
+                  </span>
                 </li>
               </ul>
             </div>
@@ -252,7 +266,8 @@ export default function ZeroAosDezKV2() {
           <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 items-start">
             <Reveal>
               <Eyebrow>Prazer, meu nome é</Eyebrow>
-              <SectionTitle className="mb-6">Lucas Magalhães</SectionTitle>
+              <SectionTitle>Lucas Magalhães</SectionTitle>
+              <div className="mt-4 mb-6 h-[3px] w-12 rounded-full bg-accent/70" />
               <div className="flex flex-col gap-4 text-muted leading-relaxed text-base">
                 <p>
                   Sou cofundador do{" "}
@@ -288,8 +303,11 @@ export default function ZeroAosDezKV2() {
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={100} className="group">
-              <div className="rounded-3xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_40px_-14px_rgba(0,200,83,0.5)]">
+            <Reveal delay={100} className="group relative">
+              <div
+                className={`absolute -inset-3 rounded-[2rem] border border-accent/25 pointer-events-none ${effects.ringPulse}`}
+              />
+              <div className="relative rounded-3xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_40px_-14px_rgba(0,200,83,0.5)]">
                 <Image
                   src="/zero-aos-10k/lucas.jpg"
                   alt="Lucas Magalhães"
@@ -310,6 +328,7 @@ export default function ZeroAosDezKV2() {
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>O obstáculo</Eyebrow>
             <SectionTitle>Por que tanta gente trava.</SectionTitle>
+            <AccentBar />
             <p className="text-muted leading-relaxed mt-4">
               A maioria das pessoas que quer faturar com IA trava por dois
               motivos:
@@ -317,8 +336,12 @@ export default function ZeroAosDezKV2() {
           </Reveal>
           <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {motivos.map((motivo, index) => (
-              <Reveal key={motivo.number} delay={index * 100} className="group relative">
-                <div className="glow h-[200px] w-[200px] -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <Reveal
+                key={motivo.number}
+                delay={index * 100}
+                className="group relative transition-transform duration-300 hover:scale-[1.02]"
+              >
+                <div className="glow h-[240px] w-[240px] -top-10 left-1/2 -translate-x-1/2 opacity-40 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 <PillarCard
                   number={motivo.number}
                   title={motivo.title}
@@ -340,6 +363,7 @@ export default function ZeroAosDezKV2() {
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>O caminho</Eyebrow>
             <SectionTitle>As 2 premissas.</SectionTitle>
+            <AccentBar />
             <p className="text-muted leading-relaxed mt-4">
               Chegar aos R$10 mil por mês não é complicado quando você entende
               as duas premissas certas.
@@ -406,8 +430,14 @@ export default function ZeroAosDezKV2() {
               3 etapas principais:
             </p>
             <div className="grid sm:grid-cols-3 gap-6">
-              <div className="card-surface card-hover rounded-3xl p-6">
-                <h4 className="font-bold mb-2">1) Aquisição</h4>
+              <div
+                className="card-surface card-hover hover:shadow-[0_20px_45px_-18px_rgba(0,200,83,0.35)] rounded-3xl p-6"
+                style={{ transition: "transform 300ms ease, border-color 300ms ease, background-color 300ms ease, box-shadow 300ms ease" }}
+              >
+                <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
+                  1
+                </span>
+                <h4 className="font-bold mb-2">Aquisição</h4>
                 <p className="text-muted text-sm leading-relaxed mb-3">
                   Atrair pessoas interessadas no seu produto.
                 </p>
@@ -417,15 +447,27 @@ export default function ZeroAosDezKV2() {
                   <li>— Produzir conteúdo nas redes sociais</li>
                 </ul>
               </div>
-              <div className="card-surface card-hover rounded-3xl p-6">
-                <h4 className="font-bold mb-2">2) Qualificação</h4>
+              <div
+                className="card-surface card-hover hover:shadow-[0_20px_45px_-18px_rgba(0,200,83,0.35)] rounded-3xl p-6"
+                style={{ transition: "transform 300ms ease, border-color 300ms ease, background-color 300ms ease, box-shadow 300ms ease" }}
+              >
+                <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
+                  2
+                </span>
+                <h4 className="font-bold mb-2">Qualificação</h4>
                 <p className="text-muted text-sm leading-relaxed">
                   Entender se são o perfil de cliente ideal — muita gente pula
                   isso e perde tempo com quem nunca vai fechar.
                 </p>
               </div>
-              <div className="card-surface card-hover rounded-3xl p-6">
-                <h4 className="font-bold mb-2">3) Conversão</h4>
+              <div
+                className="card-surface card-hover hover:shadow-[0_20px_45px_-18px_rgba(0,200,83,0.35)] rounded-3xl p-6"
+                style={{ transition: "transform 300ms ease, border-color 300ms ease, background-color 300ms ease, box-shadow 300ms ease" }}
+              >
+                <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
+                  3
+                </span>
+                <h4 className="font-bold mb-2">Conversão</h4>
                 <p className="text-muted text-sm leading-relaxed mb-3">
                   Transformar interessados em clientes.
                 </p>
@@ -446,11 +488,16 @@ export default function ZeroAosDezKV2() {
         {/* O que você vai aprender */}
         <Section
           divider
-          decor={<div className="glow absolute h-[360px] w-[360px] -top-20 -right-20 opacity-70" />}
+          decor={
+            <div
+              className={`glow absolute h-[440px] w-[440px] -top-24 -right-24 ${effects.floatDrift}`}
+            />
+          }
         >
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>O treinamento</Eyebrow>
             <SectionTitle>O que você vai aprender.</SectionTitle>
+            <AccentBar />
             <p className="text-muted leading-relaxed mt-4">
               No treinamento <span className="text-text font-semibold">Do Zero aos 10K</span>, eu não entrego uma ementa de curso — entrego o que muda de verdade na sua rotina, passo a passo.
             </p>
@@ -460,9 +507,9 @@ export default function ZeroAosDezKV2() {
               <Reveal
                 key={bloco.title}
                 delay={index * 80}
-                className="card-surface card-hover hover:bg-white/[0.02] active:scale-[0.98] transition-transform rounded-3xl p-7"
+                className="group card-surface card-hover hover:bg-white/[0.02] hover:shadow-[0_24px_55px_-18px_rgba(0,200,83,0.4)] active:scale-[0.98] ![transition:transform_300ms_ease,box-shadow_300ms_ease,background-color_300ms_ease,border-color_300ms_ease] rounded-3xl p-7"
               >
-                <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
+                <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent transition-all duration-300 group-hover:scale-110 group-hover:bg-accent group-hover:text-[#07090a]">
                   {index + 1}
                 </span>
                 <h3 className="font-black text-lg mb-3">{bloco.title}</h3>
@@ -486,12 +533,21 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* Clientes atendidos */}
-        <Section divider className="bg-tint">
+        <Section
+          divider
+          className="bg-tint"
+          decor={
+            <div
+              className={`glow h-[300px] w-[300px] top-0 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
+            />
+          }
+        >
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
             <Eyebrow>Clientes atendidos</Eyebrow>
             <SectionTitle>
               Empresas de praticamente qualquer setor que você imaginar.
             </SectionTitle>
+            <AccentBar />
             <p className="text-muted leading-relaxed mt-4">
               Clínicas, escritórios de advocacia, escolas, e-commerces,
               prestadores de serviço. É bem provável que você até conheça
@@ -510,6 +566,7 @@ export default function ZeroAosDezKV2() {
             <SectionTitle>
               Já ensinamos muita gente a sair do zero.
             </SectionTitle>
+            <AccentBar />
             <p className="text-muted leading-relaxed mt-4">
               Além de atender esses e outras dezenas de clientes, já ensinamos
               muitas pessoas como você a montar sua Agência de IA e
@@ -524,7 +581,9 @@ export default function ZeroAosDezKV2() {
                   alt="Depoimento de aluno do treinamento Do Zero aos 10K"
                   width={depoimento.width}
                   height={depoimento.height}
-                  className="w-full h-auto rounded-2xl border border-white/10 transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 active:scale-[0.98]"
+                  className={`w-full h-auto rounded-2xl border border-white/10 transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:rotate-0 active:scale-[0.98] ${
+                    index % 2 === 0 ? "-rotate-1" : "rotate-1"
+                  }`}
                 />
               </Reveal>
             ))}
@@ -542,38 +601,43 @@ export default function ZeroAosDezKV2() {
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
             <Eyebrow>A decisão</Eyebrow>
             <SectionTitle>A mesma bifurcação que eu vivi.</SectionTitle>
+            <AccentBar />
           </Reveal>
-          <Reveal delay={80} className="max-w-2xl mx-auto">
-            <div className="relative pl-8 flex flex-col gap-8">
-              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-muted-2/50 via-muted-2/20 to-accent/70" />
-              <div className="relative flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]">
-                <span className="absolute -left-8 top-1.5 h-3.5 w-3.5 rounded-full bg-muted-2 ring-4 ring-bg" />
-                <p>
-                  Eu já passei exatamente pelo ponto em que você está agora. De
-                  um lado, dava pra entrar sozinho — tentar montar o primeiro
-                  agente no escuro, quebrar a cabeça com ferramenta errada,
-                  ligar pra empresa sem saber o que falar.
-                </p>
-                <p>
-                  Foi o que eu fiz. Levei 6 meses pra fechar meus primeiros 2
-                  clientes, e boa parte de quem tenta esse caminho desiste
-                  antes disso.
-                </p>
-              </div>
-              <div className="relative flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]">
-                <span className="absolute -left-8 top-1.5 h-3.5 w-3.5 rounded-full bg-accent shadow-[0_0_10px_rgba(0,200,83,0.7)] ring-4 ring-bg" />
-                <p>
-                  Do outro lado, tinha o caminho que eu só enxerguei depois:
-                  pegar o método que eu uso hoje na minha operação de 6
-                  dígitos e aplicar direto, sem reinventar nada. Sem firula,
-                  sem enrolação — só o que realmente funciona.
-                </p>
-                <p className="text-text font-semibold">
-                  Hoje esse segundo caminho tem nome: Zero aos 10K.
-                </p>
-              </div>
-            </div>
-          </Reveal>
+          <div className="max-w-2xl mx-auto relative pl-8 flex flex-col gap-8">
+            <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-muted-2/50 via-muted-2/20 to-accent/70" />
+            <Reveal
+              delay={80}
+              className="relative flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]"
+            >
+              <span className="absolute -left-8 top-1.5 h-4 w-4 rounded-full bg-muted-2 ring-4 ring-bg" />
+              <p>
+                Eu já passei exatamente pelo ponto em que você está agora. De
+                um lado, dava pra entrar sozinho — tentar montar o primeiro
+                agente no escuro, quebrar a cabeça com ferramenta errada,
+                ligar pra empresa sem saber o que falar.
+              </p>
+              <p>
+                Foi o que eu fiz. Levei 6 meses pra fechar meus primeiros 2
+                clientes, e boa parte de quem tenta esse caminho desiste
+                antes disso.
+              </p>
+            </Reveal>
+            <Reveal
+              delay={280}
+              className="relative flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]"
+            >
+              <span className="absolute -left-8 top-1.5 h-4 w-4 rounded-full bg-accent shadow-[0_0_16px_rgba(0,200,83,0.85)] ring-4 ring-bg" />
+              <p>
+                Do outro lado, tinha o caminho que eu só enxerguei depois:
+                pegar o método que eu uso hoje na minha operação de 6
+                dígitos e aplicar direto, sem reinventar nada. Sem firula,
+                sem enrolação — só o que realmente funciona.
+              </p>
+              <p className="text-text font-semibold">
+                Hoje esse segundo caminho tem nome: Zero aos 10K.
+              </p>
+            </Reveal>
+          </div>
         </Section>
 
         {/* Oferta */}
@@ -582,45 +646,51 @@ export default function ZeroAosDezKV2() {
           divider
           decor={
             <div
-              className={`glow h-[380px] w-[380px] top-10 left-1/2 -translate-x-1/2 ${effects.floatDrift}`}
+              className={`glow h-[460px] w-[460px] top-4 left-1/2 -translate-x-1/2 ${effects.floatDrift}`}
             />
           }
         >
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
             <Eyebrow>Do Zero aos 10K com Agentes de IA</Eyebrow>
             <SectionTitle>O investimento.</SectionTitle>
+            <AccentBar />
           </Reveal>
-          <Reveal delay={80} className="relative max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.99]">
-            <div className="flex flex-wrap items-baseline gap-3 mb-2">
-              <span className="text-4xl font-black tracking-tight text-accent">
-                R$ 37,90
-              </span>
-              <span className="text-muted font-semibold">
-                | Acesso Vitalício
-              </span>
+          <Reveal delay={80} className="relative max-w-xl mx-auto">
+            <div
+              className={`absolute -inset-2 rounded-[2rem] border border-accent/30 pointer-events-none ${effects.ringPulse}`}
+            />
+            <div className="relative rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.99]">
+              <div className="flex flex-wrap items-baseline gap-3 mb-2">
+                <span className="text-4xl font-black tracking-tight text-accent">
+                  R$ 37,90
+                </span>
+                <span className="text-muted font-semibold">
+                  | Acesso Vitalício
+                </span>
+              </div>
+              <p className="text-muted-2 text-sm mb-6">
+                É menos que uma promoção do McDonald&apos;s.
+              </p>
+              <p className="text-text font-semibold mb-3">O que você leva:</p>
+              <ul className="flex flex-col gap-2 mb-8">
+                {ofertaItens.map((item) => (
+                  <li key={item} className="flex gap-3 text-muted text-[15px] leading-relaxed">
+                    <span className="text-accent shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-muted leading-relaxed mb-8">
+                Se você seguir com dedicação e consistência real, os R$10 mil
+                por mês são questão de tempo.
+              </p>
+              <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="lg" className="w-full">
+                Garantir minha vaga por R$37,90
+              </CTAButton>
+              <p className="text-muted-2 text-xs text-center mt-4">
+                🔒 Compra segura • acesso imediato
+              </p>
             </div>
-            <p className="text-muted-2 text-sm mb-6">
-              É menos que uma promoção do McDonald&apos;s.
-            </p>
-            <p className="text-text font-semibold mb-3">O que você leva:</p>
-            <ul className="flex flex-col gap-2 mb-8">
-              {ofertaItens.map((item) => (
-                <li key={item} className="flex gap-3 text-muted text-[15px] leading-relaxed">
-                  <span className="text-accent shrink-0">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="text-muted leading-relaxed mb-8">
-              Se você seguir com dedicação e consistência real, os R$10 mil
-              por mês são questão de tempo.
-            </p>
-            <CTAButton href={ZERO_AOS_10K_CHECKOUT_LINK} external size="lg" className="w-full">
-              Garantir minha vaga por R$37,90
-            </CTAButton>
-            <p className="text-muted-2 text-xs text-center mt-4">
-              🔒 Compra segura • acesso imediato
-            </p>
           </Reveal>
         </Section>
 
@@ -628,7 +698,7 @@ export default function ZeroAosDezKV2() {
         <Section divider>
           <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
             <div
-              className={`glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
+              className={`glow h-[380px] w-[380px] -top-28 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
             />
             <p className="relative text-muted leading-relaxed max-w-2xl mx-auto mb-2">
               Você já viu clínica, escritório, e-commerce e dezenas de outros
