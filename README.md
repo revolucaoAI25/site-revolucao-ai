@@ -87,6 +87,9 @@ Abra [http://localhost:3000](http://localhost:3000).
 3. **`ASAAS_API_KEY`** ainda não configurada — ver seção **Checkout do Lead
    Extractor (Asaas)** abaixo. Sem ela, o formulário de assinatura mostra um
    aviso pedindo pra falar pelo WhatsApp, sem quebrar o resto do site.
+4. **`NEXT_PUBLIC_META_PIXEL_ID`** ainda não configurada — ver seção **Meta
+   Pixel do funil `/funil-10k`** abaixo. Sem ela, a página funciona
+   normalmente, só sem disparar nenhum evento de pixel.
 
 A logo oficial já está integrada (`public/logo.png`, usada em
 `src/components/Logo.tsx` e como favicon em `src/app/icon.png`). O carrossel
@@ -140,6 +143,46 @@ contato (nome/telefone/e-mail, quando já coletado), o id do lead salvo no
 Supabase (quando aplicável) e o horário do envio. Assim como o webhook
 acima, falha nesse encaminhamento não afeta o Supabase nem o pop-up, e sem
 a variável configurada esse envio simplesmente não acontece.
+
+## Meta Pixel do funil `/funil-10k`
+
+O funil de quiz do Do Zero aos 10K (`/funil-10k`, ver seção de estrutura —
+uma rota de teste separada da LP normal, pensada pra rodar como página de
+destino de campanha) tem o Meta Pixel (Facebook/Instagram Ads) integrado,
+mas só nessa página — nenhuma outra rota do site carrega o pixel.
+
+Pra ativar:
+
+1. Configurar a variável de ambiente `NEXT_PUBLIC_META_PIXEL_ID` (local em
+   `.env.local`, e na Vercel em Project Settings → Environment Variables)
+   com o ID do pixel do Gerenciador de Eventos do Meta. Precisa do prefixo
+   `NEXT_PUBLIC_` porque o valor é usado no navegador, não só no servidor.
+2. Sem essa variável, `MetaPixel.tsx` não renderiza nada e as chamadas de
+   evento em `pixel.ts` viram no-op — a página funciona normalmente, só sem
+   mandar nada pro Meta.
+
+Eventos disparados automaticamente ao longo do funil:
+
+- **`PageView`** — automático, assim que o pixel carrega.
+- **`Lead`** — quando a pessoa termina de preencher nome e WhatsApp (as duas
+  últimas perguntas antes do resultado).
+- **`ChegouNaOferta`** (evento customizado, via `trackCustom`) — quando a
+  pessoa chega na última etapa (a oferta/preço), tenha clicado no checkout
+  ou não. Útil pra criar público de retargeting de quem viu o preço e não
+  comprou.
+- **`InitiateCheckout`** — quando clica no botão que leva pro checkout da
+  Kiwify (`ZERO_AOS_10K_CHECKOUT_LINK` em `src/lib/links.ts`).
+
+O que **não** dá pra rastrear direto daqui: o evento de **compra
+confirmada**. O checkout roda inteiro dentro da Kiwify, fora do site, e
+esse projeto não recebe nenhum retorno de lá hoje (ao contrário do Asaas,
+que tem webhook próprio — ver seção acima). Pra fechar o funil até a
+compra de verdade, o caminho mais simples é configurar o mesmo Pixel ID
+direto nas configurações de checkout/pixel da própria Kiwify (recurso
+nativo da plataforma) — se preferir uma solução mais robusta, também dá
+pra integrar via webhook da Kiwify + Meta Conversions API (server-side),
+mas isso é um projeto à parte, exige credenciais adicionais (token de
+acesso do Conversions API) e não está implementado aqui.
 
 ## Checkout do Lead Extractor (Asaas)
 

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
+import { trackPixelEvent, trackPixelCustomEvent } from "./pixel";
 import styles from "./quiz.module.css";
 
 type StepId =
@@ -411,6 +412,7 @@ export function QuizFunnel() {
   function handlePhoneSubmit() {
     if (phoneDigits.length < 10) return;
     setContact({ name: nameDraft.trim(), phone: `55${phoneDigits}` });
+    trackPixelEvent("Lead", { content_name: "Funil Zero aos 10K" });
     goNext();
   }
 
@@ -432,6 +434,14 @@ export function QuizFunnel() {
     const t = setTimeout(() => goNext(), 3200);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+  // Sinal de "viu a oferta" pro pixel — dispara ao chegar na última etapa,
+  // independente de clicar ou não no checkout (útil pra retargeting de
+  // quem chegou até aqui mas não comprou).
+  useEffect(() => {
+    if (step !== "offer") return;
+    trackPixelCustomEvent("ChegouNaOferta", { content_name: "Funil Zero aos 10K" });
   }, [step]);
 
   const answeredCount =
@@ -775,6 +785,13 @@ export function QuizFunnel() {
                 href={ZERO_AOS_10K_CHECKOUT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackPixelEvent("InitiateCheckout", {
+                    value: 37.9,
+                    currency: "BRL",
+                    content_name: "Do Zero aos 10K",
+                  })
+                }
                 className="group inline-flex w-full items-center justify-center gap-2 rounded-full font-semibold text-center transition-all duration-200 cursor-pointer bg-accent text-[#07090a] shadow-[0_0_0_1px_rgba(0,200,83,0.4),0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark hover:-translate-y-0.5 px-7 py-3.5 text-sm sm:text-base"
               >
                 Garantir minha vaga por R$37,90

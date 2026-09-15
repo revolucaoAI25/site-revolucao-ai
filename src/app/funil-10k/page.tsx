@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { QuizFunnel } from "./QuizFunnel";
+import { MetaPixel } from "./MetaPixel";
 
 const title = "Descubra seu caminho pra faturar R$10 mil com Agentes de IA";
 const description =
@@ -12,5 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function Funil10kPage() {
-  return <QuizFunnel />;
+  return (
+    <>
+      <MetaPixel />
+      <QuizFunnel />
+    </>
+  );
 }
