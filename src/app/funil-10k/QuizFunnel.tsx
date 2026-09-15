@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
@@ -14,9 +14,11 @@ type StepId =
   | "obstaculo"
   | "tempo"
   | "urgencia"
-  | "contact"
+  | "name"
+  | "phone"
   | "loading"
   | "result"
+  | "autoridade"
   | "curriculo"
   | "social"
   | "offer";
@@ -29,9 +31,11 @@ const STEP_ORDER: StepId[] = [
   "obstaculo",
   "tempo",
   "urgencia",
-  "contact",
+  "name",
+  "phone",
   "loading",
   "result",
+  "autoridade",
   "curriculo",
   "social",
   "offer",
@@ -43,7 +47,8 @@ const QUESTION_STEP_IDS: StepId[] = [
   "obstaculo",
   "tempo",
   "urgencia",
-  "contact",
+  "name",
+  "phone",
 ];
 const TOTAL_QUESTIONS = QUESTION_STEP_IDS.length;
 
@@ -66,7 +71,7 @@ const MOTIVACAO: Question = {
   id: "motivacao",
   question: "O que mais te atrai em construir um negócio com Agentes de IA?",
   options: [
-    { id: "dinheiro", label: "💰 Ganhar dinheiro sem depender de patrão" },
+    { id: "dinheiro", label: "💰 Ganhar mais dinheiro, com uma renda própria" },
     { id: "liberdade", label: "🏠 Ter liberdade pra trabalhar de onde eu quiser" },
     { id: "negocio", label: "📈 Construir algo que cresça sem depender só de mim" },
     { id: "tecnologia", label: "🧠 Trabalhar com uma tecnologia que só cresce" },
@@ -124,16 +129,16 @@ const PERFIL_TITLES: Record<string, string> = {
 
 const OBSTACULO_TEXTO: Record<string, string> = {
   ferramenta:
-    "Isso não é falta de capacidade — é falta de direção. Você não precisa aprender 10 ferramentas diferentes, só a certa. No Do Zero aos 10K a gente usa uma única ferramenta, o ChatFlux, do início ao fim, sem perder tempo testando o que não serve.",
+    "Isso não é falta de capacidade, é falta de direção. Você não precisa aprender dez ferramentas diferentes, só a certa. No Do Zero aos 10K a gente usa uma única ferramenta, o ChatFlux, do início ao fim, sem perder tempo testando o que não serve.",
   vender:
-    "Saber construir um agente de IA bom não paga boleto sozinho — vender é o que faz a diferença. E vender não é sobre ter lábia, é sobre ter um roteiro. É exatamente isso que você recebe no módulo de Vendas: script de prospecção, critérios de qualificação e roteiro de reunião prontos.",
+    "Construir um agente de IA bom é só metade do caminho — vender é o que faz a diferença. E vender bem não depende de carisma, depende de um roteiro certo. É isso que você recebe no módulo de Vendas: script de prospecção, critérios de qualificação e roteiro de reunião prontos.",
   tempo:
-    "Você não precisa de mais tempo — precisa de um caminho mais curto. O Do Zero aos 10K é direto ao ponto: sem enrolação, sem curso de 40 horas. Só o que você precisa pra sair do zero, no seu ritmo.",
-  medo: "Faz sentido ter esse receio — investir sem saber se vai dar certo dói. Por isso o Do Zero aos 10K custa R$37,90 e te dá acesso vitalício: o risco pra você experimentar é o menor possível.",
+    "Você não precisa de mais tempo, precisa de um caminho mais curto. O Do Zero aos 10K é direto ao ponto: sem enrolação, sem curso de 40 horas. Só o que você precisa pra sair do zero, no seu ritmo.",
+  medo: "Faz sentido ter esse receio — ninguém gosta de investir sem ter certeza do retorno. Por isso o Do Zero aos 10K custa R$37,90 e dá acesso vitalício: o risco pra você testar é o menor possível.",
 };
 
 const MOTIVACAO_OBJETIVO: Record<string, string> = {
-  dinheiro: "ganhar dinheiro sem depender de patrão",
+  dinheiro: "ganhar mais dinheiro, com uma renda própria",
   liberdade: "ter liberdade pra trabalhar de onde você quiser",
   negocio: "construir um negócio que cresça sem depender só de você",
   tecnologia: "trabalhar com uma tecnologia que só cresce",
@@ -174,6 +179,25 @@ const depoimentosSocial = [
   { src: "/zero-aos-10k/depoimento-4.jpg", width: 640, height: 603 },
 ];
 
+function formatLocalNumber(digits: string): string {
+  const ddd = digits.slice(0, 2);
+  const rest = digits.slice(2, 11);
+  let out = "";
+  if (ddd) out += `(${ddd}`;
+  if (ddd.length === 2) out += ") ";
+  if (rest) {
+    const splitAt = rest.length > 8 ? 5 : 4;
+    const part1 = rest.slice(0, splitAt);
+    const part2 = rest.slice(splitAt);
+    out += part2 ? `${part1}-${part2}` : part1;
+  }
+  return out;
+}
+
+function firstName(fullName: string) {
+  return fullName.trim().split(" ")[0] || fullName;
+}
+
 function ArrowIcon() {
   return (
     <svg
@@ -194,12 +218,14 @@ function ArrowIcon() {
   );
 }
 
+/** fillMode "both" é o que mantém o item visível depois que a animação termina — com
+ * "backwards" ele volta pro opacity-0 da classe base assim que a animação acaba. */
 function CheckItem({ text, delayMs }: { text: string; delayMs: number }) {
   return (
     <li className="flex items-center gap-3 text-muted">
       <span
         className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent text-[#07090a] ${styles.checkPop}`}
-        style={{ animationDelay: `${delayMs}ms`, animationFillMode: "backwards" }}
+        style={{ animationDelay: `${delayMs}ms`, animationFillMode: "both" }}
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
           <path
@@ -213,7 +239,7 @@ function CheckItem({ text, delayMs }: { text: string; delayMs: number }) {
       </span>
       <span
         className="opacity-0 animate-fade-in-up"
-        style={{ animationDelay: `${delayMs}ms`, animationFillMode: "backwards" }}
+        style={{ animationDelay: `${delayMs}ms`, animationFillMode: "both" }}
       >
         {text}
       </span>
@@ -225,16 +251,21 @@ function PrimaryButton({
   onClick,
   children,
   className = "",
+  disabled = false,
+  type = "button",
 }: {
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
   className?: string;
+  disabled?: boolean;
+  type?: "button" | "submit";
 }) {
   return (
     <button
-      type="button"
+      type={type}
       onClick={onClick}
-      className={`group inline-flex items-center justify-center gap-2 rounded-full font-semibold text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg cursor-pointer bg-accent text-[#07090a] shadow-[0_0_0_1px_rgba(0,200,83,0.4),0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(0,200,83,0.55),0_14px_36px_-10px_rgba(0,200,83,0.65)] px-7 py-3.5 text-sm sm:text-base ${className}`}
+      disabled={disabled}
+      className={`group inline-flex items-center justify-center gap-2 rounded-full font-semibold text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg cursor-pointer bg-accent text-[#07090a] shadow-[0_0_0_1px_rgba(0,200,83,0.4),0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(0,200,83,0.55),0_14px_36px_-10px_rgba(0,200,83,0.65)] disabled:opacity-40 disabled:pointer-events-none px-7 py-3.5 text-sm sm:text-base ${className}`}
     >
       {children}
       <svg
@@ -268,75 +299,54 @@ function BackButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-/**
- * Só nome + telefone, sem e-mail — enquanto o funil tá em teste não
- * precisa registrar nada, então nem chama /api/lead (ver handleContactSubmit).
- */
-function SimpleContactForm({
+/** Campo único e grande, no estilo "uma pergunta por vez" — usado nas
+ * telas de nome e telefone, em vez de um formulário com vários campos. */
+function BigField({
+  value,
+  onChange,
+  placeholder,
   onSubmit,
+  canSubmit,
+  inputMode,
+  autoFocusKey,
 }: {
-  onSubmit: (name: string, phone: string) => void;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  onSubmit: () => void;
+  canSubmit: boolean;
+  inputMode?: "text" | "tel";
+  autoFocusKey: string;
 }) {
-  const [name, setName] = useState("");
-  const [phoneDigits, setPhoneDigits] = useState("");
+  const ref = useRef<HTMLInputElement>(null);
 
-  const canSubmit = name.trim().length > 1 && phoneDigits.length >= 10;
-
-  function formatLocalNumber(digits: string): string {
-    const ddd = digits.slice(0, 2);
-    const rest = digits.slice(2, 11);
-    let out = "";
-    if (ddd) out += `(${ddd}`;
-    if (ddd.length === 2) out += ") ";
-    if (rest) {
-      const splitAt = rest.length > 8 ? 5 : 4;
-      const part1 = rest.slice(0, splitAt);
-      const part2 = rest.slice(splitAt);
-      out += part2 ? `${part1}-${part2}` : part1;
-    }
-    return out;
-  }
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    if (!canSubmit) return;
-    onSubmit(name.trim(), `55${phoneDigits}`);
-  }
+  useEffect(() => {
+    ref.current?.focus();
+  }, [autoFocusKey]);
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-5">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (canSubmit) onSubmit();
+      }}
+    >
       <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Seu nome"
-        autoComplete="name"
-        className="w-full rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 font-medium placeholder:text-muted focus:outline-none focus:border-accent/50"
+        ref={ref}
+        type={inputMode === "tel" ? "tel" : "text"}
+        inputMode={inputMode === "tel" ? "numeric" : "text"}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full bg-transparent border-0 border-b-2 border-white/15 focus:border-accent text-2xl sm:text-3xl font-bold placeholder:text-muted-2 placeholder:font-normal py-3 text-center outline-none transition-colors"
       />
-      <div className="flex items-center rounded-2xl border border-white/10 bg-surface-2 px-5 py-4 focus-within:border-accent/50">
-        <span className="font-medium text-muted shrink-0">+55</span>
-        <input
-          type="tel"
-          value={formatLocalNumber(phoneDigits)}
-          onChange={(e) => setPhoneDigits(e.target.value.replace(/\D/g, "").slice(0, 11))}
-          placeholder="(11) 91234-5678"
-          autoComplete="tel-national"
-          className="w-full min-w-0 bg-transparent pl-2 font-medium placeholder:text-muted focus:outline-none"
-        />
+      <div className="mt-10 flex justify-center">
+        <PrimaryButton type="submit" disabled={!canSubmit}>
+          Continuar
+        </PrimaryButton>
       </div>
-      <button
-        type="submit"
-        disabled={!canSubmit}
-        className="inline-flex w-full items-center justify-center rounded-full bg-accent text-[#07090a] font-semibold px-6 py-3.5 shadow-[0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-accent mt-1 cursor-pointer"
-      >
-        Continuar
-      </button>
     </form>
   );
-}
-
-function firstName(fullName: string) {
-  return fullName.trim().split(" ")[0] || fullName;
 }
 
 export function QuizFunnel() {
@@ -346,6 +356,8 @@ export function QuizFunnel() {
   const [perfilId, setPerfilId] = useState<string | null>(null);
   const [obstaculoId, setObstaculoId] = useState<string | null>(null);
   const [motivacaoId, setMotivacaoId] = useState<string | null>(null);
+  const [nameDraft, setNameDraft] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
   const [contact, setContact] = useState<{ name: string; phone: string } | null>(null);
 
   function goTo(next: StepId) {
@@ -376,12 +388,18 @@ export function QuizFunnel() {
     goNext();
   }
 
-  // Enquanto o funil está em teste, não registra em lugar nenhum (nem
-  // Supabase, nem webhook) — só guarda em memória pra personalizar o
-  // resultado com o primeiro nome. Quando for pra valer, plugar aqui o
-  // mesmo submitLead()/api/lead que os pop-ups do site já usam.
-  function handleContactSubmit(name: string, phone: string) {
-    setContact({ name, phone });
+  // Enquanto o funil está em teste, nome e telefone ficam só em memória
+  // (pra personalizar o resultado) — nada é enviado pra Supabase nem pro
+  // webhook. Quando for pra valer, plugar aqui o mesmo submitLead()/
+  // /api/lead que os pop-ups do site já usam.
+  function handleNameSubmit() {
+    if (nameDraft.trim().length < 2) return;
+    goNext();
+  }
+
+  function handlePhoneSubmit() {
+    if (phoneDigits.length < 10) return;
+    setContact({ name: nameDraft.trim(), phone: `55${phoneDigits}` });
     goNext();
   }
 
@@ -399,12 +417,13 @@ export function QuizFunnel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
-  const answeredCount = Object.keys(answers).length + (contact ? 1 : 0);
+  const answeredCount =
+    Object.keys(answers).length + (nameDraft.trim().length > 1 ? 1 : 0) + (contact ? 1 : 0);
   const progressPct = Math.min(100, (answeredCount / TOTAL_QUESTIONS) * 100);
   const showProgress = step !== "intro";
   const showBack =
     history.length > 0 &&
-    ["desejo", "motivacao", "obstaculo", "tempo", "urgencia", "contact"].includes(step);
+    ["desejo", "motivacao", "obstaculo", "tempo", "urgencia", "name", "phone"].includes(step);
 
   function renderQuestion(q: Question) {
     const qNumber = QUESTION_STEP_IDS.indexOf(q.id) + 1;
@@ -482,19 +501,45 @@ export function QuizFunnel() {
           </div>
         );
 
-      case "contact":
+      case "name":
         return (
-          <div>
+          <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
               Quase lá
             </p>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
-              Perfeito! Já sei qual é o caminho certo pra você.
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-8 text-balance">
+              Antes de mais nada, qual é o seu nome?
             </h2>
-            <p className="text-muted mb-2">
-              Pra onde eu te mando o seu diagnóstico personalizado?
+            <BigField
+              value={nameDraft}
+              onChange={setNameDraft}
+              placeholder="Digite seu nome"
+              onSubmit={handleNameSubmit}
+              canSubmit={nameDraft.trim().length > 1}
+              autoFocusKey="name"
+            />
+            {showBack && <BackButton onClick={goBack} />}
+          </div>
+        );
+
+      case "phone":
+        return (
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+              Quase lá
             </p>
-            <SimpleContactForm onSubmit={handleContactSubmit} />
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-8 text-balance">
+              Perfeito, {firstName(nameDraft) || "tudo bem"}! Qual é o seu WhatsApp?
+            </h2>
+            <BigField
+              value={formatLocalNumber(phoneDigits)}
+              onChange={(v) => setPhoneDigits(v.replace(/\D/g, "").slice(0, 11))}
+              placeholder="(11) 91234-5678"
+              onSubmit={handlePhoneSubmit}
+              canSubmit={phoneDigits.length >= 10}
+              inputMode="tel"
+              autoFocusKey="phone"
+            />
             {showBack && <BackButton onClick={goBack} />}
           </div>
         );
@@ -534,6 +579,7 @@ export function QuizFunnel() {
             </h2>
             <span
               className={`inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-1.5 text-sm font-bold text-accent mb-5 ${styles.checkPop}`}
+              style={{ animationFillMode: "both" }}
             >
               ✓ Alta compatibilidade com o método Zero aos 10K
             </span>
@@ -552,7 +598,7 @@ export function QuizFunnel() {
                 delayMs={0}
               />
               <CheckItem
-                text="Esse obstáculo tem solução direta, testada com mais de 100 alunos."
+                text="Esse obstáculo tem solução direta, e é isso que eu vou te mostrar agora."
                 delayMs={150}
               />
               <CheckItem text="Só falta um passo: ver como funciona na prática." delayMs={300} />
@@ -563,6 +609,55 @@ export function QuizFunnel() {
           </div>
         );
       }
+
+      case "autoridade":
+        return (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+              Quem te acompanha nisso
+            </p>
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-6 text-balance">
+              Antes de continuar, deixa eu me apresentar.
+            </h2>
+            <div className="flex gap-4 items-start mb-5">
+              <Image
+                src="/zero-aos-10k/lucas.jpg"
+                alt="Lucas Magalhães"
+                width={72}
+                height={72}
+                className="h-16 w-16 sm:h-[72px] sm:w-[72px] shrink-0 rounded-2xl object-cover border border-white/10"
+              />
+              <div>
+                <p className="font-bold">Lucas Magalhães</p>
+                <p className="text-muted-2 text-sm">Cofundador do Revolução AI</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 text-muted leading-relaxed">
+              <p>
+                Sou cofundador do{" "}
+                <span className="text-text font-semibold">Revolução AI</span>, uma das maiores
+                agências de IA e automações do Brasil. Hoje já atendemos mais de{" "}
+                <span className="text-text font-semibold">100 clientes</span>.
+              </p>
+              <p>Mas eu já estive exatamente onde você está agora.</p>
+              <p>
+                Não sabia por onde começar. Fiquei meses quebrando a cabeça com ferramentas
+                complexas, ligando pra empresas sem saber o que falar, sem fechar um único
+                cliente.
+              </p>
+              <blockquote className="border-l-2 border-accent/50 pl-4 py-1 text-text font-semibold">
+                Levei 6 meses pra ter meus primeiros 2 clientes.
+              </blockquote>
+              <p>
+                Até que descobri um caminho mais rápido e mais simples. Foi aí que meu jogo
+                mudou — e é esse mesmo caminho que eu ensino no Do Zero aos 10K.
+              </p>
+            </div>
+            <div className="mt-8">
+              <PrimaryButton onClick={goNext}>Quero aprender o método</PrimaryButton>
+            </div>
+          </div>
+        );
 
       case "curriculo":
         return (
@@ -609,7 +704,7 @@ export function QuizFunnel() {
               Mais de 100 clientes atendidos com esse método.
             </h2>
             <p className="text-muted leading-relaxed mb-6">
-              E dezenas de alunos que começaram exatamente de onde você está agora.
+              E gente que começou exatamente de onde você está agora.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-8">
               {depoimentosSocial.map((d) => (
