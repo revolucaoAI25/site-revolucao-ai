@@ -51,38 +51,38 @@ const aprendizado = [
   {
     title: "Estruturação",
     bullets: [
-      "Sua agência de IA de pé, com posicionamento definido",
-      "Uma oferta que as pessoas entendem de cara",
-      "Um preço que você defende com segurança, não que chuta",
-      "CNPJ aberto do jeito certo, sem gambiarra",
+      "Posicionamento e nicho da sua agência de IA, definidos com clareza",
+      "Como montar sua oferta e precificar sem chutar um número",
+      "Abertura de CNPJ e enquadramento certos pra prestar esse serviço",
+      "Uma proposta pronta, que qualquer cliente entende em 30 segundos",
     ],
   },
   {
     title: "Desenvolvimento",
     bullets: [
-      "Seu primeiro agente de IA completo, no ar e funcionando",
-      "Integrações que funcionam sem depender de ajuda externa",
-      "Domínio da ferramenta certa, sem perder tempo testando outras dez",
-      "Entrega com qualidade, sem virar refém do prazo",
+      "Construção do seu primeiro agente de IA, do zero ao WhatsApp no ar",
+      "Como integrar o agente à agenda, ao CRM e às ferramentas do cliente",
+      "Domínio prático do ChatFlux — a única ferramenta que você precisa",
+      "Checklist de qualidade pra entregar sem gambiarra e sem retrabalho",
     ],
   },
   {
     title: "Vendas",
     bullets: [
-      "Seus primeiros clientes chegando, sem sair implorando indicação",
-      "Qualificação que filtra quem não vai fechar antes de perder tempo com isso",
-      "Reuniões de venda com roteiro, não no improviso",
-      "Mais gente dizendo sim depois da conversa",
-      "Follow-up que reativa quem sumiu, em vez de deixar pra lá",
+      "Script de prospecção pra conseguir os primeiros clientes sem depender de indicação",
+      "Critérios de qualificação pra identificar quem realmente tem perfil de fechar",
+      "Roteiro de reunião de vendas, com as objeções mais comuns já resolvidas",
+      "Gatilhos de fechamento que aumentam sua taxa de conversão",
+      "Sequência de follow-up pra reativar quem sumiu no meio da conversa",
     ],
   },
   {
     title: "Pós-venda",
     bullets: [
-      "Onboarding que não assusta quem acabou de fechar com você",
-      "Só as informações que realmente importam pro projeto andar",
-      "Suporte que resolve, sem virar plantão 24 horas",
-      "Clientes que ficam — e trazem outros de indicação",
+      "Fluxo de onboarding que passa segurança logo no primeiro contato",
+      "O que perguntar ao cliente — e o que não vale a pena perguntar",
+      "Estrutura de suporte com prazos claros, sem virar plantão 24 horas",
+      "Estratégia pra transformar cliente satisfeito em indicação nova",
     ],
   },
 ];
@@ -162,24 +162,22 @@ export default function ZeroAosDezKV2() {
           </Reveal>
 
           <Reveal delay={80} className="max-w-2xl mx-auto flex flex-col gap-5 text-muted leading-relaxed text-base sm:text-[17px]">
-            <p>
-              Você sente que todo mundo já está ganhando dinheiro com
-              Inteligência Artificial... menos você?
+            <p className="text-text text-lg sm:text-xl font-semibold">
+              Todo mundo parece estar ganhando dinheiro com IA. Menos você.
             </p>
             <p>
-              O mercado está explodindo. Você vê gente faturando com
-              automações, construindo agências, fechando clientes. Mas quando
-              tenta entender como entrar, parece um labirinto — mil
+              O mercado está em uma explosão sem precedentes — automações,
+              agências, clientes fechando todos os dias. Só que na hora de
+              entender por onde entrar, você esbarra num labirinto: mil
               ferramentas, mil promessas e nenhuma direção clara.
             </p>
             <p>
-              E é exatamente por isso que tanta gente boa trava. Ou começa do
-              jeito errado e acaba desistindo no meio do caminho.
+              É exatamente por isso que tanta gente boa trava. Ou pior: começa
+              do jeito errado e desiste no meio do caminho.
             </p>
             <div>
               <p className="text-text font-semibold mb-3">
-                Se você se encaixa em uma dessas situações, esse conteúdo é
-                pra você:
+                Esse conteúdo é pra você se:
               </p>
               <ul className="flex flex-col gap-2">
                 <li className="flex gap-3">
@@ -189,25 +187,26 @@ export default function ZeroAosDezKV2() {
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Já até começou, sabe usar o n8n ou outras ferramentas, mas
-                  ainda não sabe vender e mal viu a cor da grana
+                  Já sabe usar o n8n ou outras ferramentas, mas ainda não
+                  sabe vender e mal viu a cor da grana
                 </li>
                 <li className="flex gap-3">
                   <span className="text-accent shrink-0">→</span>
-                  Está cansado de ver promessas milagrosas que não funcionam na
+                  Está cansado de promessa milagrosa que não funciona na
                   prática
                 </li>
               </ul>
             </div>
             <p>
-              A verdade é que ainda dá pra entrar agora. Dá pra construir um
-              negócio de IA sólido. E dá pra estar faturando{" "}
-              <span className="text-text font-semibold">R$10 mil por mês</span>{" "}
-              de forma relativamente rápida — desde que você tenha um{" "}
-              <span className="text-accent font-semibold">plano simples</span>{" "}
-              que funciona.
+              Mas ainda dá tempo. Dá pra construir uma agência de IA sólida e
+              chegar aos seus primeiros{" "}
+              <span className="text-accent font-semibold">R$10 mil por mês</span>{" "}
+              em poucas semanas — com um plano simples, que já funcionou pra
+              centenas de pessoas.
             </p>
-            <p>E esse plano tem nome e sobrenome — o meu.</p>
+            <p className="text-text font-semibold">
+              E esse plano tem nome e sobrenome. O meu.
+            </p>
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-center gap-3 mt-10">
@@ -416,7 +415,10 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* O que você vai aprender */}
-        <Section divider>
+        <Section
+          divider
+          decor={<div className="glow absolute h-[360px] w-[360px] -top-20 -right-20 opacity-70" />}
+        >
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>O treinamento</Eyebrow>
             <SectionTitle>O que você vai aprender.</SectionTitle>
@@ -429,7 +431,7 @@ export default function ZeroAosDezKV2() {
               <Reveal
                 key={bloco.title}
                 delay={index * 80}
-                className="card-surface rounded-3xl p-7"
+                className="card-surface card-hover hover:bg-white/[0.02] rounded-3xl p-7"
               >
                 <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent-soft text-sm font-black text-accent">
                   {index + 1}
@@ -493,7 +495,7 @@ export default function ZeroAosDezKV2() {
                   alt="Depoimento de aluno do treinamento Do Zero aos 10K"
                   width={depoimento.width}
                   height={depoimento.height}
-                  className="w-full h-auto rounded-2xl border border-white/10"
+                  className="w-full h-auto rounded-2xl border border-white/10 transition-all duration-300 hover:border-accent/40 hover:-translate-y-1"
                 />
               </Reveal>
             ))}
@@ -542,7 +544,7 @@ export default function ZeroAosDezKV2() {
             <Eyebrow>Do Zero aos 10K com Agentes de IA</Eyebrow>
             <SectionTitle>O investimento.</SectionTitle>
           </Reveal>
-          <Reveal delay={80} className="max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10">
+          <Reveal delay={80} className="max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1">
             <div className="flex flex-wrap items-baseline gap-3 mb-2">
               <span className="text-4xl font-black tracking-tight text-accent">
                 R$ 37,90
