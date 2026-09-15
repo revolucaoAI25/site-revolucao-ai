@@ -8,6 +8,8 @@ import { PillarCard } from "@/components/ui/PillarCard";
 import { ClientLogos } from "@/components/ui/ClientLogos";
 import { Reveal } from "@/components/ui/Reveal";
 import { EMAIL, ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
+import { ScrollProgress } from "./ScrollProgress";
+import effects from "./effects.module.css";
 
 const title = "Do Zero aos 10K com Agentes de IA";
 const description =
@@ -109,14 +111,15 @@ export default function ZeroAosDezKV2() {
   return (
     <>
       <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-md border-b border-white/10">
+        <ScrollProgress />
         <Container className="flex items-center justify-between h-16 sm:h-20">
-          <Link href="/" className="inline-flex items-center gap-2.5">
+          <Link href="/" className="inline-flex items-center gap-2.5 group">
             <Image
               src="/logo.png"
               alt="Revolução AI"
               width={32}
               height={32}
-              className="h-8 w-8 shrink-0 rounded-full"
+              className="h-8 w-8 shrink-0 rounded-full transition-transform duration-300 group-hover:scale-110"
               priority
             />
             <span className="leading-tight">
@@ -142,7 +145,12 @@ export default function ZeroAosDezKV2() {
           decor={
             <>
               <div className="absolute inset-0 bg-grid" />
-              <div className="glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2" />
+              <div
+                className={`glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
+              />
+              <div
+                className={`glow h-[220px] w-[220px] top-20 -right-10 ${effects.floatDrift}`}
+              />
             </>
           }
         >
@@ -261,14 +269,14 @@ export default function ZeroAosDezKV2() {
                 </p>
               </div>
             </Reveal>
-            <Reveal delay={100}>
-              <div className="rounded-3xl overflow-hidden border border-white/10">
+            <Reveal delay={100} className="group">
+              <div className="rounded-3xl overflow-hidden border border-white/10 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_40px_-14px_rgba(0,200,83,0.5)]">
                 <Image
                   src="/zero-aos-10k/lucas.jpg"
                   alt="Lucas Magalhães"
                   width={640}
                   height={640}
-                  className="w-full h-auto"
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <p className="text-muted-2 text-sm mt-3">
@@ -290,7 +298,8 @@ export default function ZeroAosDezKV2() {
           </Reveal>
           <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {motivos.map((motivo, index) => (
-              <Reveal key={motivo.number} delay={index * 100}>
+              <Reveal key={motivo.number} delay={index * 100} className="group relative">
+                <div className="glow h-[200px] w-[200px] -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 <PillarCard
                   number={motivo.number}
                   title={motivo.title}
@@ -378,7 +387,7 @@ export default function ZeroAosDezKV2() {
               3 etapas principais:
             </p>
             <div className="grid sm:grid-cols-3 gap-6">
-              <div className="card-surface rounded-3xl p-6">
+              <div className="card-surface card-hover rounded-3xl p-6">
                 <h4 className="font-bold mb-2">1) Aquisição</h4>
                 <p className="text-muted text-sm leading-relaxed mb-3">
                   Atrair pessoas interessadas no seu produto.
@@ -389,14 +398,14 @@ export default function ZeroAosDezKV2() {
                   <li>— Produzir conteúdo nas redes sociais</li>
                 </ul>
               </div>
-              <div className="card-surface rounded-3xl p-6">
+              <div className="card-surface card-hover rounded-3xl p-6">
                 <h4 className="font-bold mb-2">2) Qualificação</h4>
                 <p className="text-muted text-sm leading-relaxed">
                   Entender se são o perfil de cliente ideal — muita gente pula
                   isso e perde tempo com quem nunca vai fechar.
                 </p>
               </div>
-              <div className="card-surface rounded-3xl p-6">
+              <div className="card-surface card-hover rounded-3xl p-6">
                 <h4 className="font-bold mb-2">3) Conversão</h4>
                 <p className="text-muted text-sm leading-relaxed mb-3">
                   Transformar interessados em clientes.
@@ -515,37 +524,54 @@ export default function ZeroAosDezKV2() {
             <Eyebrow>A decisão</Eyebrow>
             <SectionTitle>A mesma bifurcação que eu vivi.</SectionTitle>
           </Reveal>
-          <Reveal delay={80} className="max-w-2xl mx-auto flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]">
-            <p>
-              Eu já passei exatamente pelo ponto em que você está agora. De um
-              lado, dava pra entrar sozinho — tentar montar o primeiro agente
-              no escuro, quebrar a cabeça com ferramenta errada, ligar pra
-              empresa sem saber o que falar.
-            </p>
-            <p>
-              Foi o que eu fiz. Levei 6 meses pra fechar meus primeiros 2
-              clientes, e boa parte de quem tenta esse caminho desiste antes
-              disso.
-            </p>
-            <p>
-              Do outro lado, tinha o caminho que eu só enxerguei depois: pegar
-              o método que eu uso hoje na minha operação de 6 dígitos e
-              aplicar direto, sem reinventar nada. Sem firula, sem enrolação —
-              só o que realmente funciona.
-            </p>
-            <p className="text-text font-semibold">
-              Hoje esse segundo caminho tem nome: Zero aos 10K.
-            </p>
+          <Reveal delay={80} className="max-w-2xl mx-auto">
+            <div className="relative pl-8 flex flex-col gap-8">
+              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-muted-2/50 via-muted-2/20 to-accent/70" />
+              <div className="relative flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]">
+                <span className="absolute -left-8 top-1.5 h-3.5 w-3.5 rounded-full bg-muted-2 ring-4 ring-bg" />
+                <p>
+                  Eu já passei exatamente pelo ponto em que você está agora. De
+                  um lado, dava pra entrar sozinho — tentar montar o primeiro
+                  agente no escuro, quebrar a cabeça com ferramenta errada,
+                  ligar pra empresa sem saber o que falar.
+                </p>
+                <p>
+                  Foi o que eu fiz. Levei 6 meses pra fechar meus primeiros 2
+                  clientes, e boa parte de quem tenta esse caminho desiste
+                  antes disso.
+                </p>
+              </div>
+              <div className="relative flex flex-col gap-4 text-muted leading-relaxed text-base sm:text-[17px]">
+                <span className="absolute -left-8 top-1.5 h-3.5 w-3.5 rounded-full bg-accent shadow-[0_0_10px_rgba(0,200,83,0.7)] ring-4 ring-bg" />
+                <p>
+                  Do outro lado, tinha o caminho que eu só enxerguei depois:
+                  pegar o método que eu uso hoje na minha operação de 6
+                  dígitos e aplicar direto, sem reinventar nada. Sem firula,
+                  sem enrolação — só o que realmente funciona.
+                </p>
+                <p className="text-text font-semibold">
+                  Hoje esse segundo caminho tem nome: Zero aos 10K.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </Section>
 
         {/* Oferta */}
-        <Section id="oferta" divider>
+        <Section
+          id="oferta"
+          divider
+          decor={
+            <div
+              className={`glow h-[380px] w-[380px] top-10 left-1/2 -translate-x-1/2 ${effects.floatDrift}`}
+            />
+          }
+        >
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
             <Eyebrow>Do Zero aos 10K com Agentes de IA</Eyebrow>
             <SectionTitle>O investimento.</SectionTitle>
           </Reveal>
-          <Reveal delay={80} className="max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1">
+          <Reveal delay={80} className="relative max-w-xl mx-auto rounded-3xl border border-accent/20 bg-accent-soft p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1">
             <div className="flex flex-wrap items-baseline gap-3 mb-2">
               <span className="text-4xl font-black tracking-tight text-accent">
                 R$ 37,90
@@ -582,7 +608,9 @@ export default function ZeroAosDezKV2() {
         {/* Fechamento */}
         <Section divider>
           <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
-            <div className="glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2" />
+            <div
+              className={`glow h-[320px] w-[320px] -top-24 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
+            />
             <p className="relative text-muted leading-relaxed max-w-2xl mx-auto mb-2">
               Você já viu clínica, escritório, e-commerce e dezenas de outros
               negócios sendo atendidos com o que eu ensino aqui. E viu gente
