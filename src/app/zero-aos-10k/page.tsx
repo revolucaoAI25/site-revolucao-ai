@@ -236,7 +236,7 @@ export default function ZeroAosDezK() {
                   Atualmente tenho faturamento de{" "}
                   <span className="text-text font-semibold">6 dígitos</span> e
                   já atendi mais de{" "}
-                  <span className="text-text font-semibold">100 clientes</span>{" "}
+                  <span className="text-text font-semibold">120 clientes</span>{" "}
                   na minha agência.
                 </p>
                 <p>Mas eu já estive exatamente onde você está agora.</p>

@@ -678,7 +678,7 @@ export function QuizFunnel() {
                 Sou cofundador do{" "}
                 <span className="text-text font-semibold">Revolução AI</span>, uma das maiores
                 agências de IA e automações do Brasil. Hoje já atendemos mais de{" "}
-                <span className="text-text font-semibold">100 clientes</span>.
+                <span className="text-text font-semibold">120 clientes</span>.
               </p>
               <p>Mas eu já estive exatamente onde você está agora.</p>
               <p>
@@ -742,7 +742,7 @@ export function QuizFunnel() {
               Quem já saiu do zero
             </p>
             <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
-              Mais de 100 clientes atendidos com esse método.
+              Mais de 120 clientes atendidos com esse método.
             </h2>
             <p className="text-muted leading-relaxed mb-6">
               E gente que começou exatamente de onde você está agora.
