@@ -1,0 +1,83 @@
+/*
+ * Animações exclusivas da LP do Agente Construtor — CSS Module (classes com
+ * hash único), sem efeito nenhum fora desta rota.
+ *
+ * Importante: nada aqui usa uma classe estática de opacity-0 junto com a
+ * animação. O estado inicial (invisível) vem do próprio keyframe, e o
+ * fill-mode "both" segura o estado final — sem isso o item some quando a
+ * animação termina.
+ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeUp {
+  animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pop {
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes floatPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.floatPulse {
+  animation: floatPulse 6s ease-in-out infinite;
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  animation: caret 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeUp,
+  .pop,
+  .floatPulse,
+  .caret {
+    animation: none;
+  }
+}
