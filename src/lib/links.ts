@@ -49,12 +49,12 @@ export const PRODUTO_LOW_TICKET_LINK = "/zero-aos-10k-v2";
 export const ZERO_AOS_10K_CHECKOUT_LINK = "https://pay.kiwify.com.br/MnBz0ac";
 
 /**
- * PLACEHOLDER — checkout do Agente Construtor (order bump do Zero aos 10K,
- * R$21,90, ver src/app/agente-construtor). O cliente ainda vai enviar o
+ * PLACEHOLDER — checkout do Construtor de Agentes (order bump do Zero aos 10K,
+ * R$21,90, ver src/app/construtor-de-agentes). O cliente ainda vai enviar o
  * link real da Kiwify; até lá, o botão da LP aponta pra esta URL fictícia.
  * Trocar aqui assim que chegar.
  */
-export const AGENTE_CONSTRUTOR_CHECKOUT_LINK = "https://pay.kiwify.com.br/SUBSTITUIR-PELO-LINK-REAL";
+export const CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK = "https://pay.kiwify.com.br/SUBSTITUIR-PELO-LINK-REAL";
 
 /**
  * LP do Lead Extractor — resultado "só preciso de uma base de leads pra

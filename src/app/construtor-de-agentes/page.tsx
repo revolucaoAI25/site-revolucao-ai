@@ -4,11 +4,11 @@ import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { AGENTE_CONSTRUTOR_CHECKOUT_LINK, EMAIL } from "@/lib/links";
+import { CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK, EMAIL } from "@/lib/links";
 import { ClaudeIcon } from "./ClaudeMark";
 import styles from "./bump.module.css";
 
-const title = "Agente Construtor — complemento do Do Zero aos 10K";
+const title = "Construtor de Agentes — complemento do Do Zero aos 10K";
 const description =
   "Um agente do Claude que monta os agentes que você vende: prompt, stepper, perguntas e respostas e funções, tudo no padrão da Revolução AI.";
 
@@ -77,7 +77,7 @@ const beneficios = [
 ];
 
 const ofertaItens = [
-  "O Agente Construtor, pronto pra instalar no seu Claude",
+  "O Construtor de Agentes, pronto pra instalar no seu Claude",
   "Passo a passo de instalação enviado por e-mail",
   "Os mesmos prompts e o método que a Revolução AI usa nos projetos",
   "Prompt do sistema, stepper, perguntas e respostas e funções, tudo no mesmo padrão",
@@ -86,7 +86,7 @@ const ofertaItens = [
 const perguntas = [
   {
     q: "Preciso ter feito o curso?",
-    a: "O Agente Construtor foi pensado como complemento do Do Zero aos 10K. O curso ensina o método inteiro; o agente acelera a execução, então você aproveita muito mais com os dois juntos.",
+    a: "O Construtor de Agentes foi pensado como complemento do Do Zero aos 10K. O curso ensina o método inteiro; o agente acelera a execução, então você aproveita muito mais com os dois juntos.",
   },
   {
     q: "Como eu recebo?",
@@ -141,7 +141,7 @@ function AgentChat() {
           </div>
           <div className="flex items-center gap-2 text-sm font-semibold text-muted">
             <ClaudeIcon size={16} />
-            Agente Construtor
+            Construtor de Agentes
           </div>
         </div>
 
@@ -186,7 +186,7 @@ function AgentChat() {
   );
 }
 
-export default function AgenteConstrutorPage() {
+export default function ConstrutorDeAgentesPage() {
   return (
     <>
       <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-md border-b border-white/10">
@@ -201,15 +201,15 @@ export default function AgenteConstrutorPage() {
               priority
             />
             <span className="leading-tight">
-              <span className="block font-black tracking-tight text-[15px] sm:text-base text-text">
-                Agente Construtor
+              <span className="block font-black tracking-tight whitespace-nowrap text-[15px] sm:text-base text-text">
+                Construtor de Agentes
               </span>
               <span className="block text-[11px] font-semibold uppercase tracking-widest text-muted-2">
                 Revolução AI
               </span>
             </span>
           </div>
-          <CTAButton href={AGENTE_CONSTRUTOR_CHECKOUT_LINK} external size="md">
+          <CTAButton href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK} external size="md" icon={false}>
             Comprar
           </CTAButton>
         </Container>
@@ -244,8 +244,8 @@ export default function AgenteConstrutorPage() {
                 <span className="text-4xl font-black tracking-tight text-accent">R$ 21,90</span>
                 <span className="text-muted font-semibold">| pagamento único</span>
               </div>
-              <CTAButton href={AGENTE_CONSTRUTOR_CHECKOUT_LINK} external size="lg">
-                Quero o Agente Construtor
+              <CTAButton href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK} external size="lg">
+                Quero o Construtor de Agentes
               </CTAButton>
               <p className="text-muted-2 text-sm mt-4">
                 ⚡ As instruções de instalação chegam no seu e-mail assim que o pagamento é
@@ -284,7 +284,7 @@ export default function AgenteConstrutorPage() {
             <SectionTitle>Tudo que um agente precisa, no mesmo padrão.</SectionTitle>
             <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent/70" />
             <p className="text-muted leading-relaxed mt-4">
-              Pra cada cliente, o Agente Construtor monta os quatro componentes que o agente
+              Pra cada cliente, o Construtor de Agentes monta os quatro componentes que o agente
               precisa pra funcionar no Chatflux.
             </p>
           </Reveal>
@@ -348,7 +348,7 @@ export default function AgenteConstrutorPage() {
           <Reveal delay={120} className="max-w-3xl mx-auto mt-8">
             <div className="border-l-2 border-accent/50 pl-4 py-1 text-muted leading-relaxed">
               <span className="text-text font-semibold">O curso continua sendo a base.</span> O
-              Do Zero aos 10K ensina o método inteiro. O Agente Construtor só acelera a
+              Do Zero aos 10K ensina o método inteiro. O Construtor de Agentes só acelera a
               execução, porque já vem com tudo montado.
             </div>
           </Reveal>
@@ -365,7 +365,7 @@ export default function AgenteConstrutorPage() {
           }
         >
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
-            <Eyebrow>Agente Construtor</Eyebrow>
+            <Eyebrow>Construtor de Agentes</Eyebrow>
             <SectionTitle>O investimento.</SectionTitle>
             <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent/70" />
           </Reveal>
@@ -390,12 +390,12 @@ export default function AgenteConstrutorPage() {
               ))}
             </ul>
             <CTAButton
-              href={AGENTE_CONSTRUTOR_CHECKOUT_LINK}
+              href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK}
               external
               size="lg"
               className="w-full"
             >
-              Quero o Agente Construtor
+              Quero o Construtor de Agentes
             </CTAButton>
             <p className="text-muted-2 text-xs text-center mt-4">
               🔒 Compra segura • feito pela equipe da Revolução AI, que já atendeu mais de 120
@@ -436,7 +436,7 @@ export default function AgenteConstrutorPage() {
       <footer className="border-t border-white/10 py-10">
         <Container className="flex flex-col gap-4 text-sm text-muted">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>Agente Construtor by Revolução AI</p>
+            <p>Construtor de Agentes by Revolução AI</p>
             <a href={`mailto:${EMAIL}`} className="hover:text-text transition-colors">
               {EMAIL}
             </a>
