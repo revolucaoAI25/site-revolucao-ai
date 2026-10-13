@@ -8,7 +8,7 @@ import { CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK, EMAIL } from "@/lib/links";
 import { ClaudeIcon } from "./ClaudeMark";
 import styles from "./bump.module.css";
 
-const title = "Construtor de Agentes — complemento do Do Zero aos 10K";
+const title = "Obrigado pela compra — Construtor de Agentes";
 const description =
   "Um agente do Claude que monta os agentes que você vende: prompt, stepper, perguntas e respostas e funções, tudo no padrão da Revolução AI.";
 
@@ -58,24 +58,6 @@ const passos = [
   },
 ];
 
-const beneficios = [
-  {
-    title: "Tempo de volta pra você",
-    description:
-      "O trabalho pesado de escrever e organizar cada componente já vem feito. Seu tempo vai pra vender e acompanhar seus clientes.",
-  },
-  {
-    title: "Método que já está validado",
-    description:
-      "É o jeito que a Revolução AI constrói os agentes dos clientes dela, com os mesmos prompts e a mesma estrutura.",
-  },
-  {
-    title: "Padrão em todo projeto",
-    description:
-      "Cada agente sai com os quatro componentes alinhados entre si, sem um contradizer o outro.",
-  },
-];
-
 const ofertaItens = [
   "O Construtor de Agentes, pronto pra instalar no seu Claude",
   "Passo a passo de instalação enviado por e-mail",
@@ -85,8 +67,8 @@ const ofertaItens = [
 
 const perguntas = [
   {
-    q: "Preciso ter feito o curso?",
-    a: "O Construtor de Agentes foi pensado como complemento do Do Zero aos 10K. O curso ensina o método inteiro; o agente acelera a execução, então você aproveita muito mais com os dois juntos.",
+    q: "Ele substitui o curso?",
+    a: "Não. O Do Zero aos 10K continua sendo a base e ensina o método inteiro. O Construtor de Agentes só acelera a execução, porque já vem com tudo montado.",
   },
   {
     q: "Como eu recebo?",
@@ -210,7 +192,7 @@ export default function ConstrutorDeAgentesPage() {
             </span>
           </div>
           <CTAButton href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK} external size="md" icon={false}>
-            Comprar
+            Quero
           </CTAButton>
         </Container>
       </header>
@@ -229,7 +211,16 @@ export default function ConstrutorDeAgentesPage() {
         >
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-14 items-center">
             <Reveal>
-              <Eyebrow>Complemento do Do Zero aos 10K</Eyebrow>
+              <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-1.5 text-sm font-semibold text-accent mb-5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Obrigado pela compra!
+              </p>
+              <p className="text-muted text-[15px] leading-relaxed mb-6 max-w-xl">
+                O acesso ao Do Zero aos 10K chega no e-mail que você usou na compra. Antes de sair, tem um
+                complemento opcional pra você começar já montando agentes:
+              </p>
               <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance mb-5">
                 Um agente do Claude que monta os agentes que{" "}
                 <span className="text-accent">você vende.</span>
@@ -324,34 +315,6 @@ export default function ConstrutorDeAgentesPage() {
               </Reveal>
             ))}
           </div>
-        </Section>
-
-        {/* Por que vale */}
-        <Section divider className="bg-tint">
-          <Reveal className="max-w-2xl mx-auto text-center mb-12">
-            <Eyebrow>O resultado</Eyebrow>
-            <SectionTitle>Mais velocidade, com o método que já funciona.</SectionTitle>
-            <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent/70" />
-          </Reveal>
-          <div className="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
-            {beneficios.map((item, i) => (
-              <Reveal
-                key={item.title}
-                delay={i * 80}
-                className="card-surface card-hover rounded-3xl p-5 sm:p-6"
-              >
-                <h3 className="font-black text-lg mb-1.5">{item.title}</h3>
-                <p className="text-muted text-[15px] leading-relaxed">{item.description}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={120} className="max-w-3xl mx-auto mt-8">
-            <div className="border-l-2 border-accent/50 pl-4 py-1 text-muted leading-relaxed">
-              <span className="text-text font-semibold">O curso continua sendo a base.</span> O
-              Do Zero aos 10K ensina o método inteiro. O Construtor de Agentes só acelera a
-              execução, porque já vem com tudo montado.
-            </div>
-          </Reveal>
         </Section>
 
         {/* Oferta */}

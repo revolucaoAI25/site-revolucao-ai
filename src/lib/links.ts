@@ -57,7 +57,7 @@ export const ZERO_AOS_10K_CHECKOUT_LINK = "https://pay.kiwify.com.br/MnBz0ac";
  * link real da Kiwify; até lá, o botão da LP aponta pra esta URL fictícia.
  * Trocar aqui assim que chegar.
  */
-export const CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK = "https://pay.kiwify.com.br/SUBSTITUIR-PELO-LINK-REAL";
+export const CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK = "https://pay.kiwify.com.br/4ZpEf0y";
 
 /**
  * LP do Lead Extractor — resultado "só preciso de uma base de leads pra
