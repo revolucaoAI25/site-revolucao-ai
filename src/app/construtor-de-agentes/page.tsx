@@ -200,7 +200,7 @@ export default function ConstrutorDeAgentesPage() {
       <main>
         {/* Obrigado */}
         <Section
-          className="!pb-6 sm:!pb-10"
+          className="!pt-10 sm:!pt-16 !pb-6 sm:!pb-10"
           decor={
             <>
               <div className="absolute inset-0 bg-grid" />
@@ -212,9 +212,9 @@ export default function ConstrutorDeAgentesPage() {
         >
           <div className="max-w-2xl mx-auto text-center flex flex-col items-center">
             <span
-              className={`inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent text-[#07090a] shadow-[0_0_40px_rgba(0,200,83,0.45)] mb-7 ${styles.pop}`}
+              className={`inline-flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-accent text-[#07090a] shadow-[0_0_40px_rgba(0,200,83,0.45)] mb-6 ${styles.pop}`}
             >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M5 12l5 5L20 7"
                   stroke="currentColor"
@@ -225,26 +225,28 @@ export default function ConstrutorDeAgentesPage() {
               </svg>
             </span>
             <Reveal>
-              <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance mb-4">
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance mb-3">
                 Obrigado pela <span className="text-accent">compra!</span>
               </h1>
-              <p className="text-text text-lg sm:text-xl font-semibold text-balance mb-3">
-                Você acabou de entrar no Do Zero aos 10K.
+              <p className="text-text text-lg sm:text-xl font-semibold text-balance mb-2">
+                Você acabou de dar o primeiro passo pra vender agentes de IA.
               </p>
-              <p className="text-muted text-base sm:text-lg leading-relaxed text-balance max-w-xl mx-auto">
-                O acesso chega no e-mail que você usou na compra. Se não aparecer em alguns
-                minutos, dá uma olhada no spam.
+              <p className="text-muted text-[15px] sm:text-base leading-relaxed text-balance max-w-md mx-auto">
+                O acesso ao Do Zero aos 10K está a caminho do seu e-mail. Se demorar, olha o spam.
               </p>
             </Reveal>
-            <div className="mt-10 flex flex-col items-center gap-2 text-muted-2">
-              <span className="text-sm font-semibold">Mas antes de ir, olha isso</span>
+            <a
+              href="#atalho"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent-soft px-5 py-3 text-sm sm:text-base font-semibold text-text transition-colors hover:border-accent"
+            >
+              Antes de fechar a página: um atalho pro seu 1º agente
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
-                className="text-accent"
+                className="shrink-0 text-accent"
               >
                 <path
                   d="M6 9l6 6 6-6"
@@ -254,13 +256,14 @@ export default function ConstrutorDeAgentesPage() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </div>
+            </a>
           </div>
         </Section>
 
         {/* Oferta do complemento */}
         <Section
-          className="!pt-6 sm:!pt-10"
+          id="atalho"
+          className="scroll-mt-16 !pt-10 sm:!pt-14"
           decor={
             <>
               <div className="absolute inset-0 bg-grid" />
@@ -272,15 +275,20 @@ export default function ConstrutorDeAgentesPage() {
         >
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-14 items-center">
             <Reveal>
-              <Eyebrow>Um atalho pra começar mais rápido</Eyebrow>
+              <Eyebrow>Pra você sair na frente</Eyebrow>
               <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-balance mb-5">
-                Um agente do Claude que monta os agentes que{" "}
-                <span className="text-accent">você vende.</span>
+                Na hora de montar seu 1º agente,{" "}
+                <span className="text-accent">você não precisa começar do zero.</span>
               </h2>
+              <p className="text-muted text-base sm:text-lg leading-relaxed mb-4 max-w-xl">
+                O curso te ensina o método. Só que cada cliente novo exige escrever o prompt, o
+                stepper, as perguntas e respostas e as funções do agente, e é aí que o tempo
+                vai embora.
+              </p>
               <p className="text-muted text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-                Você conta como é o negócio do seu cliente. Ele entrega o agente completo,
-                pronto pro Chatflux, seguindo o mesmo método que a Revolução AI usa nos
-                projetos dela.
+                O <span className="text-text font-semibold">Construtor de Agentes</span> é o agente
+                que a Revolução AI usa pra montar tudo isso. Você descreve o negócio do cliente e
+                ele entrega o agente completo, pronto pro Chatflux.
               </p>
 
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-5">
