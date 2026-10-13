@@ -138,3 +138,164 @@ on conflict (id) do nothing;
 -- sessão. Pra criar o primeiro usuário que vai logar no admin: no painel
 -- do Supabase, Authentication → Users → Add user (defina e-mail e senha
 -- ali mesmo, não precisa de fluxo de cadastro).
+
+-- ---------------------------------------------------------------------------
+-- Métricas dos funis (/funil-10k e /zero-aos-10k-v2) — painel /admin/funis.
+--
+-- Cada linha é um evento de comportamento ANÔNIMO (visualizou a página,
+-- chegou numa etapa, respondeu uma pergunta, clicou no checkout...). Não
+-- guarda IP nem nome/telefone: só um id de sessão aleatório gerado no
+-- navegador (sessionStorage). É por isso que dá pra ver até onde quem NÃO
+-- chegou a preencher o formulário foi, e o que respondeu antes de sair.
+-- Gravada por /api/track com a service role (RLS ligado, sem policy).
+-- ---------------------------------------------------------------------------
+create table if not exists public.funnel_events (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  page text not null,
+  session_id text not null,
+  event text not null,
+  step text,
+  data jsonb not null default '{}'::jsonb
+);
+
+create index if not exists funnel_events_page_created_idx
+  on public.funnel_events (page, created_at desc);
+create index if not exists funnel_events_session_idx
+  on public.funnel_events (session_id);
+
+alter table public.funnel_events enable row level security;
+
+-- Números do painel, calculados no banco (assim o admin não puxa milhares
+-- de linhas pro servidor). p_days = janela móvel, em dias.
+create or replace function public.funnel_dashboard(p_page text, p_days integer default 7)
+returns jsonb
+language sql
+stable
+as $$
+  with ev as (
+    select * from public.funnel_events
+    where page = p_page
+      and created_at >= now() - make_interval(days => greatest(p_days, 1))
+  ),
+  sess as (
+    select
+      session_id,
+      min(created_at) as first_seen,
+      bool_or(event = 'contact_submit') as is_lead,
+      bool_or(event = 'checkout_click') as clicked,
+      bool_or(event in ('answer', 'scroll_depth', 'checkout_click')) as engaged,
+      (array_agg(data order by created_at) filter (where event = 'page_view'))[1] as pv
+    from ev
+    group by session_id
+  )
+  select jsonb_build_object(
+    'sessions', (select count(*) from sess),
+    'leads', (select count(*) from sess where is_lead),
+    'checkout_sessions', (select count(*) from sess where clicked),
+    'engaged', (select count(*) from sess where engaged),
+    'by_day', (
+      select coalesce(jsonb_agg(d order by d.day), '[]'::jsonb) from (
+        select to_char((first_seen at time zone 'America/Sao_Paulo')::date, 'YYYY-MM-DD') as day,
+               count(*) as sessions,
+               count(*) filter (where is_lead) as leads,
+               count(*) filter (where clicked) as checkouts
+        from sess group by 1
+      ) d
+    ),
+    'by_step', (
+      select coalesce(jsonb_agg(jsonb_build_object('step', s.step, 'sessions', s.n)), '[]'::jsonb) from (
+        select step, count(distinct session_id) as n
+        from ev where event = 'step_view' and step is not null group by step
+      ) s
+    ),
+    'answers', (
+      select coalesce(jsonb_agg(jsonb_build_object('question', a.q, 'label', a.l, 'sessions', a.n) order by a.q, a.n desc), '[]'::jsonb) from (
+        select data->>'question' as q, data->>'label' as l, count(distinct session_id) as n
+        from ev where event = 'answer' group by 1, 2
+      ) a
+    ),
+    'scroll', (
+      select coalesce(jsonb_agg(jsonb_build_object('percent', c.p, 'sessions', c.n) order by c.p), '[]'::jsonb) from (
+        select (data->>'percent')::int as p, count(distinct session_id) as n
+        from ev where event = 'scroll_depth' group by 1
+      ) c
+    ),
+    'sections', (
+      select coalesce(jsonb_agg(jsonb_build_object('section', c.s, 'sessions', c.n)), '[]'::jsonb) from (
+        select data->>'section' as s, count(distinct session_id) as n
+        from ev where event = 'section_view' group by 1
+      ) c
+    ),
+    'ctas', (
+      select coalesce(jsonb_agg(jsonb_build_object('location', c.loc, 'clicks', c.clicks, 'sessions', c.n)), '[]'::jsonb) from (
+        select coalesce(data->>'location', 'outro') as loc, count(*) as clicks, count(distinct session_id) as n
+        from ev where event = 'checkout_click' group by 1
+      ) c
+    ),
+    'devices', (
+      select coalesce(jsonb_agg(jsonb_build_object('key', c.k, 'sessions', c.n) order by c.n desc), '[]'::jsonb) from (
+        select coalesce(pv->>'device', 'desconhecido') as k, count(*) as n from sess group by 1
+      ) c
+    ),
+    'in_app', (
+      select coalesce(jsonb_agg(jsonb_build_object('key', c.k, 'sessions', c.n) order by c.n desc), '[]'::jsonb) from (
+        select coalesce(pv->>'in_app', 'desconhecido') as k, count(*) as n from sess group by 1
+      ) c
+    ),
+    'utm_source', (
+      select coalesce(jsonb_agg(jsonb_build_object('key', c.k, 'sessions', c.n) order by c.n desc), '[]'::jsonb) from (
+        select coalesce(nullif(pv->>'utm_source', ''), '(direto)') as k, count(*) as n from sess group by 1
+      ) c
+    ),
+    'utm_campaign', (
+      select coalesce(jsonb_agg(jsonb_build_object('key', c.k, 'sessions', c.n) order by c.n desc), '[]'::jsonb) from (
+        select coalesce(nullif(pv->>'utm_campaign', ''), '(sem campanha)') as k, count(*) as n from sess group by 1
+      ) c
+    )
+  );
+$$;
+
+-- Últimas sessões, uma por visita: até onde foi, o que respondeu, se virou
+-- lead ou clicou no checkout. É aqui que aparece quem respondeu só uma parte.
+create or replace function public.funnel_recent_sessions(
+  p_page text, p_days integer default 7, p_limit integer default 60
+)
+returns jsonb
+language sql
+stable
+as $$
+  with ev as (
+    select * from public.funnel_events
+    where page = p_page
+      and created_at >= now() - make_interval(days => greatest(p_days, 1))
+  ),
+  agg as (
+    select
+      session_id,
+      min(created_at) as first_seen,
+      max(created_at) as last_seen,
+      max(case when event = 'step_view' then (data->>'index')::int end) as max_step_index,
+      max(case when event = 'scroll_depth' then (data->>'percent')::int end) as max_scroll,
+      bool_or(event = 'contact_submit') as is_lead,
+      bool_or(event = 'checkout_click') as clicked,
+      (array_agg(data order by created_at) filter (where event = 'page_view'))[1] as pv,
+      coalesce(
+        jsonb_agg(jsonb_build_object('question', data->>'question', 'label', data->>'label') order by created_at)
+          filter (where event = 'answer'),
+        '[]'::jsonb
+      ) as answers
+    from ev
+    group by session_id
+    order by max(created_at) desc
+    limit greatest(p_limit, 1)
+  )
+  select coalesce(jsonb_agg(to_jsonb(agg) order by agg.last_seen desc), '[]'::jsonb) from agg;
+$$;
+
+-- Só a service role (o painel /admin) chama essas funções — sem isso, a
+-- chave pública (anon) conseguiria ler as métricas pela API do Supabase.
+revoke all on function public.funnel_dashboard(text, integer) from public, anon, authenticated;
+revoke all on function public.funnel_recent_sessions(text, integer, integer) from public, anon, authenticated;
+grant execute on function public.funnel_dashboard(text, integer) to service_role;
+grant execute on function public.funnel_recent_sessions(text, integer, integer) to service_role;

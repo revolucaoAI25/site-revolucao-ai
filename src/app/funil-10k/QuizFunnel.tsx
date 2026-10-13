@@ -6,42 +6,13 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
 import { trackPixelEvent, trackPixelCustomEvent } from "@/lib/pixel";
 import { submitLead } from "@/lib/leads";
+import { track, trackPageView } from "@/lib/track";
+import { FUNIL_STEPS, type FunilStepId } from "@/lib/funnel-tracking";
 import styles from "./quiz.module.css";
 
-type StepId =
-  | "intro"
-  | "desejo"
-  | "motivacao"
-  | "breather"
-  | "obstaculo"
-  | "tempo"
-  | "urgencia"
-  | "name"
-  | "phone"
-  | "loading"
-  | "result"
-  | "autoridade"
-  | "curriculo"
-  | "social"
-  | "offer";
+type StepId = FunilStepId;
 
-const STEP_ORDER: StepId[] = [
-  "intro",
-  "desejo",
-  "motivacao",
-  "obstaculo",
-  "breather",
-  "tempo",
-  "urgencia",
-  "name",
-  "phone",
-  "loading",
-  "result",
-  "autoridade",
-  "curriculo",
-  "social",
-  "offer",
-];
+const STEP_ORDER: StepId[] = FUNIL_STEPS.map((step) => step.id);
 
 const QUESTION_STEP_IDS: StepId[] = [
   "desejo",
@@ -400,6 +371,10 @@ export function QuizFunnel() {
     if (q.id === "motivacao") setMotivacaoId(opt.id);
     if (q.id === "obstaculo") setObstaculoId(opt.id);
     if (q.id === "urgencia") setUrgenciaId(opt.id);
+    track("funil-10k", "answer", {
+      step: q.id,
+      data: { question: q.id, option: opt.id, label: opt.label },
+    });
     goNext();
   }
 
@@ -423,8 +398,22 @@ export function QuizFunnel() {
       contact: { name, phone },
     });
     trackPixelEvent("Lead", { content_name: "Funil Zero aos 10K" });
+    track("funil-10k", "contact_submit", { data: { result: obstaculoId ?? "quiz" } });
     goNext();
   }
+
+  // Métricas do funil (painel /admin/funis): uma visita por abertura da
+  // página e uma "etapa vista" a cada tela — é daí que sai o "até onde foi".
+  useEffect(() => {
+    trackPageView("funil-10k");
+  }, []);
+
+  useEffect(() => {
+    track("funil-10k", "step_view", {
+      step,
+      data: { step, index: STEP_ORDER.indexOf(step) },
+    });
+  }, [step]);
 
   // Cada etapa começa do topo — sem isso, se a pessoa rolou a página pra
   // ler a etapa anterior, a próxima etapa entra no meio da rolagem.
@@ -814,13 +803,14 @@ export function QuizFunnel() {
                 href={ZERO_AOS_10K_CHECKOUT_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() =>
+                onClick={() => {
                   trackPixelEvent("InitiateCheckout", {
                     value: 37.9,
                     currency: "BRL",
                     content_name: "Do Zero aos 10K",
-                  })
-                }
+                  });
+                  track("funil-10k", "checkout_click", { data: { location: "offer" } });
+                }}
                 className="group inline-flex w-full items-center justify-center gap-2 rounded-full font-semibold text-center transition-all duration-200 cursor-pointer bg-accent text-[#07090a] shadow-[0_0_0_1px_rgba(0,200,83,0.4),0_8px_30px_-8px_rgba(0,200,83,0.55)] hover:bg-accent-dark hover:-translate-y-0.5 px-7 py-3.5 text-sm sm:text-base"
               >
                 Garantir minha vaga por R$37,90

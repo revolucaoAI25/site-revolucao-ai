@@ -10,6 +10,8 @@ import { EMAIL } from "@/lib/links";
 import { ScrollProgress } from "./ScrollProgress";
 import { CheckoutCTAButton } from "./CheckoutCTAButton";
 import { MetaPixel } from "@/components/MetaPixel";
+import { PageTracker } from "./PageTracker";
+import { V2_SECTIONS } from "@/lib/funnel-tracking";
 import effects from "./effects.module.css";
 
 const title = "Do Zero aos 10K com Agentes de IA";
@@ -115,6 +117,7 @@ export default function ZeroAosDezKV2() {
   return (
     <>
       <MetaPixel />
+      <PageTracker page="zero-aos-10k-v2" sections={V2_SECTIONS.map((section) => section.id)} />
       <header className="sticky top-0 z-40 bg-bg/80 backdrop-blur-md border-b border-white/10">
         <ScrollProgress />
         <Container className="flex items-center justify-between h-16 sm:h-20">
@@ -137,7 +140,7 @@ export default function ZeroAosDezKV2() {
             </span>
           </Link>
           <div className="hidden sm:block">
-            <CheckoutCTAButton size="md">
+            <CheckoutCTAButton location="header" size="md">
               Quero começar agora
             </CheckoutCTAButton>
           </div>
@@ -146,7 +149,7 @@ export default function ZeroAosDezKV2() {
 
       <main>
         {/* Hero */}
-        <Section
+        <Section id="hero"
           decor={
             <>
               <div className="absolute inset-0 bg-grid" />
@@ -242,7 +245,7 @@ export default function ZeroAosDezKV2() {
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-center gap-3 mt-10">
-            <CheckoutCTAButton size="lg">
+            <CheckoutCTAButton location="hero" size="lg">
               Quero começar agora
             </CheckoutCTAButton>
             <p className="text-muted-2 text-sm">
@@ -263,7 +266,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* Lucas Magalhães */}
-        <Section divider className="bg-tint">
+        <Section id="bio" divider className="bg-tint">
           <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 items-start">
             <Reveal>
               <Eyebrow>Prazer, meu nome é</Eyebrow>
@@ -322,7 +325,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* Por que tanta gente trava */}
-        <Section divider>
+        <Section id="obstaculo" divider>
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>O obstáculo</Eyebrow>
             <SectionTitle>Por que tanta gente trava.</SectionTitle>
@@ -357,7 +360,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* As 2 premissas */}
-        <Section divider className="bg-tint">
+        <Section id="premissas" divider className="bg-tint">
           <Reveal className="max-w-2xl mx-auto text-center mb-12">
             <Eyebrow>O caminho</Eyebrow>
             <SectionTitle>As 2 premissas.</SectionTitle>
@@ -484,7 +487,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* O que você vai aprender */}
-        <Section
+        <Section id="aprendizado"
           divider
           decor={
             <div
@@ -531,7 +534,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* Clientes atendidos */}
-        <Section
+        <Section id="clientes"
           divider
           className="bg-tint"
           decor={
@@ -558,7 +561,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* Depoimentos de alunos */}
-        <Section divider>
+        <Section id="depoimentos" divider>
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
             <Eyebrow>Depoimentos de alunos</Eyebrow>
             <SectionTitle>
@@ -595,7 +598,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* A mesma bifurcação */}
-        <Section divider className="bg-tint">
+        <Section id="decisao" divider className="bg-tint">
           <Reveal className="max-w-2xl mx-auto text-center mb-10">
             <Eyebrow>A decisão</Eyebrow>
             <SectionTitle>A mesma bifurcação que eu vivi.</SectionTitle>
@@ -682,7 +685,7 @@ export default function ZeroAosDezKV2() {
                 Se você seguir com dedicação e consistência real, os R$10 mil
                 por mês são questão de tempo.
               </p>
-              <CheckoutCTAButton size="lg" className="w-full">
+              <CheckoutCTAButton location="oferta" size="lg" className="w-full">
                 Garantir minha vaga por R$37,90
               </CheckoutCTAButton>
               <p className="text-muted-2 text-xs text-center mt-4">
@@ -693,7 +696,7 @@ export default function ZeroAosDezKV2() {
         </Section>
 
         {/* Fechamento */}
-        <Section divider>
+        <Section id="fechamento" divider>
           <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface px-6 py-14 sm:px-16 sm:py-16 text-center">
             <div
               className={`glow h-[380px] w-[380px] -top-28 left-1/2 -translate-x-1/2 ${effects.floatPulse}`}
@@ -713,7 +716,7 @@ export default function ZeroAosDezKV2() {
               você começa hoje, ou continua vendo os outros começarem.
             </p>
             <div className="relative flex justify-center">
-              <CheckoutCTAButton size="lg">
+              <CheckoutCTAButton location="fechamento" size="lg">
                 Quero garantir meu acesso
               </CheckoutCTAButton>
             </div>

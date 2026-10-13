@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { trackPixelEvent } from "@/lib/pixel";
+import { track } from "@/lib/track";
 import { ZERO_AOS_10K_CHECKOUT_LINK } from "@/lib/links";
 
 /**
@@ -15,10 +16,13 @@ export function CheckoutCTAButton({
   children,
   size,
   className,
+  location,
 }: {
   children: ReactNode;
   size?: "md" | "lg";
   className?: string;
+  /** Qual botão é (cabeçalho, topo, oferta, fechamento) — vai pro painel de métricas. */
+  location: "header" | "hero" | "oferta" | "fechamento";
 }) {
   return (
     <CTAButton
@@ -26,13 +30,14 @@ export function CheckoutCTAButton({
       external
       size={size}
       className={className}
-      onClick={() =>
+      onClick={() => {
         trackPixelEvent("InitiateCheckout", {
           value: 37.9,
           currency: "BRL",
           content_name: "Do Zero aos 10K",
-        })
-      }
+        });
+        track("zero-aos-10k-v2", "checkout_click", { data: { location } });
+      }}
     >
       {children}
     </CTAButton>

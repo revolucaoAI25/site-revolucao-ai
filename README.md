@@ -404,6 +404,16 @@ Usa as mesmas variáveis de ambiente do Asaas já documentadas acima
 `ASAAS_WEBHOOK_TOKEN`, `ASAAS_WEBHOOK_FORWARD_URL`) — não precisa de
 nenhuma variável nova.
 
+## Métricas dos funis (`/admin/funis`)
+
+Painel próprio, anônimo e independente do Pixel, pra `/funil-10k` (quiz) e `/zero-aos-10k-v2` (LP do curso).
+
+- **O que registra:** visita, cada etapa do quiz vista, cada resposta (inclusive de quem não deixou nome/telefone), envio do contato, chegada na oferta, clique no botão de compra (por botão), até onde rolou a LP e quais seções apareceram na tela, origem (UTMs), aparelho e se abriu dentro do app do Instagram/Facebook.
+- **Privacidade:** só um id aleatório por aba (sessionStorage). Nada de nome, telefone, e-mail ou IP. Bots conhecidos são ignorados.
+- **Suas visitas de teste:** abra a página com `?notrack` no final do endereço pra não contar (`?track` volta a contar).
+- **Banco:** rode o bloco "Métricas dos funis" do `supabase/schema.sql` no SQL Editor do Supabase (tabela `funnel_events` + funções `funnel_dashboard` e `funnel_recent_sessions`). Sem isso, o painel mostra um aviso explicando.
+- **Código:** constantes compartilhadas em `src/lib/funnel-tracking.ts`; envio em `src/lib/track.ts` → `POST /api/track`; leitura em `src/lib/funnel-analytics.ts`; telas em `src/components/admin/FunnelDashboard.tsx`.
+
 ## Painel admin (`/admin`)
 
 Visão completa de tudo que passa pelo site: quem preencheu o pop-up, quem
