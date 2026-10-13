@@ -404,6 +404,14 @@ Usa as mesmas variáveis de ambiente do Asaas já documentadas acima
 `ASAAS_WEBHOOK_TOKEN`, `ASAAS_WEBHOOK_FORWARD_URL`) — não precisa de
 nenhuma variável nova.
 
+## Página de obrigado do curso + upsell de 1 clique (`/construtor-de-agentes`)
+
+- A página é a oferta do **Construtor de Agentes** (R$ 21,90) pra quem acabou de comprar o Do Zero aos 10K.
+- **Na Kiwify:** no produto do curso, aba de Upsell, escolha o Construtor e informe `https://www.revolucao-ai.com/construtor-de-agentes` como página do upsell. Aí a Kiwify manda o comprador pra cá com um `token` na URL e a página mostra o botão de **1 clique** (script oficial da Kiwify; aceita cartão, Pix e PayPal). Ao aceitar ou recusar, a Kiwify leva a pessoa pro acesso do curso.
+- **Sem o `token`** (quem abriu o link direto): o botão abre o checkout normal do Construtor (`CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK` em `src/lib/links.ts`).
+- O código fica em `src/app/construtor-de-agentes/UpsellOffer.tsx`. Só dá pra testar o 1 clique de verdade com uma compra real.
+- `AREA_DE_MEMBROS_LINK` (em `links.ts`) está vazio de propósito: o texto cita a área de membros sem link.
+
 ## Métricas dos funis (`/admin/funis`)
 
 Painel próprio, anônimo e independente do Pixel, pra `/funil-10k` (quiz) e `/zero-aos-10k-v2` (LP do curso).

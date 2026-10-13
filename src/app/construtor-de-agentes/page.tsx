@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
-import { CTAButton } from "@/components/ui/CTAButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { AREA_DE_MEMBROS_LINK, CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK, EMAIL } from "@/lib/links";
+import { AREA_DE_MEMBROS_LINK, EMAIL } from "@/lib/links";
+import { BuyLink, UpsellOffer } from "./UpsellOffer";
 import { ClaudeIcon } from "./ClaudeMark";
 import styles from "./bump.module.css";
 
@@ -191,9 +191,9 @@ export default function ConstrutorDeAgentesPage() {
               </span>
             </span>
           </div>
-          <CTAButton href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK} external size="md" icon={false}>
+          <BuyLink size="md" icon={false}>
             Quero
-          </CTAButton>
+          </BuyLink>
         </Container>
       </header>
 
@@ -309,9 +309,7 @@ export default function ConstrutorDeAgentesPage() {
                 <span className="text-4xl font-black tracking-tight text-accent">R$ 21,90</span>
                 <span className="text-muted font-semibold">| pagamento único</span>
               </div>
-              <CTAButton href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK} external size="lg">
-                Quero o Construtor de Agentes
-              </CTAButton>
+              <UpsellOffer>Quero o Construtor de Agentes</UpsellOffer>
               <p className="text-muted-2 text-sm mt-4">
                 ⚡ As instruções de instalação chegam no seu e-mail assim que o pagamento é
                 aprovado
@@ -426,14 +424,9 @@ export default function ConstrutorDeAgentesPage() {
                 </li>
               ))}
             </ul>
-            <CTAButton
-              href={CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK}
-              external
-              size="lg"
-              className="w-full"
-            >
+            <BuyLink size="lg" className="w-full">
               Quero o Construtor de Agentes
-            </CTAButton>
+            </BuyLink>
             <p className="text-muted-2 text-xs text-center mt-4">
               🔒 Compra segura • feito pela equipe da Revolução AI, que já atendeu mais de 120
               clientes
