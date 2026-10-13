@@ -737,16 +737,33 @@ export function QuizFunnel() {
 
       case "social":
         return (
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
-              Quem já saiu do zero
-            </p>
-            <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
-              Mais de 120 clientes atendidos com esse método.
-            </h2>
-            <p className="text-muted leading-relaxed mb-6">
-              E gente que começou exatamente de onde você está agora.
-            </p>
+          <div>
+            <div className="text-center">
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+                Na nossa agência
+              </p>
+              <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
+                Mais de 120 clientes atendidos.
+              </h2>
+              <p className="text-muted leading-relaxed mb-6">
+                É nessa operação que a gente usa o método que você vai aprender no curso.
+              </p>
+            </div>
+            <ClientLogos />
+
+            <div className="divider my-10" />
+
+            <div className="text-center">
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+                Quem aprendeu com a gente
+              </p>
+              <h2 className="text-xl sm:text-2xl font-black tracking-tight mb-2 text-balance">
+                Já ensinamos muita gente a sair do zero.
+              </h2>
+              <p className="text-muted leading-relaxed mb-6">
+                Depoimentos de alunos que aprenderam o método no Do Zero aos 10K.
+              </p>
+            </div>
             <div className="columns-2 gap-3 mb-8 [&>*]:mb-3 [&>*]:break-inside-avoid">
               {depoimentosSocial.map((d) => (
                 <Image
@@ -759,7 +776,9 @@ export function QuizFunnel() {
                 />
               ))}
             </div>
-            <PrimaryButton onClick={goNext}>Ver o investimento</PrimaryButton>
+            <div className="text-center">
+              <PrimaryButton onClick={goNext}>Ver o investimento</PrimaryButton>
+            </div>
           </div>
         );
 
@@ -824,12 +843,6 @@ export function QuizFunnel() {
               <p className="text-muted-2 text-xs text-center mt-4">
                 🔒 Compra segura • acesso imediato
               </p>
-            </div>
-            <div className="mt-10">
-              <p className="text-center text-muted-2 text-xs uppercase tracking-widest font-semibold mb-4">
-                Clientes atendidos com o mesmo método
-              </p>
-              <ClientLogos />
             </div>
           </div>
         );
