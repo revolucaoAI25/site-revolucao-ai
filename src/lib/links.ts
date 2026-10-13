@@ -97,3 +97,10 @@ export const LEAD_EXTRACTOR_GUIDE_LINK =
  * completa. Rota interna, ver src/app/plataforma.
  */
 export const OUTRO_PRODUTO_LINK = "/plataforma";
+
+/**
+ * Link da área de membros da Kiwify (onde o aluno acessa o Do Zero aos 10K).
+ * Aparece na página de obrigado (/construtor-de-agentes). Enquanto estiver
+ * vazio, a página só cita a área de membros, sem link.
+ */
+export const AREA_DE_MEMBROS_LINK: string = "";

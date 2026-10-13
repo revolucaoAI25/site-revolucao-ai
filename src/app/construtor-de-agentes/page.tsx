@@ -4,7 +4,7 @@ import { Section, Eyebrow, SectionTitle } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK, EMAIL } from "@/lib/links";
+import { AREA_DE_MEMBROS_LINK, CONSTRUTOR_DE_AGENTES_CHECKOUT_LINK, EMAIL } from "@/lib/links";
 import { ClaudeIcon } from "./ClaudeMark";
 import styles from "./bump.module.css";
 
@@ -232,7 +232,21 @@ export default function ConstrutorDeAgentesPage() {
                 Você acabou de dar o primeiro passo pra vender agentes de IA.
               </p>
               <p className="text-muted text-[15px] sm:text-base leading-relaxed text-balance max-w-md mx-auto">
-                O acesso ao Do Zero aos 10K está a caminho do seu e-mail. Se demorar, olha o spam.
+                Seu acesso ao Do Zero aos 10K já chega no e-mail da compra (olha o spam se demorar), ou
+                você entra direto pela{" "}
+                {AREA_DE_MEMBROS_LINK ? (
+                  <a
+                    href={AREA_DE_MEMBROS_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent font-semibold underline underline-offset-4 hover:text-text transition-colors"
+                  >
+                    área de membros da Kiwify
+                  </a>
+                ) : (
+                  "área de membros da Kiwify"
+                )}
+                .
               </p>
             </Reveal>
             <a
