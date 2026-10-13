@@ -29,7 +29,9 @@ export const CALENDLY_AGENTE_LINK =
 export const CALENDLY_FORMACAO_LINK = CALENDLY_AGENTE_LINK;
 
 /**
- * Ebook gratuito — resultado "sem orçamento agora" do pop-up de Formação.
+ * Ebook gratuito. SEM USO hoje: quem marca "Nada, não consigo investir agora"
+ * no pop-up de Formação passou a ir pro curso (PRODUTO_LOW_TICKET_LINK), então
+ * nenhum fluxo aponta mais pra cá. Link mantido só pra não se perder.
  */
 export const PRODUTO_GRATUITO_LINK =
   "https://docs.google.com/document/d/11u8-q8Z2Qr_j5W7udWUTlWlp1MsjpXDVhcWOth5ncBc/edit?usp=sharing";
@@ -37,8 +39,9 @@ export const PRODUTO_GRATUITO_LINK =
 /**
  * Curso Zero aos 10K (R$37,90) — resultado "baixo ticket" do pop-up de
  * Formação, pra quem consegue investir algo mas não chega aos R$3.000 da
- * reunião. Rota interna (ver src/app/zero-aos-10k-v2, a versão em uso —
- * a v1 em src/app/zero-aos-10k segue no ar mas não é mais linkada).
+ * reunião — e também de quem diz que não tem nada pra investir. Rota
+ * interna (ver src/app/zero-aos-10k-v2, a versão em uso; a v1 em
+ * src/app/zero-aos-10k redireciona pra ela, ver next.config.ts).
  */
 export const PRODUTO_LOW_TICKET_LINK = "/zero-aos-10k-v2";
 

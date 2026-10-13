@@ -10,7 +10,6 @@ import {
   CALENDLY_FORMACAO_LINK,
   LEAD_EXTRACTOR_LINK,
   OUTRO_PRODUTO_LINK,
-  PRODUTO_GRATUITO_LINK,
   PRODUTO_LOW_TICKET_LINK,
 } from "./links";
 
@@ -191,7 +190,7 @@ export const formacaoFlow: QualificationFlow = {
       id: "investimento",
       question: "Quanto você tem disponível pra investir na sua formação agora?",
       options: [
-        { label: "Nada, não consigo investir agora", next: "contato-gratuito" },
+        { label: "Nada, não consigo investir agora", next: "contato-low-ticket" },
         { label: "Até R$500", next: "contato-low-ticket" },
         { label: "De R$500 a R$2.000", next: "contato-low-ticket" },
         { label: "De R$2.000 a R$5.000", next: "contato-reuniao" },
@@ -202,14 +201,6 @@ export const formacaoFlow: QualificationFlow = {
           next: "contato-reuniao",
         },
       ],
-    },
-    "contato-gratuito": {
-      id: "contato-gratuito",
-      question: "Antes de continuar, só precisamos de algumas informações.",
-      helper: "Preparamos um material gratuito pra te enviar — só seu nome, e-mail e WhatsApp.",
-      kind: "contact",
-      options: [],
-      next: "result:gratuito",
     },
     "contato-low-ticket": {
       id: "contato-low-ticket",
@@ -229,13 +220,6 @@ export const formacaoFlow: QualificationFlow = {
     },
   },
   results: {
-    gratuito: {
-      kind: "result",
-      title: "Comece por aqui, sem custo.",
-      description:
-        "Preparamos um material gratuito pra você dar o primeiro passo na construção da sua agência de IA, sem precisar investir agora.",
-      cta: { label: "Acessar material gratuito", href: PRODUTO_GRATUITO_LINK },
-    },
     "low-ticket": {
       kind: "result",
       title: "Temos algo perfeito pro seu momento agora.",

@@ -60,8 +60,8 @@ Abra [http://localhost:3000](http://localhost:3000).
   Antes de mostrar o resultado, os dois fluxos pedem nome, e-mail e WhatsApp
   (`src/components/modal/ContactForm.tsx`).
 - `src/lib/links.ts` — WhatsApp, e-mail, Instagram, endereço, Calendly da
-  apresentação do agente de IA, o ebook gratuito, o curso Zero aos 10K
-  (baixo ticket) da Formação, a LP do Lead Extractor e a LP da Plataforma
+  apresentação do agente de IA, o curso Zero aos 10K (baixo ticket) da
+  Formação (também pra quem diz que não tem nada pra investir), a LP do Lead Extractor e a LP da Plataforma
   (`OUTRO_PRODUTO_LINK`) já são os reais. Agenda da reunião de vendas da
   Formação ainda **placeholder** (reaproveitando a do agente de IA).
 - `src/app/api/lead/route.ts` — recebe o resultado final de cada pop-up
@@ -125,9 +125,10 @@ Sem essas variáveis configuradas, o site funciona normalmente — a rota
 `/api/lead` só loga um aviso e não salva nada, então dá pra publicar antes
 do Supabase estar pronto.
 
-Além do Supabase, só quando o resultado é o **material gratuito** (quem
-não tem orçamento agora e vai receber o ebook) o lead também é encaminhado
-pro webhook próprio do cliente — configurar a variável `LEAD_WEBHOOK_URL`
+Além do Supabase, só quando o resultado é o **material gratuito** o lead
+também é encaminhado pro webhook próprio do cliente (hoje **nenhum fluxo**
+chega nesse resultado: quem não tem orçamento agora vai pro curso, então
+esse encaminhamento está inativo) — configurar a variável `LEAD_WEBHOOK_URL`
 com a URL do Zapier/Make/n8n/CRM que deve recebê-lo. Os demais resultados
 da Formação (baixo ticket, reunião) só ficam salvos no Supabase, sem
 encaminhamento pro webhook. Sem essa variável configurada, esse
