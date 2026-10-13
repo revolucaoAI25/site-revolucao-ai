@@ -198,8 +198,69 @@ export default function ConstrutorDeAgentesPage() {
       </header>
 
       <main>
-        {/* Hero */}
+        {/* Obrigado */}
         <Section
+          className="!pb-6 sm:!pb-10"
+          decor={
+            <>
+              <div className="absolute inset-0 bg-grid" />
+              <div
+                className={`glow h-[420px] w-[420px] -top-40 left-1/2 -translate-x-1/2 ${styles.floatPulse}`}
+              />
+            </>
+          }
+        >
+          <div className="max-w-2xl mx-auto text-center flex flex-col items-center">
+            <span
+              className={`inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent text-[#07090a] shadow-[0_0_40px_rgba(0,200,83,0.45)] mb-7 ${styles.pop}`}
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M5 12l5 5L20 7"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <Reveal>
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-balance mb-4">
+                Obrigado pela <span className="text-accent">compra!</span>
+              </h1>
+              <p className="text-text text-lg sm:text-xl font-semibold text-balance mb-3">
+                Você acabou de entrar no Do Zero aos 10K.
+              </p>
+              <p className="text-muted text-base sm:text-lg leading-relaxed text-balance max-w-xl mx-auto">
+                O acesso chega no e-mail que você usou na compra. Se não aparecer em alguns
+                minutos, dá uma olhada no spam.
+              </p>
+            </Reveal>
+            <div className="mt-10 flex flex-col items-center gap-2 text-muted-2">
+              <span className="text-sm font-semibold">Mas antes de ir, olha isso</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                className="text-accent"
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </Section>
+
+        {/* Oferta do complemento */}
+        <Section
+          className="!pt-6 sm:!pt-10"
           decor={
             <>
               <div className="absolute inset-0 bg-grid" />
@@ -211,20 +272,11 @@ export default function ConstrutorDeAgentesPage() {
         >
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-14 items-center">
             <Reveal>
-              <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-4 py-1.5 text-sm font-semibold text-accent mb-5">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 12l5 5L20 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                Obrigado pela compra!
-              </p>
-              <p className="text-muted text-[15px] leading-relaxed mb-6 max-w-xl">
-                O acesso ao Do Zero aos 10K chega no e-mail que você usou na compra. Antes de sair, tem um
-                complemento opcional pra você começar já montando agentes:
-              </p>
-              <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-balance mb-5">
+              <Eyebrow>Um atalho pra começar mais rápido</Eyebrow>
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-balance mb-5">
                 Um agente do Claude que monta os agentes que{" "}
                 <span className="text-accent">você vende.</span>
-              </h1>
+              </h2>
               <p className="text-muted text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
                 Você conta como é o negócio do seu cliente. Ele entrega o agente completo,
                 pronto pro Chatflux, seguindo o mesmo método que a Revolução AI usa nos
