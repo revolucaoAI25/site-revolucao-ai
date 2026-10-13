@@ -69,8 +69,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} h-full`}>
       <head>
-        <link rel="preconnect" href="https://assets.calendly.com" />
-        <link rel="preconnect" href="https://calendly.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
