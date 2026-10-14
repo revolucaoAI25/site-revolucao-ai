@@ -67,6 +67,7 @@ export const CHAT_STEPS: ChatStep[] = [
     messages: [
       "💆 Uma clínica de estética gerou 71 consultas no primeiro mês de IA, com conversão constante acima de 25%.",
       "👨‍⚕️ Outro médico recebe 80 leads por semana e hoje a IA agenda 20 novos pacientes por semana (antes eram 5), com faturamento na casa dos R$ 200.000. 🚀",
+      "E tudo isso sem a dor de cabeça de gerenciar time: mais consistência e previsibilidade nas suas vendas.",
     ],
     inputType: "hook",
   },

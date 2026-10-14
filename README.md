@@ -408,6 +408,8 @@ nenhuma variável nova.
 
 Funil no estilo "chat" pra captar clientes pra agência de IA (réplica do funil que os gestores de tráfego tinham em outro domínio, com a lógica de qualificação nova).
 
+**Estrutura:** `src/app/(chat)` tem o layout raiz próprio dessa página (sem a fonte Inter nem o CSS global); todo o resto do site fica em `src/app/(main)`. Os endereços não mudam. Isso tirou ~48 KB do carregamento e deixou o primeiro paint ~2,5x mais rápido em rede lenta.
+
 **Conversa:** gancho, nome, área, o que mais trava, 3 pilares, leads por mês, WhatsApp, Instagram, benefícios e botão final. As perguntas ficam em `src/lib/agency-funnel.ts` (`CHAT_STEPS`); o visual em `src/app/apresentacao/chat.module.css`.
 
 **Pra onde cada faixa vai** (`VOLUME_OPTIONS` no mesmo arquivo — é o único lugar pra mudar a regra):
@@ -426,7 +428,7 @@ Funil no estilo "chat" pra captar clientes pra agência de IA (réplica do funil
 
 **Eventos do Pixel:** `PageView` (beacon de imagem + `fbq` com o mesmo id, como no funil original, pra segurar o connect rate), `Lead` **só pra quem tem mais de 50 leads/mês e já passou o WhatsApp**, e `Schedule` quando o agendamento é concluído.
 
-**Calendly → site:** a janela da agenda manda o id do lead no `utm_content`. O `Schedule` dispara de duas formas, a que chegar primeiro vale: o aviso do Calendly no navegador e o webhook `POST /api/calendly-webhook` (`invitee.created` marca "agendou"; `invitee.canceled` move pra "Não agendou"). Pra criar o webhook (precisa de plano pago do Calendly), use a API com o evento `invitee.created` e `invitee.canceled`, escopo da organização, apontando pra `https://www.revolucao-ai.com/api/calendly-webhook`, e guarde a `signing_key` na variável acima.
+**Calendly → site:** a janela da agenda manda o id do lead no `utm_content`. O `Schedule` dispara de duas formas, a que chegar primeiro vale: o aviso do Calendly no navegador e o webhook `POST /api/calendly-webhook` (`invitee.created` marca "agendou"; `invitee.canceled` move pra "Não agendou"). O webhook é **opcional**: sem ele, o aviso do navegador já marca "agendou" e dispara o `Schedule`; o que se perde é só cancelamento/remarcação e agendamento feito fora da janela. Pra criar o webhook (precisa de plano pago do Calendly), use a API com o evento `invitee.created` e `invitee.canceled`, escopo da organização, apontando pra `https://www.revolucao-ai.com/api/calendly-webhook`, e guarde a `signing_key` na variável acima.
 
 **Banco:** rode o bloco "Funil de conversa da agência" do `supabase/schema.sql` (tabela `agencia_leads`). As visitas anônimas (quem não chegou a dar o nome) usam o bloco "Métricas dos funis" já existente.
 
