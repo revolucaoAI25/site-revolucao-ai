@@ -299,3 +299,57 @@ revoke all on function public.funnel_dashboard(text, integer) from public, anon,
 revoke all on function public.funnel_recent_sessions(text, integer, integer) from public, anon, authenticated;
 grant execute on function public.funnel_dashboard(text, integer) to service_role;
 grant execute on function public.funnel_recent_sessions(text, integer, integer) to service_role;
+
+-- ---------------------------------------------------------------------------
+-- Funil de conversa da agência (/apresentacao) — painel /admin/agencia.
+--
+-- Um lead nasce quando a pessoa responde o nome (primeira pergunta) e vai
+-- sendo atualizado a cada resposta, até agendar. `stage` é a coluna do
+-- kanban (editável à mão); `status` e `etapa_funil` guardam o que realmente
+-- aconteceu. Gravada só pelas rotas /api/apresentacao e /api/calendly-webhook
+-- (service role; RLS ligado e sem policy, igual às outras tabelas).
+-- ---------------------------------------------------------------------------
+create table if not exists public.agencia_leads (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  nome text,
+  area_atuacao text,
+  problema text,
+  volume_leads text,
+  -- 'nenhum' | 'ate-50' | '51-300' | '300-mais'
+  volume_faixa text,
+  qualified boolean not null default false,
+  -- 'plataforma' | 'whatsapp' | 'agendar'
+  destination text,
+  whatsapp text,
+  instagram text,
+  utm_source text,
+  utm_medium text,
+  utm_campaign text,
+  utm_content text,
+  utm_term text,
+  device text,
+  in_app text,
+  fbp text,
+  fbc text,
+  -- Mesmo id anônimo de sessão do funnel_events (liga o lead à jornada).
+  session_id text,
+  last_step text,
+  etapa_funil text not null default 'inicio',
+  status text not null default 'iniciado',
+  stage text not null default 'iniciou',
+  final_at timestamptz,
+  cta_clicked_at timestamptz,
+  calendly_opened_at timestamptz,
+  scheduled_at timestamptz,
+  canceled_at timestamptz,
+  calendly_event_uri text
+);
+
+create index if not exists agencia_leads_created_at_idx
+  on public.agencia_leads (created_at desc);
+create index if not exists agencia_leads_campaign_idx
+  on public.agencia_leads (utm_campaign);
+
+alter table public.agencia_leads enable row level security;

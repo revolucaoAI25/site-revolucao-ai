@@ -1,6 +1,6 @@
 import "server-only";
 import { getSupabaseServerClient } from "@/lib/supabase-server";
-import type { FunnelPage } from "@/lib/funnel-tracking";
+import type { TrackedPage } from "@/lib/funnel-tracking";
 
 type Count = { key: string; sessions: number };
 
@@ -50,7 +50,7 @@ function isMissingSql(error: { code?: string; message?: string }) {
 }
 
 export async function getFunnelDashboard(
-  page: FunnelPage,
+  page: TrackedPage,
   days: number
 ): Promise<FunnelDashboardResult> {
   const supabase = getSupabaseServerClient();

@@ -1,4 +1,4 @@
-import type { FunnelEvent, FunnelPage } from "./funnel-tracking";
+import type { FunnelEvent, TrackedPage } from "./funnel-tracking";
 
 /**
  * Registro de métricas dos funis (client-side). Anônimo: só um id aleatório
@@ -14,7 +14,7 @@ const OPTOUT_KEY = "rv_notrack";
 
 let memorySessionId: string | null = null;
 
-function isOptedOut(): boolean {
+export function isOptedOut(): boolean {
   try {
     const params = new URLSearchParams(window.location.search);
     if (params.has("notrack")) localStorage.setItem(OPTOUT_KEY, "1");
@@ -30,7 +30,7 @@ function randomId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
 }
 
-function getSessionId(): string {
+export function getSessionId(): string {
   try {
     let id = sessionStorage.getItem(SESSION_KEY);
     if (!id) {
@@ -45,7 +45,7 @@ function getSessionId(): string {
 }
 
 export function track(
-  page: FunnelPage,
+  page: TrackedPage,
   event: FunnelEvent,
   opts: { step?: string; data?: Record<string, unknown> } = {}
 ) {
@@ -72,7 +72,7 @@ function detectInApp(ua: string): string {
 }
 
 /** page_view com origem (UTMs), tipo de aparelho e se abriu dentro do app do Instagram/Facebook. */
-export function trackPageView(page: FunnelPage) {
+export function trackPageView(page: TrackedPage) {
   if (typeof window === "undefined") return;
   const params = new URLSearchParams(window.location.search);
   const pick = (key: string) => (params.get(key) ?? "").slice(0, 100);

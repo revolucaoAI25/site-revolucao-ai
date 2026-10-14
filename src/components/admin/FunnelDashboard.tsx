@@ -11,17 +11,17 @@ import {
 import type { FunnelDashboardData, RecentSession } from "@/lib/funnel-analytics";
 
 const PERIODS = [7, 14, 30, 90];
-const TZ = "America/Sao_Paulo";
+export const TZ = "America/Sao_Paulo";
 
-function pct(part: number, total: number): string {
+export function pct(part: number, total: number): string {
   if (total <= 0) return "—";
   const value = (part / total) * 100;
   return `${value < 10 && value > 0 ? value.toFixed(1).replace(".", ",") : Math.round(value)}%`;
 }
 
-function Card({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+export function Card({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
   return (
-    <section className="card-surface rounded-3xl p-6">
+    <section className="card-surface rounded-3xl p-6 min-w-0">
       <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-2">{title}</h2>
       {hint && <p className="text-muted text-sm mt-1.5 mb-5">{hint}</p>}
       {!hint && <div className="mb-5" />}
@@ -30,7 +30,7 @@ function Card({ title, hint, children }: { title: string; hint?: string; childre
   );
 }
 
-function Tile({
+export function Tile({
   label,
   value,
   sub,
@@ -51,7 +51,7 @@ function Tile({
 }
 
 /** Uma linha de barra: rótulo, barra proporcional e o número escrito (nunca só a cor). */
-function BarRow({
+export function BarRow({
   label,
   value,
   max,
@@ -107,7 +107,7 @@ function SimpleList({ items, total }: { items: { key: string; sessions: number }
 }
 
 /** Últimos N dias (fuso de São Paulo), com zero nos dias sem visita. */
-function lastDays(days: number): string[] {
+export function lastDays(days: number): string[] {
   const fmt = new Intl.DateTimeFormat("en-CA", { timeZone: TZ });
   const out: string[] = [];
   for (let i = days - 1; i >= 0; i--) {
@@ -116,7 +116,7 @@ function lastDays(days: number): string[] {
   return out;
 }
 
-function shortDate(iso: string) {
+export function shortDate(iso: string) {
   const [, m, d] = iso.split("-");
   return `${d}/${m}`;
 }
@@ -229,7 +229,7 @@ function Answers({ data }: { data: FunnelDashboardData }) {
   );
 }
 
-function formatWhen(iso: string) {
+export function formatWhen(iso: string) {
   return new Date(iso).toLocaleString("pt-BR", {
     timeZone: TZ,
     day: "2-digit",

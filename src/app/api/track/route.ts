@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase-server";
-import { FUNNEL_EVENTS, FUNNEL_PAGES } from "@/lib/funnel-tracking";
+import { AGENCY_TRACKED_PAGE, FUNNEL_EVENTS, FUNNEL_PAGES } from "@/lib/funnel-tracking";
 
-const PAGES = new Set<string>(FUNNEL_PAGES.map((p) => p.id));
+const PAGES = new Set<string>([...FUNNEL_PAGES.map((p) => p.id), AGENCY_TRACKED_PAGE]);
 const EVENTS = new Set<string>(FUNNEL_EVENTS);
 const SESSION_ID = /^[A-Za-z0-9-]{8,64}$/;
 // Robôs, pré-visualização de link e ferramentas de teste não contam como visita.

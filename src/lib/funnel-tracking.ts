@@ -11,6 +11,14 @@ export const FUNNEL_PAGES = [
 
 export type FunnelPage = (typeof FUNNEL_PAGES)[number]["id"];
 
+/**
+ * Páginas que gravam em funnel_events. O funil de conversa da agência
+ * (/apresentacao) também grava, mas tem painel próprio (/admin/agencia),
+ * por isso não entra em FUNNEL_PAGES (que alimenta /admin/funis).
+ */
+export const AGENCY_TRACKED_PAGE = "apresentacao" as const;
+export type TrackedPage = FunnelPage | typeof AGENCY_TRACKED_PAGE;
+
 export const FUNNEL_EVENTS = [
   "page_view",
   "step_view",

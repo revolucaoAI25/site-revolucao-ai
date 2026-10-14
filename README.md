@@ -404,6 +404,34 @@ Usa as mesmas variáveis de ambiente do Asaas já documentadas acima
 `ASAAS_WEBHOOK_TOKEN`, `ASAAS_WEBHOOK_FORWARD_URL`) — não precisa de
 nenhuma variável nova.
 
+## Funil de conversa da agência (`/apresentacao`)
+
+Funil no estilo "chat" pra captar clientes pra agência de IA (réplica do funil que os gestores de tráfego tinham em outro domínio, com a lógica de qualificação nova).
+
+**Conversa:** gancho, nome, área, o que mais trava, 3 pilares, leads por mês, WhatsApp, Instagram, benefícios e botão final. As perguntas ficam em `src/lib/agency-funnel.ts` (`CHAT_STEPS`); o visual em `src/app/apresentacao/chat.module.css`.
+
+**Pra onde cada faixa vai** (`VOLUME_OPTIONS` no mesmo arquivo — é o único lugar pra mudar a regra):
+
+| Leads por mês | Destino | Botão final |
+| --- | --- | --- |
+| Nenhum | `/plataforma` (funil de implementação automático, `OUTRO_PRODUTO_LINK`) | Conhecer a Plataforma |
+| De 1 a 50 | WhatsApp | Falar no WhatsApp |
+| De 51 a 300 | Agenda do Calendly (janela dentro da página) | Agendar minha consulta |
+| Mais de 300 | Agenda do Calendly | Agendar minha consulta |
+
+**Variáveis de ambiente:**
+- `NEXT_PUBLIC_META_PIXEL_ID_AGENCIA`: Pixel do funil (sem ela, nenhum pixel carrega). É lida na hora do build, então mudar exige novo deploy.
+- `META_CAPI_TOKEN_AGENCIA` (opcional): token da API de Conversões desse mesmo Pixel. Com ele, o servidor também envia `Lead` e `Schedule` (mesmo `event_id` do navegador, então a Meta conta uma vez só). `META_CAPI_TEST_CODE` (opcional) joga os eventos em "Eventos de teste".
+- `CALENDLY_WEBHOOK_SIGNING_KEY`: chave de assinatura do webhook do Calendly (abaixo).
+
+**Eventos do Pixel:** `PageView` (beacon de imagem + `fbq` com o mesmo id, como no funil original, pra segurar o connect rate), `Lead` **só pra quem tem mais de 50 leads/mês e já passou o WhatsApp**, e `Schedule` quando o agendamento é concluído.
+
+**Calendly → site:** a janela da agenda manda o id do lead no `utm_content`. O `Schedule` dispara de duas formas, a que chegar primeiro vale: o aviso do Calendly no navegador e o webhook `POST /api/calendly-webhook` (`invitee.created` marca "agendou"; `invitee.canceled` move pra "Não agendou"). Pra criar o webhook (precisa de plano pago do Calendly), use a API com o evento `invitee.created` e `invitee.canceled`, escopo da organização, apontando pra `https://www.revolucao-ai.com/api/calendly-webhook`, e guarde a `signing_key` na variável acima.
+
+**Banco:** rode o bloco "Funil de conversa da agência" do `supabase/schema.sql` (tabela `agencia_leads`). As visitas anônimas (quem não chegou a dar o nome) usam o bloco "Métricas dos funis" já existente.
+
+**Painel:** `/admin/agencia` — aba **Métricas** (funil de qualificação, onde as pessoas saem, campanha/conjunto/anúncio/fonte, faixas de leads, aparelho) e aba **Kanban** (arraste o card; o site move sozinho ao qualificar, agendar ou cancelar). Teste sem sujar os números: abra a página com `?notrack`.
+
 ## Página de obrigado do curso + upsell de 1 clique (`/construtor-de-agentes`)
 
 - A página é a oferta do **Construtor de Agentes** (R$ 21,90) pra quem acabou de comprar o Do Zero aos 10K.

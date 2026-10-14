@@ -9,6 +9,7 @@ const TABS = [
   { href: "/admin/kanban", label: "Kanban" },
   { href: "/admin/tabela", label: "Tabela" },
   { href: "/admin/funis", label: "Funis" },
+  { href: "/admin/agencia", label: "Agência" },
 ];
 
 export function AdminNav() {
