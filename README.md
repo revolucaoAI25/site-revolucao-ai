@@ -418,8 +418,8 @@ Funil no estilo "chat" pra captar clientes pra agência de IA (réplica do funil
 | --- | --- | --- |
 | Nenhum | `/plataforma` (funil de implementação automático, `OUTRO_PRODUTO_LINK`) | Conhecer a Plataforma |
 | De 1 a 50 | WhatsApp | Falar no WhatsApp |
-| De 51 a 300 | Agenda do Calendly (janela dentro da página) | Agendar minha consulta |
-| Mais de 300 | Agenda do Calendly | Agendar minha consulta |
+| De 51 a 300 | Agenda do Calendly (janela dentro da página) | Agendar minha apresentação |
+| Mais de 300 | Agenda do Calendly | Agendar minha apresentação |
 
 **Variáveis de ambiente:**
 - `NEXT_PUBLIC_META_PIXEL_ID_AGENCIA`: Pixel do funil (sem ela, nenhum pixel carrega). É lida na hora do build, então mudar exige novo deploy.

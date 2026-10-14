@@ -20,7 +20,7 @@ const STEP_LABELS: Record<string, string> = {
   volume_leads: "Pergunta: leads por mês",
   whatsapp: "Pergunta: WhatsApp",
   instagram: "Pergunta: Instagram",
-  hook_benefits: "Benefícios (24/7, setup)",
+  hook_benefits: "Benefícios (24/7, implementação)",
   final: "Botão final (agendar / WhatsApp / Plataforma)",
 };
 
@@ -378,7 +378,7 @@ export function AgencyMetrics({
             ))}
           </div>
         </Card>
-        <Card title="O que mais trava as vendas" hint="Resposta da pergunta 3 da conversa.">
+        <Card title="O que mais trava o comercial" hint="Resposta da pergunta 3 da conversa.">
           {problemaCounts.length === 0 ? (
             <p className="text-muted text-sm">Sem dados.</p>
           ) : (

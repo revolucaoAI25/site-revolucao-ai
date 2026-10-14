@@ -34,7 +34,7 @@ export const DESTINATION_CTA: Record<
   AgencyDestination,
   { label: string; href: string }
 > = {
-  agendar: { label: "Agendar minha consulta", href: CALENDLY_AGENTE_LINK },
+  agendar: { label: "Agendar minha apresentação", href: CALENDLY_AGENTE_LINK },
   whatsapp: { label: "Falar no WhatsApp", href: WHATSAPP_LINK },
   plataforma: { label: "Conhecer a Plataforma", href: OUTRO_PRODUTO_LINK },
 };
@@ -85,7 +85,7 @@ export const CHAT_STEPS: ChatStep[] = [
   },
   {
     id: "problema",
-    messages: ["O que mais trava suas vendas hoje, {nome}?"],
+    messages: ["O que mais trava o seu comercial hoje, {nome}?"],
     inputType: "buttons",
     variable: "problema",
     options: ["Demora no atendimento", "Falta de follow-up", "Time não dá conta", "Leads desqualificados"],
@@ -123,7 +123,7 @@ export const CHAT_STEPS: ChatStep[] = [
     id: "hook_benefits",
     messages: [
       "Disponibilidade 24/7, follow-ups automáticos, integração com CRM, WhatsApp e Instagram.",
-      "Setup em 15 a 21 dias, 100% personalizado. ✏️",
+      "Desenvolvimento e implementação, 100% personalizado para as necessidades da sua operação. ✏️",
     ],
     inputType: "hook",
   },
