@@ -129,8 +129,27 @@ export const CHAT_STEPS: ChatStep[] = [
   },
 ];
 
-/** Mensagens finais, depois da última pergunta. */
-export function finalMessages(nome: string): string[] {
+/**
+ * Mensagens finais, depois da última pergunta. Quem vai pra agenda recebe o
+ * texto do funil original; quem vai pro WhatsApp ou pra Plataforma não pode
+ * ler "agendar" nem "60 minutos de apresentação", porque não vai agendar nada.
+ */
+export function finalMessages(nome: string, destination: AgencyDestination = "agendar"): string[] {
+  if (destination === "plataforma") {
+    return [
+      `${nome}, pelo seu momento, temos a solução ideal pra você começar. 🚀`,
+      "Ela te ajuda a estruturar o atendimento e as vendas com IA desde o início, de um jeito simples.",
+      "Quer conhecer como funciona?",
+    ];
+  }
+  if (destination === "whatsapp") {
+    return [
+      `${nome}, você está no perfil ideal para o nosso sistema. 🚀`,
+      "Vagas limitadas.",
+      "Vamos te mostrar um sistema que gera resultados todos os dias.",
+      "Vamos conversar pelo WhatsApp para mostrar como funciona na prática?",
+    ];
+  }
   return [
     `${nome}, você está no perfil ideal para o nosso sistema. 🚀`,
     "Vagas limitadas.",

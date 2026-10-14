@@ -218,7 +218,7 @@ export function ChatFunnel() {
 
     leadEvent("final");
     track(AGENCY_PAGE, "step_view", { step: "final", data: { step: "final", index: CHAT_STEPS.length } });
-    await playMessages(finalMessages(nome));
+    await playMessages(finalMessages(nome, destination));
     setCta({ destination, label: DESTINATION_CTA[destination].label });
     scrollToBottom();
   }, [leadEvent, playMessages, scrollToBottom]);

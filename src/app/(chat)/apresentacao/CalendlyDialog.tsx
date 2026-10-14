@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { CALENDLY_AGENTE_LINK } from "@/lib/links";
 import { UTM_KEYS } from "@/lib/agency-funnel";
+import { toInternationalPhone } from "@/lib/phone";
 import styles from "./chat.module.css";
 
 /**
@@ -50,7 +51,9 @@ export function CalendlyDialog({
 
   const params = new URLSearchParams({ embed: "true", hide_gdpr_banner: "1" });
   if (prefill.name) params.set("name", prefill.name);
-  if (prefill.phone) params.set("a1", prefill.phone);
+  // No chat a pessoa digita só DDD + número; o Calendly precisa do +55.
+  const phone = toInternationalPhone(prefill.phone);
+  if (phone) params.set("a1", phone);
   // Origem da visita (campanha, fonte...) segue pro Calendly; o `utm_content`
   // carrega o id do lead, que é o que o webhook usa pra achar o lead.
   const visit = new URLSearchParams(window.location.search);
