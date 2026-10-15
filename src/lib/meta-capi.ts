@@ -49,8 +49,13 @@ export async function sendMetaEvent(input: MetaEventInput): Promise<void> {
   const userData: Record<string, unknown> = {};
   const phone = input.phone ? normalizePhone(input.phone) : null;
   if (phone) userData.ph = [sha256(phone)];
-  const firstName = input.name?.trim().split(/\s+/)[0]?.toLowerCase();
-  if (firstName) userData.fn = [sha256(firstName)];
+  const nameParts = input.name?.trim().toLowerCase().split(/\s+/).filter(Boolean) ?? [];
+  if (nameParts[0]) userData.fn = [sha256(nameParts[0])];
+  // Sobrenome (a última palavra do nome) e país: ajudam a Meta a casar o
+  // evento com a pessoa (qualidade de correspondência). O funil é 100%
+  // Brasil, então o país é sempre "br".
+  if (nameParts.length > 1) userData.ln = [sha256(nameParts[nameParts.length - 1])];
+  userData.country = [sha256("br")];
   if (input.fbp) userData.fbp = input.fbp;
   if (input.fbc) userData.fbc = input.fbc;
   if (input.clientIp) userData.client_ip_address = input.clientIp;

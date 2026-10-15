@@ -30,7 +30,7 @@ export function CalendlyDialog({
   useEffect(() => {
     if (!open) return;
     function onMessage(event: MessageEvent) {
-      if (event.origin !== "https://calendly.com") return;
+      if (event.origin !== "https://calendly.com" && !event.origin.endsWith(".calendly.com")) return;
       if (event.data?.event === "calendly.event_scheduled" && !scheduledRef.current) {
         scheduledRef.current = true;
         onScheduled();
@@ -49,7 +49,16 @@ export function CalendlyDialog({
 
   if (!open) return null;
 
-  const params = new URLSearchParams({ embed: "true", hide_gdpr_banner: "1" });
+  // `embed_domain` e `embed_type` são o que faz o Calendly se comportar como
+  // agenda embutida e avisar a página (postMessage) quando o agendamento é
+  // concluído — o script oficial (widget.js) monta o endereço do mesmo jeito.
+  // Sem eles a agenda abre, mas o aviso nunca chega.
+  const params = new URLSearchParams({
+    embed: "true",
+    hide_gdpr_banner: "1",
+    embed_domain: window.location.host,
+    embed_type: "Inline",
+  });
   if (prefill.name) params.set("name", prefill.name);
   // No chat a pessoa digita só DDD + número; o Calendly precisa do +55.
   const phone = toInternationalPhone(prefill.phone);
