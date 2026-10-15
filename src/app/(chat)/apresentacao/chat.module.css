@@ -5,7 +5,9 @@
  * resto do site.
  */
 
-.root {
+/* Cores compartilhadas pela conversa e pela página de obrigado. */
+.root,
+.thanks {
   --bg: #1c1d1c;
   --card: #1f1f1f;
   --fg: #fafafa;
@@ -13,7 +15,9 @@
   --border: #333;
   --primary: #0dde67;
   --popover: #1a1a1a;
+}
 
+.root {
   height: 100vh;
   height: 100dvh;
   display: flex;
@@ -443,6 +447,7 @@
 
 .thanksTitle {
   margin: 0;
+  text-wrap: balance;
   font-size: 30px;
   line-height: 1.2;
   font-weight: 700;
