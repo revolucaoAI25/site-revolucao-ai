@@ -14,7 +14,7 @@ export function articleJsonLd(post: BlogPost) {
     author: {
       "@type": "Person",
       name: "Lucas Magalhães",
-      url: `${siteUrl}/formacao`,
+      url: siteUrl,
     },
     publisher: {
       "@type": "Organization",

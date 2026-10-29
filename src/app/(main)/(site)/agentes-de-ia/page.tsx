@@ -12,6 +12,7 @@ import { TechLogos } from "@/components/ui/TechLogos";
 import { HeroChatMock } from "@/components/ui/HeroChatMock";
 import { WhatsAppFloatingButton } from "@/components/ui/WhatsAppFloatingButton";
 import { faqPageJsonLd } from "@/lib/faq-jsonld";
+import { breadcrumbJsonLd } from "@/lib/breadcrumb-jsonld";
 
 const faqItems = [
   {
@@ -36,9 +37,24 @@ const faqItems = [
   },
 ];
 
-const title = "Agentes de IA para Pré-Vendas";
+const title = "Agente de IA no WhatsApp para Pré-Vendas e Atendimento";
 const description =
-  "Agentes de IA no WhatsApp que qualificam, atendem e agendam seus leads no automático, 24 horas por dia.";
+  "Implementação completa de agentes de IA no WhatsApp que qualificam, atendem e agendam seus leads no automático, 24 horas por dia. Conheça o Revolução AI.";
+
+const siteUrl = "https://www.revolucao-ai.com";
+
+/** JSON-LD Service: diz pro Bing/Google exatamente que serviço é vendido nesta página. */
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Agente de IA no WhatsApp para pré-vendas e atendimento",
+  serviceType: "Implementação de agentes de IA para atendimento, qualificação e agendamento de leads no WhatsApp",
+  description,
+  url: `${siteUrl}/agentes-de-ia`,
+  provider: { "@type": "Organization", name: "Revolução AI", url: siteUrl },
+  areaServed: { "@type": "Country", name: "Brasil" },
+  availableChannel: { "@type": "ServiceChannel", serviceUrl: `${siteUrl}/agentes-de-ia` },
+};
 
 export const metadata: Metadata = {
   title,
@@ -486,6 +502,21 @@ export default function AgentesDeIA() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(faqItems)) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              breadcrumbJsonLd([
+                { name: "Início", path: "/" },
+                { name: "Agentes de IA", path: "/agentes-de-ia" },
+              ])
+            ),
+          }}
         />
         <Reveal>
           <Eyebrow>Perguntas frequentes</Eyebrow>

@@ -9,6 +9,7 @@ import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { faqPageJsonLd } from "@/lib/faq-jsonld";
 import { articleJsonLd } from "@/lib/blog/article-jsonld";
+import { breadcrumbJsonLd } from "@/lib/breadcrumb-jsonld";
 import { getPostBySlug, getRelatedPosts } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
@@ -54,6 +55,18 @@ export default async function BlogPostPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd(post)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: "Início", path: "/" },
+              { name: "Blog", path: "/blog" },
+              { name: post.title, path: `/blog/${post.slug}` },
+            ])
+          ),
+        }}
       />
       {post.faq.length > 0 && (
         <script

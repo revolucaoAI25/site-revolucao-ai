@@ -511,6 +511,18 @@ funcionar sem login configurado, então aqui não existe modo "degradado";
 o resto do site continua funcionando normalmente, já que o proxy só roda
 nas rotas `/admin`.
 
+## Bing (e busca do ChatGPT / Copilot)
+
+A busca do ChatGPT e o Copilot usam o índice do Bing, então o foco aqui é o site da agência (home, `/agentes-de-ia` e blog). Formação, Lead Extractor e Plataforma ficam de fora de propósito.
+
+- **IndexNow** (`src/lib/indexnow.ts`): avisa o Bing na hora que uma página entra no ar. A chave pública fica em `public/<chave>.txt` (mesmo valor de `INDEXNOW_KEY`).
+  - **Envio diário automático:** `vercel.json` agenda `/api/cron/indexnow` todo dia. Ele manda só os posts do blog publicados nos últimos 2 dias. Precisa da variável `CRON_SECRET` na Vercel (qualquer texto longo e aleatório); a Vercel envia ela sozinha no cron.
+  - **Envio manual:** logado no `/admin`, abra `/api/admin/indexnow?todos=1` (páginas da agência + todos os posts) ou `/api/admin/indexnow` (só as páginas principais).
+- **Bing Webmaster Tools:** o jeito mais rápido é entrar em bing.com/webmasters e usar **Importar do Google Search Console** (verifica o domínio e importa o sitemap). Se preferir verificar por meta tag, coloque o código em `BING_SITE_VERIFICATION`.
+- **Sitemap com datas reais:** `src/app/sitemap.ts` usa `PAGE_UPDATED_AT` em vez da data de agora (o Bing ignora `lastmod` que muda toda hora). Atualize a data quando mudar o conteúdo de uma página.
+- **Dados estruturados:** Organization (com endereço), Service + Breadcrumb em `/agentes-de-ia`, BlogPosting + Breadcrumb + FAQ nos posts.
+- `robots.ts` libera explicitamente `bingbot` e os robôs de IA (inclusive `OAI-SearchBot`, do ChatGPT).
+
 ## SEO
 
 Sem mexer em conteúdo/estrutura das páginas, só na parte técnica:

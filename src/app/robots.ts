@@ -16,6 +16,9 @@ const disallow = [
  * abaixo, pra deixar claro que o site pode ser lido e citado por eles (GEO).
  */
 const aiCrawlers = [
+  // Bing: índice usado pela busca do ChatGPT e pelo Copilot.
+  "bingbot",
+  "msnbot",
   "GPTBot",
   "ChatGPT-User",
   "OAI-SearchBot",

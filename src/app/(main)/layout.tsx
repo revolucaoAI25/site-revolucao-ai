@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   verification: {
     other: {
       "facebook-domain-verification": "8jyw20qv10qc09jxunvgdkbtj5ydw6",
+      // Bing Webmaster Tools (opcional: a verificação também pode ser feita
+      // importando o site do Google Search Console, sem código).
+      ...(process.env.BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+        : {}),
     },
   },
   openGraph: {
@@ -51,7 +56,17 @@ const organizationJsonLd = {
   name: "Revolução AI",
   url: siteUrl,
   logo: `${siteUrl}/logo.png`,
+  description:
+    "Implementação de agentes de IA no WhatsApp que qualificam, atendem e agendam leads no automático, 24 horas por dia.",
+  email: "contato@revolucao-ai.com",
   sameAs: ["https://instagram.com/revolucao.ai"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Rua Sergipe, 1440 - Savassi",
+    addressLocality: "Belo Horizonte",
+    addressRegion: "MG",
+    addressCountry: "BR",
+  },
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+55-31-3157-6084",

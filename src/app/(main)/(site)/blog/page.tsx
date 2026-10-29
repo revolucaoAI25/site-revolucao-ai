@@ -6,7 +6,7 @@ import { getPublishedPosts } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
 
-const title = "Blog — Revolução AI";
+const title = "Blog: agentes de IA no WhatsApp, atendimento e vendas";
 const description =
   "O que aprendemos implementando agentes de IA de verdade no WhatsApp: o que funciona, o que não funciona e o que vale saber antes de contratar.";
 

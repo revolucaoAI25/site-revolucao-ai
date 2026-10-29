@@ -7,45 +7,60 @@ const siteUrl = "https://www.revolucao-ai.com";
 // sitemap assim que a data de publicação chega, sem precisar de um redeploy.
 export const dynamic = "force-dynamic";
 
+/**
+ * Data da última mudança real de conteúdo de cada página. O Bing usa o
+ * lastmod pra decidir quando voltar a rastrear — se ele mudar a cada visita
+ * (como acontecia com new Date()), o Bing passa a ignorar. Atualize a data
+ * da página quando mudar o conteúdo dela.
+ */
+const PAGE_UPDATED_AT: Record<string, string> = {
+  "/": "2026-10-29",
+  "/agentes-de-ia": "2026-10-29",
+  "/formacao": "2026-10-09",
+  "/lead-extractor": "2026-10-09",
+  "/plataforma": "2026-10-09",
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const posts = getPublishedPosts();
+  const page = (path: string) => new Date(`${PAGE_UPDATED_AT[path]}T12:00:00-03:00`);
+  const lastPost = posts[0] ? new Date(`${posts[0].date}T12:00:00-03:00`) : page("/");
 
   return [
-    { url: siteUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: siteUrl, lastModified: page("/"), changeFrequency: "weekly", priority: 1 },
     {
       url: `${siteUrl}/agentes-de-ia`,
-      lastModified: now,
+      lastModified: page("/agentes-de-ia"),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${siteUrl}/formacao`,
-      lastModified: now,
+      lastModified: page("/formacao"),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${siteUrl}/lead-extractor`,
-      lastModified: now,
+      lastModified: page("/lead-extractor"),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${siteUrl}/plataforma`,
-      lastModified: now,
+      lastModified: page("/plataforma"),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${siteUrl}/blog`,
-      lastModified: now,
+      lastModified: lastPost,
       changeFrequency: "daily",
       priority: 0.8,
     },
     ...posts.map((post) => ({
       url: `${siteUrl}/blog/${post.slug}`,
-      lastModified: new Date(post.date),
+      lastModified: new Date(`${post.date}T12:00:00-03:00`),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
