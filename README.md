@@ -523,6 +523,17 @@ A busca do ChatGPT e o Copilot usam o índice do Bing, então o foco aqui é o s
 - **Dados estruturados:** Organization (com endereço), Service + Breadcrumb em `/agentes-de-ia`, BlogPosting + Breadcrumb + FAQ nos posts.
 - `robots.ts` libera explicitamente `bingbot` e os robôs de IA (inclusive `OAI-SearchBot`, do ChatGPT).
 
+## Do Zero aos 10K → créditos na ChatFlux (webhook da Kiwify)
+
+Cada compra aprovada do Do Zero aos 10K cadastra o e-mail do aluno na ChatFlux, que libera 200 créditos quando o aluno preenche o formulário de lá com o mesmo e-mail (a ordem não importa e o crédito sai uma vez só).
+
+- **Endpoint pra Kiwify:** `https://www.revolucao-ai.com/api/kiwify-webhook`, evento **Compra aprovada**. A Kiwify assina com o token do webhook (`?signature=`, HMAC-SHA1 do corpo).
+- **Filtro:** só `order_approved`/`paid` do produto Do Zero aos 10K (pelo nome, sem o Kit Proposta + Contrato). Pra filtrar por id, defina `KIWIFY_10K_PRODUCT_IDS` (ids separados por vírgula).
+- **Telefone:** vai no formato `+55...`; se a ChatFlux recusar o telefone, reenvia só com e-mail e nome.
+- **Falha na ChatFlux:** responde 502 e a Kiwify tenta de novo. Os logs ficam na Vercel com o prefixo `[kiwify-webhook]`.
+- **Variáveis na Vercel:** `KIWIFY_WEBHOOK_TOKEN` (token que a Kiwify mostra no webhook) e `CHATFLUX_PARTNER_TOKEN` (token `rai_...` da ChatFlux). `CHATFLUX_PARTNER_URL` é opcional. Sem as duas obrigatórias, o endpoint responde 503.
+- Código: `src/app/api/kiwify-webhook/route.ts`, `src/lib/kiwify-webhook.ts`, `src/lib/chatflux-partner.ts`.
+
 ## SEO
 
 Sem mexer em conteúdo/estrutura das páginas, só na parte técnica:
